@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { sql, relations } from "drizzle-orm";
 import { pgTable, text, varchar, integer, decimal, timestamp, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -72,6 +72,31 @@ export type InsertOrder = z.infer<typeof insertOrderSchema>;
 export type Seller = typeof sellers.$inferSelect;
 export type Product = typeof products.$inferSelect;
 export type Order = typeof orders.$inferSelect;
+
+// Relations
+export const sellersRelations = relations(sellers, ({ many }) => ({
+  products: many(products),
+  orders: many(orders),
+}));
+
+export const productsRelations = relations(products, ({ one, many }) => ({
+  seller: one(sellers, {
+    fields: [products.sellerId],
+    references: [sellers.id],
+  }),
+  orders: many(orders),
+}));
+
+export const ordersRelations = relations(orders, ({ one }) => ({
+  product: one(products, {
+    fields: [orders.productId],
+    references: [products.id],
+  }),
+  seller: one(sellers, {
+    fields: [orders.sellerId],
+    references: [sellers.id],
+  }),
+}));
 
 export type ProductWithSeller = Product & { seller: Seller };
 export type OrderWithDetails = Order & { product: Product; seller: Seller };
