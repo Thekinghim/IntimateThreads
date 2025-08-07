@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Search, Package, Truck, CheckCircle, Clock, XCircle, Mail, MapPin, CreditCard } from "lucide-react";
+import { Search, Package, Truck, CheckCircle, Clock, XCircle, Mail, MapPin, CreditCard, ExternalLink } from "lucide-react";
 import { format } from "date-fns";
 
 export default function TrackOrder() {
   const [orderIdInput, setOrderIdInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [searchAttempted, setSearchAttempted] = useState(false);
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [show17track, setShow17track] = useState(false);
 
   // Query to track order by ID and email
   const { data: order, isLoading, error } = useQuery({
@@ -33,6 +35,45 @@ export default function TrackOrder() {
   const handleSearch = () => {
     if (orderIdInput.trim() && emailInput.trim()) {
       setSearchAttempted(true);
+    }
+  };
+
+  // Load 17track script when component mounts
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://www.17track.net/externalcall.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Only remove if script exists
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
+  const handleTrackWith17track = () => {
+    if (trackingNumber.trim()) {
+      setShow17track(true);
+      // Initialize 17track widget
+      setTimeout(() => {
+        if ((window as any).YQ17) {
+          (window as any).YQ17.push([{
+            id: "17track-widget",
+            width: "100%",
+            height: "500px",
+            track: trackingNumber,
+            carrier: "",
+            lang: "en",
+            style: {
+              "font-family": "system-ui, -apple-system, sans-serif",
+              "border": "1px solid #e5e7eb",
+              "border-radius": "8px"
+            }
+          }]);
+        }
+      }, 100);
     }
   };
 
@@ -108,16 +149,62 @@ export default function TrackOrder() {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-stone-800 mb-4">Track Your Order</h1>
           <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-            Enter your order ID and email address to track your package and view order details.
+            Enter your order ID and email address to track your package and view order details, or use advanced tracking with 17track.
           </p>
         </div>
 
-        {/* Search Form */}
+        {/* Advanced Tracking with 17track */}
+        <Card className="mb-8 shadow-lg border-0 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-stone-800">
+              <ExternalLink className="h-5 w-5" />
+              Advanced Package Tracking
+            </CardTitle>
+            <CardDescription>
+              Track packages from any carrier worldwide using 17track's comprehensive tracking system.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-stone-700">Tracking Number</label>
+              <Input
+                placeholder="Enter any tracking number (DHL, FedEx, PostNord, etc.)"
+                value={trackingNumber}
+                onChange={(e) => setTrackingNumber(e.target.value)}
+                className="border-stone-200 focus:ring-blue-400"
+              />
+            </div>
+            <Button 
+              onClick={handleTrackWith17track}
+              disabled={!trackingNumber.trim()}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Track with 17track
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* 17track Widget */}
+        {show17track && (
+          <Card className="mb-8 shadow-lg border-0">
+            <CardHeader>
+              <CardTitle className="text-stone-800">Package Tracking Results</CardTitle>
+              <CardDescription>
+                Real-time tracking information powered by 17track
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div id="17track-widget" style={{ minHeight: '500px' }}></div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Order Lookup Form */}
         <Card className="mb-8 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-stone-800">
               <Search className="h-5 w-5" />
-              Find Your Order
+              Find Your Nordic Collection Order
             </CardTitle>
             <CardDescription>
               Enter the order ID from your confirmation email and the email address used for the order.
@@ -150,7 +237,7 @@ export default function TrackOrder() {
               disabled={!orderIdInput.trim() || !emailInput.trim() || isLoading}
               className="w-full bg-stone-800 hover:bg-stone-900 text-white"
             >
-              {isLoading ? "Searching..." : "Track Order"}
+              {isLoading ? "Searching..." : "Find My Order"}
             </Button>
           </CardContent>
         </Card>
@@ -229,6 +316,11 @@ export default function TrackOrder() {
                       <div>
                         <p className="font-medium text-stone-800">Order Shipped</p>
                         <p className="text-sm text-stone-600">Package sent to delivery address</p>
+                        {(order as any).trackingNumber && (
+                          <p className="text-xs text-blue-600 font-mono mt-1">
+                            Tracking: {(order as any).trackingNumber}
+                          </p>
+                        )}
                       </div>
                     </div>
                   )}
@@ -327,6 +419,38 @@ export default function TrackOrder() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Advanced Tracking for Shipped Orders */}
+            {order.status === 'shipped' && (order as any).trackingNumber && (
+              <Card className="shadow-lg border-0 bg-gradient-to-r from-green-50 to-emerald-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-stone-800">
+                    <Truck className="h-5 w-5" />
+                    Advanced Package Tracking
+                  </CardTitle>
+                  <CardDescription>
+                    Get detailed tracking information for your shipped package
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-stone-700">Tracking Number:</span>
+                      <code className="text-sm bg-stone-100 px-2 py-1 rounded">{(order as any).trackingNumber}</code>
+                    </div>
+                    <Button 
+                      onClick={() => {
+                        setTrackingNumber((order as any).trackingNumber);
+                        handleTrackWith17track();
+                      }}
+                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                    >
+                      Track Package with 17track
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Contact Support */}
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
