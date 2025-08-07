@@ -26,6 +26,7 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
 - Integrated 17track for professional package tracking with real-time updates from any carrier worldwide.
 - Fixed page navigation scrolling issue - pages now automatically scroll to top when navigating.
 - Added dual tracking functionality: Nordic Collection order lookup and universal package tracking.
+- **LATEST (Aug 7, 2025 Evening):** Fixed critical UX issues - improved admin login authentication flow requiring proper credentials, enhanced admin access visibility with improved footer button, and resolved white-on-white color contrast problems throughout the application for better readability.
 
 ## Authentication and Payment Processing
 The application integrates with **NOWPayments** for cryptocurrency transactions (Bitcoin, Ethereum, USDT), **Revolut** for traditional payments, and **Gumroad** as an additional payment gateway. No traditional user authentication is implemented - the system operates on anonymous purchasing with email-based order tracking. Payment status tracking includes pending, completed, failed, and expired states with corresponding order status management.
