@@ -13,18 +13,19 @@ export default function Navbar() {
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
 
   const navItems = [
-    { href: "/", label: "Hem" },
-    { href: "/collection", label: "Kollektion" },
-    { href: "/how-it-works", label: "Så funkar det" },
+    { href: "/", label: "Home" },
+    { href: "/collection", label: "Collection" },
+    { href: "/track-order", label: "Track Order" },
+    { href: "/how-it-works", label: "How It Works" },
   ];
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+    <nav className="bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center">
-            <h1 className="font-poppins font-semibold text-2xl text-charcoal">Diskreta</h1>
-            <span className="ml-2 text-sm text-gray-500 font-light">Kollektion</span>
+          <Link href="/" className="flex items-center group">
+            <h1 className="font-poppins font-bold text-2xl text-stone-800 group-hover:text-stone-600 transition-colors">Nordic</h1>
+            <span className="ml-2 text-sm text-stone-500 font-light italic">Collection</span>
           </Link>
           
           <div className="hidden md:flex space-x-8">
@@ -32,10 +33,10 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`transition-colors duration-200 ${
+                className={`font-medium transition-all duration-200 px-3 py-2 rounded-md ${
                   location === item.href
-                    ? "text-powder-pink border-b-2 border-powder-pink"
-                    : "text-charcoal hover:text-powder-pink"
+                    ? "text-stone-800 bg-stone-100"
+                    : "text-stone-600 hover:text-stone-800 hover:bg-stone-50"
                 }`}
               >
                 {item.label}

@@ -15,26 +15,26 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="warm-beige py-20">
+      {/* Hero Section - Updated for casual/classy feel */}
+      <section className="bg-gradient-to-br from-stone-50 via-stone-100 to-sage-green/20 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-poppins font-light text-4xl md:text-6xl text-charcoal mb-6">
-              Diskreta, personliga plagg<br />
-              <span className="font-normal">från riktiga kvinnor</span>
+            <h2 className="font-poppins font-light text-5xl md:text-7xl text-stone-800 mb-8 leading-tight">
+              Authentic Nordic<br />
+              <span className="font-medium bg-gradient-to-r from-stone-700 to-stone-600 bg-clip-text text-transparent">Collection</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto font-light">
-              Exklusiva, begagnade intimplagg från nordiska kvinnor. Varje plagg berättar sin egen historia med fullständig diskretion och elegans.
+            <p className="text-xl text-stone-600 mb-14 max-w-3xl mx-auto font-light leading-relaxed">
+              Discover exclusive, pre-loved intimate apparel from Nordic women. Each piece tells its own story with complete discretion and timeless elegance.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link href="/collection">
-                <Button size="lg" className="bg-charcoal text-white hover:bg-gray-800 font-poppins font-medium px-8 py-4 rounded-full">
-                  Utforska kollektion
+                <Button size="lg" className="bg-stone-800 text-white hover:bg-stone-900 font-poppins font-medium px-10 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                  Explore Collection
                 </Button>
               </Link>
               <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white font-poppins font-medium px-8 py-4 rounded-full">
-                  Så funkar det
+                <Button variant="outline" size="lg" className="border-2 border-stone-600 text-stone-700 hover:bg-stone-600 hover:text-white font-poppins font-medium px-10 py-4 rounded-lg transition-all duration-300">
+                  How It Works
                 </Button>
               </Link>
             </div>
@@ -43,11 +43,11 @@ export default function Home() {
       </section>
 
       {/* Featured Collection */}
-      <section className="py-20">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="font-poppins font-medium text-3xl text-charcoal mb-4">Aktuell Kollektion</h3>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Handplockat urval av exklusiva plagg från verifierade nordiska kvinnor</p>
+          <div className="text-center mb-20">
+            <h3 className="font-poppins font-medium text-4xl text-stone-800 mb-6">Featured Collection</h3>
+            <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">Handpicked selection of exclusive pieces from verified Nordic women</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

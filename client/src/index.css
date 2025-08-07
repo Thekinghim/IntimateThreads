@@ -29,11 +29,13 @@
   --chart-4: hsl(0 0% 60%);
   --chart-5: hsl(35 15% 75%);
   
-  /* Custom color variables */
-  --warm-beige: hsl(35 15% 95%);
-  --powder-pink: hsl(353 30% 88%);
-  --charcoal: hsl(0 0% 10.2%);
-  --soft-white: hsl(0 0% 98%);
+  /* Custom color variables - Updated for casual/classy feel */
+  --warm-stone: hsl(20 14% 95%);
+  --sage-green: hsl(120 12% 85%);
+  --charcoal-soft: hsl(215 15% 25%);
+  --cream-white: hsl(40 20% 98%);
+  --terracotta: hsl(15 55% 75%);
+  --dusty-blue: hsl(210 25% 80%);
   
   --font-sans: 'Lora', serif;
   --font-poppins: 'Poppins', sans-serif;

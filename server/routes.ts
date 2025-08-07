@@ -294,6 +294,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Order tracking route (public)
+  app.get('/api/track-order', async (req, res) => {
+    try {
+      const { orderId, email } = req.query;
+      
+      if (!orderId || !email) {
+        return res.status(400).json({ message: "Order ID and email are required" });
+      }
+      
+      const order = await storage.getOrderByIdAndEmail(orderId as string, email as string);
+      
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+      
+      res.json(order);
+    } catch (error) {
+      console.error("Error tracking order:", error);
+      res.status(500).json({ message: "Failed to track order" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

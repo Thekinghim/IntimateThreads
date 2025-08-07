@@ -21,6 +21,7 @@ export interface IStorage {
   // Orders
   getOrders(): Promise<OrderWithDetails[]>;
   getOrder(id: string): Promise<OrderWithDetails | undefined>;
+  getOrderByIdAndEmail(orderId: string, email: string): Promise<OrderWithDetails | undefined>;
   createOrder(order: InsertOrder): Promise<Order>;
   updateOrder(id: string, updates: Partial<Order>): Promise<Order | undefined>;
   getOrdersByStatus(status: string): Promise<OrderWithDetails[]>;
@@ -121,6 +122,17 @@ export class DatabaseStorage implements IStorage {
   async getOrder(id: string): Promise<OrderWithDetails | undefined> {
     const order = await db.query.orders.findFirst({
       where: eq(orders.id, id),
+      with: {
+        product: true,
+        seller: true,
+      },
+    });
+    return order || undefined;
+  }
+
+  async getOrderByIdAndEmail(orderId: string, email: string): Promise<OrderWithDetails | undefined> {
+    const order = await db.query.orders.findFirst({
+      where: and(eq(orders.id, orderId), eq(orders.customerEmail, email)),
       with: {
         product: true,
         seller: true,

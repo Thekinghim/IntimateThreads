@@ -11,7 +11,8 @@ import Product from "@/pages/product";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
 import HowItWorks from "@/pages/how-it-works";
-import Admin from "@/pages/admin";
+import TrackOrder from "@/pages/track-order";
+import Admin from "@/pages/shopify-admin";
 import AdminLogin from "@/pages/adminLogin";
 import NotFound from "@/pages/not-found";
 
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/how-it-works" component={HowItWorks} />
+      <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
