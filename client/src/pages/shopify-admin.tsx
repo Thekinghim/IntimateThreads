@@ -31,8 +31,17 @@ import {
   ChevronDown,
   Calendar,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  Clock,
+  CheckCircle,
+  Truck,
+  XCircle
 } from "lucide-react";
+import ProductManager from "@/components/admin/product-manager";
+import OrderStatusManager from "@/components/admin/order-status-manager";
+import QuickActions from "@/components/admin/quick-actions";
+import EnhancedSearch from "@/components/admin/enhanced-search";
+import VisualImprovements from "@/components/visual-improvements";
 import { format } from "date-fns";
 
 export default function ShopifyAdmin() {
@@ -230,6 +239,16 @@ export default function ShopifyAdmin() {
                 <p className="text-gray-600">Monitor your store performance and key metrics</p>
               </div>
               
+              {/* Quick Actions and Visual Improvements */}
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <div className="xl:col-span-2">
+                  <QuickActions stats={stats} />
+                </div>
+                <div className="xl:col-span-1">
+                  <VisualImprovements />
+                </div>
+              </div>
+              
               {/* Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <Card>
@@ -369,6 +388,15 @@ export default function ShopifyAdmin() {
                 </div>
               </div>
 
+              {/* Enhanced Search */}
+              <EnhancedSearch 
+                onSearch={(filters) => {
+                  // You can implement advanced filtering logic here
+                  console.log('Search filters:', filters);
+                }} 
+                totalResults={filteredOrders.length}
+              />
+
               {/* Filters */}
               <Card>
                 <CardContent className="p-4">
@@ -496,7 +524,7 @@ export default function ShopifyAdmin() {
                   <h2 className="text-2xl font-bold text-gray-900">Products</h2>
                   <p className="text-gray-600">Manage your product catalog</p>
                 </div>
-                <Button>Add Product</Button>
+                <ProductManager sellers={Array.isArray(sellers) ? sellers : []} />
               </div>
 
               <Card>

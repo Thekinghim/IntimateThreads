@@ -263,6 +263,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.patch("/api/admin/orders/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updateData = req.body;
+      
+      const updatedOrder = await storage.updateOrder(id, updateData);
+      if (!updatedOrder) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+      
+      res.json(updatedOrder);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update order" });
+    }
+  });
+
   app.post("/api/admin/products", requireAdminAuth, async (req, res) => {
     try {
       const productData = insertProductSchema.parse(req.body);
