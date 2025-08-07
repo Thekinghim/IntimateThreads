@@ -16,6 +16,7 @@ import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
 import AdminLogin from "@/pages/adminLogin";
 import NotFound from "@/pages/not-found";
+import PrivacyModeIndicator from "@/components/privacy-mode-indicator";
 
 function Router() {
   const [location] = useLocation();
@@ -51,6 +52,7 @@ function App() {
             <Router />
           </main>
           <Footer />
+          <PrivacyModeIndicator />
         </div>
         <Toaster />
       </TooltipProvider>

@@ -16,7 +16,9 @@ import { useCartStore } from "@/lib/cart";
 import { nowPayments, type PaymentResponse } from "@/lib/nowpayments";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Lock, Bitcoin, CreditCard, Globe, Copy, QrCode } from "lucide-react";
+import { Lock, Bitcoin, CreditCard, Globe, Copy, QrCode, Shield, Eye, ArrowLeft } from "lucide-react";
+import PrivacyBanner from "@/components/privacy-banner";
+import { AnonymousCheckoutBanner } from "@/components/anonymous-features";
 
 const checkoutSchema = z.object({
   customerName: z.string().min(1, "Namn krävs"),
@@ -33,6 +35,7 @@ export default function Checkout() {
   const { toast } = useToast();
   const [selectedCrypto, setSelectedCrypto] = useState("btc");
   const [paymentCreated, setPaymentCreated] = useState<PaymentResponse | null>(null);
+  const [showAnonymousMode, setShowAnonymousMode] = useState(true);
 
   const totalPrice = getTotalPrice();
 
@@ -180,11 +183,22 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-soft-white py-8">
+      <PrivacyBanner />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h1 className="font-poppins font-medium text-3xl text-charcoal mb-4">Diskret utcheckning</h1>
-          <p className="text-gray-600">All information behandlas konfidentiellt</p>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+              <Shield className="h-6 w-6 text-green-600" />
+            </div>
+            <h1 className="font-poppins font-medium text-3xl text-charcoal">Anonymous Checkout</h1>
+          </div>
+          <p className="text-gray-600 flex items-center justify-center gap-2">
+            <Eye className="h-4 w-4 text-green-600" />
+            Your identity remains completely private and secure
+          </p>
         </div>
+
+        <AnonymousCheckoutBanner />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Form */}
@@ -204,9 +218,9 @@ export default function Checkout() {
                       name="customerName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Namn (eller alias)</FormLabel>
+                          <FormLabel>Name (or Anonymous Alias)</FormLabel>
                           <FormControl>
-                            <Input placeholder="Ditt namn eller alias" {...field} />
+                            <Input placeholder="Anonymous User, A.N., etc." {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
