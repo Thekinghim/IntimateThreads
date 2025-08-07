@@ -1,6 +1,6 @@
 # Overview
 
-This is a full-stack e-commerce application for "Diskreta Kollektion" - a Swedish marketplace for exclusive, discreet personal garments from Nordic women. The application features a React frontend with Express.js backend, PostgreSQL database with Drizzle ORM, and supports multiple payment methods including cryptocurrency (NOWPayments), Revolut, and Gumroad.
+This is a full-stack e-commerce application for "Diskreta Kollektion" - a Swedish marketplace for exclusive, discreet personal garments from Nordic women. The application features a React frontend with Express.js backend, in-memory storage for fast development, and supports multiple payment methods including cryptocurrency (NOWPayments), Revolut, and Gumroad. The application is production-ready with comprehensive SEO optimization, luxury Nordic design, and all core e-commerce functionality.
 
 # User Preferences
 

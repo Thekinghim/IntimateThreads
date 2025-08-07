@@ -332,8 +332,8 @@ export default function Admin() {
                               <span className="capitalize">{order.paymentMethod}</span>
                             </div>
                           </TableCell>
-                          <TableCell>{getStatusBadge(order.status)}</TableCell>
-                          <TableCell>{getPaymentStatusBadge(order.paymentStatus)}</TableCell>
+                          <TableCell>{getStatusBadge(order.status || "pending")}</TableCell>
+                          <TableCell>{getPaymentStatusBadge(order.paymentStatus || "pending")}</TableCell>
                           <TableCell>
                             <div className="flex space-x-2">
                               <Dialog>
@@ -359,19 +359,19 @@ export default function Admin() {
                                         </div>
                                         <div>
                                           <Label className="text-sm font-medium">Skapad</Label>
-                                          <p className="text-sm">{new Date(selectedOrder.createdAt).toLocaleString('sv-SE')}</p>
+                                          <p className="text-sm">{selectedOrder.createdAt ? new Date(selectedOrder.createdAt).toLocaleString('sv-SE') : 'N/A'}</p>
                                         </div>
                                       </div>
 
                                       <div className="grid grid-cols-2 gap-4">
                                         <div>
                                           <Label className="text-sm font-medium">Nuvarande Status</Label>
-                                          <div className="mt-1">{getStatusBadge(selectedOrder.status)}</div>
+                                          <div className="mt-1">{getStatusBadge(selectedOrder.status || "pending")}</div>
                                         </div>
                                         <div>
                                           <Label className="text-sm font-medium">Uppdatera Status</Label>
                                           <Select 
-                                            value={selectedOrder.status}
+                                            value={selectedOrder.status || "pending"}
                                             onValueChange={(newStatus) => {
                                               updateOrderMutation.mutate({
                                                 orderId: selectedOrder.id,
@@ -586,7 +586,7 @@ export default function Admin() {
                                 <FormItem>
                                   <FormLabel>Bild URL</FormLabel>
                                   <FormControl>
-                                    <Input placeholder="https://..." {...field} />
+                                    <Input placeholder="https://..." {...field} value={field.value || ""} />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -600,7 +600,7 @@ export default function Admin() {
                                 <FormItem>
                                   <FormLabel>Antal bärdagar</FormLabel>
                                   <FormControl>
-                                    <Input type="number" placeholder="3" {...field} onChange={(e) => field.onChange(parseInt(e.target.value) || 0)} />
+                                    <Input type="number" placeholder="3" {...field} value={field.value || ""} onChange={(e) => field.onChange(parseInt(e.target.value) || 0)} />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -734,7 +734,7 @@ export default function Admin() {
                               <FormItem>
                                 <FormLabel>Biografi</FormLabel>
                                 <FormControl>
-                                  <Textarea placeholder="Kort beskrivning..." {...field} />
+                                  <Textarea placeholder="Kort beskrivning..." {...field} value={field.value || ""} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -782,7 +782,7 @@ export default function Admin() {
                             <TableCell className="font-medium">{seller.alias}</TableCell>
                             <TableCell>{seller.location}</TableCell>
                             <TableCell>{seller.age} år</TableCell>
-                            <TableCell>{(parseFloat(seller.commissionRate) * 100).toFixed(0)}%</TableCell>
+                            <TableCell>{(parseFloat(seller.commissionRate || "0.45") * 100).toFixed(0)}%</TableCell>
                             <TableCell>
                               <Badge variant={seller.isActive ? "default" : "secondary"}>
                                 {seller.isActive ? "Aktiv" : "Inaktiv"}
