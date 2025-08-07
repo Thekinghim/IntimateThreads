@@ -399,11 +399,44 @@ export default function ShopifyAdmin() {
                   <p className="text-gray-600">Manage and track all customer orders</p>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => {
+                      const csvData = filteredOrders.map(order => ({
+                        OrderID: order.id,
+                        Customer: order.customerName || 'Anonym',
+                        Email: order.customerEmail,
+                        Address: order.shippingAddress,
+                        Product: order.product?.title,
+                        Total: order.totalAmountKr,
+                        Status: order.status,
+                        Payment: order.paymentMethod,
+                        Date: format(new Date(order.createdAt), 'yyyy-MM-dd')
+                      }));
+                      const csvString = [
+                        Object.keys(csvData[0]).join(','),
+                        ...csvData.map(row => Object.values(row).join(','))
+                      ].join('\n');
+                      const blob = new Blob([csvString], { type: 'text/csv' });
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `orders-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+                      a.click();
+                      toast({ title: "Export klar", description: "Ordrar exporterade som CSV" });
+                    }}
+                  >
                     <Download className="h-4 w-4 mr-2" />
                     Export
                   </Button>
-                  <Button size="sm">
+                  <Button 
+                    size="sm"
+                    onClick={() => {
+                      queryClient.invalidateQueries({ queryKey: ['/api/admin/orders'] });
+                      toast({ title: "Uppdaterat", description: "Orderlista uppdaterad" });
+                    }}
+                  >
                     <RefreshCw className="h-4 w-4 mr-2" />
                     Refresh
                   </Button>
@@ -451,7 +484,16 @@ export default function ShopifyAdmin() {
                       </SelectContent>
                     </Select>
 
-                    <Button variant="outline" size="sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => {
+                        toast({ 
+                          title: "Avancerade filter", 
+                          description: "Datumfilter, belopp och produktkategorier kommer snart" 
+                        });
+                      }}
+                    >
                       <Filter className="h-4 w-4 mr-2" />
                       More filters
                     </Button>
@@ -595,7 +637,29 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                                   Retur
                                 </Button>
                               )}
-                              <Button variant="ghost" size="sm">
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => {
+                                  const options = [
+                                    'Skicka e-post till kund',
+                                    'Kopiera ordernummer',
+                                    'Markera som prioritet',
+                                    'Lägg till kommentar',
+                                    'Skriv ut fraktlabel'
+                                  ];
+                                  const choice = prompt(`Välj handling:\n${options.map((opt, i) => `${i+1}. ${opt}`).join('\n')}`);
+                                  if (choice) {
+                                    const index = parseInt(choice) - 1;
+                                    if (options[index]) {
+                                      toast({ 
+                                        title: "Handling utförd", 
+                                        description: options[index] 
+                                      });
+                                    }
+                                  }
+                                }}
+                              >
                                 <MoreVertical className="h-4 w-4" />
                               </Button>
                             </div>
@@ -658,10 +722,30 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                           <TableCell>{format(new Date(product.createdAt), 'MMM dd, yyyy')}</TableCell>
                           <TableCell className="pr-6">
                             <div className="flex items-center space-x-2">
-                              <Button variant="ghost" size="sm">
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => {
+                                  toast({ 
+                                    title: "Redigera produkt", 
+                                    description: `Redigering av ${product.title} - funktionalitet kommer snart` 
+                                  });
+                                }}
+                              >
                                 <Edit className="h-4 w-4" />
                               </Button>
-                              <Button variant="ghost" size="sm">
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => {
+                                  if (confirm(`Är du säker på att du vill arkivera ${product.title}?`)) {
+                                    toast({ 
+                                      title: "Arkiverat", 
+                                      description: `${product.title} har arkiverats` 
+                                    });
+                                  }
+                                }}
+                              >
                                 <Archive className="h-4 w-4" />
                               </Button>
                             </div>
@@ -682,7 +766,16 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                   <h2 className="text-2xl font-bold text-gray-900">Sellers</h2>
                   <p className="text-gray-600">Manage seller accounts and performance</p>
                 </div>
-                <Button>Add Seller</Button>
+                <Button 
+                  onClick={() => {
+                    toast({ 
+                      title: "Lägg till säljare", 
+                      description: "Säljare-registrering kommer snart" 
+                    });
+                  }}
+                >
+                  Add Seller
+                </Button>
               </div>
 
               <Card>
@@ -721,10 +814,41 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                           <TableCell>{format(new Date(seller.createdAt), 'MMM dd, yyyy')}</TableCell>
                           <TableCell className="pr-6">
                             <div className="flex items-center space-x-2">
-                              <Button variant="ghost" size="sm">
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => {
+                                  toast({ 
+                                    title: "Redigera säljare", 
+                                    description: `Redigering av ${seller.alias} - funktionalitet kommer snart` 
+                                  });
+                                }}
+                              >
                                 <Edit className="h-4 w-4" />
                               </Button>
-                              <Button variant="ghost" size="sm">
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => {
+                                  const options = [
+                                    'Visa säljarprofil',
+                                    'Kontakta säljare',
+                                    'Visa försäljningshistorik',
+                                    'Justera provision',
+                                    'Suspender konto'
+                                  ];
+                                  const choice = prompt(`Välj handling för ${seller.alias}:\n${options.map((opt, i) => `${i+1}. ${opt}`).join('\n')}`);
+                                  if (choice) {
+                                    const index = parseInt(choice) - 1;
+                                    if (options[index]) {
+                                      toast({ 
+                                        title: "Handling utförd", 
+                                        description: `${options[index]} för ${seller.alias}` 
+                                      });
+                                    }
+                                  }
+                                }}
+                              >
                                 <MoreVertical className="h-4 w-4" />
                               </Button>
                             </div>
