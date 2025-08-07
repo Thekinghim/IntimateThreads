@@ -140,7 +140,8 @@ export default function ShopifyAdmin() {
       confirmed: "bg-blue-100 text-blue-800", 
       shipped: "bg-purple-100 text-purple-800",
       completed: "bg-green-100 text-green-800",
-      cancelled: "bg-red-100 text-red-800"
+      cancelled: "bg-red-100 text-red-800",
+      returned: "bg-orange-100 text-orange-800"
     };
     return <Badge className={variants[status] || "bg-gray-100 text-gray-800"}>{status}</Badge>;
   };
@@ -433,6 +434,7 @@ export default function ShopifyAdmin() {
                         <SelectItem value="shipped">Shipped</SelectItem>
                         <SelectItem value="completed">Completed</SelectItem>
                         <SelectItem value="cancelled">Cancelled</SelectItem>
+                        <SelectItem value="returned">Returned</SelectItem>
                       </SelectContent>
                     </Select>
 
@@ -464,10 +466,11 @@ export default function ShopifyAdmin() {
                     <TableHeader>
                       <TableRow>
                         <TableHead className="pl-6">Order</TableHead>
-                        <TableHead>Customer</TableHead>
+                        <TableHead>Customer Info</TableHead>
+                        <TableHead>Shipping Address</TableHead>
                         <TableHead>Product</TableHead>
                         <TableHead>Payment</TableHead>
-                        <TableHead>Order Status</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead>Total</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="pr-6">Actions</TableHead>
@@ -479,8 +482,24 @@ export default function ShopifyAdmin() {
                           <TableCell className="pl-6 font-medium">#{order.id.slice(0, 8)}</TableCell>
                           <TableCell>
                             <div>
-                              <p className="font-medium">{order.customerName || 'N/A'}</p>
+                              <p className="font-medium">{order.customerName || 'Anonym'}</p>
                               <p className="text-sm text-gray-500">{order.customerEmail}</p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="max-w-xs">
+                              <p className="text-sm text-gray-700 truncate">{order.shippingAddress}</p>
+                              <Button 
+                                variant="link" 
+                                size="sm" 
+                                className="h-auto p-0 text-xs text-blue-600 hover:text-blue-800"
+                                onClick={() => {
+                                  // Open detailed view
+                                  alert(order.shippingAddress);
+                                }}
+                              >
+                                Visa fullständig adress
+                              </Button>
                             </div>
                           </TableCell>
                           <TableCell>
@@ -519,15 +538,67 @@ export default function ShopifyAdmin() {
                                 <SelectItem value="shipped">Shipped</SelectItem>
                                 <SelectItem value="completed">Completed</SelectItem>
                                 <SelectItem value="cancelled">Cancelled</SelectItem>
+                                <SelectItem value="returned">Returned</SelectItem>
                               </SelectContent>
                             </Select>
                           </TableCell>
                           <TableCell className="font-medium">{order.totalAmountKr} kr</TableCell>
                           <TableCell>{format(new Date(order.createdAt), 'MMM dd, yyyy')}</TableCell>
                           <TableCell className="pr-6">
-                            <Button variant="ghost" size="sm">
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
+                            <div className="flex items-center space-x-2">
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => {
+                                  // Open detailed order view
+                                  const orderDetails = `
+BESTÄLLNING #${order.id}
+
+KUNDUPPGIFTER:
+Namn: ${order.customerName || 'Anonym'}
+E-post: ${order.customerEmail}
+
+LEVERANSADRESS:
+${order.shippingAddress}
+
+PRODUKT:
+${order.product?.title} (${order.product?.size})
+Pris: ${order.totalAmountKr} kr
+
+BETALNING:
+Metod: ${order.paymentMethod}
+Status: ${order.paymentStatus}
+${order.cryptoCurrency ? `Krypto: ${order.cryptoAmount} ${order.cryptoCurrency}` : ''}
+
+STATUS: ${order.status}
+SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
+                                  `.trim();
+                                  alert(orderDetails);
+                                }}
+                              >
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              {order.status === 'completed' && (
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  className="text-orange-600 hover:text-orange-800"
+                                  onClick={() => {
+                                    if (confirm('Är du säker på att du vill markera denna beställning som returnerad?')) {
+                                      updateOrderMutation.mutate({ 
+                                        orderId: order.id, 
+                                        updates: { status: 'returned' } 
+                                      });
+                                    }
+                                  }}
+                                >
+                                  Retur
+                                </Button>
+                              )}
+                              <Button variant="ghost" size="sm">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </div>
                           </TableCell>
                         </TableRow>
                       ))}

@@ -44,7 +44,7 @@ export const orders = pgTable("orders", {
   cryptoCurrency: text("crypto_currency"),
   cryptoAmount: text("crypto_amount"),
   paymentAddress: text("payment_address"),
-  status: text("status").default("pending"), // 'pending', 'confirmed', 'shipped', 'completed', 'cancelled'
+  status: text("status").default("pending"), // 'pending', 'confirmed', 'shipped', 'completed', 'cancelled', 'returned'
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
