@@ -36,13 +36,14 @@ import {
 import { format } from "date-fns";
 
 export default function ShopifyAdmin() {
+  // All hooks must be called at the top level before any conditional returns
   const { isAuthenticated, isLoading: authLoading, adminUser, logout, getAuthHeader } = useAdminAuth();
   const { toast } = useToast();
   const [selectedTab, setSelectedTab] = useState("overview");
   const [orderStatusFilter, setOrderStatusFilter] = useState("all");
   const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
 
-  // Queries with authentication
+  // Queries with authentication - always called but enabled conditionally
   const { data: orders, isLoading: ordersLoading } = useQuery({
     queryKey: ['/api/admin/orders'],
     enabled: isAuthenticated,
@@ -66,24 +67,7 @@ export default function ShopifyAdmin() {
     enabled: isAuthenticated,
   });
 
-  // Redirect if not authenticated
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading admin panel...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    window.location.href = '/admin/login';
-    return null;
-  }
-
-  // Update order mutation
+  // Update order mutation - always defined
   const updateOrderMutation = useMutation({
     mutationFn: async ({ orderId, updates }: { orderId: string; updates: any }) => {
       const authHeaders = getAuthHeader();
@@ -106,6 +90,23 @@ export default function ShopifyAdmin() {
       });
     },
   });
+
+  // NOW we can do conditional rendering after all hooks are called
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading admin panel...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    window.location.href = '/admin/login';
+    return null;
+  }
 
   // Calculate stats
   const stats = {
