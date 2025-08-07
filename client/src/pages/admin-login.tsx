@@ -46,7 +46,7 @@ export default function AdminLogin() {
       if (response.ok) {
         // Spara token och användardata
         localStorage.setItem('adminToken', result.token);
-        localStorage.setItem('adminUser', JSON.stringify(result.user));
+        localStorage.setItem('adminUser', JSON.stringify(result.admin));
         
         toast({
           title: "Inloggning lyckades",
