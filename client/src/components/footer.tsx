@@ -42,8 +42,17 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-          <p className="text-gray-400 text-sm">© 2024 Diskreta Kollektion. Alla rättigheter förbehålls. | 18+ endast</p>
+        <div className="border-t border-gray-700 mt-12 pt-8">
+          <div className="flex justify-between items-center">
+            <p className="text-gray-400 text-sm">© 2024 Diskreta Kollektion. Alla rättigheter förbehålls. | 18+ endast</p>
+            <Link 
+              href="/admin/login" 
+              className="text-gray-500 hover:text-gray-400 text-xs opacity-50 hover:opacity-100 transition-opacity duration-200"
+              title="Admin"
+            >
+              •
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
