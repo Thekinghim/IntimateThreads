@@ -55,10 +55,10 @@ export default function Footer() {
             <p className="text-stone-400 text-base">© 2024 Nordic Collection. Alla rättigheter förbehålls. | 18+ endast</p>
             <Link 
               href="/admin/login" 
-              className="w-8 h-8 bg-stone-800/30 rounded-lg flex items-center justify-center text-stone-500 hover:text-stone-300 hover:bg-stone-700/50 transition-all duration-300"
+              className="w-10 h-10 bg-stone-800/40 rounded-lg flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-600/70 transition-all duration-300 hover:scale-110"
               title="Admin Access"
             >
-              •
+              <div className="w-3 h-3 bg-stone-400 hover:bg-white rounded-full transition-colors duration-300"></div>
             </Link>
           </div>
         </div>

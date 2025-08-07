@@ -14,7 +14,7 @@ import Checkout from "@/pages/checkout";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
-import AdminLogin from "@/pages/adminLogin";
+import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 import PrivacyModeIndicator from "@/components/privacy-mode-indicator";
 
