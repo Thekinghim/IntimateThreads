@@ -15,26 +15,28 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Updated for casual/classy feel */}
-      <section className="bg-gradient-to-br from-stone-50 via-stone-100 to-sage-green/20 py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="font-poppins font-light text-5xl md:text-7xl text-stone-800 mb-8 leading-tight">
-              Authentic Nordic<br />
-              <span className="font-medium bg-gradient-to-r from-stone-700 to-stone-600 bg-clip-text text-transparent">Collection</span>
-            </h2>
-            <p className="text-xl text-stone-600 mb-14 max-w-3xl mx-auto font-light leading-relaxed">
-              Discover exclusive, pre-loved intimate apparel from Nordic women. Each piece tells its own story with complete discretion and timeless elegance.
+      {/* Luxury Hero Section */}
+      <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-nordic-cream via-dusty-rose/20 to-sage-mist/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/40 to-transparent"></div>
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          <div className="mb-12">
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-poppins font-bold text-deep-charcoal leading-none mb-8 tracking-tight">
+              Nordic
+              <span className="block text-dusty-rose italic font-light tracking-wider">Collection</span>
+            </h1>
+            <p className="text-2xl md:text-3xl text-soft-taupe max-w-3xl mx-auto font-light leading-relaxed mb-12">
+              Exklusiva, personliga plagg från nordiska kvinnor. Diskret, säkert och helt anonymt.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
               <Link href="/collection">
-                <Button size="lg" className="bg-stone-800 text-white hover:bg-stone-900 font-poppins font-medium px-10 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-                  Explore Collection
+                <Button size="lg" className="btn-luxury font-poppins font-medium px-12 py-6 text-xl rounded-3xl">
+                  Utforska Kollektion
                 </Button>
               </Link>
               <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="border-2 border-stone-600 text-stone-700 hover:bg-stone-600 hover:text-white font-poppins font-medium px-10 py-4 rounded-lg transition-all duration-300">
-                  How It Works
+                <Button variant="outline" size="lg" className="border-3 border-dusty-rose text-dusty-rose hover:bg-dusty-rose hover:text-deep-charcoal font-poppins font-medium px-12 py-6 text-xl rounded-3xl shadow-rose transition-all duration-500 hover:scale-105">
+                  Så Fungerar Det
                 </Button>
               </Link>
             </div>
@@ -43,11 +45,11 @@ export default function Home() {
       </section>
 
       {/* Featured Collection */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h3 className="font-poppins font-medium text-4xl text-stone-800 mb-6">Featured Collection</h3>
-            <p className="text-stone-600 text-lg max-w-2xl mx-auto leading-relaxed">Handpicked selection of exclusive pieces from verified Nordic women</p>
+      <section className="py-32 glass relative">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+          <div className="text-center mb-24">
+            <h3 className="font-poppins font-bold text-5xl text-deep-charcoal mb-8">Utvald Kollektion</h3>
+            <p className="text-soft-taupe text-2xl max-w-3xl mx-auto font-light leading-relaxed">Handplockade exklusiva plagg från verifierade nordiska kvinnor</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -66,87 +68,103 @@ export default function Home() {
             )}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link href="/collection">
-              <Button variant="outline" size="lg" className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white font-poppins font-medium px-8 py-3 rounded-full">
-                Se hela kollektionen
+              <Button variant="outline" size="lg" className="border-3 border-dusty-rose text-dusty-rose hover:bg-dusty-rose hover:text-deep-charcoal font-poppins font-medium px-10 py-5 text-xl rounded-3xl shadow-rose transition-all duration-500 hover:scale-105">
+                Se Hela Kollektionen
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* How it Works */}
-      <section className="warm-beige py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="font-poppins font-medium text-3xl text-charcoal mb-4">Så funkar det</h3>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Enkel och diskret process från beställning till leverans</p>
+      {/* Luxury How it Works */}
+      <section className="py-32 bg-champagne/50 relative">
+        <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+          <div className="text-center mb-24">
+            <h3 className="font-poppins font-bold text-5xl text-deep-charcoal mb-8">Så Funkar Det</h3>
+            <p className="text-soft-taupe text-2xl max-w-3xl mx-auto font-light leading-relaxed">Enkel och diskret process från beställning till leverans</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <Search className="h-8 w-8 text-powder-pink" />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-rose rounded-full flex items-center justify-center mx-auto mb-8 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                <Search className="h-12 w-12 text-deep-charcoal" />
               </div>
-              <h4 className="font-poppins font-medium text-xl text-charcoal mb-4">1. Välj</h4>
-              <p className="text-gray-600">Bläddra igenom vår exklusiva kollektion och välj det plagg som tilltalar dig mest.</p>
+              <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-6">1. Välj</h4>
+              <p className="text-soft-taupe text-lg font-light leading-relaxed">Bläddra igenom vår exklusiva kollektion och välj det plagg som tilltalar dig mest.</p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <CreditCard className="h-8 w-8 text-powder-pink" />
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-rose rounded-full flex items-center justify-center mx-auto mb-8 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                <CreditCard className="h-12 w-12 text-deep-charcoal" />
               </div>
-              <h4 className="font-poppins font-medium text-xl text-charcoal mb-4">2. Betala</h4>
-              <p className="text-gray-600">Diskret betalning via kryptovaluta, Revolut eller andra säkra betalningsmetoder.</p>
+              <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-6">2. Betala</h4>
+              <p className="text-soft-taupe text-lg font-light leading-relaxed">Diskret betalning via kryptovaluta, Revolut eller andra säkra betalningsmetoder.</p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <Truck className="h-8 w-8 text-powder-pink" />
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-rose rounded-full flex items-center justify-center mx-auto mb-8 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                <Truck className="h-12 w-12 text-deep-charcoal" />
               </div>
-              <h4 className="font-poppins font-medium text-xl text-charcoal mb-4">3. Diskret frakt</h4>
-              <p className="text-gray-600">Plagget skickas diskret i neutral förpackning utan avslöjande märkningar.</p>
+              <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-6">3. Diskret Frakt</h4>
+              <p className="text-soft-taupe text-lg font-light leading-relaxed">Plagget skickas diskret i neutral förpackning utan avslöjande märkningar.</p>
             </div>
 
-            <div className="text-center">
-              <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <Gift className="h-8 w-8 text-powder-pink" />
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-rose rounded-full flex items-center justify-center mx-auto mb-8 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                <Gift className="h-12 w-12 text-deep-charcoal" />
               </div>
-              <h4 className="font-poppins font-medium text-xl text-charcoal mb-4">4. Få hem</h4>
-              <p className="text-gray-600">Motta ditt paket hemma med fullständig anonymitet och diskretion.</p>
+              <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-6">4. Få Hem</h4>
+              <p className="text-soft-taupe text-lg font-light leading-relaxed">Motta ditt paket hemma med fullständig anonymitet och diskretion.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Privacy & Discretion */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="flex flex-col items-center">
-              <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-sm">
-                <KeyRound className="h-8 w-8 text-powder-pink" />
+      {/* Final Luxury Call to Action */}
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-dusty-rose/30 via-sage-mist/20 to-champagne/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+          <div className="text-center">
+            <h3 className="font-poppins font-bold text-5xl text-deep-charcoal mb-8">Upptäck Diskret Elegans</h3>
+            <p className="text-soft-taupe text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-16">
+              Varje plagg berättar sin egen historia med fullständig anonymitet och tidlös elegans
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+              <div className="flex flex-col items-center group">
+                <div className="w-20 h-20 glass rounded-full flex items-center justify-center mb-6 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                  <KeyRound className="h-10 w-10 text-dusty-rose" />
+                </div>
+                <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-4">Fullständig Anonymitet</h4>
+                <p className="text-soft-taupe text-lg font-light leading-relaxed">All kommunikation och leverans sker diskret utan avslöjande information</p>
               </div>
-              <h4 className="font-poppins font-medium text-lg text-charcoal mb-2">Fullständig anonymitet</h4>
-              <p className="text-gray-600 text-sm">All kommunikation och leverans sker diskret utan avslöjande information</p>
+              
+              <div className="flex flex-col items-center group">
+                <div className="w-20 h-20 glass rounded-full flex items-center justify-center mb-6 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                  <Gift className="h-10 w-10 text-dusty-rose" />
+                </div>
+                <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-4">Diskret Förpackning</h4>
+                <p className="text-soft-taupe text-lg font-light leading-relaxed">Neutral förpackning utan logotyper eller avslöjande märkningar</p>
+              </div>
+              
+              <div className="flex flex-col items-center group">
+                <div className="w-20 h-20 glass rounded-full flex items-center justify-center mb-6 shadow-luxury group-hover:scale-110 transition-all duration-500">
+                  <Shield className="h-10 w-10 text-dusty-rose" />
+                </div>
+                <h4 className="font-poppins font-bold text-2xl text-deep-charcoal mb-4">Säker Betalning</h4>
+                <p className="text-soft-taupe text-lg font-light leading-relaxed">Krypterade betalningar som garanterar din integritet</p>
+              </div>
             </div>
             
-            <div className="flex flex-col items-center">
-              <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-sm">
-                <Gift className="h-8 w-8 text-powder-pink" />
-              </div>
-              <h4 className="font-poppins font-medium text-lg text-charcoal mb-2">Diskret förpackning</h4>
-              <p className="text-gray-600 text-sm">Neutral förpackning utan logotyper eller avslöjande märkningar</p>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mb-4 shadow-sm">
-                <Shield className="h-8 w-8 text-powder-pink" />
-              </div>
-              <h4 className="font-poppins font-medium text-lg text-charcoal mb-2">Säker betalning</h4>
-              <p className="text-gray-600 text-sm">Krypterade betalningar som garanterar din integritet</p>
-            </div>
+            <Link href="/collection">
+              <Button size="lg" className="btn-luxury font-poppins font-medium px-16 py-8 text-2xl rounded-3xl">
+                Börja Utforska Nu
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

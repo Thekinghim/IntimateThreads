@@ -4,38 +4,40 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(215 15% 15%);
+  --background: hsl(40 15% 99%);
+  --foreground: hsl(20 5% 8%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(215 15% 15%);
+  --card-foreground: hsl(20 5% 12%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(215 15% 15%);
-  --primary: hsl(215 15% 25%);
-  --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(210 8% 95%);
-  --secondary-foreground: hsl(215 15% 25%);
-  --muted: hsl(210 8% 95%);
-  --muted-foreground: hsl(215 15% 45%);
-  --accent: hsl(210 8% 90%);
-  --accent-foreground: hsl(215 15% 25%);
-  --destructive: hsl(0 75% 55%);
+  --popover-foreground: hsl(20 5% 12%);
+  --primary: hsl(25 20% 15%);
+  --primary-foreground: hsl(40 20% 98%);
+  --secondary: hsl(35 25% 96%);
+  --secondary-foreground: hsl(25 15% 20%);
+  --muted: hsl(38 18% 94%);
+  --muted-foreground: hsl(25 8% 45%);
+  --accent: hsl(345 25% 88%);
+  --accent-foreground: hsl(25 20% 15%);
+  --destructive: hsl(0 70% 50%);
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(210 8% 88%);
-  --input: hsl(210 8% 96%);
-  --ring: hsl(215 15% 25%);
-  --chart-1: hsl(215 15% 25%);
-  --chart-2: hsl(120 12% 60%);
-  --chart-3: hsl(35 15% 70%);
-  --chart-4: hsl(210 25% 65%);
-  --chart-5: hsl(15 55% 70%);
+  --border: hsl(38 15% 88%);
+  --input: hsl(38 20% 97%);
+  --ring: hsl(25 20% 15%);
+  --chart-1: hsl(25 20% 15%);
+  --chart-2: hsl(345 35% 75%);
+  --chart-3: hsl(40 25% 80%);
+  --chart-4: hsl(210 15% 70%);
+  --chart-5: hsl(15 30% 75%);
   
-  /* Custom color variables - Updated for better contrast */
-  --warm-stone: hsl(20 14% 95%);
-  --sage-green: hsl(120 12% 75%);
-  --charcoal-soft: hsl(215 15% 20%);
-  --cream-white: hsl(40 20% 98%);
-  --terracotta: hsl(15 55% 65%);
-  --dusty-blue: hsl(210 25% 70%);
+  /* Luxury Nordic Color Palette */
+  --nordic-cream: hsl(40 25% 98%);
+  --warm-pearl: hsl(35 20% 95%);
+  --dusty-rose: hsl(345 25% 88%);
+  --sage-mist: hsl(120 15% 85%);
+  --deep-charcoal: hsl(25 20% 12%);
+  --soft-taupe: hsl(30 15% 75%);
+  --champagne: hsl(45 30% 92%);
+  --blush: hsl(350 20% 90%);
   
   --font-sans: 'Lora', serif;
   --font-poppins: 'Poppins', sans-serif;
@@ -85,38 +87,61 @@
 }
 
 @layer utilities {
-  /* Background colors with better contrast */
-  .bg-soft-white { background-color: #FFFFFF; }
-  .bg-warm-beige { background-color: #F8F6F1; }
-  .bg-powder-pink { background-color: #E8D4D4; }
-  .bg-charcoal { background-color: #1A1A1A; }
+  /* Luxury Background Colors */
+  .bg-nordic-cream { background-color: var(--nordic-cream); }
+  .bg-warm-pearl { background-color: var(--warm-pearl); }
+  .bg-dusty-rose { background-color: var(--dusty-rose); }
+  .bg-sage-mist { background-color: var(--sage-mist); }
+  .bg-deep-charcoal { background-color: var(--deep-charcoal); }
+  .bg-champagne { background-color: var(--champagne); }
+  .bg-blush { background-color: var(--blush); }
   
-  /* Text colors with better contrast */
-  .text-charcoal { color: #1A1A1A; }
-  .text-sage { color: #5A6B5A; }
-  .text-warm-gray { color: #4A4A4A; }
-  .text-soft-white { color: #FFFFFF; }
+  /* Refined Text Colors */
+  .text-deep-charcoal { color: var(--deep-charcoal); }
+  .text-soft-taupe { color: var(--soft-taupe); }
+  .text-nordic-cream { color: var(--nordic-cream); }
+  .text-dusty-rose { color: hsl(345 35% 65%); }
   
-  /* Button improvements */
-  .btn-primary {
-    background-color: hsl(215 15% 20%);
-    color: white;
+  /* Luxury Gradients */
+  .gradient-nordic {
+    background: linear-gradient(135deg, var(--nordic-cream), var(--warm-pearl));
   }
   
-  .btn-primary:hover {
-    background-color: hsl(215 15% 15%);
+  .gradient-rose {
+    background: linear-gradient(135deg, var(--dusty-rose), var(--blush));
   }
   
-  /* Form improvements for better contrast */
-  .form-input {
-    background-color: white;
-    border: 2px solid hsl(210 8% 88%);
-    color: hsl(215 15% 15%);
+  .gradient-charcoal {
+    background: linear-gradient(135deg, var(--deep-charcoal), hsl(25 15% 18%));
   }
   
-  .form-input:focus {
-    border-color: hsl(215 15% 25%);
-    outline: none;
-    box-shadow: 0 0 0 3px hsl(215 15% 25% / 0.1);
+  /* Premium Button Styles */
+  .btn-luxury {
+    background: linear-gradient(135deg, var(--deep-charcoal), hsl(25 15% 18%));
+    color: var(--nordic-cream);
+    box-shadow: 0 4px 20px hsl(25 20% 12% / 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-luxury:hover {
+    background: linear-gradient(135deg, hsl(25 15% 18%), var(--deep-charcoal));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px hsl(25 20% 12% / 0.4);
+  }
+  
+  /* Glass Morphism Effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Refined Shadows */
+  .shadow-luxury {
+    box-shadow: 0 10px 40px hsl(25 20% 12% / 0.1);
+  }
+  
+  .shadow-rose {
+    box-shadow: 0 8px 32px hsl(345 25% 88% / 0.3);
   }
 }

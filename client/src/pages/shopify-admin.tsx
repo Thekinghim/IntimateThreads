@@ -156,28 +156,33 @@ export default function ShopifyAdmin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Shopify-style Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="px-6 py-4">
+    <div className="min-h-screen gradient-nordic">
+      {/* Luxury Admin Header */}
+      <header className="glass border-b border-dusty-rose/20 sticky top-0 z-40 shadow-luxury">
+        <div className="px-8 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-semibold text-gray-900">Nordic Collection Admin</h1>
-              <Badge variant="secondary" className="bg-green-100 text-green-800">Live</Badge>
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 gradient-charcoal rounded-2xl flex items-center justify-center shadow-luxury">
+                  <Settings className="h-6 w-6 text-nordic-cream" />
+                </div>
+                <h1 className="text-3xl font-bold text-deep-charcoal font-poppins">Nordic Collection Admin</h1>
+              </div>
+              <Badge className="bg-sage-mist text-deep-charcoal px-4 py-2 text-sm font-medium rounded-full">Live</Badge>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
-                <Search className="h-4 w-4" />
+            <div className="flex items-center space-x-6">
+              <Button variant="ghost" size="lg" className="hover:bg-dusty-rose/20 rounded-2xl p-3">
+                <Search className="h-6 w-6 text-soft-taupe" />
               </Button>
-              <Button variant="ghost" size="sm">
-                <Bell className="h-4 w-4" />
+              <Button variant="ghost" size="lg" className="hover:bg-dusty-rose/20 rounded-2xl p-3">
+                <Bell className="h-6 w-6 text-soft-taupe" />
               </Button>
-              <Separator orientation="vertical" className="h-6" />
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-700">Welcome, {adminUser?.name}</span>
-                <Button variant="ghost" size="sm" onClick={logout}>
-                  <LogOut className="h-4 w-4" />
+              <Separator orientation="vertical" className="h-8 bg-dusty-rose/30" />
+              <div className="flex items-center space-x-4">
+                <span className="text-lg text-soft-taupe font-light">Välkommen, {adminUser?.name || 'Admin'}</span>
+                <Button variant="ghost" size="lg" onClick={logout} className="hover:bg-dusty-rose/20 rounded-2xl p-3">
+                  <LogOut className="h-6 w-6 text-soft-taupe" />
                 </Button>
               </div>
             </div>
@@ -187,51 +192,67 @@ export default function ShopifyAdmin() {
 
       {/* Main Content */}
       <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-73px)]">
-          <nav className="p-4 space-y-2">
+        {/* Luxury Sidebar */}
+        <aside className="w-80 glass border-r border-dusty-rose/20 min-h-[calc(100vh-97px)] shadow-luxury">
+          <nav className="p-8 space-y-4">
             <Button 
-              variant={selectedTab === "overview" ? "secondary" : "ghost"} 
-              className="w-full justify-start"
+              variant={selectedTab === "overview" ? "default" : "ghost"} 
+              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
+                selectedTab === "overview" 
+                  ? "btn-luxury text-nordic-cream shadow-luxury" 
+                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
+              }`}
               onClick={() => setSelectedTab("overview")}
             >
-              <BarChart3 className="h-4 w-4 mr-2" />
-              Overview
+              <BarChart3 className="h-6 w-6 mr-4" />
+              Översikt
             </Button>
             <Button 
-              variant={selectedTab === "orders" ? "secondary" : "ghost"} 
-              className="w-full justify-start"
+              variant={selectedTab === "orders" ? "default" : "ghost"} 
+              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
+                selectedTab === "orders" 
+                  ? "btn-luxury text-nordic-cream shadow-luxury" 
+                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
+              }`}
               onClick={() => setSelectedTab("orders")}
             >
-              <ShoppingBag className="h-4 w-4 mr-2" />
-              Orders
+              <ShoppingBag className="h-6 w-6 mr-4" />
+              Beställningar
             </Button>
             <Button 
-              variant={selectedTab === "products" ? "secondary" : "ghost"} 
-              className="w-full justify-start"
+              variant={selectedTab === "products" ? "default" : "ghost"} 
+              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
+                selectedTab === "products" 
+                  ? "btn-luxury text-nordic-cream shadow-luxury" 
+                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
+              }`}
               onClick={() => setSelectedTab("products")}
             >
-              <Package className="h-4 w-4 mr-2" />
-              Products
+              <Package className="h-6 w-6 mr-4" />
+              Produkter
             </Button>
             <Button 
-              variant={selectedTab === "sellers" ? "secondary" : "ghost"} 
-              className="w-full justify-start"
+              variant={selectedTab === "sellers" ? "default" : "ghost"} 
+              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
+                selectedTab === "sellers" 
+                  ? "btn-luxury text-nordic-cream shadow-luxury" 
+                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
+              }`}
               onClick={() => setSelectedTab("sellers")}
             >
-              <Users className="h-4 w-4 mr-2" />
-              Sellers
+              <Users className="h-6 w-6 mr-4" />
+              Säljare
             </Button>
-            <Separator className="my-4" />
-            <Button variant="ghost" className="w-full justify-start">
-              <Settings className="h-4 w-4 mr-2" />
-              Settings
+            <Separator className="my-6 bg-dusty-rose/30" />
+            <Button variant="ghost" className="w-full justify-start py-4 px-6 text-lg rounded-2xl text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal transition-all duration-500">
+              <Settings className="h-6 w-6 mr-4" />
+              Inställningar
             </Button>
           </nav>
         </aside>
 
-        {/* Content Area */}
-        <main className="flex-1 p-6">
+        {/* Luxury Content Area */}
+        <main className="flex-1 p-10 bg-gradient-to-br from-nordic-cream/50 to-champagne/30">
           {selectedTab === "overview" && (
             <div className="space-y-6">
               <div>

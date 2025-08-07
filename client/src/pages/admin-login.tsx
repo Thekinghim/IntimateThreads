@@ -76,16 +76,17 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 to-stone-100 flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        <Card className="shadow-2xl border-0">
-          <CardHeader className="text-center space-y-4 pb-8">
-            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-stone-700 to-stone-900 rounded-2xl flex items-center justify-center">
-              <Shield className="h-8 w-8 text-white" />
+    <div className="min-h-screen gradient-nordic flex items-center justify-center px-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-dusty-rose/10 to-sage-mist/10"></div>
+      <div className="w-full max-w-lg relative">
+        <Card className="glass shadow-luxury border-0 backdrop-blur-3xl">
+          <CardHeader className="text-center space-y-6 pb-10">
+            <div className="mx-auto w-20 h-20 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury">
+              <Shield className="h-10 w-10 text-nordic-cream" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-stone-800">Admin Panel</CardTitle>
-              <CardDescription className="text-stone-600 mt-2">
+              <CardTitle className="text-3xl font-bold text-deep-charcoal font-poppins">Admin Panel</CardTitle>
+              <CardDescription className="text-soft-taupe mt-3 text-lg font-light">
                 Logga in för att komma åt administratörspanelen
               </CardDescription>
             </div>
@@ -99,11 +100,11 @@ export default function AdminLogin() {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-stone-700 font-medium">Användarnamn</FormLabel>
+                      <FormLabel className="text-deep-charcoal font-medium text-lg">Användarnamn</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Ange ditt användarnamn"
-                          className="h-12 border-stone-200 focus:border-stone-400 focus:ring-stone-400"
+                          className="h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-lg rounded-2xl shadow-luxury"
                           {...field}
                         />
                       </FormControl>
@@ -117,26 +118,26 @@ export default function AdminLogin() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-stone-700 font-medium">Lösenord</FormLabel>
+                      <FormLabel className="text-deep-charcoal font-medium text-lg">Lösenord</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input
                             type={showPassword ? "text" : "password"}
                             placeholder="Ange ditt lösenord"
-                            className="h-12 border-stone-200 focus:border-stone-400 focus:ring-stone-400 pr-12"
+                            className="h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-lg rounded-2xl shadow-luxury pr-14"
                             {...field}
                           />
                           <Button
                             type="button"
                             variant="ghost"
                             size="sm"
-                            className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 p-0 text-stone-500 hover:text-stone-700"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 p-0 text-soft-taupe hover:text-dusty-rose rounded-xl"
                             onClick={() => setShowPassword(!showPassword)}
                           >
                             {showPassword ? (
-                              <EyeOff className="h-4 w-4" />
+                              <EyeOff className="h-5 w-5" />
                             ) : (
-                              <Eye className="h-4 w-4" />
+                              <Eye className="h-5 w-5" />
                             )}
                           </Button>
                         </div>
@@ -148,17 +149,17 @@ export default function AdminLogin() {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 bg-gradient-to-r from-stone-700 to-stone-800 hover:from-stone-800 hover:to-stone-900 text-white font-medium text-base"
+                  className="w-full h-16 btn-luxury text-nordic-cream font-medium text-lg rounded-2xl font-poppins"
                   disabled={isLoading}
                 >
                   {isLoading ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    <div className="flex items-center space-x-3">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-nordic-cream"></div>
                       <span>Loggar in...</span>
                     </div>
                   ) : (
-                    <div className="flex items-center space-x-2">
-                      <Lock className="h-4 w-4" />
+                    <div className="flex items-center space-x-3">
+                      <Lock className="h-5 w-5" />
                       <span>Logga in</span>
                     </div>
                   )}
@@ -166,8 +167,8 @@ export default function AdminLogin() {
               </form>
             </Form>
 
-            <div className="mt-8 pt-6 border-t border-stone-200">
-              <p className="text-center text-sm text-stone-500">
+            <div className="mt-10 pt-8 border-t border-dusty-rose/20">
+              <p className="text-center text-lg text-soft-taupe font-light">
                 Endast auktoriserad personal
               </p>
             </div>

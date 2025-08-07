@@ -20,30 +20,30 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white/95 backdrop-blur-lg shadow-lg border-b border-stone-200/60 sticky top-0 z-50">
+    <nav className="glass sticky top-0 z-50 shadow-luxury border-b border-white/20">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center group">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-stone-700 to-stone-900 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">N</span>
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 gradient-charcoal rounded-2xl flex items-center justify-center shadow-luxury group-hover:scale-105 transition-all duration-300">
+                <span className="text-nordic-cream font-bold text-xl font-poppins">N</span>
               </div>
               <div className="flex flex-col">
-                <h1 className="font-poppins font-bold text-xl text-stone-800 group-hover:text-stone-600 transition-colors leading-none">Nordic</h1>
-                <span className="text-xs text-stone-500 font-light italic tracking-wide">Collection</span>
+                <h1 className="font-poppins font-bold text-2xl text-deep-charcoal group-hover:text-dusty-rose transition-colors leading-none">Nordic</h1>
+                <span className="text-sm text-soft-taupe font-light italic tracking-widest">Collection</span>
               </div>
             </div>
           </Link>
           
-          <div className="hidden md:flex space-x-2">
+          <div className="hidden md:flex space-x-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`font-medium transition-all duration-300 px-6 py-3 rounded-xl text-sm ${
+                className={`font-medium transition-all duration-500 px-8 py-4 rounded-2xl text-sm font-poppins ${
                   location === item.href
-                    ? "text-white bg-gradient-to-r from-stone-700 to-stone-800 shadow-lg"
-                    : "text-stone-600 hover:text-stone-800 hover:bg-stone-100/80 hover:shadow-md"
+                    ? "text-nordic-cream gradient-charcoal shadow-luxury transform scale-105"
+                    : "text-deep-charcoal hover:text-dusty-rose hover:bg-dusty-rose/20 hover:shadow-rose hover:scale-102"
                 }`}
               >
                 {item.label}
@@ -51,12 +51,12 @@ export default function Navbar() {
             ))}
           </div>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             <Link href="/cart">
-              <Button variant="ghost" size="lg" className="relative group hover:bg-stone-100/80 transition-all duration-300">
-                <ShoppingBag className="h-6 w-6 text-stone-600 group-hover:text-stone-800 transition-colors" />
+              <Button variant="ghost" size="lg" className="relative group hover:bg-dusty-rose/20 transition-all duration-500 rounded-2xl p-3 hover:shadow-rose hover:scale-110">
+                <ShoppingBag className="h-7 w-7 text-deep-charcoal group-hover:text-dusty-rose transition-all duration-300" />
                 {itemCount > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-6 w-6 flex items-center justify-center bg-gradient-to-r from-rose-500 to-rose-600 text-white shadow-lg animate-pulse">
+                  <Badge className="absolute -top-1 -right-1 h-7 w-7 flex items-center justify-center gradient-rose text-deep-charcoal font-bold shadow-luxury animate-bounce">
                     {itemCount}
                   </Badge>
                 )}
