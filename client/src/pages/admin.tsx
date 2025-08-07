@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,7 @@ import { insertProductSchema, insertSellerSchema } from "@shared/schema";
 import { type OrderWithDetails, type ProductWithSeller, type Seller, type Product } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { 
   Package, 
   Users, 
@@ -30,7 +31,8 @@ import {
   CheckCircle,
   XCircle,
   Clock,
-  Truck
+  Truck,
+  LogOut
 } from "lucide-react";
 import { z } from "zod";
 
@@ -46,6 +48,7 @@ type NewProductForm = z.infer<typeof newProductSchema>;
 type NewSellerForm = z.infer<typeof newSellerSchema>;
 
 export default function Admin() {
+  const { isAuthenticated, isLoading: authLoading, adminUser, logout, getAuthHeader } = useAdminAuth();
   const [selectedOrder, setSelectedOrder] = useState<OrderWithDetails | null>(null);
   const [orderStatusFilter, setOrderStatusFilter] = useState<string>("all");
   const [paymentStatusFilter, setPaymentStatusFilter] = useState<string>("all");
@@ -53,9 +56,44 @@ export default function Admin() {
   const [showAddSeller, setShowAddSeller] = useState(false);
   const { toast } = useToast();
 
-  // Queries
+  // Omdirigera till login om inte autentiserad
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      window.location.href = '/admin/login';
+    }
+  }, [isAuthenticated, authLoading]);
+
+  // Visa loading medan autentisering kontrolleras
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-warm-beige flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-powder-pink mx-auto mb-4"></div>
+          <p className="text-charcoal">Kontrollerar behörighet...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Visa login-sida om inte autentiserad
+  if (!isAuthenticated) {
+    return null; // useEffect kommer omdirigera
+  }
+
+  // Queries med autentisering
   const { data: orders, isLoading: ordersLoading } = useQuery<OrderWithDetails[]>({
     queryKey: ['/api/admin/orders'],
+    queryFn: async () => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/orders', {
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to fetch orders');
+      return response.json();
+    },
   });
 
   const { data: products, isLoading: productsLoading } = useQuery<ProductWithSeller[]>({
@@ -66,10 +104,19 @@ export default function Admin() {
     queryKey: ['/api/sellers'],
   });
 
-  // Mutations
+  // Mutations med autentisering
   const updateOrderMutation = useMutation({
     mutationFn: async ({ orderId, updates }: { orderId: string; updates: any }) => {
-      const response = await apiRequest('PATCH', `/api/orders/${orderId}`, updates);
+      const authHeaders = getAuthHeader();
+      const response = await fetch(`/api/orders/${orderId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders,
+        },
+        body: JSON.stringify(updates),
+      });
+      if (!response.ok) throw new Error('Failed to update order');
       return response.json();
     },
     onSuccess: () => {
@@ -83,7 +130,16 @@ export default function Admin() {
 
   const createProductMutation = useMutation({
     mutationFn: async (productData: any) => {
-      const response = await apiRequest('POST', '/api/admin/products', productData);
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders,
+        },
+        body: JSON.stringify(productData),
+      });
+      if (!response.ok) throw new Error('Failed to create product');
       return response.json();
     },
     onSuccess: () => {
@@ -186,9 +242,20 @@ export default function Admin() {
     <div className="min-h-screen bg-soft-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="font-poppins font-medium text-3xl text-charcoal mb-4">Admin Panel</h1>
-          <p className="text-gray-600">Hantera beställningar, produkter och säljare</p>
+        <div className="mb-8 flex justify-between items-start">
+          <div>
+            <h1 className="font-poppins font-medium text-3xl text-charcoal mb-2">Admin Panel</h1>
+            <p className="text-gray-600">Hantera beställningar, produkter och säljare</p>
+            <p className="text-sm text-powder-pink">Välkommen, {adminUser?.name}</p>
+          </div>
+          <Button 
+            variant="outline" 
+            onClick={logout}
+            className="border-powder-pink text-powder-pink hover:bg-powder-pink hover:text-white"
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            Logga ut
+          </Button>
         </div>
 
         {/* Statistics Cards */}

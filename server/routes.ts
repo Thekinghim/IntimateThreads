@@ -1,8 +1,9 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProductSchema, insertOrderSchema } from "@shared/schema";
+import { insertProductSchema, insertOrderSchema, adminLoginSchema } from "@shared/schema";
 import { z } from "zod";
+import { requireAdminAuth, authenticateAdmin, logoutAdmin } from "./adminAuth";
 
 const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY || process.env.API_KEY || "your_api_key_here";
 const nowpaymentsBaseUrl = process.env.NODE_ENV === "production" 
@@ -208,8 +209,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin endpoints
-  app.get("/api/admin/orders", async (req, res) => {
+  // Admin authentication endpoints
+  app.post("/api/admin/login", async (req, res) => {
+    try {
+      const { username, password } = adminLoginSchema.parse(req.body);
+      
+      const result = await authenticateAdmin(username, password);
+      
+      if (!result) {
+        return res.status(401).json({ message: "Felaktigt användarnamn eller lösenord" });
+      }
+      
+      res.json(result);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Ogiltig indata", errors: error.errors });
+      }
+      res.status(500).json({ message: "Inloggningsfel" });
+    }
+  });
+
+  app.post("/api/admin/logout", requireAdminAuth, async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      const token = authHeader?.substring(7); // Ta bort 'Bearer '
+      
+      if (token) {
+        await logoutAdmin(token);
+      }
+      
+      res.json({ message: "Utloggad" });
+    } catch (error) {
+      res.status(500).json({ message: "Utloggningsfel" });
+    }
+  });
+
+  app.get("/api/admin/me", requireAdminAuth, async (req, res) => {
+    const admin = (req as any).admin;
+    res.json({
+      id: admin.id,
+      username: admin.username,
+      name: admin.name,
+    });
+  });
+
+  // Protected admin endpoints
+  app.get("/api/admin/orders", requireAdminAuth, async (req, res) => {
     try {
       const orders = await storage.getOrders();
       res.json(orders);
@@ -218,7 +263,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/admin/products", async (req, res) => {
+  app.post("/api/admin/products", requireAdminAuth, async (req, res) => {
     try {
       const productData = insertProductSchema.parse(req.body);
       const product = await storage.createProduct(productData);
@@ -228,6 +273,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid product data", errors: error.errors });
       }
       res.status(500).json({ message: "Failed to create product" });
+    }
+  });
+
+  // Update order status (protected admin endpoint)
+  app.patch("/api/orders/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const orderId = req.params.id;
+      const updates = req.body;
+      
+      const updatedOrder = await storage.updateOrder(orderId, updates);
+      
+      if (!updatedOrder) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+      
+      res.json(updatedOrder);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update order" });
     }
   });
 

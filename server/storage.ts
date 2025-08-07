@@ -1,7 +1,8 @@
-import { type Seller, type Product, type Order, type InsertSeller, type InsertProduct, type InsertOrder, type ProductWithSeller, type OrderWithDetails, sellers, products, orders } from "@shared/schema";
+import { type Seller, type Product, type Order, type InsertSeller, type InsertProduct, type InsertOrder, type ProductWithSeller, type OrderWithDetails, type Admin, type AdminSession, type InsertAdmin, sellers, products, orders, admins, adminSessions } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, and, gt } from "drizzle-orm";
 import { randomUUID } from "crypto";
+import bcrypt from "bcryptjs";
 
 export interface IStorage {
   // Sellers
@@ -23,247 +24,16 @@ export interface IStorage {
   createOrder(order: InsertOrder): Promise<Order>;
   updateOrder(id: string, updates: Partial<Order>): Promise<Order | undefined>;
   getOrdersByStatus(status: string): Promise<OrderWithDetails[]>;
+
+  // Admin authentication
+  createAdmin(admin: InsertAdmin): Promise<Admin>;
+  getAdminByUsername(username: string): Promise<Admin | undefined>;
+  createAdminSession(adminId: string, token: string, expiresAt: Date): Promise<AdminSession>;
+  getValidAdminSession(token: string): Promise<AdminSession & { admin: Admin } | undefined>;
+  deleteAdminSession(token: string): Promise<void>;
 }
 
-export class MemStorage implements IStorage {
-  private sellers: Map<string, Seller>;
-  private products: Map<string, Product>;
-  private orders: Map<string, Order>;
-
-  constructor() {
-    this.sellers = new Map();
-    this.products = new Map();
-    this.orders = new Map();
-    this.seedData();
-  }
-
-  private seedData() {
-    // Add some sample sellers
-    const seller1: Seller = {
-      id: randomUUID(),
-      alias: "Emma",
-      location: "Stockholm",
-      age: 25,
-      bio: "Stilmedveten tjej som älskar lyxiga material",
-      commissionRate: "0.45",
-      isActive: true,
-      createdAt: new Date(),
-    };
-
-    const seller2: Seller = {
-      id: randomUUID(),
-      alias: "Astrid",
-      location: "Oslo",
-      age: 28,
-      bio: "Designer med passion för kvalitet",
-      commissionRate: "0.45",
-      isActive: true,
-      createdAt: new Date(),
-    };
-
-    const seller3: Seller = {
-      id: randomUUID(),
-      alias: "Linnea",
-      location: "Köpenhamn",
-      age: 24,
-      bio: "Minimalist som föredrar klassiska designs",
-      commissionRate: "0.45",
-      isActive: true,
-      createdAt: new Date(),
-    };
-
-    this.sellers.set(seller1.id, seller1);
-    this.sellers.set(seller2.id, seller2);
-    this.sellers.set(seller3.id, seller3);
-
-    // Add sample products
-    const product1: Product = {
-      id: randomUUID(),
-      sellerId: seller1.id,
-      title: "Svart spets",
-      description: "Elegant svart spets i storlek S. Buren vid speciella tillfällen. Diskret och välvårdad.",
-      size: "S",
-      color: "Svart",
-      material: "Spets",
-      priceKr: "499.00",
-      imageUrl: "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400",
-      isAvailable: true,
-      wearDays: 3,
-      createdAt: new Date(),
-    };
-
-    const product2: Product = {
-      id: randomUUID(),
-      sellerId: seller2.id,
-      title: "Rosa siden",
-      description: "Lyxig rosa siden från fransk tillverkare. Storlek M. Sällan använd.",
-      size: "M",
-      color: "Rosa",
-      material: "Siden",
-      priceKr: "699.00",
-      imageUrl: "https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=400",
-      isAvailable: true,
-      wearDays: 2,
-      createdAt: new Date(),
-    };
-
-    const product3: Product = {
-      id: randomUUID(),
-      sellerId: seller3.id,
-      title: "Vit bomull med spetsdetaljer",
-      description: "Klassisk vit bomull med spetsdetaljer. Storlek S. Mycket omtyckt design.",
-      size: "S",
-      color: "Vit",
-      material: "Bomull",
-      priceKr: "399.00",
-      imageUrl: "https://images.unsplash.com/photo-1594736797933-d0f021b89484?w=400",
-      isAvailable: true,
-      wearDays: 5,
-      createdAt: new Date(),
-    };
-
-    this.products.set(product1.id, product1);
-    this.products.set(product2.id, product2);
-    this.products.set(product3.id, product3);
-  }
-
-  // Sellers
-  async getSellers(): Promise<Seller[]> {
-    return Array.from(this.sellers.values());
-  }
-
-  async getSeller(id: string): Promise<Seller | undefined> {
-    return this.sellers.get(id);
-  }
-
-  async createSeller(insertSeller: InsertSeller): Promise<Seller> {
-    const seller: Seller = {
-      ...insertSeller,
-      id: randomUUID(),
-      bio: insertSeller.bio || null,
-      commissionRate: insertSeller.commissionRate || "0.45",
-      isActive: insertSeller.isActive ?? true,
-      createdAt: new Date(),
-    };
-    this.sellers.set(seller.id, seller);
-    return seller;
-  }
-
-  async updateSeller(id: string, updates: Partial<Seller>): Promise<Seller | undefined> {
-    const seller = this.sellers.get(id);
-    if (!seller) return undefined;
-
-    const updated = { ...seller, ...updates };
-    this.sellers.set(id, updated);
-    return updated;
-  }
-
-  // Products
-  async getProducts(): Promise<ProductWithSeller[]> {
-    const products = Array.from(this.products.values());
-    return Promise.all(
-      products.map(async (product) => {
-        const seller = await this.getSeller(product.sellerId);
-        return { ...product, seller: seller! };
-      })
-    );
-  }
-
-  async getProduct(id: string): Promise<ProductWithSeller | undefined> {
-    const product = this.products.get(id);
-    if (!product) return undefined;
-
-    const seller = await this.getSeller(product.sellerId);
-    if (!seller) return undefined;
-
-    return { ...product, seller };
-  }
-
-  async getProductsBySeller(sellerId: string): Promise<ProductWithSeller[]> {
-    const products = Array.from(this.products.values()).filter(p => p.sellerId === sellerId);
-    const seller = await this.getSeller(sellerId);
-    if (!seller) return [];
-
-    return products.map(product => ({ ...product, seller }));
-  }
-
-  async createProduct(insertProduct: InsertProduct): Promise<Product> {
-    const product: Product = {
-      ...insertProduct,
-      id: randomUUID(),
-      imageUrl: insertProduct.imageUrl || null,
-      isAvailable: insertProduct.isAvailable ?? true,
-      wearDays: insertProduct.wearDays || null,
-      createdAt: new Date(),
-    };
-    this.products.set(product.id, product);
-    return product;
-  }
-
-  async updateProduct(id: string, updates: Partial<Product>): Promise<Product | undefined> {
-    const product = this.products.get(id);
-    if (!product) return undefined;
-
-    const updated = { ...product, ...updates };
-    this.products.set(id, updated);
-    return updated;
-  }
-
-  // Orders
-  async getOrders(): Promise<OrderWithDetails[]> {
-    const orders = Array.from(this.orders.values());
-    return Promise.all(
-      orders.map(async (order) => {
-        const product = await this.getProduct(order.productId);
-        const seller = await this.getSeller(order.sellerId);
-        return { ...order, product: product!, seller: seller! };
-      })
-    );
-  }
-
-  async getOrder(id: string): Promise<OrderWithDetails | undefined> {
-    const order = this.orders.get(id);
-    if (!order) return undefined;
-
-    const product = await this.getProduct(order.productId);
-    const seller = await this.getSeller(order.sellerId);
-    if (!product || !seller) return undefined;
-
-    return { ...order, product, seller };
-  }
-
-  async createOrder(insertOrder: InsertOrder): Promise<Order> {
-    const order: Order = {
-      ...insertOrder,
-      id: randomUUID(),
-      customerName: insertOrder.customerName || null,
-      nowpaymentsId: insertOrder.nowpaymentsId || null,
-      cryptoCurrency: insertOrder.cryptoCurrency || null,
-      cryptoAmount: insertOrder.cryptoAmount || null,
-      paymentAddress: insertOrder.paymentAddress || null,
-      paymentStatus: insertOrder.paymentStatus || "pending",
-      status: insertOrder.status || "pending",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.orders.set(order.id, order);
-    return order;
-  }
-
-  async updateOrder(id: string, updates: Partial<Order>): Promise<Order | undefined> {
-    const order = this.orders.get(id);
-    if (!order) return undefined;
-
-    const updated = { ...order, ...updates, updatedAt: new Date() };
-    this.orders.set(id, updated);
-    return updated;
-  }
-
-  async getOrdersByStatus(status: string): Promise<OrderWithDetails[]> {
-    const orders = await this.getOrders();
-    return orders.filter(order => order.status === status);
-  }
-}
+// MemStorage removed - now using DatabaseStorage only
 
 export class DatabaseStorage implements IStorage {
   // Sellers
@@ -384,6 +154,53 @@ export class DatabaseStorage implements IStorage {
         seller: true,
       },
     });
+  }
+
+  // Admin authentication
+  async createAdmin(insertAdmin: InsertAdmin): Promise<Admin> {
+    const passwordHash = await bcrypt.hash(insertAdmin.passwordHash, 12);
+    const [admin] = await db
+      .insert(admins)
+      .values({
+        ...insertAdmin,
+        passwordHash,
+      })
+      .returning();
+    return admin;
+  }
+
+  async getAdminByUsername(username: string): Promise<Admin | undefined> {
+    const [admin] = await db.select().from(admins).where(eq(admins.username, username));
+    return admin || undefined;
+  }
+
+  async createAdminSession(adminId: string, token: string, expiresAt: Date): Promise<AdminSession> {
+    const [session] = await db
+      .insert(adminSessions)
+      .values({
+        adminId,
+        token,
+        expiresAt,
+      })
+      .returning();
+    return session;
+  }
+
+  async getValidAdminSession(token: string): Promise<AdminSession & { admin: Admin } | undefined> {
+    const session = await db.query.adminSessions.findFirst({
+      where: and(
+        eq(adminSessions.token, token),
+        gt(adminSessions.expiresAt, new Date())
+      ),
+      with: {
+        admin: true,
+      },
+    });
+    return session || undefined;
+  }
+
+  async deleteAdminSession(token: string): Promise<void> {
+    await db.delete(adminSessions).where(eq(adminSessions.token, token));
   }
 }
 

@@ -49,6 +49,23 @@ export const orders = pgTable("orders", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+export const admins = pgTable("admins", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  username: text("username").unique().notNull(),
+  passwordHash: text("password_hash").notNull(),
+  name: text("name").notNull(),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const adminSessions = pgTable("admin_sessions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  adminId: varchar("admin_id").references(() => admins.id).notNull(),
+  token: text("token").unique().notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertSellerSchema = createInsertSchema(sellers).omit({
   id: true,
   createdAt: true,
@@ -65,13 +82,27 @@ export const insertOrderSchema = createInsertSchema(orders).omit({
   updatedAt: true,
 });
 
+export const insertAdminSchema = createInsertSchema(admins).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const adminLoginSchema = z.object({
+  username: z.string().min(1, "Användarnamn krävs"),
+  password: z.string().min(1, "Lösenord krävs"),
+});
+
 export type InsertSeller = z.infer<typeof insertSellerSchema>;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type InsertOrder = z.infer<typeof insertOrderSchema>;
+export type InsertAdmin = z.infer<typeof insertAdminSchema>;
+export type AdminLogin = z.infer<typeof adminLoginSchema>;
 
 export type Seller = typeof sellers.$inferSelect;
 export type Product = typeof products.$inferSelect;
 export type Order = typeof orders.$inferSelect;
+export type Admin = typeof admins.$inferSelect;
+export type AdminSession = typeof adminSessions.$inferSelect;
 
 // Relations
 export const sellersRelations = relations(sellers, ({ many }) => ({
@@ -95,6 +126,17 @@ export const ordersRelations = relations(orders, ({ one }) => ({
   seller: one(sellers, {
     fields: [orders.sellerId],
     references: [sellers.id],
+  }),
+}));
+
+export const adminsRelations = relations(admins, ({ many }) => ({
+  sessions: many(adminSessions),
+}));
+
+export const adminSessionsRelations = relations(adminSessions, ({ one }) => ({
+  admin: one(admins, {
+    fields: [adminSessions.adminId],
+    references: [admins.id],
   }),
 }));
 

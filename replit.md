@@ -17,7 +17,10 @@ The server runs on **Express.js** with TypeScript, providing RESTful APIs for pr
 ## Data Storage
 The application uses **PostgreSQL** as the primary database with **Drizzle ORM** for type-safe database operations. The schema defines three main entities: sellers (Nordic women offering products), products (garments with detailed descriptions), and orders (purchase transactions with payment tracking). Database migrations are managed through Drizzle Kit, and the connection uses Neon Database's serverless driver for cloud-hosted PostgreSQL.
 
-**Recent Change (Aug 7, 2025):** Successfully migrated from in-memory storage to PostgreSQL database. Implemented DatabaseStorage class with full relational queries using Drizzle's query API. All relations are properly configured and the database is seeded with sample data. The application now persists data between restarts.
+**Recent Changes (Aug 7, 2025):**
+- Successfully migrated from in-memory storage to PostgreSQL database. Implemented DatabaseStorage class with full relational queries using Drizzle's query API. All relations are properly configured and the database is seeded with sample data. The application now persists data between restarts.
+- Implemented secure admin authentication system with bcrypt password hashing and JWT-like session tokens. Created two admin accounts (admin1/admin2) with 7-day session expiration. Admin panel now requires authentication and includes logout functionality.
+- Protected all admin API endpoints with authentication middleware. Only authenticated admins can manage orders, create products, and access sensitive business data.
 
 ## Authentication and Payment Processing
 The application integrates with **NOWPayments** for cryptocurrency transactions (Bitcoin, Ethereum, USDT), **Revolut** for traditional payments, and **Gumroad** as an additional payment gateway. No traditional user authentication is implemented - the system operates on anonymous purchasing with email-based order tracking. Payment status tracking includes pending, completed, failed, and expired states with corresponding order status management.
