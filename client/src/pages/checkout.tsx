@@ -91,21 +91,26 @@ export default function Checkout() {
     }
 
     try {
-      // Create orders for each item (simplified - in real app might want to batch)
+      // Create orders for each item (simplified - in real app might want to batch)  
       const orders = [];
       for (const item of items) {
-        const commission = totalPrice * 0.45; // 45% commission
+        const itemTotal = item.priceKr * item.quantity;
+        const commission = itemTotal * 0.45; // 45% commission
         const orderData = {
           productId: item.id,
-          sellerId: item.sellerId,
+          sellerId: item.sellerId || "8a97dd0f-644d-4769-9f2c-03d858c96463", // fallback seller ID
           customerName: data.customerName,
           customerEmail: data.customerEmail,
           shippingAddress: data.shippingAddress,
-          totalAmountKr: (item.priceKr * item.quantity).toString(),
+          totalAmountKr: itemTotal.toString(),
           commissionKr: commission.toString(),
           paymentMethod: data.paymentMethod,
           paymentStatus: "pending",
           status: "pending",
+          ...(data.paymentMethod === "crypto" && {
+            cryptoCurrency: selectedCrypto.toUpperCase(),
+            cryptoAmount: estimate?.estimated_amount?.toString() || "0",
+          }),
         };
 
         const order = await createOrderMutation.mutateAsync(orderData);

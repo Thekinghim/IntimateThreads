@@ -110,20 +110,20 @@ export default function ShopifyAdmin() {
 
   // Calculate stats
   const stats = {
-    totalOrders: orders?.length || 0,
-    pendingOrders: orders?.filter((o: any) => o.status === "pending").length || 0,
-    completedOrders: orders?.filter((o: any) => o.status === "completed").length || 0,
-    totalRevenue: orders?.reduce((sum: number, order: any) => sum + parseFloat(order.totalAmountKr), 0) || 0,
-    totalProducts: products?.length || 0,
-    activeSellers: sellers?.filter((s: any) => s.isActive).length || 0,
+    totalOrders: Array.isArray(orders) ? orders.length : 0,
+    pendingOrders: Array.isArray(orders) ? orders.filter((o: any) => o.status === "pending").length : 0,
+    completedOrders: Array.isArray(orders) ? orders.filter((o: any) => o.status === "completed").length : 0,
+    totalRevenue: Array.isArray(orders) ? orders.reduce((sum: number, order: any) => sum + parseFloat(order.totalAmountKr), 0) : 0,
+    totalProducts: Array.isArray(products) ? products.length : 0,
+    activeSellers: Array.isArray(sellers) ? sellers.filter((s: any) => s.isActive).length : 0,
   };
 
   // Filter orders
-  const filteredOrders = orders?.filter((order: any) => {
+  const filteredOrders = Array.isArray(orders) ? orders.filter((order: any) => {
     const matchesOrderStatus = orderStatusFilter === "all" || order.status === orderStatusFilter;
     const matchesPaymentStatus = paymentStatusFilter === "all" || order.paymentStatus === paymentStatusFilter;
     return matchesOrderStatus && matchesPaymentStatus;
-  }) || [];
+  }) : [];
 
   const getStatusBadge = (status: string) => {
     const variants: Record<string, string> = {
@@ -513,7 +513,7 @@ export default function ShopifyAdmin() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {products?.map((product: any) => (
+                      {Array.isArray(products) && products.map((product: any) => (
                         <TableRow key={product.id}>
                           <TableCell className="pl-6">
                             <div className="flex items-center space-x-3">
@@ -580,7 +580,7 @@ export default function ShopifyAdmin() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {sellers?.map((seller: any) => (
+                      {Array.isArray(sellers) && sellers.map((seller: any) => (
                         <TableRow key={seller.id}>
                           <TableCell className="pl-6">
                             <div>
@@ -591,7 +591,7 @@ export default function ShopifyAdmin() {
                           <TableCell>{seller.location}</TableCell>
                           <TableCell>{(parseFloat(seller.commissionRate) * 100).toFixed(0)}%</TableCell>
                           <TableCell>
-                            {products?.filter((p: any) => p.sellerId === seller.id).length || 0}
+                            {Array.isArray(products) ? products.filter((p: any) => p.sellerId === seller.id).length : 0}
                           </TableCell>
                           <TableCell>
                             <Badge className={seller.isActive ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}>
