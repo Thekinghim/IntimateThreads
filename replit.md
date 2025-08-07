@@ -21,6 +21,11 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
 - Successfully migrated from in-memory storage to PostgreSQL database. Implemented DatabaseStorage class with full relational queries using Drizzle's query API. All relations are properly configured and the database is seeded with sample data. The application now persists data between restarts.
 - Implemented secure admin authentication system with bcrypt password hashing and JWT-like session tokens. Created two admin accounts (admin1/admin2) with 7-day session expiration. Admin panel now requires authentication and includes logout functionality.
 - Protected all admin API endpoints with authentication middleware. Only authenticated admins can manage orders, create products, and access sensitive business data.
+- Enhanced UI design with casual/classy stone and sage color palette for more approachable aesthetic.
+- Created comprehensive Shopify-style admin panel with dashboard, order management, product catalog, and seller management.
+- Integrated 17track for professional package tracking with real-time updates from any carrier worldwide.
+- Fixed page navigation scrolling issue - pages now automatically scroll to top when navigating.
+- Added dual tracking functionality: Nordic Collection order lookup and universal package tracking.
 
 ## Authentication and Payment Processing
 The application integrates with **NOWPayments** for cryptocurrency transactions (Bitcoin, Ethereum, USDT), **Revolut** for traditional payments, and **Gumroad** as an additional payment gateway. No traditional user authentication is implemented - the system operates on anonymous purchasing with email-based order tracking. Payment status tracking includes pending, completed, failed, and expired states with corresponding order status management.
