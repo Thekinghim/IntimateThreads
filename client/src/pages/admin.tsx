@@ -56,31 +56,7 @@ export default function Admin() {
   const [showAddSeller, setShowAddSeller] = useState(false);
   const { toast } = useToast();
 
-  // Omdirigera till login om inte autentiserad
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      window.location.href = '/admin/login';
-    }
-  }, [isAuthenticated, authLoading]);
-
-  // Visa loading medan autentisering kontrolleras
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-warm-beige flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-powder-pink mx-auto mb-4"></div>
-          <p className="text-charcoal">Kontrollerar behörighet...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Visa login-sida om inte autentiserad
-  if (!isAuthenticated) {
-    return null; // useEffect kommer omdirigera
-  }
-
-  // Queries med autentisering
+  // Queries - alltid definiera hooks
   const { data: orders, isLoading: ordersLoading } = useQuery<OrderWithDetails[]>({
     queryKey: ['/api/admin/orders'],
     queryFn: async () => {
@@ -91,17 +67,27 @@ export default function Admin() {
           ...authHeaders,
         },
       });
-      if (!response.ok) throw new Error('Failed to fetch orders');
+      if (!response.ok) {
+        if (response.status === 401) {
+          window.location.href = '/admin/login';
+          throw new Error('Unauthorized');
+        }
+        throw new Error('Failed to fetch orders');
+      }
       return response.json();
     },
+    enabled: isAuthenticated,
+    retry: false,
   });
 
   const { data: products, isLoading: productsLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
+    enabled: isAuthenticated,
   });
 
   const { data: sellers, isLoading: sellersLoading } = useQuery<Seller[]>({
     queryKey: ['/api/sellers'],
+    enabled: isAuthenticated,
   });
 
   // Mutations med autentisering
@@ -180,6 +166,37 @@ export default function Admin() {
       isActive: true,
     },
   });
+
+  // Omdirigera till login om inte autentiserad
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      window.location.href = '/admin/login';
+    }
+  }, [isAuthenticated, authLoading]);
+
+  // Visa loading medan autentisering kontrolleras
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-soft-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-powder-pink mx-auto mb-4"></div>
+          <p className="text-charcoal">Kontrollerar behörighet...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Visa loading om inte autentiserad - låt useEffect hantera omdirigering
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-soft-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-powder-pink mx-auto mb-4"></div>
+          <p className="text-charcoal">Omdirigerar till inloggning...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Filter orders
   const filteredOrders = orders?.filter(order => {
