@@ -1,63 +1,53 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-
-interface AdminUser {
-  id: string;
-  username: string;
-  name: string;
-}
 
 export function useAdminAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [adminUser, setAdminUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Kontrollera om vi har en giltig token
+  // Kontrollera om vi har en giltig token vid start
   useEffect(() => {
-    const storedToken = localStorage.getItem('adminToken');
-    const storedUser = localStorage.getItem('adminUser');
-    
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setAdminUser(JSON.parse(storedUser));
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  // Verifiera token med servern
-  const { data: verifiedUser, isLoading, error } = useQuery({
-    queryKey: ['/api/admin/me'],
-    enabled: !!token,
-    retry: false,
-    queryFn: async () => {
-      const response = await fetch('/api/admin/me', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+    const checkAuth = async () => {
+      const storedToken = localStorage.getItem('adminToken');
+      const storedUser = localStorage.getItem('adminUser');
       
-      if (!response.ok) {
-        throw new Error('Unauthorized');
+      if (storedToken && storedUser) {
+        try {
+          // Verifiera token med servern
+          const response = await fetch('/api/admin/me', {
+            headers: {
+              'Authorization': `Bearer ${storedToken}`,
+            },
+          });
+          
+          if (response.ok) {
+            const user = await response.json();
+            setAdminUser(user);
+            setIsAuthenticated(true);
+          } else {
+            // Token är ogiltig, rensa localStorage
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            setIsAuthenticated(false);
+            setAdminUser(null);
+          }
+        } catch (error) {
+          // Något gick fel, rensa localStorage
+          localStorage.removeItem('adminToken');
+          localStorage.removeItem('adminUser');
+          setIsAuthenticated(false);
+          setAdminUser(null);
+        }
+      } else {
+        setIsAuthenticated(false);
+        setAdminUser(null);
       }
       
-      return response.json();
-    },
-  });
+      setIsLoading(false);
+    };
 
-  // Uppdatera autentiseringsstatus baserat på server-verifiering
-  useEffect(() => {
-    if (error) {
-      // Token är ogiltig, rensa localStorage
-      localStorage.removeItem('adminToken');
-      localStorage.removeItem('adminUser');
-      setIsAuthenticated(false);
-      setAdminUser(null);
-      setToken(null);
-    } else if (verifiedUser) {
-      setIsAuthenticated(true);
-      setAdminUser(verifiedUser);
-    }
-  }, [verifiedUser, error]);
+    checkAuth();
+  }, []);
 
   const logout = async () => {
     const storedToken = localStorage.getItem('adminToken');
@@ -80,7 +70,6 @@ export function useAdminAuth() {
     localStorage.removeItem('adminUser');
     setIsAuthenticated(false);
     setAdminUser(null);
-    setToken(null);
     
     // Omdirigera till login-sidan
     window.location.href = '/admin/login';
