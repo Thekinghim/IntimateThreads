@@ -1,0 +1,77 @@
+import { sql } from "drizzle-orm";
+import { pgTable, text, varchar, integer, decimal, timestamp, boolean } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
+
+export const sellers = pgTable("sellers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  alias: text("alias").notNull(),
+  location: text("location").notNull(),
+  age: integer("age").notNull(),
+  bio: text("bio"),
+  commissionRate: decimal("commission_rate", { precision: 5, scale: 2 }).default("0.45"),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const products = pgTable("products", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sellerId: varchar("seller_id").references(() => sellers.id).notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  size: text("size").notNull(),
+  color: text("color").notNull(),
+  material: text("material").notNull(),
+  priceKr: decimal("price_kr", { precision: 10, scale: 2 }).notNull(),
+  imageUrl: text("image_url"),
+  isAvailable: boolean("is_available").default(true),
+  wearDays: integer("wear_days"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const orders = pgTable("orders", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  productId: varchar("product_id").references(() => products.id).notNull(),
+  sellerId: varchar("seller_id").references(() => sellers.id).notNull(),
+  customerName: text("customer_name"),
+  customerEmail: text("customer_email").notNull(),
+  shippingAddress: text("shipping_address").notNull(),
+  totalAmountKr: decimal("total_amount_kr", { precision: 10, scale: 2 }).notNull(),
+  commissionKr: decimal("commission_kr", { precision: 10, scale: 2 }).notNull(),
+  paymentMethod: text("payment_method").notNull(), // 'crypto', 'revolut', 'gumroad'
+  paymentStatus: text("payment_status").default("pending"), // 'pending', 'completed', 'failed', 'expired'
+  nowpaymentsId: text("nowpayments_id"),
+  cryptoCurrency: text("crypto_currency"),
+  cryptoAmount: text("crypto_amount"),
+  paymentAddress: text("payment_address"),
+  status: text("status").default("pending"), // 'pending', 'confirmed', 'shipped', 'completed', 'cancelled'
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertSellerSchema = createInsertSchema(sellers).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertProductSchema = createInsertSchema(products).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertOrderSchema = createInsertSchema(orders).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertSeller = z.infer<typeof insertSellerSchema>;
+export type InsertProduct = z.infer<typeof insertProductSchema>;
+export type InsertOrder = z.infer<typeof insertOrderSchema>;
+
+export type Seller = typeof sellers.$inferSelect;
+export type Product = typeof products.$inferSelect;
+export type Order = typeof orders.$inferSelect;
+
+export type ProductWithSeller = Product & { seller: Seller };
+export type OrderWithDetails = Order & { product: Product; seller: Seller };
