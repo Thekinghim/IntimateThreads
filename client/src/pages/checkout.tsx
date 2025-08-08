@@ -186,19 +186,9 @@ export default function Checkout() {
       <PrivacyBanner />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-              <Shield className="h-6 w-6 text-green-600" />
-            </div>
-            <h1 className="font-poppins font-medium text-3xl text-charcoal">Anonymous Checkout</h1>
-          </div>
-          <p className="text-gray-600 flex items-center justify-center gap-2">
-            <Eye className="h-4 w-4 text-green-600" />
-            Your identity remains completely private and secure
-          </p>
+          <h1 className="font-poppins font-medium text-3xl text-charcoal mb-2">Slutför ditt köp</h1>
+          <p className="text-gray-600">Fyll i leveransuppgifter och välj betalningsmetod</p>
         </div>
-
-        <AnonymousCheckoutBanner />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Form */}
@@ -260,32 +250,64 @@ export default function Checkout() {
                       name="paymentMethod"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Betalningsmetod</FormLabel>
+                          <FormLabel className="text-lg font-semibold">Välj betalningsmetod</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
                               defaultValue={field.value}
-                              className="space-y-3"
+                              className="grid grid-cols-1 gap-4 mt-4"
                             >
-                              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                                <RadioGroupItem value="crypto" id="crypto" />
-                                <Label htmlFor="crypto" className="flex items-center cursor-pointer">
-                                  <Bitcoin className="h-5 w-5 mr-2 text-orange-500" />
-                                  Kryptovaluta (BTC/ETH/USDT)
+                              <div className="relative">
+                                <RadioGroupItem value="crypto" id="crypto" className="sr-only" />
+                                <Label 
+                                  htmlFor="crypto" 
+                                  className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                    paymentMethod === "crypto" 
+                                      ? 'border-deep-charcoal bg-gray-50' 
+                                      : 'border-gray-300 hover:border-gray-400'
+                                  }`}
+                                >
+                                  <Bitcoin className="h-6 w-6 mr-3 text-orange-500" />
+                                  <div>
+                                    <div className="font-medium text-lg">Kryptovaluta</div>
+                                    <div className="text-sm text-gray-600">Bitcoin, Ethereum, USDT - Snabbt och säkert</div>
+                                  </div>
                                 </Label>
                               </div>
-                              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                                <RadioGroupItem value="revolut" id="revolut" />
-                                <Label htmlFor="revolut" className="flex items-center cursor-pointer">
-                                  <CreditCard className="h-5 w-5 mr-2 text-blue-500" />
-                                  Revolut
+                              
+                              <div className="relative">
+                                <RadioGroupItem value="revolut" id="revolut" className="sr-only" />
+                                <Label 
+                                  htmlFor="revolut" 
+                                  className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                    paymentMethod === "revolut" 
+                                      ? 'border-deep-charcoal bg-gray-50' 
+                                      : 'border-gray-300 hover:border-gray-400'
+                                  }`}
+                                >
+                                  <CreditCard className="h-6 w-6 mr-3 text-blue-500" />
+                                  <div>
+                                    <div className="font-medium text-lg">Revolut</div>
+                                    <div className="text-sm text-gray-600">Mobil betalning med Revolut-appen</div>
+                                  </div>
                                 </Label>
                               </div>
-                              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                                <RadioGroupItem value="gumroad" id="gumroad" />
-                                <Label htmlFor="gumroad" className="flex items-center cursor-pointer">
-                                  <Globe className="h-5 w-5 mr-2 text-green-500" />
-                                  Gumroad
+                              
+                              <div className="relative">
+                                <RadioGroupItem value="gumroad" id="gumroad" className="sr-only" />
+                                <Label 
+                                  htmlFor="gumroad" 
+                                  className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                    paymentMethod === "gumroad" 
+                                      ? 'border-deep-charcoal bg-gray-50' 
+                                      : 'border-gray-300 hover:border-gray-400'
+                                  }`}
+                                >
+                                  <Globe className="h-6 w-6 mr-3 text-green-500" />
+                                  <div>
+                                    <div className="font-medium text-lg">Gumroad</div>
+                                    <div className="text-sm text-gray-600">Säker betalning med kort eller PayPal</div>
+                                  </div>
                                 </Label>
                               </div>
                             </RadioGroup>
@@ -385,9 +407,22 @@ export default function Checkout() {
             {paymentMethod === "crypto" && paymentCreated && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Bitcoin className="h-5 w-5 mr-2 text-orange-500" />
-                    Kryptovaluta Betalning
+                  <CardTitle className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <Bitcoin className="h-5 w-5 mr-2 text-orange-500" />
+                      Kryptovaluta Betalning
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => {
+                        setPaymentCreated(null);
+                        setSelectedCrypto('btc');
+                      }}
+                      className="text-sm"
+                    >
+                      Byt krypto
+                    </Button>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>

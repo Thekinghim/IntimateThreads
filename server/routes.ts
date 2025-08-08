@@ -196,23 +196,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { amount, currency_from, currency_to } = req.query;
       
-      // Return demo estimates since API key is invalid
-      const conversionRates: Record<string, number> = {
-        btc: 0.000002,  // 1 SEK = 0.000002 BTC (demo rate)
-        eth: 0.00003,   // 1 SEK = 0.00003 ETH (demo rate)
-        usdt: 0.095     // 1 SEK = 0.095 USDT (demo rate)
-      };
-      
-      const amountNum = parseFloat(amount as string);
-      const estimated = (amountNum * (conversionRates[currency_to as string] || 0.0001)).toFixed(8);
-      
-      res.json({
-        estimated_amount: estimated,
-        currency_from: currency_from,
-        currency_to: currency_to,
-        amount: amount
+      const response = await fetch(`${nowpaymentsBaseUrl}/estimate?amount=${amount}&currency_from=${currency_from}&currency_to=${currency_to}`, {
+        headers: { 'x-api-key': nowpaymentsApiKey }
       });
+      
+      if (!response.ok) {
+        console.error('NOWPayments estimate error:', response.status, await response.text());
+        return res.status(500).json({ message: "Failed to get estimate from NOWPayments" });
+      }
+      
+      const data = await response.json();
+      res.json(data);
     } catch (error) {
+      console.error('Estimate error:', error);
       res.status(500).json({ message: "Failed to get estimate" });
     }
   });
