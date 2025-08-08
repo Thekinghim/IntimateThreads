@@ -14,7 +14,7 @@ import Checkout from "@/pages/checkout";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
-import MobileAdmin from "@/pages/mobile-admin";
+import MobileAdmin from "@/pages/mobile-admin-v2";
 import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 import PrivacyModeIndicator from "@/components/privacy-mode-indicator";
@@ -27,7 +27,7 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Check if mobile device
+  // Check if mobile device - always use v2 for mobile
   const isMobile = window.innerWidth < 768;
   const AdminComponent = isMobile ? MobileAdmin : Admin;
 
