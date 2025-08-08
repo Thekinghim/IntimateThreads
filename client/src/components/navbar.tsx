@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#FEFBEA] shadow-sm border-b border-[#E8E4D6]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pl-[10px] pr-[10px]">
         <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
           <Link href="/">
