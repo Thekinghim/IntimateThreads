@@ -1,43 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: hsl(40 15% 99%);
-  --foreground: hsl(20 5% 8%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(20 5% 12%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(20 5% 12%);
-  --primary: hsl(25 20% 15%);
-  --primary-foreground: hsl(40 20% 98%);
-  --secondary: hsl(35 25% 96%);
-  --secondary-foreground: hsl(25 15% 20%);
-  --muted: hsl(38 18% 94%);
-  --muted-foreground: hsl(25 8% 45%);
-  --accent: hsl(345 25% 88%);
-  --accent-foreground: hsl(25 20% 15%);
+  --background: hsl(48 44% 96%); /* #FEFBEA */
+  --foreground: hsl(215 100% 18%); /* #064F8C */
+  --card: hsl(48 44% 96%); /* #FEFBEA */
+  --card-foreground: hsl(215 100% 18%); /* #064F8C */
+  --popover: hsl(48 44% 96%); /* #FEFBEA */
+  --popover-foreground: hsl(215 100% 18%); /* #064F8C */
+  --primary: hsl(225 70% 14%); /* #111B3E */
+  --primary-foreground: hsl(48 44% 96%); /* #FEFBEA */
+  --secondary: hsl(215 100% 18%); /* #064F8C */
+  --secondary-foreground: hsl(48 44% 96%); /* #FEFBEA */
+  --muted: hsl(48 20% 92%); /* Light cream */
+  --muted-foreground: hsl(215 30% 40%); /* Muted navy */
+  --accent: hsl(215 100% 18%); /* #064F8C */
+  --accent-foreground: hsl(48 44% 96%); /* #FEFBEA */
   --destructive: hsl(0 70% 50%);
-  --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(38 15% 88%);
-  --input: hsl(38 20% 97%);
-  --ring: hsl(25 20% 15%);
-  --chart-1: hsl(25 20% 15%);
-  --chart-2: hsl(345 35% 75%);
-  --chart-3: hsl(40 25% 80%);
-  --chart-4: hsl(210 15% 70%);
-  --chart-5: hsl(15 30% 75%);
+  --destructive-foreground: hsl(48 44% 96%);
+  --border: hsl(48 20% 85%); /* Light border */
+  --input: hsl(48 20% 90%); /* Input background */
+  --ring: hsl(225 70% 14%); /* #111B3E */
+  --chart-1: hsl(225 70% 14%);
+  --chart-2: hsl(215 100% 18%);
+  --chart-3: hsl(43 100% 50%);
+  --chart-4: hsl(48 44% 96%);
+  --chart-5: hsl(48 20% 85%);
   
-  /* Luxury Nordic Color Palette */
-  --nordic-cream: hsl(40 25% 98%);
-  --warm-pearl: hsl(35 20% 95%);
-  --dusty-rose: hsl(345 25% 88%);
-  --sage-mist: hsl(120 15% 85%);
-  --deep-charcoal: hsl(25 20% 12%);
-  --soft-taupe: hsl(30 15% 75%);
-  --champagne: hsl(45 30% 92%);
-  --blush: hsl(350 20% 90%);
+  /* Scandiscent Color Palette */
+  --scandiscent-cream: hsl(48 44% 96%); /* #FEFBEA */
+  --scandiscent-navy: hsl(215 100% 18%); /* #064F8C */
+  --scandiscent-dark: hsl(225 70% 14%); /* #111B3E */
+  --scandiscent-light: hsl(48 20% 92%); /* Light cream */
+  --scandiscent-border: hsl(48 20% 85%);
+  
+  /* Gold Gradients for Details */
+  --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%);
+  --gold-metallic: linear-gradient(145deg, #FFE55C 0%, #D4AF37 15%, #B8860B 30%, #DAA520 45%, #FFD700 60%, #FFA500 75%, #CD853F 90%, #B8860B 100%);
+  --gold-shine: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
   
   --font-sans: 'Lora', serif;
   --font-poppins: 'Poppins', sans-serif;
@@ -129,19 +131,78 @@
     box-shadow: 0 6px 25px hsl(25 20% 12% / 0.4);
   }
   
-  /* Glass Morphism Effects */
+  /* Scandiscent Gold Details */
+  .gold-accent {
+    background: var(--gold-gradient);
+    background-size: 200% 200%;
+    animation: goldShimmer 3s ease-in-out infinite;
+  }
+
+  .gold-text {
+    background: var(--gold-metallic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: goldShimmer 4s ease-in-out infinite;
+  }
+
+  .gold-border {
+    border-image: var(--gold-gradient) 1;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .gold-button {
+    background: var(--gold-metallic);
+    background-size: 200% 200%;
+    animation: goldShimmer 3s ease-in-out infinite;
+    color: var(--scandiscent-dark);
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gold-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gold-shine);
+    animation: goldSweep 2s ease-in-out infinite;
+  }
+
+  @keyframes goldShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes goldSweep {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+  }
+
+  /* Glass Morphism Effects - Updated for Scandiscent */
   .glass {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(254, 251, 234, 0.8);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(6, 79, 140, 0.1);
+  }
+
+  .glass-dark {
+    background: rgba(17, 27, 62, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(254, 251, 234, 0.1);
   }
   
-  /* Refined Shadows */
+  /* Scandiscent Shadows */
   .shadow-luxury {
-    box-shadow: 0 10px 40px hsl(25 20% 12% / 0.1);
+    box-shadow: 0 10px 40px hsl(225 70% 14% / 0.15);
   }
   
-  .shadow-rose {
-    box-shadow: 0 8px 32px hsl(345 25% 88% / 0.3);
+  .shadow-navy {
+    box-shadow: 0 8px 32px hsl(215 100% 18% / 0.2);
   }
 }
