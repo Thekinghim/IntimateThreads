@@ -34,45 +34,33 @@ export const requireAdminAuth: RequestHandler = async (req, res, next) => {
 
 // Hjälpfunktioner för admin-sessioner
 export async function authenticateAdmin(username: string, password: string) {
-  let admin;
-  
   try {
-    // Temporär fix för production - skapa admin om den inte finns
-    admin = await storage.getAdminByUsername(username);
+    console.log(`🔐 Production auth v3.2.0: Login attempt for ${username}`);
     
-    console.log(`Login attempt for user: ${username}, admin found: ${!!admin}`);
+    // Hämta admin från databas
+    const admin = await storage.getAdminByUsername(username);
+    console.log(`Admin found: ${!!admin}`);
     
-    if (!admin && (username === 'admin1' || username === 'admin2') && password === 'adminpass123') {
-      // Skapa admin-användare om den inte finns
-      console.log(`Creating new admin user: ${username}`);
-      const passwordHash = await bcrypt.hash(password, 12);
-      try {
-        admin = await storage.createAdmin({
-          username,
-          passwordHash,
-          name: username === 'admin1' ? 'Admin 1' : 'Admin 2',
-          isActive: true
-        });
-        console.log(`Admin user created successfully: ${username}`);
-      } catch (createError) {
-        console.error('Error creating admin:', createError);
-        return null;
-      }
+    if (!admin) {
+      console.log(`❌ No admin found for username: ${username}`);
+      return null;
     }
     
-    if (!admin || !admin.isActive) {
-      console.log(`Authentication failed: admin not found or inactive for ${username}`);
+    if (!admin.isActive) {
+      console.log(`❌ Admin account inactive: ${username}`);
       return null;
     }
 
+    console.log(`🔑 Testing password for ${username}...`);
     const isValid = await bcrypt.compare(password, admin.passwordHash);
+    console.log(`Password valid: ${isValid}`);
     
     if (!isValid) {
-      console.log(`Password validation failed for ${username}`);
+      console.log(`❌ Password validation failed for ${username}`);
       return null;
     }
     
-    console.log(`Authentication successful for ${username}`);
+    console.log(`✅ Authentication successful for ${username}`);
     
     // Skapa en ny session
     const token = randomUUID();
@@ -94,23 +82,6 @@ export async function authenticateAdmin(username: string, password: string) {
     console.error('Authentication error:', error);
     return null;
   }
-
-  // Skapa en ny session
-  const token = randomUUID();
-  const expiresAt = new Date();
-  expiresAt.setDate(expiresAt.getDate() + 7); // 7 dagar giltighetstid
-
-  const session = await storage.createAdminSession(admin.id, token, expiresAt);
-  
-  return {
-    admin: {
-      id: admin.id,
-      username: admin.username,
-      name: admin.name,
-    },
-    token,
-    expiresAt,
-  };
 }
 
 export async function logoutAdmin(token: string) {
