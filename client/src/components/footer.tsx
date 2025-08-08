@@ -43,8 +43,8 @@ export default function Footer() {
           <div>
             <h5 className="font-poppins font-semibold text-2xl mb-8 text-nordic-cream">Villkor</h5>
             <ul className="space-y-6 text-champagne/80">
-              <li><a href="#" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Integritetspolicy</a></li>
-              <li><a href="#" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Användarvillkor</a></li>
+              <li><Link href="/privacy-policy" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Integritetspolicy</Link></li>
+              <li><Link href="/terms-of-service" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Användarvillkor</Link></li>
               <li><a href="#" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Returpolicy</a></li>
               <li><a href="#" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Säkerhet</a></li>
             </ul>

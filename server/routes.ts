@@ -488,6 +488,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Payment status endpoint
+  app.get("/api/payment-status", (req, res) => {
+    res.json({
+      nowpayments: !!process.env.NOWPAYMENTS_API_KEY,
+      revolut: !!process.env.REVOLUT_API_KEY,
+      gumroad: !!process.env.GUMROAD_API_KEY
+    });
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
