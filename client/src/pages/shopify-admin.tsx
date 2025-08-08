@@ -158,32 +158,50 @@ export default function ShopifyAdmin() {
 
   return (
     <div className="min-h-screen gradient-nordic">
-      {/* Luxury Admin Header */}
-      <header className="glass border-b border-dusty-rose/20 sticky top-0 z-40 shadow-luxury">
-        <div className="px-8 py-6">
+      {/* Enhanced Desktop Header */}
+      <header className="glass border-b border-dusty-rose/20 sticky top-0 z-50 shadow-luxury backdrop-blur-xl">
+        <div className="px-6 py-4 max-w-none">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-8">
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 gradient-charcoal rounded-2xl flex items-center justify-center shadow-luxury">
-                  <Settings className="h-6 w-6 text-nordic-cream" />
+                <div className="w-14 h-14 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury hover:shadow-xl transition-all duration-300">
+                  <Settings className="h-7 w-7 text-nordic-cream" />
                 </div>
-                <h1 className="text-3xl font-bold text-deep-charcoal font-poppins">Nordic Collection Admin</h1>
+                <div>
+                  <h1 className="text-3xl font-bold text-deep-charcoal font-poppins tracking-tight">Nordic Collection Admin</h1>
+                  <p className="text-sm text-soft-taupe font-medium">Luxury E-commerce Management</p>
+                </div>
               </div>
-              <Badge className="bg-sage-mist text-deep-charcoal px-4 py-2 text-sm font-medium rounded-full">Live</Badge>
+              <div className="flex items-center space-x-3">
+                <Badge className="bg-sage-mist text-deep-charcoal px-4 py-2 text-sm font-medium rounded-full shadow-sm">Live</Badge>
+                <Badge className="bg-green-100 text-green-700 px-3 py-1 text-xs font-medium rounded-full">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                  Online
+                </Badge>
+              </div>
             </div>
             
-            <div className="flex items-center space-x-6">
-              <Button variant="ghost" size="lg" className="hover:bg-dusty-rose/20 rounded-2xl p-3">
-                <Search className="h-6 w-6 text-soft-taupe" />
-              </Button>
-              <Button variant="ghost" size="lg" className="hover:bg-dusty-rose/20 rounded-2xl p-3">
+            <div className="flex items-center space-x-4">
+              <div className="hidden xl:flex items-center space-x-4 bg-white/60 backdrop-blur-sm rounded-2xl px-4 py-2 border border-dusty-rose/20">
+                <Search className="h-5 w-5 text-soft-taupe" />
+                <input 
+                  type="text" 
+                  placeholder="Sök beställningar, produkter..." 
+                  className="bg-transparent outline-none text-deep-charcoal placeholder-soft-taupe w-64"
+                />
+              </div>
+              <Button variant="ghost" size="lg" className="hover:bg-dusty-rose/20 rounded-2xl p-3 relative">
                 <Bell className="h-6 w-6 text-soft-taupe" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
               </Button>
               <Separator orientation="vertical" className="h-8 bg-dusty-rose/30" />
               <div className="flex items-center space-x-4">
-                <span className="text-lg text-soft-taupe font-light">Välkommen, {adminUser?.name || 'Admin'}</span>
-                <Button variant="ghost" size="lg" onClick={logout} className="hover:bg-dusty-rose/20 rounded-2xl p-3">
-                  <LogOut className="h-6 w-6 text-soft-taupe" />
+                <div className="text-right hidden lg:block">
+                  <p className="text-lg text-deep-charcoal font-medium">Välkommen, {adminUser?.name || 'Admin'}</p>
+                  <p className="text-sm text-soft-taupe">Superadministratör</p>
+                </div>
+                <Button variant="ghost" size="lg" onClick={logout} className="hover:bg-dusty-rose/20 rounded-2xl p-3 group">
+                  <LogOut className="h-6 w-6 text-soft-taupe group-hover:text-red-500 transition-colors" />
                 </Button>
               </div>
             </div>
@@ -191,88 +209,167 @@ export default function ShopifyAdmin() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="flex">
-        {/* Luxury Sidebar */}
-        <aside className="w-80 glass border-r border-dusty-rose/20 min-h-[calc(100vh-97px)] shadow-luxury">
-          <nav className="p-8 space-y-4">
-            <Button 
-              variant={selectedTab === "overview" ? "default" : "ghost"} 
-              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
-                selectedTab === "overview" 
-                  ? "btn-luxury text-nordic-cream shadow-luxury" 
-                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
-              }`}
-              onClick={() => setSelectedTab("overview")}
-            >
-              <BarChart3 className="h-6 w-6 mr-4" />
-              Översikt
-            </Button>
-            <Button 
-              variant={selectedTab === "orders" ? "default" : "ghost"} 
-              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
-                selectedTab === "orders" 
-                  ? "btn-luxury text-nordic-cream shadow-luxury" 
-                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
-              }`}
-              onClick={() => setSelectedTab("orders")}
-            >
-              <ShoppingBag className="h-6 w-6 mr-4" />
-              Beställningar
-            </Button>
-            <Button 
-              variant={selectedTab === "products" ? "default" : "ghost"} 
-              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
-                selectedTab === "products" 
-                  ? "btn-luxury text-nordic-cream shadow-luxury" 
-                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
-              }`}
-              onClick={() => setSelectedTab("products")}
-            >
-              <Package className="h-6 w-6 mr-4" />
-              Produkter
-            </Button>
-            <Button 
-              variant={selectedTab === "sellers" ? "default" : "ghost"} 
-              className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-500 ${
-                selectedTab === "sellers" 
-                  ? "btn-luxury text-nordic-cream shadow-luxury" 
-                  : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal"
-              }`}
-              onClick={() => setSelectedTab("sellers")}
-            >
-              <Users className="h-6 w-6 mr-4" />
-              Säljare
-            </Button>
-            <Separator className="my-6 bg-dusty-rose/30" />
-            <Button variant="ghost" className="w-full justify-start py-4 px-6 text-lg rounded-2xl text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal transition-all duration-500">
-              <Settings className="h-6 w-6 mr-4" />
-              Inställningar
-            </Button>
-          </nav>
+      {/* Enhanced Desktop Layout */}
+      <div className="flex min-h-[calc(100vh-105px)]">
+        {/* Enhanced Desktop Sidebar */}
+        <aside className="w-96 glass border-r border-dusty-rose/20 shadow-luxury backdrop-blur-xl">
+          <div className="p-8">
+            {/* Quick Stats in Sidebar */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-dusty-rose/20">
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <ShoppingBag className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-deep-charcoal">{stats.totalOrders}</p>
+                    <p className="text-xs text-soft-taupe">Orders</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-dusty-rose/20">
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                    <DollarSign className="h-4 w-4 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-deep-charcoal">{Math.round(stats.totalRevenue)}</p>
+                    <p className="text-xs text-soft-taupe">Revenue</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Enhanced Navigation */}
+            <nav className="space-y-3">
+              <Button 
+                variant={selectedTab === "overview" ? "default" : "ghost"} 
+                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                  selectedTab === "overview" 
+                    ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
+                    : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
+                }`}
+                onClick={() => setSelectedTab("overview")}
+              >
+                <BarChart3 className="h-6 w-6 mr-4" />
+                <span>Översikt</span>
+                <div className="ml-auto">
+                  {selectedTab === "overview" && <ChevronDown className="h-4 w-4" />}
+                </div>
+              </Button>
+              <Button 
+                variant={selectedTab === "orders" ? "default" : "ghost"} 
+                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                  selectedTab === "orders" 
+                    ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
+                    : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
+                }`}
+                onClick={() => setSelectedTab("orders")}
+              >
+                <ShoppingBag className="h-6 w-6 mr-4" />
+                <span>Beställningar</span>
+                <div className="ml-auto flex items-center space-x-2">
+                  <Badge className="bg-red-100 text-red-700 text-xs px-2 py-0.5 rounded-full">
+                    {orders?.filter((o: any) => o.status === 'pending').length || 0}
+                  </Badge>
+                  {selectedTab === "orders" && <ChevronDown className="h-4 w-4" />}
+                </div>
+              </Button>
+              <Button 
+                variant={selectedTab === "products" ? "default" : "ghost"} 
+                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                  selectedTab === "products" 
+                    ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
+                    : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
+                }`}
+                onClick={() => setSelectedTab("products")}
+              >
+                <Package className="h-6 w-6 mr-4" />
+                <span>Produkter</span>
+                <div className="ml-auto flex items-center space-x-2">
+                  <Badge className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+                    {stats.totalProducts}
+                  </Badge>
+                  {selectedTab === "products" && <ChevronDown className="h-4 w-4" />}
+                </div>
+              </Button>
+              <Button 
+                variant={selectedTab === "sellers" ? "default" : "ghost"} 
+                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                  selectedTab === "sellers" 
+                    ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
+                    : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
+                }`}
+                onClick={() => setSelectedTab("sellers")}
+              >
+                <Users className="h-6 w-6 mr-4" />
+                <span>Säljare</span>
+                <div className="ml-auto flex items-center space-x-2">
+                  <Badge className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full">
+                    {stats.activeSellers}
+                  </Badge>
+                  {selectedTab === "sellers" && <ChevronDown className="h-4 w-4" />}
+                </div>
+              </Button>
+              <Separator className="my-6 bg-dusty-rose/30" />
+              <Button variant="ghost" className="w-full justify-start py-4 px-6 text-lg rounded-2xl text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal transition-all duration-300 hover:scale-102">
+                <Settings className="h-6 w-6 mr-4" />
+                Inställningar
+              </Button>
+            </nav>
+
+            {/* Quick Actions in Sidebar */}
+            <div className="mt-8 p-4 bg-white/30 backdrop-blur-sm rounded-2xl border border-dusty-rose/20">
+              <h3 className="text-sm font-semibold text-deep-charcoal mb-3">Snabbåtgärder</h3>
+              <div className="space-y-2">
+                <Button variant="ghost" size="sm" className="w-full justify-start text-sm">
+                  <Clock className="h-4 w-4 mr-3" />
+                  Senaste aktivitet
+                </Button>
+                <Button variant="ghost" size="sm" className="w-full justify-start text-sm">
+                  <RefreshCw className="h-4 w-4 mr-3" />
+                  Uppdatera data
+                </Button>
+              </div>
+            </div>
+          </div>
         </aside>
 
-        {/* Luxury Content Area */}
-        <main className="flex-1 p-10 bg-gradient-to-br from-nordic-cream/50 to-champagne/30">
-          {selectedTab === "overview" && (
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Dashboard Overview</h2>
-                <p className="text-gray-600">Monitor your store performance and key metrics</p>
-              </div>
-              
-              {/* Quick Actions and Visual Improvements */}
-              <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <div className="xl:col-span-2">
-                  <QuickActions stats={stats} />
+        {/* Enhanced Content Area */}
+        <main className="flex-1 bg-gradient-to-br from-nordic-cream/30 to-champagne/20 overflow-y-auto">
+          <div className="p-8 max-w-none">
+            {selectedTab === "overview" && (
+              <div className="space-y-8">
+                {/* Enhanced Header */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-4xl font-bold text-deep-charcoal mb-2 font-poppins">Dashboard Overview</h2>
+                    <p className="text-soft-taupe text-lg">Monitor your store performance and key metrics</p>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Button variant="outline" className="rounded-2xl">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      Last 30 days
+                    </Button>
+                    <Button className="btn-luxury rounded-2xl">
+                      <Download className="h-4 w-4 mr-2" />
+                      Export Report
+                    </Button>
+                  </div>
                 </div>
-                <div className="xl:col-span-1">
-                  <VisualImprovements />
+                
+                {/* Enhanced Quick Actions Grid */}
+                <div className="grid grid-cols-1 2xl:grid-cols-12 gap-8">
+                  <div className="2xl:col-span-8">
+                    <QuickActions stats={stats} />
+                  </div>
+                  <div className="2xl:col-span-4">
+                    <VisualImprovements />
+                  </div>
                 </div>
-              </div>
-              
-              {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                {/* Enhanced Stats Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                 <Card>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
@@ -350,54 +447,78 @@ export default function ShopifyAdmin() {
                 </Card>
               </div>
 
-              {/* Recent Orders */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    Recent Orders
-                    <Button variant="ghost" size="sm">
-                      <Eye className="h-4 w-4 mr-2" />
-                      View all
-                    </Button>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Order ID</TableHead>
-                        <TableHead>Customer</TableHead>
-                        <TableHead>Product</TableHead>
-                        <TableHead>Amount</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Date</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {orders?.slice(0, 5).map((order: any) => (
-                        <TableRow key={order.id}>
-                          <TableCell className="font-medium">#{order.id.slice(0, 8)}</TableCell>
-                          <TableCell>{order.customerEmail}</TableCell>
-                          <TableCell>{order.product?.title}</TableCell>
-                          <TableCell>{order.totalAmountKr} kr</TableCell>
-                          <TableCell>{getStatusBadge(order.status)}</TableCell>
-                          <TableCell>{format(new Date(order.createdAt), 'MMM dd, yyyy')}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </div>
-          )}
+                {/* Enhanced Recent Orders */}
+                <Card className="shadow-luxury border-dusty-rose/20 backdrop-blur-sm">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center justify-between text-2xl text-deep-charcoal font-poppins">
+                      Recent Orders
+                      <div className="flex items-center space-x-3">
+                        <Badge className="bg-blue-100 text-blue-700 px-3 py-1">
+                          {orders?.length || 0} total
+                        </Badge>
+                        <Button variant="ghost" size="sm" onClick={() => setSelectedTab("orders")} className="hover:bg-dusty-rose/20 rounded-xl">
+                          <Eye className="h-4 w-4 mr-2" />
+                          View all
+                        </Button>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="px-0">
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="border-dusty-rose/20">
+                            <TableHead className="pl-6 text-soft-taupe font-semibold">Order ID</TableHead>
+                            <TableHead className="text-soft-taupe font-semibold">Customer</TableHead>
+                            <TableHead className="text-soft-taupe font-semibold">Product</TableHead>
+                            <TableHead className="text-soft-taupe font-semibold">Amount</TableHead>
+                            <TableHead className="text-soft-taupe font-semibold">Status</TableHead>
+                            <TableHead className="text-soft-taupe font-semibold">Date</TableHead>
+                            <TableHead className="pr-6 text-soft-taupe font-semibold">Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {orders?.slice(0, 8).map((order: any) => (
+                            <TableRow key={order.id} className="hover:bg-dusty-rose/10 transition-colors border-dusty-rose/10">
+                              <TableCell className="pl-6 font-medium text-deep-charcoal">
+                                <code className="bg-gray-100 px-2 py-1 rounded text-xs">#{order.id.slice(0, 8)}</code>
+                              </TableCell>
+                              <TableCell className="text-deep-charcoal">{order.customerEmail}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center space-x-2">
+                                  <img 
+                                    src={order.product?.imageUrl || '/placeholder.jpg'} 
+                                    alt={order.product?.title}
+                                    className="w-8 h-8 rounded-lg object-cover"
+                                  />
+                                  <span className="text-deep-charcoal font-medium">{order.product?.title}</span>
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-bold text-deep-charcoal">{order.totalAmountKr} kr</TableCell>
+                              <TableCell>{getStatusBadge(order.status)}</TableCell>
+                              <TableCell className="text-soft-taupe">{format(new Date(order.createdAt), 'MMM dd, yyyy')}</TableCell>
+                              <TableCell className="pr-6">
+                                <Button variant="ghost" size="sm" className="hover:bg-dusty-rose/20 rounded-xl">
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
 
-          {selectedTab === "orders" && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Orders</h2>
-                  <p className="text-gray-600">Manage and track all customer orders</p>
-                </div>
+            {selectedTab === "orders" && (
+              <div className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-4xl font-bold text-deep-charcoal font-poppins">Orders Management</h2>
+                    <p className="text-soft-taupe text-lg">Manage and track all customer orders</p>
+                  </div>
                 <div className="flex items-center space-x-2">
                   <Button 
                     variant="outline" 
@@ -859,8 +980,9 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                   </Table>
                 </CardContent>
               </Card>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </main>
       </div>
     </div>
