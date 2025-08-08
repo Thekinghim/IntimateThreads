@@ -42,6 +42,8 @@ import OrderStatusManager from "@/components/admin/order-status-manager";
 import QuickActions from "@/components/admin/quick-actions";
 import EnhancedSearch from "@/components/admin/enhanced-search";
 import VisualImprovements from "@/components/visual-improvements";
+import SellerManager from "@/components/admin/seller-manager";
+import SettingsPanel from "@/components/admin/settings-panel";
 import { format } from "date-fns";
 
 export default function ShopifyAdmin() {
@@ -312,9 +314,20 @@ export default function ShopifyAdmin() {
                 </div>
               </Button>
               <Separator className="my-6 bg-dusty-rose/30" />
-              <Button variant="ghost" className="w-full justify-start py-4 px-6 text-lg rounded-2xl text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal transition-all duration-300 hover:scale-102">
+              <Button 
+                variant={selectedTab === "settings" ? "default" : "ghost"}
+                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                  selectedTab === "settings" 
+                    ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
+                    : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
+                }`}
+                onClick={() => setSelectedTab("settings")}
+              >
                 <Settings className="h-6 w-6 mr-4" />
-                Inställningar
+                <span>Inställningar</span>
+                <div className="ml-auto">
+                  {selectedTab === "settings" && <ChevronDown className="h-4 w-4" />}
+                </div>
               </Button>
             </nav>
 
@@ -880,24 +893,15 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
             </div>
           )}
 
-          {selectedTab === "sellers" && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Sellers</h2>
-                  <p className="text-gray-600">Manage seller accounts and performance</p>
+            {selectedTab === "sellers" && (
+              <div className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-4xl font-bold text-deep-charcoal font-poppins">Säljare</h2>
+                    <p className="text-soft-taupe text-lg">Hantera säljarkonton och provision</p>
+                  </div>
+                  <SellerManager />
                 </div>
-                <Button 
-                  onClick={() => {
-                    toast({ 
-                      title: "Lägg till säljare", 
-                      description: "Säljare-registrering kommer snart" 
-                    });
-                  }}
-                >
-                  Add Seller
-                </Button>
-              </div>
 
               <Card>
                 <CardContent className="p-0">
@@ -981,6 +985,10 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                 </CardContent>
               </Card>
               </div>
+            )}
+
+            {selectedTab === "settings" && (
+              <SettingsPanel />
             )}
           </div>
         </main>

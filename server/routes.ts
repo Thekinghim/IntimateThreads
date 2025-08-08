@@ -55,6 +55,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin: Create new seller
+  app.post("/api/admin/sellers", requireAdminAuth, async (req, res) => {
+    try {
+      const { alias, location, age, bio, commissionRate } = req.body;
+      const seller = await storage.createSeller({
+        alias,
+        location,
+        age,
+        bio,
+        commissionRate: commissionRate || "0.45",
+        isActive: true
+      });
+      res.json(seller);
+    } catch (error) {
+      console.error("Create seller error:", error);
+      res.status(500).json({ message: "Failed to create seller" });
+    }
+  });
+
+  // Admin: Update seller
+  app.patch("/api/admin/sellers/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const seller = await storage.updateSeller(req.params.id, req.body);
+      if (!seller) {
+        return res.status(404).json({ message: "Seller not found" });
+      }
+      res.json(seller);
+    } catch (error) {
+      console.error("Update seller error:", error);
+      res.status(500).json({ message: "Failed to update seller" });
+    }
+  });
+
+  // Admin: Create new product
+  app.post("/api/admin/products", requireAdminAuth, async (req, res) => {
+    try {
+      console.log("Creating product:", req.body);
+      const productData = {
+        ...req.body,
+        priceKr: parseFloat(req.body.priceKr).toString(),
+        wearDays: parseInt(req.body.wearDays) || 0,
+        isAvailable: req.body.isAvailable !== false
+      };
+      const product = await storage.createProduct(productData);
+      console.log("Product created:", product);
+      res.json(product);
+    } catch (error) {
+      console.error("Create product error:", error);
+      res.status(500).json({ message: "Failed to create product" });
+    }
+  });
+
+  // Admin: Update product
+  app.patch("/api/admin/products/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const updates = {
+        ...req.body,
+        priceKr: req.body.priceKr ? parseFloat(req.body.priceKr).toString() : undefined,
+        wearDays: req.body.wearDays ? parseInt(req.body.wearDays) : undefined
+      };
+      const product = await storage.updateProduct(req.params.id, updates);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json(product);
+    } catch (error) {
+      console.error("Update product error:", error);
+      res.status(500).json({ message: "Failed to update product" });
+    }
+  });
+
   // Create new order
   app.post("/api/orders", async (req, res) => {
     try {

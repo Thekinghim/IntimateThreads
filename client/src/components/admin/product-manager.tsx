@@ -73,13 +73,15 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
   const createProductMutation = useMutation({
     mutationFn: async (data: ProductForm) => {
       const token = localStorage.getItem('adminToken');
-      const endpoint = isEdit ? `/api/admin/products/${product.id}` : '/api/admin/products';
-      const method = isEdit ? 'PATCH' : 'POST';
-      
-      const response = await apiRequest(method, endpoint, {
-        ...data,
-        priceKr: data.priceKr.toString(),
+      const response = await fetch(`/api/admin/products${isEdit ? `/${product?.id}` : ''}`, {
+        method: isEdit ? 'PATCH' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
       });
+      if (!response.ok) throw new Error('Failed to save product');
       return response.json();
     },
     onSuccess: () => {
