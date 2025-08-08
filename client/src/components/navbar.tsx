@@ -41,7 +41,7 @@ export default function Navbar() {
               </span>
             </Link>
             <Link href="/track-order">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors font-medium text-sm lg:text-base">
+              <span className="hover:text-[#111B3E] transition-colors font-medium lg:text-base text-[#000000] text-[25px]">
                 Track Order
               </span>
             </Link>
