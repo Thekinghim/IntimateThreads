@@ -60,6 +60,8 @@ export default {
         sans: ["var(--font-sans)"],
         poppins: ["var(--font-poppins)"],
         cormorant: ["var(--font-cormorant)"],
+        lora: ["var(--font-lora)"],
+        "dm-sans": ["var(--font-dm-sans)"],
       },
       keyframes: {
         "accordion-down": {
