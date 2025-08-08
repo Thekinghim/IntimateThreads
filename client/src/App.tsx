@@ -14,6 +14,7 @@ import Checkout from "@/pages/checkout";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
+import MobileAdmin from "@/pages/mobile-admin";
 import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 import PrivacyModeIndicator from "@/components/privacy-mode-indicator";
@@ -26,6 +27,10 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
+  // Check if mobile device
+  const isMobile = window.innerWidth < 768;
+  const AdminComponent = isMobile ? MobileAdmin : Admin;
+
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -36,7 +41,7 @@ function Router() {
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />
-      <Route path="/admin" component={Admin} />
+      <Route path="/admin" component={AdminComponent} />
       <Route component={NotFound} />
     </Switch>
   );
