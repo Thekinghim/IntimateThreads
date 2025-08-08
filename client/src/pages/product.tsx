@@ -154,8 +154,18 @@ export default function Product() {
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-2">Color: {product.color}</h3>
               <div className="flex space-x-2">
-                <div className="w-8 h-8 bg-black rounded-full border-2 border-gray-300"></div>
-                <div className="w-8 h-8 bg-gray-300 rounded-full border-2 border-gray-200"></div>
+                <button 
+                  onClick={() => {
+                    console.log('Selected black color');
+                  }}
+                  className="w-8 h-8 bg-black rounded-full border-2 border-gray-300 hover:border-gray-500"
+                ></button>
+                <button 
+                  onClick={() => {
+                    console.log('Selected gray color');
+                  }}
+                  className="w-8 h-8 bg-gray-300 rounded-full border-2 border-gray-200 hover:border-gray-400"
+                ></button>
               </div>
             </div>
 
@@ -170,10 +180,14 @@ export default function Product() {
                   Size Guide
                 </button>
               </div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 {['XXS', 'XS', 'S', 'M', 'L', 'XL'].map((size) => (
                   <button
                     key={size}
+                    onClick={() => {
+                      // Handle size selection if needed
+                      console.log(`Selected size: ${size}`);
+                    }}
                     className={`py-3 px-2 border text-sm font-medium text-center ${
                       size === product.size
                         ? 'border-gray-900 bg-gray-900 text-white'
@@ -199,17 +213,33 @@ export default function Product() {
             {/* Quantity and Add to Cart */}
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
-                <button className="w-8 h-8 border border-gray-300 flex items-center justify-center">-</button>
+                <button 
+                  onClick={() => {
+                    // Handle quantity decrease
+                    console.log('Decrease quantity');
+                  }}
+                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100"
+                >
+                  -
+                </button>
                 <span className="px-4 py-2 border border-gray-300 min-w-12 text-center">1</span>
-                <button className="w-8 h-8 border border-gray-300 flex items-center justify-center">+</button>
+                <button 
+                  onClick={() => {
+                    // Handle quantity increase
+                    console.log('Increase quantity');
+                  }}
+                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100"
+                >
+                  +
+                </button>
               </div>
 
               <button 
                 onClick={handleAddToCart}
                 disabled={!product.isAvailable}
-                className="w-full bg-blue-600 text-white py-3 text-base font-medium uppercase tracking-wide hover:bg-blue-700 transition-colors"
+                className="w-full bg-blue-600 text-white py-3 text-base font-medium uppercase tracking-wide hover:bg-blue-700 transition-colors disabled:bg-gray-400"
               >
-                SELECT SIZE
+                {product.isAvailable ? "ADD TO CART" : "OUT OF STOCK"}
               </button>
             </div>
 
