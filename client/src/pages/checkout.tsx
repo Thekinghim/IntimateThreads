@@ -337,12 +337,13 @@ export default function Checkout() {
                     {!paymentCreated && (
                       <Button 
                         type="submit" 
-                        className="w-full bg-charcoal text-white hover:bg-gray-800 font-poppins font-medium text-lg py-6"
+                        className="w-full bg-deep-charcoal text-nordic-cream hover:bg-charcoal font-poppins font-medium text-lg py-6 transition-all duration-200"
                         disabled={createOrderMutation.isPending || (paymentMethod === "crypto" && !selectedCrypto)}
                       >
                         {createOrderMutation.isPending ? "Skapar beställning..." : 
-                         paymentMethod === "crypto" ? `Betala med ${selectedCrypto.toUpperCase()} - ${totalPrice.toLocaleString('sv-SE')} kr` :
-                         `Slutför beställning - ${totalPrice.toLocaleString('sv-SE')} kr`}
+                         paymentMethod === "crypto" && selectedCrypto ? `Slutför betalning med ${selectedCrypto.toUpperCase()}` :
+                         paymentMethod === "crypto" ? "Välj kryptovaluta först" :
+                         "Slutför beställning"}
                       </Button>
                     )}
                   </form>
@@ -394,9 +395,11 @@ export default function Checkout() {
                     /* Payment Created - Show Payment Details */
                     <div className="space-y-4">
                       <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                        <h3 className="font-medium text-green-800 mb-2">Betalning skapad!</h3>
+                        <h3 className="font-medium text-green-800 mb-2 flex items-center">
+                          ✓ Betalning skapad!
+                        </h3>
                         <p className="text-sm text-green-700">
-                          Skicka exakt {paymentCreated.pay_amount} {paymentCreated.pay_currency.toUpperCase()} till adressen nedan
+                          Skicka exakt <span className="font-bold text-lg">{paymentCreated.pay_amount} {paymentCreated.pay_currency.toUpperCase()}</span> till adressen nedan
                         </p>
                       </div>
 
@@ -439,25 +442,24 @@ export default function Checkout() {
                         </ul>
                       </div>
                       
-                      <div className="flex gap-3">
+                      <div className="space-y-3">
                         <Button 
                           onClick={() => {
                             clearCart();
                             setLocation(`/order-tracking?orderId=${paymentCreated.order_id}`);
                           }}
-                          className="flex-1 bg-charcoal text-white hover:bg-gray-800"
+                          className="w-full bg-green-600 hover:bg-green-700 text-white font-poppins font-medium text-lg py-6"
                         >
-                          Visa beställningsstatus
+                          ✓ Jag har slutfört betalningen
                         </Button>
                         <Button 
                           onClick={() => {
-                            clearCart();
                             setLocation('/');
                           }}
                           variant="outline"
-                          className="flex-1"
+                          className="w-full font-poppins"
                         >
-                          Tillbaka till butiken
+                          Avbryt och gå tillbaka
                         </Button>
                       </div>
                     </div>
