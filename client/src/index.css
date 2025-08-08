@@ -89,6 +89,11 @@
     font-family: 'Cormorant Garamond', serif;
   }
   
+  /* All H2 and H3 elements use Lora */
+  h2, h3 {
+    font-family: 'Lora', serif;
+  }
+  
   .font-poppins {
     font-family: 'Poppins', sans-serif;
   }
