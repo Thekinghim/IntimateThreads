@@ -19,6 +19,8 @@ export default function Product() {
 
   const { data: product, isLoading } = useQuery<ProductWithSeller>({
     queryKey: ['/api/products', id],
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 10 * 60 * 1000, // 10 minutes
   });
 
   const handleAddToCart = () => {
@@ -86,14 +88,14 @@ export default function Product() {
         </nav>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           {/* Left side - Product Images */}
           <div className="space-y-4">
-            {/* Thumbnail column */}
-            <div className="flex lg:flex-col lg:space-y-4 lg:w-20 space-x-4 lg:space-x-0 overflow-x-auto lg:overflow-visible">
+            {/* Thumbnails - responsive */}
+            <div className="flex space-x-2 mb-4 overflow-x-auto sm:overflow-visible">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-20 h-24 bg-gray-100 flex-shrink-0">
+                <div key={i} className="w-16 h-20 sm:w-20 sm:h-24 bg-gray-100 flex-shrink-0">
                   <img
                     src={product.imageUrl || `https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=200&q=80&random=${i}`}
                     alt={`${product.title} view ${i}`}
@@ -104,23 +106,21 @@ export default function Product() {
             </div>
 
             {/* Main product image */}
-            <div className="lg:ml-24 -mt-4 lg:mt-0">
-              <div className="aspect-square bg-gray-100">
-                <img
-                  src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
-                  alt={product.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="aspect-square sm:aspect-[4/5] bg-gray-100 rounded-lg overflow-hidden">
+              <img
+                src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
+                alt={product.title}
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
           {/* Right side - Product Info */}
-          <div className="space-y-6 lg:pl-8">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-light text-gray-900 uppercase tracking-wider">{product.title}</h1>
-              <button className="p-2 text-gray-400 hover:text-gray-600">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+          <div className="space-y-6 mt-6 lg:mt-0">
+            <div className="flex items-start justify-between">
+              <h1 className="text-2xl sm:text-3xl font-light text-gray-900 uppercase tracking-wider pr-4">{product.title}</h1>
+              <button className="p-2 text-gray-400 hover:text-gray-600 flex-shrink-0">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                 </svg>
               </button>
@@ -129,11 +129,11 @@ export default function Product() {
             <p className="text-sm text-gray-600 capitalize">{product.material}</p>
 
             {/* Price */}
-            <div className="flex items-baseline space-x-3">
+            <div className="flex flex-col sm:flex-row sm:items-baseline space-y-1 sm:space-y-0 sm:space-x-3">
               <span className="text-lg line-through text-gray-400">
                 ${(parseFloat(product.priceKr) * 2 / 10).toFixed(2)}
               </span>
-              <span className="text-2xl font-medium text-gray-900">
+              <span className="text-2xl sm:text-3xl font-medium text-gray-900">
                 ${(parseFloat(product.priceKr) / 10).toFixed(2)}
               </span>
             </div>
@@ -194,7 +194,7 @@ export default function Product() {
                   Size Guide
                 </button>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {['XXS', 'XS', 'S', 'M', 'L', 'XL'].map((size) => (
                   <button
                     key={size}

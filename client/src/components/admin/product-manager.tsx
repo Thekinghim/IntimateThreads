@@ -22,7 +22,7 @@ const productSchema = z.object({
   size: z.string().min(1, "Size is required"),
   color: z.string().min(1, "Color is required"),
   material: z.string().min(1, "Material is required"),
-  priceKr: z.coerce.number().min(1, "Price must be greater than 0"),
+  priceKr: z.string().min(1, "Price is required").transform((val) => parseFloat(val)).refine((val) => val > 0, "Price must be greater than 0"),
   imageUrl: z.string().url("Valid image URL is required"),
   sellerId: z.string().min(1, "Seller must be selected"),
   wearDays: z.coerce.number().min(0).optional(),
@@ -62,7 +62,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
       size: "",
       color: "",
       material: "",
-      priceKr: 0,
+      priceKr: undefined,
       imageUrl: "",
       sellerId: "",
       wearDays: 0,
@@ -130,9 +130,9 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
           )}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto mx-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+          <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl">
             <Package className="h-5 w-5" />
             {isEdit ? 'Edit Product' : 'Create New Product'}
           </DialogTitle>
@@ -140,7 +140,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
               {/* Left Column */}
               <div className="space-y-4">
                 <FormField
@@ -175,7 +175,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   )}
                 />
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="size"
@@ -223,7 +223,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="material"
@@ -255,10 +255,14 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                         <FormLabel>Price (SEK)</FormLabel>
                         <FormControl>
                           <Input 
-                            type="number" 
+                            type="text" 
                             placeholder="499" 
                             {...field}
-                            onChange={e => field.onChange(Number(e.target.value))}
+                            onChange={e => {
+                              // Remove any leading zeros and non-numeric characters except decimal point
+                              const value = e.target.value.replace(/^0+/, '').replace(/[^0-9.]/g, '');
+                              field.onChange(value);
+                            }}
                           />
                         </FormControl>
                         <FormMessage />
@@ -267,7 +271,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="sellerId"
@@ -347,18 +351,19 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-6 border-t">
+            <div className="flex flex-col sm:flex-row justify-end gap-2 pt-6 border-t">
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={() => setIsOpen(false)}
+                className="w-full sm:w-auto"
               >
                 Cancel
               </Button>
               <Button 
                 type="submit" 
                 disabled={createProductMutation.isPending}
-                className="min-w-[120px]"
+                className="min-w-[120px] w-full sm:w-auto bg-blue-600 hover:bg-blue-700"
               >
                 {createProductMutation.isPending 
                   ? (isEdit ? "Updating..." : "Creating...") 
