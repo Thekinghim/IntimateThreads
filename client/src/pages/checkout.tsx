@@ -294,14 +294,55 @@ export default function Checkout() {
                         </FormItem>
                       )}
                     />
+                    
+                    {/* Show crypto selection immediately when crypto is selected */}
+                    {paymentMethod === "crypto" && !paymentCreated && (
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+                        <Label className="text-sm font-medium block">Välj kryptovaluta:</Label>
+                        <div className="grid grid-cols-3 gap-3">
+                          {popularCryptos.map((crypto) => {
+                            const IconComponent = crypto.icon;
+                            return (
+                              <button
+                                key={crypto.code}
+                                type="button"
+                                onClick={() => setSelectedCrypto(crypto.code)}
+                                className={`flex flex-col items-center p-3 border rounded-lg transition-all ${
+                                  selectedCrypto === crypto.code
+                                    ? 'border-charcoal bg-white shadow-md'
+                                    : 'border-gray-300 hover:border-gray-400 bg-white'
+                                }`}
+                              >
+                                <IconComponent className={`h-6 w-6 mb-1 ${crypto.color}`} />
+                                <span className="text-sm font-medium">{crypto.code.toUpperCase()}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                        
+                        {/* Show estimate immediately */}
+                        {selectedCrypto && estimate && (
+                          <div className="bg-white rounded-lg p-3 border">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-600">Du kommer att betala:</span>
+                              <span className="font-bold">
+                                {(estimate as any)?.estimated_amount || 0} {selectedCrypto.toUpperCase()}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {!paymentCreated && (
                       <Button 
                         type="submit" 
                         className="w-full bg-charcoal text-white hover:bg-gray-800 font-poppins font-medium text-lg py-6"
-                        disabled={createOrderMutation.isPending}
+                        disabled={createOrderMutation.isPending || (paymentMethod === "crypto" && !selectedCrypto)}
                       >
-                        {createOrderMutation.isPending ? "Skapar beställning..." : `Slutför beställning - ${totalPrice.toLocaleString('sv-SE')} kr`}
+                        {createOrderMutation.isPending ? "Skapar beställning..." : 
+                         paymentMethod === "crypto" ? `Betala med ${selectedCrypto.toUpperCase()} - ${totalPrice.toLocaleString('sv-SE')} kr` :
+                         `Slutför beställning - ${totalPrice.toLocaleString('sv-SE')} kr`}
                       </Button>
                     )}
                   </form>
@@ -340,7 +381,7 @@ export default function Checkout() {
             </Card>
 
             {/* Crypto Payment Details */}
-            {paymentMethod === "crypto" && (
+            {paymentMethod === "crypto" && paymentCreated && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -349,52 +390,7 @@ export default function Checkout() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {!paymentCreated ? (
-                    <>
-                      {/* Crypto Selection */}
-                      <div className="mb-6">
-                        <Label className="text-sm font-medium mb-3 block">Välj kryptovaluta:</Label>
-                        <div className="grid grid-cols-3 gap-3">
-                          {popularCryptos.map((crypto) => {
-                            const IconComponent = crypto.icon;
-                            return (
-                              <button
-                                key={crypto.code}
-                                type="button"
-                                onClick={() => setSelectedCrypto(crypto.code)}
-                                className={`flex flex-col items-center p-3 border rounded-lg transition-all ${
-                                  selectedCrypto === crypto.code
-                                    ? 'border-charcoal bg-gray-50'
-                                    : 'border-gray-300 hover:border-gray-400'
-                                }`}
-                              >
-                                <IconComponent className={`h-6 w-6 mb-1 ${crypto.color}`} />
-                                <span className="text-sm font-medium">{crypto.code.toUpperCase()}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Price Estimate */}
-                      {isEstimateLoading ? (
-                        <Skeleton className="h-16 w-full" />
-                      ) : estimate && (
-                        <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Belopp att betala:</span>
-                            <span className="font-bold text-lg">
-                              {(estimate as any)?.estimated_amount || 0} {selectedCrypto.toUpperCase()}
-                            </span>
-                          </div>
-                          <div className="flex justify-between items-center text-sm text-gray-500">
-                            <span>Ungefär:</span>
-                            <span>{totalPrice.toLocaleString('sv-SE')} SEK</span>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  ) : (
+                  {paymentCreated && (
                     /* Payment Created - Show Payment Details */
                     <div className="space-y-4">
                       <div className="bg-green-50 border border-green-200 rounded-lg p-4">
