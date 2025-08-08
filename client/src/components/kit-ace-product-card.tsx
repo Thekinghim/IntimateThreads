@@ -69,10 +69,10 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
         </div>
         
         <div className="mt-4 space-y-2">
-          <h3 className="text-sm font-light text-gray-900 uppercase tracking-wide">
+          <h3 className="text-sm font-light text-[#111B3E] uppercase tracking-wide">
             {product.title}
           </h3>
-          <p className="text-sm text-gray-600">{product.seller.alias}</p>
+          <p className="text-sm text-[#064F8C]">{product.seller.alias}</p>
           <div className="space-y-2">
             {/* Days selector */}
             <div className="flex flex-wrap gap-1">
@@ -86,8 +86,8 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
                   }}
                   className={`px-2 py-1 text-xs border rounded transition-colors ${
                     selectedWearDays === days
-                      ? 'border-gray-900 bg-gray-900 text-white'
-                      : 'border-gray-300 text-gray-600 hover:border-gray-400'
+                      ? 'border-[#111B3E] bg-[#111B3E] text-[#FEFBEA]'
+                      : 'border-[#064F8C] text-[#064F8C] hover:border-[#111B3E]'
                   }`}
                 >
                   {days === 0 ? 'Ny' : `${days}d`}
@@ -99,16 +99,16 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 {selectedWearDays > 0 && (
-                  <span className="text-xs text-gray-500 line-through">
+                  <span className="text-xs text-[#064F8C]/70 line-through">
                     {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
                   </span>
                 )}
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-[#111B3E]">
                   {finalPrice.toLocaleString('sv-SE')} kr
                 </p>
               </div>
               {selectedWearDays > 0 && (
-                <span className="text-xs text-green-600">
+                <span className="text-xs gold-text font-medium">
                   +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr
                 </span>
               )}
@@ -123,7 +123,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
           disabled={!product.isAvailable}
           variant="outline"
           size="sm"
-          className="w-full text-xs font-medium uppercase tracking-wide border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
+          className="w-full text-xs font-medium uppercase tracking-wide border-[#111B3E] text-[#111B3E] hover:bg-[#111B3E] hover:text-[#FEFBEA]"
         >
           {product.isAvailable ? "Quick Add" : "Sold Out"}
         </Button>

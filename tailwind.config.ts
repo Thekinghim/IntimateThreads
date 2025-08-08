@@ -59,6 +59,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)"],
         poppins: ["var(--font-poppins)"],
+        cormorant: ["var(--font-cormorant)"],
       },
       keyframes: {
         "accordion-down": {

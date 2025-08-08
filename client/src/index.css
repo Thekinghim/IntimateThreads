@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,6 +43,7 @@
   
   --font-sans: 'Lora', serif;
   --font-poppins: 'Poppins', sans-serif;
+  --font-cormorant: 'Cormorant Garamond', serif;
   --radius: 1rem;
 }
 
@@ -83,8 +84,53 @@
     font-family: 'Lora', serif;
   }
   
+  /* All H1 elements use Cormorant Garamond */
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
   .font-poppins {
     font-family: 'Poppins', sans-serif;
+  }
+  
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  /* Gold effects */
+  .gold-text {
+    background: var(--gold-metallic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShimmer 3s ease-in-out infinite;
+  }
+  
+  .gold-button {
+    background: var(--gold-metallic);
+    color: #111B3E;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .gold-button:hover {
+    background: var(--gold-gradient);
+    color: #111B3E;
+  }
+  
+  .gold-circle {
+    background: var(--gold-metallic);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+  }
+  
+  .gold-accent {
+    background: var(--gold-metallic);
+  }
+  
+  @keyframes goldShimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
 }
 
