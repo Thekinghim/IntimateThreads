@@ -71,12 +71,6 @@ export default function Product() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Blue discount bar */}
-      <div className="bg-blue-600 text-white text-center py-2 text-sm font-medium">
-        EVERYTHING 50% OFF ARCHIVE SALE - DISCOUNT APPLIED IN CART
-        <span className="float-right mr-4">FREE SHIPPING ON ORDERS OVER</span>
-      </div>
-
       {/* Breadcrumb */}
       <div className="max-w-6xl mx-auto px-4 py-3">
         <nav className="flex text-sm text-gray-600">
