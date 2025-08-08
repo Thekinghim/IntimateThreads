@@ -111,8 +111,8 @@ export default function Product() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           {/* Left side - Product Images */}
           <div className="space-y-4">
-            {/* Main product image */}
-            <div className="aspect-square sm:aspect-[4/5] bg-gray-100 rounded-lg overflow-hidden">
+            {/* Main product image - adjusted for better PC responsiveness */}
+            <div className="aspect-square lg:aspect-[3/4] max-w-full lg:max-w-[500px] xl:max-w-[550px] mx-auto bg-gray-100 rounded-lg overflow-hidden">
               <img
                 src={selectedImage || product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
                 alt={product.title}
