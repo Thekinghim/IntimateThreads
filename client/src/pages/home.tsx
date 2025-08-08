@@ -22,7 +22,7 @@ export default function Home() {
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#111B3E] leading-none mb-8 tracking-tight">
-              <span className="block gold-text italic font-light tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl">Scandiscent</span>
+              <span className="block gold-text italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold">Scandiscent</span>
             </h1>
             <p className="text-2xl md:text-3xl text-[#064F8C] max-w-3xl mx-auto font-light leading-relaxed mb-12">
               Exklusiva, personliga plagg från nordiska kvinnor. Diskret, säkert och helt anonymt.
@@ -42,7 +42,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Featured Collection */}
       <section className="py-32 bg-gradient-to-br from-[#F5F2E8] to-[#E8E4D6] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
@@ -76,7 +75,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Luxury How it Works */}
       <section className="py-32 bg-[#FEFBEA] relative">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/30 to-transparent"></div>
@@ -121,7 +119,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Final Luxury Call to Action */}
       <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#F5F2E8] via-[#E8E4D6] to-[#FEFBEA]">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/50 to-transparent"></div>
