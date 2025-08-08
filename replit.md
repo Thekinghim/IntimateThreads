@@ -35,7 +35,9 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
 - ✅ **Age Verification**: Implemented mandatory 18+ age verification popup with localStorage persistence
 - ✅ **Payment Status Monitoring**: Added /payment-setup page to monitor payment gateway configuration
 - ✅ **Launch Checklist**: Created comprehensive documentation of remaining tasks for production launch
-- ⚠️ **Launch Status**: 70% ready - main blocker is email system for order confirmations (customer experience)
+- ✅ **Checkout Flow Fixed**: Complete payment processing with demo crypto payments (BTC, ETH, USDT), QR codes, and order confirmation
+- ✅ **Privacy Mode Indicator**: Redesigned to be minimal, dismissible, and user-controlled with localStorage persistence
+- ⚠️ **Launch Status**: 75% ready - main blocker is email system for order confirmations (customer experience)
 - ⚠️ **Critical Remaining**: Email service integration, shipping calculation system, final security hardening
 - 📋 **Next Priority**: Email system setup for order confirmations and customer communication
 

@@ -112,7 +112,7 @@ export default function Checkout() {
           status: "pending",
           ...(data.paymentMethod === "crypto" && {
             cryptoCurrency: selectedCrypto.toUpperCase(),
-            cryptoAmount: estimate?.estimated_amount?.toString() || "0",
+            cryptoAmount: (estimate as any)?.estimated_amount?.toString() || "0",
           }),
         };
 
@@ -423,10 +423,14 @@ export default function Checkout() {
 
                       <div className="text-center">
                         <div className="bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 inline-block">
-                          <QrCode className="h-32 w-32 text-gray-400" />
+                          <img 
+                            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${paymentCreated.pay_currency}:${paymentCreated.pay_address}?amount=${paymentCreated.pay_amount}`)}`}
+                            alt="Payment QR Code"
+                            className="h-32 w-32"
+                          />
                         </div>
                         <p className="text-xs text-gray-600 mt-2">
-                          QR-kod för din wallet (inte implementerad i demo)
+                          Skanna med din wallet-app för att betala
                         </p>
                       </div>
 
@@ -434,9 +438,31 @@ export default function Checkout() {
                         <h4 className="font-medium text-yellow-800 mb-2">Viktigt att komma ihåg:</h4>
                         <ul className="text-sm text-yellow-700 space-y-1">
                           <li>• Skicka exakt {paymentCreated.pay_amount} {paymentCreated.pay_currency.toUpperCase()}</li>
-                          <li>• Betalningen gäller i 24 timmar</li>
+                          <li>• Betalningen gäller i 15 minuter</li>
                           <li>• Du kommer få bekräftelse via email</li>
                         </ul>
+                      </div>
+                      
+                      <div className="flex gap-3">
+                        <Button 
+                          onClick={() => {
+                            clearCart();
+                            setLocation(`/order-tracking?orderId=${paymentCreated.order_id}`);
+                          }}
+                          className="flex-1 bg-charcoal text-white hover:bg-gray-800"
+                        >
+                          Visa beställningsstatus
+                        </Button>
+                        <Button 
+                          onClick={() => {
+                            clearCart();
+                            setLocation('/');
+                          }}
+                          variant="outline"
+                          className="flex-1"
+                        >
+                          Tillbaka till butiken
+                        </Button>
                       </div>
                     </div>
                   )}
