@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import ProductCard from "@/components/product-card";
+import KitAceProductCard from "@/components/kit-ace-product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Link } from "wouter";
 import { useState } from "react";
 import { type ProductWithSeller } from "@shared/schema";
 import { Search } from "lucide-react";
@@ -58,154 +59,123 @@ export default function Collection() {
   });
 
   return (
-    <div className="min-h-screen bg-soft-white py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white">
+      {/* Breadcrumb */}
+      <div className="border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <nav className="flex text-sm">
+            <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
+            <span className="mx-2 text-gray-400">/</span>
+            <span className="text-gray-900">Collection</span>
+          </nav>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="font-poppins font-medium text-4xl text-charcoal mb-4">Hela Kollektionen</h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Utforska vårt kompletta utbud av exklusiva plagg från verifierade nordiska kvinnor
+          <h1 className="text-3xl font-light text-gray-900 uppercase tracking-widest mb-4">NORDIC COLLECTION</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Exklusiva plagg från verifierade nordiska kvinnor
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-            <div className="relative col-span-1 md:col-span-2 lg:col-span-1 xl:col-span-2">
+        {/* Filters Bar */}
+        <div className="border-b border-gray-200 mb-8 pb-4">
+          <div className="flex flex-wrap items-center gap-6">
+            {/* Search */}
+            <div className="relative flex-1 min-w-80">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="Sök produkter, säljare..."
+                placeholder="Search products, sellers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 border-gray-300 focus:border-gray-500"
               />
             </div>
             
-            <Select value={filterSize} onValueChange={setFilterSize}>
-              <SelectTrigger>
-                <SelectValue placeholder="Storlek" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Alla storlekar</SelectItem>
-                <SelectItem value="XS">XS</SelectItem>
-                <SelectItem value="S">S</SelectItem>
-                <SelectItem value="M">M</SelectItem>
-                <SelectItem value="L">L</SelectItem>
-                <SelectItem value="XL">XL</SelectItem>
-                <SelectItem value="XXL">XXL</SelectItem>
-                <SelectItem value="One Size">One Size</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* Filter dropdowns */}
+            <div className="flex gap-4">
+              <Select value={filterSize} onValueChange={setFilterSize}>
+                <SelectTrigger className="w-32 border-gray-300">
+                  <SelectValue placeholder="Size" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Sizes</SelectItem>
+                  <SelectItem value="XS">XS</SelectItem>
+                  <SelectItem value="S">S</SelectItem>
+                  <SelectItem value="M">M</SelectItem>
+                  <SelectItem value="L">L</SelectItem>
+                  <SelectItem value="XL">XL</SelectItem>
+                </SelectContent>
+              </Select>
 
-            <Select value={filterMaterial} onValueChange={setFilterMaterial}>
-              <SelectTrigger>
-                <SelectValue placeholder="Material" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Alla material</SelectItem>
-                <SelectItem value="Cotton">Bomull</SelectItem>
-                <SelectItem value="Lace">Spets</SelectItem>
-                <SelectItem value="Silk">Siden</SelectItem>
-                <SelectItem value="Satin">Satin</SelectItem>
-                <SelectItem value="Modal">Modal</SelectItem>
-                <SelectItem value="Bamboo">Bambu</SelectItem>
-                <SelectItem value="Polyester">Polyester</SelectItem>
-                <SelectItem value="Mesh">Mesh</SelectItem>
-              </SelectContent>
-            </Select>
+              <Select value={filterMaterial} onValueChange={setFilterMaterial}>
+                <SelectTrigger className="w-32 border-gray-300">
+                  <SelectValue placeholder="Material" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="Cotton">Cotton</SelectItem>
+                  <SelectItem value="Lace">Lace</SelectItem>
+                  <SelectItem value="Silk">Silk</SelectItem>
+                  <SelectItem value="Satin">Satin</SelectItem>
+                </SelectContent>
+              </Select>
 
-            <Select value={filterColor} onValueChange={setFilterColor}>
-              <SelectTrigger>
-                <SelectValue placeholder="Färg" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Alla färger</SelectItem>
-                <SelectItem value="Black">Svart</SelectItem>
-                <SelectItem value="White">Vit</SelectItem>
-                <SelectItem value="Red">Röd</SelectItem>
-                <SelectItem value="Pink">Rosa</SelectItem>
-                <SelectItem value="Blue">Blå</SelectItem>
-                <SelectItem value="Purple">Lila</SelectItem>
-                <SelectItem value="Green">Grön</SelectItem>
-                <SelectItem value="Yellow">Gul</SelectItem>
-                <SelectItem value="Beige">Beige</SelectItem>
-                <SelectItem value="Gray">Grå</SelectItem>
-              </SelectContent>
-            </Select>
+              <Select value={filterColor} onValueChange={setFilterColor}>
+                <SelectTrigger className="w-32 border-gray-300">
+                  <SelectValue placeholder="Color" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Colors</SelectItem>
+                  <SelectItem value="Black">Black</SelectItem>
+                  <SelectItem value="White">White</SelectItem>
+                  <SelectItem value="Pink">Pink</SelectItem>
+                  <SelectItem value="Red">Red</SelectItem>
+                </SelectContent>
+              </Select>
 
-            <Select value={filterWearDays} onValueChange={setFilterWearDays}>
-              <SelectTrigger>
-                <SelectValue placeholder="Bärdagar" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Alla bärdagar</SelectItem>
-                <SelectItem value="new">Oanvänd (0 dagar)</SelectItem>
-                <SelectItem value="1-3">1-3 dagar</SelectItem>
-                <SelectItem value="4-7">4-7 dagar</SelectItem>
-                <SelectItem value="8+">8+ dagar</SelectItem>
-              </SelectContent>
-            </Select>
-            
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger>
-                <SelectValue placeholder="Sortera" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="newest">Nyaste först</SelectItem>
-                <SelectItem value="price-low">Pris: låg till hög</SelectItem>
-                <SelectItem value="price-high">Pris: hög till låg</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Clear Filters Button */}
-          {(searchTerm || filterSize !== "all" || filterMaterial !== "all" || filterColor !== "all" || filterWearDays !== "all") && (
-            <div className="mt-4 pt-4 border-t">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => {
-                  setSearchTerm("");
-                  setFilterSize("all");
-                  setFilterMaterial("all");
-                  setFilterColor("all");
-                  setFilterWearDays("all");
-                  setSortBy("newest");
-                }}
-                className="text-sm"
-              >
-                Rensa alla filter
-              </Button>
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-32 border-gray-300">
+                  <SelectValue placeholder="Sort" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="newest">Newest</SelectItem>
+                  <SelectItem value="price-low">Price: Low</SelectItem>
+                  <SelectItem value="price-high">Price: High</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Results count */}
-        <div className="mb-6">
-          <p className="text-gray-600">
-            {isLoading ? "Laddar..." : `${sortedProducts.length} produkter hittades`}
+        <div className="flex justify-between items-center mb-8">
+          <p className="text-sm text-gray-600">
+            {isLoading ? "Loading..." : `${sortedProducts.length} products found`}
           </p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {isLoading ? (
             Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="space-y-4">
-                <Skeleton className="h-64 w-full rounded-2xl" />
+                <Skeleton className="aspect-square w-full" />
                 <Skeleton className="h-4 w-3/4" />
                 <Skeleton className="h-4 w-1/2" />
                 <Skeleton className="h-8 w-full" />
               </div>
             ))
           ) : sortedProducts.length === 0 ? (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-600 text-lg">Inga produkter hittades med dina filterkriterier.</p>
-              <p className="text-gray-500 text-sm mt-2">Prova att justera dina sökkriterier eller rensa filtren.</p>
+            <div className="col-span-full text-center py-20">
+              <p className="text-gray-600 text-lg">No products found matching your criteria.</p>
+              <p className="text-gray-500 text-sm mt-2">Try adjusting your search or filters.</p>
             </div>
           ) : (
             sortedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <KitAceProductCard key={product.id} product={product} />
             ))
           )}
         </div>

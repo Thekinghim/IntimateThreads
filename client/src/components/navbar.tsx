@@ -20,47 +20,36 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="glass sticky top-0 z-50 shadow-luxury border-b border-white/20">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-        <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center group">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 gradient-charcoal rounded-2xl flex items-center justify-center shadow-luxury group-hover:scale-105 transition-all duration-300">
-                <span className="text-nordic-cream font-bold text-xl font-poppins">N</span>
-              </div>
-              <div className="flex flex-col">
-                <h1 className="font-poppins font-bold text-2xl text-deep-charcoal group-hover:text-dusty-rose transition-colors leading-none">Nordic</h1>
-                <span className="text-sm text-soft-taupe font-light italic tracking-widest">Collection</span>
-              </div>
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Left Navigation */}
+          <div className="flex items-center space-x-8">
+            <Link href="/collection">
+              <span className="text-sm font-medium text-gray-900 uppercase tracking-wide hover:text-gray-600">
+                Women
+              </span>
+            </Link>
+          </div>
+
+          {/* Center Logo */}
+          <Link href="/">
+            <div className="flex items-center">
+              <span className="text-xl font-light text-gray-900 uppercase tracking-widest">NORDIC</span>
             </div>
           </Link>
-          
-          <div className="hidden md:flex space-x-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`font-medium transition-all duration-500 px-8 py-4 rounded-2xl text-sm font-poppins ${
-                  location === item.href
-                    ? "text-nordic-cream gradient-charcoal shadow-luxury transform scale-105"
-                    : "text-deep-charcoal hover:text-dusty-rose hover:bg-dusty-rose/20 hover:shadow-rose hover:scale-102"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          
-          <div className="flex items-center space-x-6">
+
+          {/* Right Actions */}
+          <div className="flex items-center space-x-6">            
             <Link href="/cart">
-              <Button variant="ghost" size="lg" className="relative group hover:bg-dusty-rose/20 transition-all duration-500 rounded-2xl p-3 hover:shadow-rose hover:scale-110">
-                <ShoppingBag className="h-7 w-7 text-deep-charcoal group-hover:text-dusty-rose transition-all duration-300" />
+              <button className="relative text-gray-900 hover:text-gray-600">
+                <ShoppingBag className="w-5 h-5" />
                 {itemCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-7 w-7 flex items-center justify-center gradient-rose text-deep-charcoal font-bold shadow-luxury animate-bounce">
+                  <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {itemCount}
-                  </Badge>
+                  </span>
                 )}
-              </Button>
+              </button>
             </Link>
             
             <Button 
