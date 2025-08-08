@@ -171,7 +171,7 @@ export default function ShopifyAdmin() {
                 </div>
                 <div>
                   <h1 className="text-lg md:text-3xl font-bold text-deep-charcoal font-poppins tracking-tight">
-                    <span className="hidden sm:inline">Nordic Collection Admin</span>
+                    <span className="hidden sm:inline">Scandiscent Admin</span>
                     <span className="sm:hidden">Admin Panel</span>
                   </h1>
                   <p className="text-xs md:text-sm text-soft-taupe font-medium hidden sm:block">Luxury E-commerce Management</p>

@@ -174,7 +174,7 @@ export default function MobileAdmin() {
             <div className="p-4">
               <div className="mb-6 flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-1">Nordic Collection</h2>
+                  <h2 className="text-lg font-semibold text-gray-900 mb-1">Scandiscent</h2>
                   <p className="text-xs text-gray-500">Admin Dashboard</p>
                 </div>
                 <Button

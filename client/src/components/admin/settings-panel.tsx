@@ -47,7 +47,7 @@ export default function SettingsPanel() {
   const form = useForm<SettingsForm>({
     resolver: zodResolver(settingsSchema),
     defaultValues: {
-      siteName: "Nordic Collection",
+      siteName: "Scandiscent",
       siteDescription: "En exklusiv marknadsplats för diskreta personliga plagg från nordiska kvinnor",
       contactEmail: "admin@nordiccollection.se",
       maintenanceMode: false,

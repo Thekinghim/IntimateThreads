@@ -204,7 +204,7 @@ export default function TrackOrder() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-stone-800">
               <Search className="h-5 w-5" />
-              Find Your Nordic Collection Order
+              Find Your Scandiscent Order
             </CardTitle>
             <CardDescription>
               Enter the order ID from your confirmation email and the email address used for the order.

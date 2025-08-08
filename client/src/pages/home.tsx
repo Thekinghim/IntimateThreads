@@ -21,7 +21,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/40 to-transparent"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-poppins font-bold text-deep-charcoal leading-none mb-8 tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-poppins font-bold text-deep-charcoal leading-none mb-8 tracking-tight">
               <span className="block text-dusty-rose italic font-light tracking-wider">Scandiscent</span>
             </h1>
             <p className="text-2xl md:text-3xl text-soft-taupe max-w-3xl mx-auto font-light leading-relaxed mb-12">

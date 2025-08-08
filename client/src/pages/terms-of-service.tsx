@@ -13,14 +13,14 @@ export default function TermsOfService() {
             <section>
               <h2 className="text-2xl font-semibold text-deep-charcoal mb-4">1. Agreement to Terms</h2>
               <p className="text-deep-charcoal/80 leading-relaxed">
-                By accessing and using Nordic Collection ("we," "our," or "us"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                By accessing and using Scandiscent ("we," "our," or "us"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-deep-charcoal mb-4">2. Age Requirement</h2>
               <p className="text-deep-charcoal/80 leading-relaxed">
-                You must be at least 18 years old to use this service. By using Nordic Collection, you represent and warrant that you are 18 years of age or older.
+                You must be at least 18 years old to use this service. By using Scandiscent, you represent and warrant that you are 18 years of age or older.
               </p>
             </section>
 
@@ -79,14 +79,14 @@ export default function TermsOfService() {
             <section>
               <h2 className="text-2xl font-semibold text-deep-charcoal mb-4">9. Intellectual Property</h2>
               <p className="text-deep-charcoal/80 leading-relaxed">
-                The service and its original content, features, and functionality are and will remain the exclusive property of Nordic Collection. The service is protected by copyright, trademark, and other laws.
+                The service and its original content, features, and functionality are and will remain the exclusive property of Scandiscent. The service is protected by copyright, trademark, and other laws.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-deep-charcoal mb-4">10. Limitation of Liability</h2>
               <p className="text-deep-charcoal/80 leading-relaxed">
-                Nordic Collection shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
+                Scandiscent shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
               </p>
             </section>
 

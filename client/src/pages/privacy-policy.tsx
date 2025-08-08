@@ -47,7 +47,7 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-2xl font-semibold text-deep-charcoal mb-4">3. Anonymous Shopping</h2>
               <p className="text-deep-charcoal/80 leading-relaxed">
-                Nordic Collection is designed for maximum privacy and discretion. We do not require account creation, and all purchases can be made anonymously using cryptocurrency payments. Your browsing history is not linked to your identity.
+                Scandiscent is designed for maximum privacy and discretion. We do not require account creation, and all purchases can be made anonymously using cryptocurrency payments. Your browsing history is not linked to your identity.
               </p>
             </section>
 
