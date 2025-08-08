@@ -10,11 +10,10 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-4 mb-8">
               <div className="w-16 h-16 gradient-rose rounded-3xl flex items-center justify-center shadow-luxury">
-                <span className="text-deep-charcoal font-bold text-2xl font-poppins">N</span>
+                <span className="text-deep-charcoal font-bold text-2xl font-poppins">S</span>
               </div>
               <div className="flex flex-col">
-                <h4 className="font-poppins font-bold text-3xl text-nordic-cream">Nordic</h4>
-                <span className="text-lg text-champagne font-light italic tracking-widest">Collection</span>
+                <h4 className="font-poppins font-bold text-3xl text-nordic-cream">Scandiscent</h4>
               </div>
             </div>
             <p className="text-champagne/90 mb-10 max-w-lg text-xl leading-relaxed font-light">
@@ -53,7 +52,7 @@ export default function Footer() {
         
         <div className="border-t border-champagne/20 mt-20 pt-12">
           <div className="flex justify-between items-center">
-            <p className="text-champagne/70 text-lg font-light">© 2024 Nordic Collection. Alla rättigheter förbehålls. | 18+ endast</p>
+            <p className="text-champagne/70 text-lg font-light">© 2024 Scandiscent. Alla rättigheter förbehålls. | 18+ endast</p>
             <Link 
               href="/admin/login" 
               className="w-14 h-14 glass rounded-2xl flex items-center justify-center text-soft-taupe hover:text-dusty-rose hover:shadow-rose transition-all duration-500 hover:scale-125 group"

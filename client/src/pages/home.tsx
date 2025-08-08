@@ -22,8 +22,7 @@ export default function Home() {
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-7xl md:text-8xl lg:text-9xl font-poppins font-bold text-deep-charcoal leading-none mb-8 tracking-tight">
-              Nordic
-              <span className="block text-dusty-rose italic font-light tracking-wider">Collection</span>
+              <span className="block text-dusty-rose italic font-light tracking-wider">Scandiscent</span>
             </h1>
             <p className="text-2xl md:text-3xl text-soft-taupe max-w-3xl mx-auto font-light leading-relaxed mb-12">
               Exklusiva, personliga plagg från nordiska kvinnor. Diskret, säkert och helt anonymt.

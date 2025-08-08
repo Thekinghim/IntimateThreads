@@ -26,7 +26,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/">
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-lg sm:text-xl text-gray-900">Nordic Collection</span>
+              <span className="font-bold text-lg sm:text-xl text-gray-900">Scandiscent</span>
             </div>
           </Link>
 

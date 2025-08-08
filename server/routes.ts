@@ -222,7 +222,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         price_currency: "sek", 
         pay_currency: pay_currency,
         order_id: order_id,
-        order_description: req.body.order_description || "Diskreta Kollektion Purchase"
+        order_description: req.body.order_description || "Scandiscent Purchase"
       };
       
       const response = await fetch(`${nowpaymentsBaseUrl}/payment`, {
