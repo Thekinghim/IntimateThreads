@@ -4,8 +4,8 @@ import { setupVite, serveStatic, log } from "./vite";
 import { seedAdmins } from "./seedAdmins";
 import { PRODUCTION_VERSION } from "./forceProductionUpdate";
 
-// PRODUCTION FORCE UPDATE - v3.0.1 - Database sync fixed
-console.log(`🚀 Server starting with version ${PRODUCTION_VERSION}`);
+// PRODUCTION FORCE UPDATE - v3.1.0 - COMPLETE DATABASE REBUILD
+console.log(`🚀 FORCE DEPLOYMENT: Server starting with version ${PRODUCTION_VERSION}`);
 
 const app = express();
 app.use(express.json());
