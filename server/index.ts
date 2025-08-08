@@ -3,7 +3,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedAdmins } from "./seedAdmins";
 
-// Production fix for admin auth - v2.2 with WebSocket config
+// PRODUCTION FORCE UPDATE - v3.0 - Admin login fixed with logging
 
 const app = express();
 app.use(express.json());

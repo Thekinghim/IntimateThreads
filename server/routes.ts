@@ -209,19 +209,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin authentication endpoints
+  // Admin authentication endpoints - PRODUCTION FIXED VERSION
   app.post("/api/admin/login", async (req, res) => {
     try {
+      console.log("Admin login attempt received:", req.body?.username);
       const { username, password } = adminLoginSchema.parse(req.body);
       
       const result = await authenticateAdmin(username, password);
       
       if (!result) {
+        console.log("Authentication failed for:", username);
         return res.status(401).json({ message: "Felaktigt användarnamn eller lösenord" });
       }
       
+      console.log("Authentication successful for:", username);
       res.json(result);
     } catch (error) {
+      console.error("Admin login error:", error);
       if (error instanceof z.ZodError) {
         return res.status(400).json({ message: "Ogiltig indata", errors: error.errors });
       }
