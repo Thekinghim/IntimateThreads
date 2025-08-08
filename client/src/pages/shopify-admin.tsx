@@ -160,18 +160,21 @@ export default function ShopifyAdmin() {
 
   return (
     <div className="min-h-screen gradient-nordic">
-      {/* Enhanced Desktop Header */}
+      {/* Mobile-First Responsive Header */}
       <header className="glass border-b border-dusty-rose/20 sticky top-0 z-50 shadow-luxury backdrop-blur-xl">
-        <div className="px-6 py-4 max-w-none">
+        <div className="px-4 py-3 md:px-6 md:py-4 max-w-none">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-4">
-                <div className="w-14 h-14 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury hover:shadow-xl transition-all duration-300">
-                  <Settings className="h-7 w-7 text-nordic-cream" />
+            <div className="flex items-center space-x-3 md:space-x-8">
+              <div className="flex items-center space-x-2 md:space-x-4">
+                <div className="w-10 h-10 md:w-14 md:h-14 gradient-charcoal rounded-2xl md:rounded-3xl flex items-center justify-center shadow-luxury hover:shadow-xl transition-all duration-300">
+                  <Settings className="h-5 w-5 md:h-7 md:w-7 text-nordic-cream" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-deep-charcoal font-poppins tracking-tight">Nordic Collection Admin</h1>
-                  <p className="text-sm text-soft-taupe font-medium">Luxury E-commerce Management</p>
+                  <h1 className="text-lg md:text-3xl font-bold text-deep-charcoal font-poppins tracking-tight">
+                    <span className="hidden sm:inline">Nordic Collection Admin</span>
+                    <span className="sm:hidden">Admin Panel</span>
+                  </h1>
+                  <p className="text-xs md:text-sm text-soft-taupe font-medium hidden sm:block">Luxury E-commerce Management</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -183,7 +186,7 @@ export default function ShopifyAdmin() {
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
               <div className="hidden xl:flex items-center space-x-4 bg-white/60 backdrop-blur-sm rounded-2xl px-4 py-2 border border-dusty-rose/20">
                 <Search className="h-5 w-5 text-soft-taupe" />
                 <input 
@@ -192,18 +195,18 @@ export default function ShopifyAdmin() {
                   className="bg-transparent outline-none text-deep-charcoal placeholder-soft-taupe w-64"
                 />
               </div>
-              <Button variant="ghost" size="lg" className="hover:bg-dusty-rose/20 rounded-2xl p-3 relative">
-                <Bell className="h-6 w-6 text-soft-taupe" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+              <Button variant="ghost" size="sm" className="hover:bg-dusty-rose/20 rounded-xl md:rounded-2xl p-2 md:p-3 relative">
+                <Bell className="h-4 w-4 md:h-6 md:w-6 text-soft-taupe" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
               </Button>
-              <Separator orientation="vertical" className="h-8 bg-dusty-rose/30" />
-              <div className="flex items-center space-x-4">
+              <Separator orientation="vertical" className="h-6 md:h-8 bg-dusty-rose/30 hidden sm:block" />
+              <div className="flex items-center space-x-2 md:space-x-4">
                 <div className="text-right hidden lg:block">
                   <p className="text-lg text-deep-charcoal font-medium">Välkommen, {adminUser?.name || 'Admin'}</p>
                   <p className="text-sm text-soft-taupe">Superadministratör</p>
                 </div>
-                <Button variant="ghost" size="lg" onClick={logout} className="hover:bg-dusty-rose/20 rounded-2xl p-3 group">
-                  <LogOut className="h-6 w-6 text-soft-taupe group-hover:text-red-500 transition-colors" />
+                <Button variant="ghost" size="sm" onClick={logout} className="hover:bg-dusty-rose/20 rounded-xl md:rounded-2xl p-2 md:p-3 group">
+                  <LogOut className="h-4 w-4 md:h-6 md:w-6 text-soft-taupe group-hover:text-red-500 transition-colors" />
                 </Button>
               </div>
             </div>
@@ -211,103 +214,103 @@ export default function ShopifyAdmin() {
         </div>
       </header>
 
-      {/* Enhanced Desktop Layout */}
-      <div className="flex min-h-[calc(100vh-105px)]">
-        {/* Enhanced Desktop Sidebar */}
-        <aside className="w-96 glass border-r border-dusty-rose/20 shadow-luxury backdrop-blur-xl">
-          <div className="p-8">
-            {/* Quick Stats in Sidebar */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-dusty-rose/20">
+      {/* Mobile-First Responsive Layout */}
+      <div className="flex flex-col lg:flex-row min-h-[calc(100vh-85px)]">
+        {/* Mobile-First Responsive Sidebar */}
+        <aside className="w-full lg:w-96 glass border-b lg:border-b-0 lg:border-r border-dusty-rose/20 shadow-luxury backdrop-blur-xl">
+          <div className="p-4 lg:p-8">
+            {/* Mobile-First Quick Stats */}
+            <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 lg:gap-4 mb-6 lg:mb-8">
+              <div className="bg-white/40 backdrop-blur-sm rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-dusty-rose/20">
                 <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <ShoppingBag className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 lg:w-8 lg:h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <ShoppingBag className="h-3 w-3 lg:h-4 lg:w-4 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-deep-charcoal">{stats.totalOrders}</p>
+                    <p className="text-lg lg:text-2xl font-bold text-deep-charcoal">{stats.totalOrders}</p>
                     <p className="text-xs text-soft-taupe">Orders</p>
                   </div>
                 </div>
               </div>
-              <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-dusty-rose/20">
+              <div className="bg-white/40 backdrop-blur-sm rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-dusty-rose/20">
                 <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                    <DollarSign className="h-4 w-4 text-green-600" />
+                  <div className="w-6 h-6 lg:w-8 lg:h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                    <DollarSign className="h-3 w-3 lg:h-4 lg:w-4 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-deep-charcoal">{Math.round(stats.totalRevenue)}</p>
+                    <p className="text-lg lg:text-2xl font-bold text-deep-charcoal">{Math.round(stats.totalRevenue)}</p>
                     <p className="text-xs text-soft-taupe">Revenue</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Enhanced Navigation */}
-            <nav className="space-y-3">
+            {/* Mobile-First Navigation */}
+            <nav className="space-y-2 lg:space-y-3">
               <Button 
                 variant={selectedTab === "overview" ? "default" : "ghost"} 
-                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                className={`w-full justify-start py-3 lg:py-4 px-4 lg:px-6 text-base lg:text-lg rounded-xl lg:rounded-2xl transition-all duration-300 ${
                   selectedTab === "overview" 
                     ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
                     : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
                 }`}
                 onClick={() => setSelectedTab("overview")}
               >
-                <BarChart3 className="h-6 w-6 mr-4" />
+                <BarChart3 className="h-5 w-5 lg:h-6 lg:w-6 mr-3 lg:mr-4" />
                 <span>Översikt</span>
                 <div className="ml-auto">
-                  {selectedTab === "overview" && <ChevronDown className="h-4 w-4" />}
+                  {selectedTab === "overview" && <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4" />}
                 </div>
               </Button>
               <Button 
                 variant={selectedTab === "orders" ? "default" : "ghost"} 
-                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                className={`w-full justify-start py-3 lg:py-4 px-4 lg:px-6 text-base lg:text-lg rounded-xl lg:rounded-2xl transition-all duration-300 ${
                   selectedTab === "orders" 
                     ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
                     : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
                 }`}
                 onClick={() => setSelectedTab("orders")}
               >
-                <ShoppingBag className="h-6 w-6 mr-4" />
+                <ShoppingBag className="h-5 w-5 lg:h-6 lg:w-6 mr-3 lg:mr-4" />
                 <span>Beställningar</span>
-                <div className="ml-auto flex items-center space-x-2">
-                  <Badge className="bg-red-100 text-red-700 text-xs px-2 py-0.5 rounded-full">
+                <div className="ml-auto flex items-center space-x-1 lg:space-x-2">
+                  <Badge className="bg-red-100 text-red-700 text-xs px-1.5 lg:px-2 py-0.5 rounded-full">
                     {orders?.filter((o: any) => o.status === 'pending').length || 0}
                   </Badge>
-                  {selectedTab === "orders" && <ChevronDown className="h-4 w-4" />}
+                  {selectedTab === "orders" && <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4" />}
                 </div>
               </Button>
               <Button 
                 variant={selectedTab === "products" ? "default" : "ghost"} 
-                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                className={`w-full justify-start py-3 lg:py-4 px-4 lg:px-6 text-base lg:text-lg rounded-xl lg:rounded-2xl transition-all duration-300 ${
                   selectedTab === "products" 
                     ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
                     : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
                 }`}
                 onClick={() => setSelectedTab("products")}
               >
-                <Package className="h-6 w-6 mr-4" />
+                <Package className="h-5 w-5 lg:h-6 lg:w-6 mr-3 lg:mr-4" />
                 <span>Produkter</span>
-                <div className="ml-auto flex items-center space-x-2">
-                  <Badge className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+                <div className="ml-auto flex items-center space-x-1 lg:space-x-2">
+                  <Badge className="bg-blue-100 text-blue-700 text-xs px-1.5 lg:px-2 py-0.5 rounded-full">
                     {stats.totalProducts}
                   </Badge>
-                  {selectedTab === "products" && <ChevronDown className="h-4 w-4" />}
+                  {selectedTab === "products" && <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4" />}
                 </div>
               </Button>
               <Button 
                 variant={selectedTab === "sellers" ? "default" : "ghost"} 
-                className={`w-full justify-start py-4 px-6 text-lg rounded-2xl transition-all duration-300 ${
+                className={`w-full justify-start py-3 lg:py-4 px-4 lg:px-6 text-base lg:text-lg rounded-xl lg:rounded-2xl transition-all duration-300 ${
                   selectedTab === "sellers" 
                     ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
                     : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
                 }`}
                 onClick={() => setSelectedTab("sellers")}
               >
-                <Users className="h-6 w-6 mr-4" />
+                <Users className="h-5 w-5 lg:h-6 lg:w-6 mr-3 lg:mr-4" />
                 <span>Säljare</span>
-                <div className="ml-auto flex items-center space-x-2">
-                  <Badge className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full">
+                <div className="ml-auto flex items-center space-x-1 lg:space-x-2">
+                  <Badge className="bg-orange-100 text-orange-700 text-xs px-1.5 lg:px-2 py-0.5 rounded-full">
                     {stats.activeSellers}
                   </Badge>
                   {selectedTab === "sellers" && <ChevronDown className="h-4 w-4" />}
@@ -331,16 +334,16 @@ export default function ShopifyAdmin() {
               </Button>
             </nav>
 
-            {/* Quick Actions in Sidebar */}
-            <div className="mt-8 p-4 bg-white/30 backdrop-blur-sm rounded-2xl border border-dusty-rose/20">
-              <h3 className="text-sm font-semibold text-deep-charcoal mb-3">Snabbåtgärder</h3>
-              <div className="space-y-2">
-                <Button variant="ghost" size="sm" className="w-full justify-start text-sm">
-                  <Clock className="h-4 w-4 mr-3" />
+            {/* Mobile-First Quick Actions */}
+            <div className="mt-6 lg:mt-8 p-3 lg:p-4 bg-white/30 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-dusty-rose/20">
+              <h3 className="text-sm font-semibold text-deep-charcoal mb-2 lg:mb-3">Snabbåtgärder</h3>
+              <div className="space-y-1 lg:space-y-2">
+                <Button variant="ghost" size="sm" className="w-full justify-start text-xs lg:text-sm py-2">
+                  <Clock className="h-3 w-3 lg:h-4 lg:w-4 mr-2 lg:mr-3" />
                   Senaste aktivitet
                 </Button>
-                <Button variant="ghost" size="sm" className="w-full justify-start text-sm">
-                  <RefreshCw className="h-4 w-4 mr-3" />
+                <Button variant="ghost" size="sm" className="w-full justify-start text-xs lg:text-sm py-2">
+                  <RefreshCw className="h-3 w-3 lg:h-4 lg:w-4 mr-2 lg:mr-3" />
                   Uppdatera data
                 </Button>
               </div>
@@ -348,9 +351,9 @@ export default function ShopifyAdmin() {
           </div>
         </aside>
 
-        {/* Enhanced Content Area */}
+        {/* Mobile-First Content Area */}
         <main className="flex-1 bg-gradient-to-br from-nordic-cream/30 to-champagne/20 overflow-y-auto">
-          <div className="p-8 max-w-none">
+          <div className="p-4 lg:p-8 max-w-none">
             {selectedTab === "overview" && (
               <div className="space-y-8">
                 {/* Enhanced Header */}
