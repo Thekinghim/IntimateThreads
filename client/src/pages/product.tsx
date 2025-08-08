@@ -17,6 +17,7 @@ export default function Product() {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
+  const [selectedImage, setSelectedImage] = useState<string>("");
   
   const sizeChart = {
     'XS': { bust: '78-82', waist: '60-64', hips: '86-90' },
@@ -26,11 +27,19 @@ export default function Product() {
     'XL': { bust: '94-98', waist: '76-80', hips: '102-106' },
     'XXL': { bust: '98-102', waist: '80-84', hips: '106-110' }
   };
+  
+  // Create image gallery with multiple views
+  const imageGallery = [
+    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800",
+    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=face",
+    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=sides", 
+    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=back"
+  ];
 
   const { data: product, isLoading } = useQuery<ProductWithSeller>({
     queryKey: ['/api/products', id],
     staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 10 * 60 * 1000, // 10 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
   });
 
   const handleAddToCart = () => {
@@ -102,26 +111,34 @@ export default function Product() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           {/* Left side - Product Images */}
           <div className="space-y-4">
-            {/* Thumbnails - responsive */}
-            <div className="flex space-x-2 mb-4 overflow-x-auto sm:overflow-visible">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-16 h-20 sm:w-20 sm:h-24 bg-gray-100 flex-shrink-0">
-                  <img
-                    src={product.imageUrl || `https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=200&q=80&random=${i}`}
-                    alt={`${product.title} view ${i}`}
-                    className="w-full h-full object-cover cursor-pointer"
-                  />
-                </div>
-              ))}
-            </div>
-
             {/* Main product image */}
             <div className="aspect-square sm:aspect-[4/5] bg-gray-100 rounded-lg overflow-hidden">
               <img
-                src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
+                src={selectedImage || product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
                 alt={product.title}
                 className="w-full h-full object-cover"
+                loading="eager"
               />
+            </div>
+
+            {/* Thumbnails slideshow - responsive */}
+            <div className="flex space-x-2 overflow-x-auto sm:overflow-visible">
+              {imageGallery.map((img, i) => (
+                <div 
+                  key={i} 
+                  className={`w-16 h-20 sm:w-20 sm:h-24 bg-gray-100 flex-shrink-0 cursor-pointer border-2 ${
+                    selectedImage === img ? 'border-gray-900' : 'border-transparent'
+                  }`}
+                  onClick={() => setSelectedImage(img)}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.title} view ${i + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -169,22 +186,16 @@ export default function Product() {
               <h3 className="text-sm font-medium text-gray-900 mb-2">Color: {product.color}</h3>
               <div className="flex space-x-2">
                 <button 
-                  onClick={() => {
-                    setSelectedColor('black');
-                    console.log('Selected black color');
-                  }}
-                  className={`w-8 h-8 bg-black rounded-full border-2 ${
+                  onClick={() => setSelectedColor('black')}
+                  className={`w-8 h-8 bg-black rounded-full border-2 transition-all ${
                     selectedColor === 'black' 
                       ? 'border-gray-900 ring-2 ring-gray-400' 
                       : 'border-gray-300 hover:border-gray-500'
                   }`}
                 ></button>
                 <button 
-                  onClick={() => {
-                    setSelectedColor('gray');
-                    console.log('Selected gray color');
-                  }}
-                  className={`w-8 h-8 bg-gray-300 rounded-full border-2 ${
+                  onClick={() => setSelectedColor('gray')}
+                  className={`w-8 h-8 bg-gray-300 rounded-full border-2 transition-all ${
                     selectedColor === 'gray' 
                       ? 'border-gray-600 ring-2 ring-gray-400' 
                       : 'border-gray-200 hover:border-gray-400'
@@ -236,10 +247,9 @@ export default function Product() {
                     onClick={() => {
                       if (size !== 'XL') {
                         setSelectedSize(size);
-                        console.log(`Selected size: ${size}`);
                       }
                     }}
-                    className={`py-3 px-2 border text-sm font-medium text-center ${
+                    className={`py-3 px-2 border text-sm font-medium text-center transition-all ${
                       size === selectedSize
                         ? 'border-gray-900 bg-gray-900 text-white'
                         : size === 'XL' 
@@ -265,26 +275,16 @@ export default function Product() {
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
                 <button 
-                  onClick={() => {
-                    if (quantity > 1) {
-                      setQuantity(quantity - 1);
-                      console.log('Decrease quantity');
-                    }
-                  }}
-                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
+                  onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 transition-all"
                   disabled={quantity <= 1}
                 >
                   -
                 </button>
                 <span className="px-4 py-2 border border-gray-300 min-w-12 text-center">{quantity}</span>
                 <button 
-                  onClick={() => {
-                    if (quantity < 10) {
-                      setQuantity(quantity + 1);
-                      console.log('Increase quantity');
-                    }
-                  }}
-                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
+                  onClick={() => quantity < 10 && setQuantity(quantity + 1)}
+                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 transition-all"
                   disabled={quantity >= 10}
                 >
                   +

@@ -20,7 +20,7 @@ export default function Collection() {
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
     staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 10 * 60 * 1000, // 10 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
   });
 
   const filteredProducts = products?.filter((product) => {
