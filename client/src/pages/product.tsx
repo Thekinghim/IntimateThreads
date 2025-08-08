@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowLeft, MapPin, Calendar, Package } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
@@ -16,6 +17,15 @@ export default function Product() {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
+  
+  const sizeChart = {
+    'XS': { bust: '78-82', waist: '60-64', hips: '86-90' },
+    'S': { bust: '82-86', waist: '64-68', hips: '90-94' },
+    'M': { bust: '86-90', waist: '68-72', hips: '94-98' },
+    'L': { bust: '90-94', waist: '72-76', hips: '98-102' },
+    'XL': { bust: '94-98', waist: '76-80', hips: '102-106' },
+    'XXL': { bust: '98-102', waist: '80-84', hips: '106-110' }
+  };
 
   const { data: product, isLoading } = useQuery<ProductWithSeller>({
     queryKey: ['/api/products', id],
@@ -187,12 +197,37 @@ export default function Product() {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-medium text-gray-900">Size:</h3>
-                <button className="text-sm text-gray-500 underline flex items-center">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Size Guide
-                </button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="text-sm text-gray-500 underline flex items-center hover:text-gray-700">
+                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Size Guide
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Size Guide (cm)</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-4 gap-2 text-sm font-medium text-gray-900 border-b pb-2">
+                        <div>Size</div>
+                        <div>Bust</div>
+                        <div>Waist</div>
+                        <div>Hips</div>
+                      </div>
+                      {Object.entries(sizeChart).map(([size, measurements]) => (
+                        <div key={size} className="grid grid-cols-4 gap-2 text-sm text-gray-600">
+                          <div className="font-medium">{size}</div>
+                          <div>{measurements.bust}</div>
+                          <div>{measurements.waist}</div>
+                          <div>{measurements.hips}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {['XXS', 'XS', 'S', 'M', 'L', 'XL'].map((size) => (

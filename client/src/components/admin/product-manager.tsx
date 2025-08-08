@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import ImageUpload from "@/components/image-upload";
+import { ImageUploader } from "@/components/image-uploader";
 import { Plus, Edit, Package } from "lucide-react";
 
 const productSchema = z.object({
@@ -318,33 +318,22 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                 </div>
               </div>
 
-              {/* Right Column - Image URL */}
+              {/* Right Column - Image Upload */}
               <div className="space-y-4">
                 <FormField
                   control={form.control}
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Bild URL</FormLabel>
+                      <FormLabel>Produktbild</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="https://example.com/image.jpg" 
-                          {...field} 
+                        <ImageUploader
+                          value={field.value}
+                          onChange={field.onChange}
+                          placeholder="Ange bild-URL eller ladda upp fil"
                         />
                       </FormControl>
                       <FormMessage />
-                      {field.value && (
-                        <div className="mt-2">
-                          <img 
-                            src={field.value} 
-                            alt="Preview" 
-                            className="w-32 h-32 object-cover rounded-lg border"
-                            onError={(e) => {
-                              e.currentTarget.src = "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400";
-                            }}
-                          />
-                        </div>
-                      )}
                     </FormItem>
                   )}
                 />
