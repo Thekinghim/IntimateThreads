@@ -3,7 +3,10 @@ import { drizzle } from 'drizzle-orm/neon-serverless';
 import ws from "ws";
 import * as schema from "@shared/schema";
 
+// Ensure WebSocket is configured for production
 neonConfig.webSocketConstructor = ws;
+
+console.log('Database configuration initialized with WebSocket support');
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
