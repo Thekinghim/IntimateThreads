@@ -1,0 +1,13 @@
+ABSOLUTE FORCE DEPLOYMENT v3.2.0
+
+This file MUST trigger a new production deployment.
+
+Changes:
+- Added /api/debug endpoint to verify server version
+- Production authentication system v3.2.0
+- Database hash synchronization completed
+- Admin seeding on startup verified
+
+Deployment timestamp: 2025-08-08T08:41:00Z
+
+Production MUST update to serve these new API endpoints.
