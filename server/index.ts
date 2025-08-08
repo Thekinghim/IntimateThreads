@@ -2,8 +2,10 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedAdmins } from "./seedAdmins";
+import { PRODUCTION_VERSION } from "./forceProductionUpdate";
 
-// PRODUCTION FORCE UPDATE - v3.0 - Admin login fixed with logging
+// PRODUCTION FORCE UPDATE - v3.0.1 - Database sync fixed
+console.log(`🚀 Server starting with version ${PRODUCTION_VERSION}`);
 
 const app = express();
 app.use(express.json());
