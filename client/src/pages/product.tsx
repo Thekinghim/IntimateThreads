@@ -71,148 +71,167 @@ export default function Product() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex text-sm">
-            <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <Link href="/collection" className="text-gray-500 hover:text-gray-700">Collection</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900">{product.title}</span>
-          </nav>
-        </div>
+      {/* Blue discount bar */}
+      <div className="bg-blue-600 text-white text-center py-2 text-sm font-medium">
+        EVERYTHING 50% OFF ARCHIVE SALE - DISCOUNT APPLIED IN CART
+        <span className="float-right mr-4">FREE SHIPPING ON ORDERS OVER</span>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-          {/* Product Images */}
-          <div className="lg:col-span-7">
-            <div className="space-y-4">
-              {/* Main Image */}
-              <div className="aspect-square w-full">
+      {/* Breadcrumb */}
+      <div className="max-w-6xl mx-auto px-4 py-3">
+        <nav className="flex text-sm text-gray-600">
+          <Link href="/" className="hover:text-gray-900">Home</Link>
+          <span className="mx-2">/</span>
+          <Link href="/collection" className="hover:text-gray-900">Collection</Link>
+          <span className="mx-2">/</span>
+          <span className="text-gray-900">{product.title}</span>
+        </nav>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left side - Product Images */}
+          <div className="space-y-4">
+            {/* Thumbnail column */}
+            <div className="flex lg:flex-col lg:space-y-4 lg:w-20 space-x-4 lg:space-x-0 overflow-x-auto lg:overflow-visible">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-20 h-24 bg-gray-100 flex-shrink-0">
+                  <img
+                    src={product.imageUrl || `https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=200&q=80&random=${i}`}
+                    alt={`${product.title} view ${i}`}
+                    className="w-full h-full object-cover cursor-pointer"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Main product image */}
+            <div className="lg:ml-24 -mt-4 lg:mt-0">
+              <div className="aspect-square bg-gray-100">
                 <img
                   src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
                   alt={product.title}
-                  className="w-full h-full object-cover bg-gray-100"
+                  className="w-full h-full object-cover"
                 />
-              </div>
-              
-              {/* Thumbnail Images */}
-              <div className="flex space-x-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-20 h-20 bg-gray-100 flex-shrink-0">
-                    <img
-                      src={product.imageUrl || `https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=200&q=80&random=${i}`}
-                      alt={`${product.title} view ${i}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
               </div>
             </div>
           </div>
 
-          {/* Product Info */}
-          <div className="mt-8 lg:mt-0 lg:col-span-5">
-            <div className="space-y-6">
-              {/* Title and Rating */}
-              <div>
-                <h1 className="text-2xl font-light text-gray-900 uppercase tracking-wide">{product.title}</h1>
-                <div className="mt-2 flex items-center">
-                  <p className="text-sm text-gray-600">{product.seller.alias}</p>
-                </div>
-                <div className="mt-3 flex items-center">
-                  <div className="flex items-center">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <svg key={star} className="h-4 w-4 text-gray-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <span className="ml-2 text-sm text-gray-600">129 reviews</span>
-                </div>
+          {/* Right side - Product Info */}
+          <div className="space-y-6 lg:pl-8">
+            <div className="flex items-center justify-between">
+              <h1 className="text-3xl font-light text-gray-900 uppercase tracking-wider">{product.title}</h1>
+              <button className="p-2 text-gray-400 hover:text-gray-600">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+
+            <p className="text-sm text-gray-600 capitalize">{product.material}</p>
+
+            {/* Price */}
+            <div className="flex items-baseline space-x-3">
+              <span className="text-lg line-through text-gray-400">
+                ${(parseFloat(product.priceKr) * 2 / 10).toFixed(2)}
+              </span>
+              <span className="text-2xl font-medium text-gray-900">
+                ${(parseFloat(product.priceKr) / 10).toFixed(2)}
+              </span>
+            </div>
+
+            <div className="text-sm text-gray-600">
+              4 interest-free payments of ${(parseFloat(product.priceKr) / 40).toFixed(2)} CAD with <strong>Klarna</strong> or <strong>afterpay</strong>
+            </div>
+
+            {/* Rating */}
+            <div className="flex items-center space-x-2">
+              <div className="flex">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="h-4 w-4 text-blue-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
               </div>
+              <span className="text-sm text-gray-600">129 reviews</span>
+            </div>
 
-              {/* Price */}
-              <div className="flex items-baseline space-x-3">
-                <span className="text-2xl font-light text-gray-900">
-                  {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
-                </span>
+            {/* Color */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-900 mb-2">Color: {product.color}</h3>
+              <div className="flex space-x-2">
+                <div className="w-8 h-8 bg-black rounded-full border-2 border-gray-300"></div>
+                <div className="w-8 h-8 bg-gray-300 rounded-full border-2 border-gray-200"></div>
               </div>
+            </div>
 
-              {/* Color Selection */}
-              <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-3">Färg: {product.color}</h3>
-                <div className="flex space-x-3">
-                  <div className={`w-8 h-8 rounded-full border-2 border-gray-400 bg-${product.color.toLowerCase()}-500`}></div>
-                </div>
-              </div>
-
-              {/* Size Selection */}
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-medium text-gray-900">Size:</h3>
-                  <button className="text-sm text-gray-500 underline">Size Guide</button>
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {['XXS', 'XS', 'S', 'M'].map((size) => (
-                    <button
-                      key={size}
-                      className={`py-2 px-3 border text-sm font-medium ${
-                        size === product.size
-                          ? 'border-gray-900 bg-gray-900 text-white'
-                          : 'border-gray-300 bg-white text-gray-900 hover:border-gray-400'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Wear Days Info */}
-              {product.wearDays && (
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-sm text-blue-800">
-                    • Bärdagar: {product.wearDays} dagar
-                  </p>
-                </div>
-              )}
-
-              {/* Add to Cart */}
-              <div className="space-y-4">
-                <Button 
-                  onClick={handleAddToCart}
-                  disabled={!product.isAvailable}
-                  className="w-full bg-gray-900 text-white hover:bg-gray-800 py-4 text-base font-medium uppercase tracking-wide"
-                >
-                  {product.isAvailable ? "Lägg i varukorg" : "Slutsåld"}
-                </Button>
-                
-                <div className="text-center">
-                  <p className="text-sm text-gray-600">
-                    Diskret leverans • 3-5 arbetsdagar
-                  </p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="border-t pt-6">
-                <button className="w-full flex justify-between items-center py-4 text-left">
-                  <span className="text-sm font-medium text-gray-900 uppercase tracking-wide">Description</span>
-                  <span className="text-gray-400">+</span>
+            {/* Size */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-medium text-gray-900">Size:</h3>
+                <button className="text-sm text-gray-500 underline flex items-center">
+                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Size Guide
                 </button>
-                <div className="pb-4">
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {product.description}
-                  </p>
-                  <div className="mt-4 space-y-2 text-sm text-gray-600">
-                    <p>• Material: {product.material}</p>
-                    <p>• Säljare: {product.seller.alias}, {product.seller.location}</p>
-                    <p>• Ålder: {product.seller.age} år</p>
-                  </div>
-                </div>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {['XXS', 'XS', 'S', 'M', 'L', 'XL'].map((size) => (
+                  <button
+                    key={size}
+                    className={`py-3 px-2 border text-sm font-medium text-center ${
+                      size === product.size
+                        ? 'border-gray-900 bg-gray-900 text-white'
+                        : size === 'XL' 
+                        ? 'border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'border-gray-300 bg-white text-gray-900 hover:border-gray-400'
+                    }`}
+                    disabled={size === 'XL'}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Archive Sale Notice */}
+            <div className="bg-blue-50 p-3 rounded">
+              <p className="text-sm text-blue-800">
+                • 50% Off Archive Sales. Discount applied in cart.
+              </p>
+            </div>
+
+            {/* Quantity and Add to Cart */}
+            <div className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <button className="w-8 h-8 border border-gray-300 flex items-center justify-center">-</button>
+                <span className="px-4 py-2 border border-gray-300 min-w-12 text-center">1</span>
+                <button className="w-8 h-8 border border-gray-300 flex items-center justify-center">+</button>
+              </div>
+
+              <button 
+                onClick={handleAddToCart}
+                disabled={!product.isAvailable}
+                className="w-full bg-blue-600 text-white py-3 text-base font-medium uppercase tracking-wide hover:bg-blue-700 transition-colors"
+              >
+                SELECT SIZE
+              </button>
+            </div>
+
+            {/* Description */}
+            <div className="border-t pt-6">
+              <button className="w-full flex justify-between items-center py-3 text-left">
+                <span className="text-sm font-medium text-gray-900 uppercase tracking-wide">🔽 DESCRIPTION</span>
+                <span className="text-gray-400">-</span>
+              </button>
+              <div className="pb-4 text-sm text-gray-600 leading-relaxed">
+                <p>{product.description}</p>
+                <br />
+                <p>Material: {product.material}</p>
+                <p>Seller: {product.seller.alias}, {product.seller.location}</p>
+                <p>Age: {product.seller.age} years</p>
+                {product.wearDays && <p>Days worn: {product.wearDays}</p>}
               </div>
             </div>
           </div>
