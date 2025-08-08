@@ -29,7 +29,7 @@ export default function Navbar() {
               <div className="w-8 h-8 gold-accent rounded-full flex items-center justify-center shadow-md">
                 <span className="text-[#111B3E] font-bold text-sm">S</span>
               </div>
-              <span className="font-bold text-lg sm:text-xl text-[#111B3E] tracking-wide">Scandiscent</span>
+              <span className="sm:text-xl text-[#111B3E] tracking-wide text-center text-[22px] ml-[6px] mr-[6px] font-light bg-[#00000000]">Scandiscent</span>
             </div>
           </Link>
 
