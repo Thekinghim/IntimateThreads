@@ -36,7 +36,7 @@ export default function Navbar() {
           {/* Navigation Links - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link href="/collection">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors font-medium text-sm lg:text-base">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[28px] font-extrabold">
                 Collection
               </span>
             </Link>
