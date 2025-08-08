@@ -34,7 +34,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 border-3 border-dusty-rose text-dusty-rose hover:bg-dusty-rose hover:text-deep-charcoal font-poppins font-medium px-12 py-6 text-xl rounded-3xl shadow-rose transition-all duration-500 hover:scale-105 bg-[#fbf9f4]">
+                <Button variant="outline" size="lg" className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 border-3 border-dusty-rose hover:bg-dusty-rose hover:text-deep-charcoal font-poppins font-medium px-12 py-6 text-xl rounded-3xl shadow-rose transition-all duration-500 hover:scale-105 text-[#000000] bg-[#fcfcfc]">
                   Så Fungerar Det
                 </Button>
               </Link>
