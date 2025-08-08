@@ -25,10 +25,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
           <Link href="/">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 gold-accent rounded-full flex items-center justify-center shadow-md">
-                <span className="text-[#111B3E] font-bold text-sm">S</span>
-              </div>
+            <div className="flex items-center">
               <span className="sm:text-xl text-[#111B3E] tracking-wide text-center text-[22px] ml-[6px] mr-[6px] font-light bg-[#00000000]">Scandiscent</span>
             </div>
           </Link>

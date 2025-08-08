@@ -15,16 +15,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#FEFBEA]">
-      {/* Luxury Hero Section */}
-      <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FEFBEA] via-[#F5F2E8] to-[#E8E4D6]"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/40 to-transparent"></div>
+      {/* Hero Section with Background Image */}
+      <section 
+        className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: "url('/images/hero-background.jpg')", // Replace with actual Figma image path
+        }}
+      >
+        <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#111B3E] leading-none mb-8 tracking-tight">
-              <span className="block gold-text italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold">Scandiscent</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
+              <span className="block gold-text italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold drop-shadow-lg">Scandiscent</span>
             </h1>
-            <p className="text-2xl md:text-3xl text-[#064F8C] max-w-3xl mx-auto font-light leading-relaxed mb-12">
+            <p className="text-2xl md:text-3xl text-white max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-md">
               Exklusiva, personliga plagg från nordiska kvinnor. Diskret, säkert och helt anonymt.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
@@ -34,7 +38,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 border-3 border-dusty-rose hover:bg-dusty-rose hover:text-deep-charcoal font-poppins font-medium px-12 py-6 text-xl rounded-3xl shadow-rose transition-all duration-500 hover:scale-105 text-[#000000] bg-[#fcfcfc]">
+                <Button variant="outline" size="lg" className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 border-3 border-white hover:bg-white hover:text-[#111B3E] font-medium px-12 py-6 text-xl rounded-3xl shadow-lg transition-all duration-500 hover:scale-105 text-white bg-transparent">
                   Så Fungerar Det
                 </Button>
               </Link>
