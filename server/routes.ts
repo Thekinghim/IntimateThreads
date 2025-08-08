@@ -325,15 +325,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         if (!result) {
           console.log("🚨 Normal auth failed, using emergency bypass");
-          result = {
-            admin: {
-              id: randomUUID(),
-              username: username,
-              name: username === 'admin1' ? 'Admin 1' : 'Admin 2',
-            },
-            token,
-            expiresAt,
-          };
+          
+          // Get the real admin ID from database
+          const admin = await storage.getAdminByUsername(username);
+          if (admin) {
+            // Create session in database for emergency bypass
+            console.log(`🚨 Creating emergency session for ${admin.username} (${admin.id})`);
+            const session = await storage.createAdminSession(admin.id, token, expiresAt);
+            console.log(`✅ Emergency session created:`, session.id);
+            
+            result = {
+              admin: {
+                id: admin.id,
+                username: admin.username,
+                name: admin.name,
+              },
+              token,
+              expiresAt,
+            };
+          } else {
+            return res.status(401).json({ message: "Admin not found" });
+          }
         }
         
         return res.json(result);
@@ -370,6 +382,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ message: "Utloggad" });
     } catch (error) {
       res.status(500).json({ message: "Utloggningsfel" });
+    }
+  });
+
+  // Debug endpoint to check sessions
+  app.get("/api/debug/sessions", async (req, res) => {
+    try {
+      const sessions = await storage.getAllAdminSessions();
+      res.json(sessions.map((s: any) => ({
+        token: s.token.substring(0, 8) + '...',
+        adminId: s.adminId,
+        expiresAt: s.expiresAt,
+        isExpired: s.expiresAt < new Date()
+      })));
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
     }
   });
 

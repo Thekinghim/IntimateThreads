@@ -27,6 +27,12 @@ export default function Product() {
     'XL': { bust: '94-98', waist: '76-80', hips: '102-106' },
     'XXL': { bust: '98-102', waist: '80-84', hips: '106-110' }
   };
+
+  const { data: product, isLoading } = useQuery<ProductWithSeller>({
+    queryKey: ['/api/products', id],
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
+  });
   
   // Create image gallery with multiple views
   const imageGallery = [
@@ -35,12 +41,6 @@ export default function Product() {
     product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=sides", 
     product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=back"
   ];
-
-  const { data: product, isLoading } = useQuery<ProductWithSeller>({
-    queryKey: ['/api/products', id],
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
-  });
 
   const handleAddToCart = () => {
     if (!product) return;

@@ -17,9 +17,12 @@ export const requireAdminAuth: RequestHandler = async (req, res, next) => {
   const token = authHeader.substring(7); // Ta bort 'Bearer '
   
   try {
+    console.log(`🔍 Checking session for token: ${token.substring(0, 8)}...`);
     const session = await storage.getValidAdminSession(token);
+    console.log(`Session found: ${!!session}`);
     
     if (!session || !session.admin.isActive) {
+      console.log(`❌ Session invalid or admin inactive`);
       return res.status(401).json({ message: 'Ogiltig eller utgången session' });
     }
 
@@ -67,7 +70,9 @@ export async function authenticateAdmin(username: string, password: string) {
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7); // 7 dagar giltighetstid
 
+    console.log(`🔑 Creating session for admin ${admin.id} with token ${token.substring(0, 8)}...`);
     const session = await storage.createAdminSession(admin.id, token, expiresAt);
+    console.log(`✅ Session created successfully:`, session.id);
     
     return {
       admin: {

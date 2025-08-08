@@ -214,6 +214,10 @@ export class DatabaseStorage implements IStorage {
   async deleteAdminSession(token: string): Promise<void> {
     await db.delete(adminSessions).where(eq(adminSessions.token, token));
   }
+
+  async getAllAdminSessions(): Promise<AdminSession[]> {
+    return await db.select().from(adminSessions);
+  }
 }
 
 export const storage = new DatabaseStorage();
