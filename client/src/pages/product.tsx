@@ -7,11 +7,15 @@ import { ArrowLeft, MapPin, Calendar, Package } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 export default function Product() {
   const { id } = useParams();
   const { addItem } = useCartStore();
   const { toast } = useToast();
+  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("black");
+  const [quantity, setQuantity] = useState<number>(1);
 
   const { data: product, isLoading } = useQuery<ProductWithSeller>({
     queryKey: ['/api/products', id],
@@ -156,15 +160,25 @@ export default function Product() {
               <div className="flex space-x-2">
                 <button 
                   onClick={() => {
+                    setSelectedColor('black');
                     console.log('Selected black color');
                   }}
-                  className="w-8 h-8 bg-black rounded-full border-2 border-gray-300 hover:border-gray-500"
+                  className={`w-8 h-8 bg-black rounded-full border-2 ${
+                    selectedColor === 'black' 
+                      ? 'border-gray-900 ring-2 ring-gray-400' 
+                      : 'border-gray-300 hover:border-gray-500'
+                  }`}
                 ></button>
                 <button 
                   onClick={() => {
+                    setSelectedColor('gray');
                     console.log('Selected gray color');
                   }}
-                  className="w-8 h-8 bg-gray-300 rounded-full border-2 border-gray-200 hover:border-gray-400"
+                  className={`w-8 h-8 bg-gray-300 rounded-full border-2 ${
+                    selectedColor === 'gray' 
+                      ? 'border-gray-600 ring-2 ring-gray-400' 
+                      : 'border-gray-200 hover:border-gray-400'
+                  }`}
                 ></button>
               </div>
             </div>
@@ -185,11 +199,13 @@ export default function Product() {
                   <button
                     key={size}
                     onClick={() => {
-                      // Handle size selection if needed
-                      console.log(`Selected size: ${size}`);
+                      if (size !== 'XL') {
+                        setSelectedSize(size);
+                        console.log(`Selected size: ${size}`);
+                      }
                     }}
                     className={`py-3 px-2 border text-sm font-medium text-center ${
-                      size === product.size
+                      size === selectedSize
                         ? 'border-gray-900 bg-gray-900 text-white'
                         : size === 'XL' 
                         ? 'border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed'
@@ -215,20 +231,26 @@ export default function Product() {
               <div className="flex items-center space-x-4">
                 <button 
                   onClick={() => {
-                    // Handle quantity decrease
-                    console.log('Decrease quantity');
+                    if (quantity > 1) {
+                      setQuantity(quantity - 1);
+                      console.log('Decrease quantity');
+                    }
                   }}
-                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100"
+                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
+                  disabled={quantity <= 1}
                 >
                   -
                 </button>
-                <span className="px-4 py-2 border border-gray-300 min-w-12 text-center">1</span>
+                <span className="px-4 py-2 border border-gray-300 min-w-12 text-center">{quantity}</span>
                 <button 
                   onClick={() => {
-                    // Handle quantity increase
-                    console.log('Increase quantity');
+                    if (quantity < 10) {
+                      setQuantity(quantity + 1);
+                      console.log('Increase quantity');
+                    }
                   }}
-                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100"
+                  className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
+                  disabled={quantity >= 10}
                 >
                   +
                 </button>
@@ -236,10 +258,10 @@ export default function Product() {
 
               <button 
                 onClick={handleAddToCart}
-                disabled={!product.isAvailable}
+                disabled={!product.isAvailable || !selectedSize}
                 className="w-full bg-blue-600 text-white py-3 text-base font-medium uppercase tracking-wide hover:bg-blue-700 transition-colors disabled:bg-gray-400"
               >
-                {product.isAvailable ? "ADD TO CART" : "OUT OF STOCK"}
+                {!selectedSize ? "SELECT SIZE" : product.isAvailable ? "ADD TO CART" : "OUT OF STOCK"}
               </button>
             </div>
 
