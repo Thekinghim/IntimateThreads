@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { type ProductWithSeller } from "@shared/schema";
@@ -11,6 +12,9 @@ export default function Collection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [filterSize, setFilterSize] = useState("all");
+  const [filterMaterial, setFilterMaterial] = useState("all");
+  const [filterColor, setFilterColor] = useState("all");
+  const [filterWearDays, setFilterWearDays] = useState("all");
 
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
@@ -23,8 +27,21 @@ export default function Collection() {
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesSize = filterSize === "all" || product.size === filterSize;
+    const matchesMaterial = filterMaterial === "all" || product.material === filterMaterial;
+    const matchesColor = filterColor === "all" || product.color === filterColor;
     
-    return matchesSearch && matchesSize && product.isAvailable;
+    let matchesWearDays = true;
+    if (filterWearDays !== "all") {
+      const wearDays = product.wearDays || 0;
+      switch (filterWearDays) {
+        case "new": matchesWearDays = wearDays === 0; break;
+        case "1-3": matchesWearDays = wearDays >= 1 && wearDays <= 3; break;
+        case "4-7": matchesWearDays = wearDays >= 4 && wearDays <= 7; break;
+        case "8+": matchesWearDays = wearDays >= 8; break;
+      }
+    }
+    
+    return matchesSearch && matchesSize && matchesMaterial && matchesColor && matchesWearDays && product.isAvailable;
   }) || [];
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -53,8 +70,8 @@ export default function Collection() {
 
         {/* Filters */}
         <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            <div className="relative col-span-1 md:col-span-2 lg:col-span-1 xl:col-span-2">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="Sök produkter, säljare..."
@@ -66,7 +83,7 @@ export default function Collection() {
             
             <Select value={filterSize} onValueChange={setFilterSize}>
               <SelectTrigger>
-                <SelectValue placeholder="Filtrera storlek" />
+                <SelectValue placeholder="Storlek" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alla storlekar</SelectItem>
@@ -75,6 +92,57 @@ export default function Collection() {
                 <SelectItem value="M">M</SelectItem>
                 <SelectItem value="L">L</SelectItem>
                 <SelectItem value="XL">XL</SelectItem>
+                <SelectItem value="XXL">XXL</SelectItem>
+                <SelectItem value="One Size">One Size</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={filterMaterial} onValueChange={setFilterMaterial}>
+              <SelectTrigger>
+                <SelectValue placeholder="Material" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alla material</SelectItem>
+                <SelectItem value="Cotton">Bomull</SelectItem>
+                <SelectItem value="Lace">Spets</SelectItem>
+                <SelectItem value="Silk">Siden</SelectItem>
+                <SelectItem value="Satin">Satin</SelectItem>
+                <SelectItem value="Modal">Modal</SelectItem>
+                <SelectItem value="Bamboo">Bambu</SelectItem>
+                <SelectItem value="Polyester">Polyester</SelectItem>
+                <SelectItem value="Mesh">Mesh</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={filterColor} onValueChange={setFilterColor}>
+              <SelectTrigger>
+                <SelectValue placeholder="Färg" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alla färger</SelectItem>
+                <SelectItem value="Black">Svart</SelectItem>
+                <SelectItem value="White">Vit</SelectItem>
+                <SelectItem value="Red">Röd</SelectItem>
+                <SelectItem value="Pink">Rosa</SelectItem>
+                <SelectItem value="Blue">Blå</SelectItem>
+                <SelectItem value="Purple">Lila</SelectItem>
+                <SelectItem value="Green">Grön</SelectItem>
+                <SelectItem value="Yellow">Gul</SelectItem>
+                <SelectItem value="Beige">Beige</SelectItem>
+                <SelectItem value="Gray">Grå</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={filterWearDays} onValueChange={setFilterWearDays}>
+              <SelectTrigger>
+                <SelectValue placeholder="Bärdagar" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alla bärdagar</SelectItem>
+                <SelectItem value="new">Oanvänd (0 dagar)</SelectItem>
+                <SelectItem value="1-3">1-3 dagar</SelectItem>
+                <SelectItem value="4-7">4-7 dagar</SelectItem>
+                <SelectItem value="8+">8+ dagar</SelectItem>
               </SelectContent>
             </Select>
             
@@ -89,6 +157,27 @@ export default function Collection() {
               </SelectContent>
             </Select>
           </div>
+
+          {/* Clear Filters Button */}
+          {(searchTerm || filterSize !== "all" || filterMaterial !== "all" || filterColor !== "all" || filterWearDays !== "all") && (
+            <div className="mt-4 pt-4 border-t">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  setSearchTerm("");
+                  setFilterSize("all");
+                  setFilterMaterial("all");
+                  setFilterColor("all");
+                  setFilterWearDays("all");
+                  setSortBy("newest");
+                }}
+                className="text-sm"
+              >
+                Rensa alla filter
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Results count */}
