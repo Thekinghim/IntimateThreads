@@ -170,31 +170,37 @@ export default function MobileAdmin() {
       {/* Mobile Sidebar */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setSidebarOpen(false)}>
-          <aside className="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-50" onClick={(e) => e.stopPropagation()}>
+          <aside className="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-lg z-50 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="p-4">
-              <div className="mb-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-1">Nordic Collection</h2>
-                <p className="text-xs text-gray-500">Admin Dashboard</p>
+              <div className="mb-6 flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900 mb-1">Nordic Collection</h2>
+                  <p className="text-xs text-gray-500">Admin Dashboard</p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSidebarOpen(false)}
+                  className="p-1"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
               </div>
 
               {/* Stats Overview */}
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="bg-blue-50 rounded-lg p-3">
-                  <div className="flex items-center space-x-2">
-                    <ShoppingBag className="h-4 w-4 text-blue-600" />
-                    <div>
-                      <p className="text-lg font-bold text-gray-900">{stats.totalOrders}</p>
-                      <p className="text-xs text-gray-500">Orders</p>
-                    </div>
+                  <div className="flex flex-col items-center">
+                    <ShoppingBag className="h-5 w-5 text-blue-600 mb-1" />
+                    <p className="text-xl font-bold text-gray-900">{stats.totalOrders}</p>
+                    <p className="text-xs text-gray-500">Orders</p>
                   </div>
                 </div>
                 <div className="bg-green-50 rounded-lg p-3">
-                  <div className="flex items-center space-x-2">
-                    <DollarSign className="h-4 w-4 text-green-600" />
-                    <div>
-                      <p className="text-lg font-bold text-gray-900">{Math.round(stats.totalRevenue)}</p>
-                      <p className="text-xs text-gray-500">Revenue</p>
-                    </div>
+                  <div className="flex flex-col items-center">
+                    <DollarSign className="h-5 w-5 text-green-600 mb-1" />
+                    <p className="text-xl font-bold text-gray-900">{Math.round(stats.totalRevenue)}</p>
+                    <p className="text-xs text-gray-500">Revenue</p>
                   </div>
                 </div>
               </div>
@@ -203,61 +209,61 @@ export default function MobileAdmin() {
               <nav className="space-y-2">
                 <Button
                   variant={selectedTab === "overview" ? "default" : "ghost"}
-                  className="w-full justify-start"
+                  className="w-full flex items-center justify-start"
                   onClick={() => {
                     setSelectedTab("overview");
                     setSidebarOpen(false);
                   }}
                 >
-                  <Package className="h-4 w-4 mr-3" />
-                  Overview
+                  <Package className="h-4 w-4 mr-3 flex-shrink-0" />
+                  <span className="flex-1 text-left">Overview</span>
                 </Button>
                 <Button
                   variant={selectedTab === "orders" ? "default" : "ghost"}
-                  className="w-full justify-start"
+                  className="w-full flex items-center justify-start"
                   onClick={() => {
                     setSelectedTab("orders");
                     setSidebarOpen(false);
                   }}
                 >
-                  <ShoppingBag className="h-4 w-4 mr-3" />
-                  Orders
-                  <Badge className="ml-auto bg-red-100 text-red-700 text-xs">{stats.pendingOrders}</Badge>
+                  <ShoppingBag className="h-4 w-4 mr-3 flex-shrink-0" />
+                  <span className="flex-1 text-left">Orders</span>
+                  <Badge className="bg-red-100 text-red-700 text-xs px-2 flex-shrink-0">{stats.pendingOrders}</Badge>
                 </Button>
                 <Button
                   variant={selectedTab === "products" ? "default" : "ghost"}
-                  className="w-full justify-start"
+                  className="w-full flex items-center justify-start"
                   onClick={() => {
                     setSelectedTab("products");
                     setSidebarOpen(false);
                   }}
                 >
-                  <Package className="h-4 w-4 mr-3" />
-                  Products
-                  <Badge className="ml-auto text-xs">{stats.totalProducts}</Badge>
+                  <Package className="h-4 w-4 mr-3 flex-shrink-0" />
+                  <span className="flex-1 text-left">Products</span>
+                  <Badge className="text-xs px-2 flex-shrink-0">{stats.totalProducts}</Badge>
                 </Button>
                 <Button
                   variant={selectedTab === "sellers" ? "default" : "ghost"}
-                  className="w-full justify-start"
+                  className="w-full flex items-center justify-start"
                   onClick={() => {
                     setSelectedTab("sellers");
                     setSidebarOpen(false);
                   }}
                 >
-                  <Users className="h-4 w-4 mr-3" />
-                  Sellers
-                  <Badge className="ml-auto text-xs">{stats.activeSellers}</Badge>
+                  <Users className="h-4 w-4 mr-3 flex-shrink-0" />
+                  <span className="flex-1 text-left">Sellers</span>
+                  <Badge className="text-xs px-2 flex-shrink-0">{stats.activeSellers}</Badge>
                 </Button>
                 <Button
                   variant={selectedTab === "settings" ? "default" : "ghost"}
-                  className="w-full justify-start"
+                  className="w-full flex items-center justify-start"
                   onClick={() => {
                     setSelectedTab("settings");
                     setSidebarOpen(false);
                   }}
                 >
-                  <Settings className="h-4 w-4 mr-3" />
-                  Settings
+                  <Settings className="h-4 w-4 mr-3 flex-shrink-0" />
+                  <span className="flex-1 text-left">Settings</span>
                 </Button>
               </nav>
 
@@ -348,18 +354,20 @@ export default function MobileAdmin() {
               <CardContent className="p-0">
                 <div className="divide-y divide-gray-100">
                   {orders?.slice(0, 5).map((order: any) => (
-                    <div key={order.id} className="p-3 flex items-center justify-between">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">#{order.id.slice(0, 8)}</p>
-                        <p className="text-xs text-gray-500">{order.customerEmail}</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Badge className={`text-xs ${getStatusColor(order.status)}`}>
-                          {order.status}
-                        </Badge>
-                        <Button variant="ghost" size="sm" className="p-1">
-                          <Eye className="h-4 w-4" />
-                        </Button>
+                    <div key={order.id} className="p-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate">#{order.id.slice(0, 8)}</p>
+                          <p className="text-xs text-gray-500 truncate">{order.customerEmail}</p>
+                        </div>
+                        <div className="flex items-center space-x-1 ml-2 flex-shrink-0">
+                          <Badge className={`text-xs ${getStatusColor(order.status)}`}>
+                            {order.status}
+                          </Badge>
+                          <Button variant="ghost" size="sm" className="p-1">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   ))}
