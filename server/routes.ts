@@ -215,52 +215,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/nowpayments/payment", async (req, res) => {
     try {
-      // Since the API key seems invalid, create a demo payment response
-      // In production, this would be replaced with actual NOWPayments API call
-      
       const { price_amount, pay_currency, order_id } = req.body;
       
-      // Generate demo payment details based on currency
-      const paymentAddresses: Record<string, string> = {
-        btc: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
-        eth: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8",
-        usdt: "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
-      };
-      
-      // Calculate demo crypto amount (simplified conversion)
-      const conversionRates: Record<string, number> = {
-        btc: 0.000002,  // 1 SEK = 0.000002 BTC (demo rate)
-        eth: 0.00003,   // 1 SEK = 0.00003 ETH (demo rate)
-        usdt: 0.095     // 1 SEK = 0.095 USDT (demo rate)
-      };
-      
-      const cryptoAmount = (price_amount * (conversionRates[pay_currency] || 0.0001)).toFixed(8);
-      
-      const demoPayment = {
-        payment_id: `demo_${randomUUID()}`,
-        payment_status: "waiting",
-        pay_address: paymentAddresses[pay_currency] || paymentAddresses.btc,
+      const paymentData = {
         price_amount: price_amount,
-        price_currency: "sek",
-        pay_amount: cryptoAmount,
+        price_currency: "sek", 
         pay_currency: pay_currency,
         order_id: order_id,
-        order_description: req.body.order_description || "Diskreta Kollektion Purchase",
-        purchase_id: randomUUID(),
-        created_at: new Date().toISOString(),
-        expiration_estimate_date: new Date(Date.now() + 15 * 60 * 1000).toISOString() // 15 minutes
+        order_description: req.body.order_description || "Diskreta Kollektion Purchase"
       };
+      
+      const response = await fetch(`${nowpaymentsBaseUrl}/payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': nowpaymentsApiKey
+        },
+        body: JSON.stringify(paymentData)
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('NOWPayments payment error:', response.status, errorText);
+        return res.status(500).json({ message: "Failed to create payment with NOWPayments", error: errorText });
+      }
+      
+      const payment = await response.json();
       
       // Update order with payment details
       await storage.updateOrder(order_id, {
-        nowpaymentsId: demoPayment.payment_id,
-        cryptoCurrency: demoPayment.pay_currency,
-        cryptoAmount: demoPayment.pay_amount,
-        paymentAddress: demoPayment.pay_address,
+        nowpaymentsId: payment.payment_id,
+        cryptoCurrency: payment.pay_currency,
+        cryptoAmount: payment.pay_amount,
+        paymentAddress: payment.pay_address,
         paymentStatus: "pending"
       });
       
-      res.json(demoPayment);
+      res.json(payment);
     } catch (error) {
       console.error("Payment creation error:", error);
       res.status(500).json({ message: "Failed to create payment" });

@@ -96,10 +96,11 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
         form.reset();
       }
     },
-    onError: () => {
+    onError: (error: any) => {
+      console.error('Product creation error:', error);
       toast({
         title: "Error",
-        description: `Failed to ${isEdit ? 'update' : 'create'} product.`,
+        description: `Failed to ${isEdit ? 'update' : 'create'} product: ${error.message}`,
         variant: "destructive",
       });
     },
