@@ -3,6 +3,9 @@ import { storage } from "./storage";
 import bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
 
+// PRODUCTION AUTH v3.2.0 - Enhanced logging and detection
+console.log("🔐 Admin authentication system v3.2.0 initialized");
+
 // Middleware för admin-autentisering
 export const requireAdminAuth: RequestHandler = async (req, res, next) => {
   const authHeader = req.headers.authorization;

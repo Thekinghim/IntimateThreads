@@ -3,9 +3,11 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedAdmins } from "./seedAdmins";
 import { PRODUCTION_VERSION } from "./forceProductionUpdate";
+import { CRITICAL_UPDATE, logProductionStatus } from "./productionForce";
 
-// PRODUCTION FORCE UPDATE - v3.1.0 - COMPLETE DATABASE REBUILD
-console.log(`🚀 FORCE DEPLOYMENT: Server starting with version ${PRODUCTION_VERSION}`);
+// CRITICAL PRODUCTION UPDATE - v3.2.0 - FORCE SERVER RESTART
+console.log(`🔥 CRITICAL UPDATE: ${CRITICAL_UPDATE.version} - ${CRITICAL_UPDATE.deploymentId}`);
+logProductionStatus();
 
 const app = express();
 app.use(express.json());
