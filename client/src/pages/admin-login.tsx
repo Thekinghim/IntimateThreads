@@ -76,35 +76,35 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen gradient-nordic flex items-center justify-center px-6 relative overflow-hidden">
+    <div className="min-h-screen gradient-nordic flex items-center justify-center px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-dusty-rose/10 to-sage-mist/10"></div>
-      <div className="w-full max-w-lg relative">
+      <div className="w-full max-w-sm sm:max-w-lg relative">
         <Card className="glass shadow-luxury border-0 backdrop-blur-3xl">
-          <CardHeader className="text-center space-y-6 pb-10">
-            <div className="mx-auto w-20 h-20 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury">
-              <Shield className="h-10 w-10 text-nordic-cream" />
+          <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-10">
+            <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury">
+              <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-nordic-cream" />
             </div>
             <div>
-              <CardTitle className="text-3xl font-bold text-deep-charcoal font-poppins">Admin Panel</CardTitle>
-              <CardDescription className="text-soft-taupe mt-3 text-lg font-light">
+              <CardTitle className="text-2xl sm:text-3xl font-bold text-deep-charcoal font-poppins">Admin Panel</CardTitle>
+              <CardDescription className="text-soft-taupe mt-2 sm:mt-3 text-base sm:text-lg font-light px-2">
                 Logga in för att komma åt administratörspanelen
               </CardDescription>
             </div>
           </CardHeader>
           
-          <CardContent>
+          <CardContent className="px-4 sm:px-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 <FormField
                   control={form.control}
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-deep-charcoal font-medium text-lg">Användarnamn</FormLabel>
+                      <FormLabel className="text-deep-charcoal font-medium text-base sm:text-lg">Användarnamn</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ange ditt användarnamn"
-                          className="h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-lg rounded-2xl shadow-luxury"
+                          placeholder="admin1 eller admin2"
+                          className="h-12 sm:h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-base sm:text-lg rounded-2xl shadow-luxury"
                           {...field}
                         />
                       </FormControl>
@@ -118,13 +118,13 @@ export default function AdminLogin() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-deep-charcoal font-medium text-lg">Lösenord</FormLabel>
+                      <FormLabel className="text-deep-charcoal font-medium text-base sm:text-lg">Lösenord</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input
                             type={showPassword ? "text" : "password"}
-                            placeholder="Ange ditt lösenord"
-                            className="h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-lg rounded-2xl shadow-luxury pr-14"
+                            placeholder="adminpass123"
+                            className="h-12 sm:h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-base sm:text-lg rounded-2xl shadow-luxury pr-12 sm:pr-14"
                             {...field}
                           />
                           <Button
@@ -149,7 +149,7 @@ export default function AdminLogin() {
 
                 <Button
                   type="submit"
-                  className="w-full h-16 btn-luxury text-nordic-cream font-medium text-lg rounded-2xl font-poppins"
+                  className="w-full h-14 sm:h-16 btn-luxury text-nordic-cream font-medium text-base sm:text-lg rounded-2xl font-poppins"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -167,8 +167,16 @@ export default function AdminLogin() {
               </form>
             </Form>
 
-            <div className="mt-10 pt-8 border-t border-dusty-rose/20">
-              <p className="text-center text-lg text-soft-taupe font-light">
+            <div className="mt-6 sm:mt-10 pt-6 sm:pt-8 border-t border-dusty-rose/20 space-y-4">
+              <div className="text-center space-y-2">
+                <p className="text-sm sm:text-base text-soft-taupe font-light">
+                  <strong>Användare:</strong> admin1 eller admin2
+                </p>
+                <p className="text-sm sm:text-base text-soft-taupe font-light">
+                  <strong>Lösenord:</strong> adminpass123
+                </p>
+              </div>
+              <p className="text-center text-sm sm:text-base text-soft-taupe font-light">
                 Endast auktoriserad personal
               </p>
             </div>
