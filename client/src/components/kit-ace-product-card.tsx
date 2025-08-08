@@ -9,9 +9,32 @@ interface KitAceProductCardProps {
   product: ProductWithSeller;
 }
 
+function calculatePriceWithWearDays(basePrice: string, wearDays: number): number {
+  const base = parseFloat(basePrice);
+  const daysPricing = {
+    0: 0,    // Ny
+    1: 500,  // 1 dag
+    2: 1000, // 2 dagar
+    3: 1500, // 3 dagar
+  };
+  
+  if (wearDays <= 3) {
+    return base + (daysPricing[wearDays as keyof typeof daysPricing] || 0);
+  } else if (wearDays >= 4 && wearDays <= 7) {
+    return base + 2000; // 4-7 dagar
+  } else if (wearDays >= 8) {
+    return base + 3000; // 8+ dagar
+  }
+  
+  return base;
+}
+
 export default function KitAceProductCard({ product }: KitAceProductCardProps) {
   const { addItem } = useCartStore();
   const { toast } = useToast();
+
+  const wearDays = product.wearDays || 0;
+  const finalPrice = calculatePriceWithWearDays(product.priceKr, wearDays);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -21,7 +44,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
       title: product.title,
       sellerId: product.sellerId,
       sellerAlias: product.seller.alias,
-      priceKr: parseFloat(product.priceKr),
+      priceKr: finalPrice,
       imageUrl: product.imageUrl || "",
       size: product.size,
     });
@@ -48,14 +71,28 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
             {product.title}
           </h3>
           <p className="text-sm text-gray-600">{product.seller.alias}</p>
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-gray-900">
-              {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
-            </p>
-            {product.wearDays && (
-              <span className="text-xs text-gray-500">
-                {product.wearDays} days worn
-              </span>
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col">
+                {wearDays > 0 && (
+                  <span className="text-xs text-gray-500 line-through">
+                    {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
+                  </span>
+                )}
+                <p className="text-sm font-medium text-gray-900">
+                  {finalPrice.toLocaleString('sv-SE')} kr
+                </p>
+              </div>
+              {wearDays > 0 && (
+                <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
+                  {wearDays} dag{wearDays !== 1 ? 'ar' : ''} använd
+                </span>
+              )}
+            </div>
+            {wearDays > 0 && (
+              <p className="text-xs text-green-600">
+                +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr för extra dagar
+              </p>
             )}
           </div>
         </div>

@@ -42,6 +42,21 @@ export default function Product() {
     product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=back"
   ];
 
+  // Calculate final price with wear days
+  const calculateFinalPrice = (basePrice: string, wearDays: number): number => {
+    const base = parseFloat(basePrice);
+    if (wearDays === 0) return base;
+    if (wearDays === 1) return base + 500;
+    if (wearDays === 2) return base + 1000;
+    if (wearDays === 3) return base + 1500;
+    if (wearDays >= 4 && wearDays <= 7) return base + 2000;
+    if (wearDays >= 8) return base + 3000;
+    return base;
+  };
+
+  const wearDays = product?.wearDays || 0;
+  const finalPrice = product ? calculateFinalPrice(product.priceKr, wearDays) : 0;
+
   const handleAddToCart = () => {
     if (!product) return;
     
@@ -50,7 +65,7 @@ export default function Product() {
       title: product.title,
       sellerId: product.sellerId,
       sellerAlias: product.seller.alias,
-      priceKr: parseFloat(product.priceKr),
+      priceKr: finalPrice,
       imageUrl: product.imageUrl || "",
       size: product.size,
     });
@@ -155,18 +170,32 @@ export default function Product() {
 
             <p className="text-sm text-gray-600 capitalize">{product.material}</p>
 
-            {/* Price */}
-            <div className="flex flex-col sm:flex-row sm:items-baseline space-y-1 sm:space-y-0 sm:space-x-3">
-              <span className="text-lg line-through text-gray-400">
-                ${(parseFloat(product.priceKr) * 2 / 10).toFixed(2)}
-              </span>
-              <span className="text-2xl sm:text-3xl font-medium text-gray-900">
-                ${(parseFloat(product.priceKr) / 10).toFixed(2)}
-              </span>
+            {/* Price with wear days */}
+            <div className="space-y-2">
+              <div className="flex flex-col space-y-1">
+                {wearDays > 0 && (
+                  <span className="text-lg line-through text-gray-400">
+                    {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr (grundpris)
+                  </span>
+                )}
+                <span className="text-2xl sm:text-3xl font-medium text-gray-900">
+                  {finalPrice.toLocaleString('sv-SE')} kr
+                </span>
+                {wearDays > 0 && (
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                      {wearDays} dag{wearDays !== 1 ? 'ar' : ''} använd
+                    </span>
+                    <span className="text-sm text-green-600">
+                      +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr extra
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="text-sm text-gray-600">
-              4 interest-free payments of ${(parseFloat(product.priceKr) / 40).toFixed(2)} CAD with <strong>Klarna</strong> or <strong>afterpay</strong>
+              Diskret förpackning och anonym leverans ingår alltid
             </div>
 
             {/* Rating */}

@@ -38,7 +38,9 @@ export default function Collection() {
       const wearDays = product.wearDays || 0;
       switch (filterWearDays) {
         case "new": matchesWearDays = wearDays === 0; break;
-        case "1-3": matchesWearDays = wearDays >= 1 && wearDays <= 3; break;
+        case "1": matchesWearDays = wearDays === 1; break;
+        case "2": matchesWearDays = wearDays === 2; break;
+        case "3": matchesWearDays = wearDays === 3; break;
         case "4-7": matchesWearDays = wearDays >= 4 && wearDays <= 7; break;
         case "8+": matchesWearDays = wearDays >= 8; break;
       }
@@ -47,12 +49,24 @@ export default function Collection() {
     return matchesSearch && matchesSize && matchesMaterial && matchesColor && matchesWearDays && product.isAvailable;
   }) || [];
 
+  // Helper function for calculating final price with wear days
+  const calculateFinalPrice = (basePrice: string, wearDays: number): number => {
+    const base = parseFloat(basePrice);
+    if (wearDays === 0) return base;
+    if (wearDays === 1) return base + 500;
+    if (wearDays === 2) return base + 1000;
+    if (wearDays === 3) return base + 1500;
+    if (wearDays >= 4 && wearDays <= 7) return base + 2000;
+    if (wearDays >= 8) return base + 3000;
+    return base;
+  };
+
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case "price-low":
-        return parseFloat(a.priceKr) - parseFloat(b.priceKr);
+        return calculateFinalPrice(a.priceKr, a.wearDays || 0) - calculateFinalPrice(b.priceKr, b.wearDays || 0);
       case "price-high":
-        return parseFloat(b.priceKr) - parseFloat(a.priceKr);
+        return calculateFinalPrice(b.priceKr, b.wearDays || 0) - calculateFinalPrice(a.priceKr, a.wearDays || 0);
       case "newest":
         return (b.createdAt ? new Date(b.createdAt).getTime() : 0) - (a.createdAt ? new Date(a.createdAt).getTime() : 0);
       default:
@@ -135,6 +149,21 @@ export default function Collection() {
                   <SelectItem value="White">White</SelectItem>
                   <SelectItem value="Pink">Pink</SelectItem>
                   <SelectItem value="Red">Red</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Select value={filterWearDays} onValueChange={setFilterWearDays}>
+                <SelectTrigger className="w-40 border-gray-300">
+                  <SelectValue placeholder="Antal dagar" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Alla dagar</SelectItem>
+                  <SelectItem value="new">Ny (0 dagar)</SelectItem>
+                  <SelectItem value="1">1 dag (+500kr)</SelectItem>
+                  <SelectItem value="2">2 dagar (+1000kr)</SelectItem>
+                  <SelectItem value="3">3 dagar (+1500kr)</SelectItem>
+                  <SelectItem value="4-7">4-7 dagar (+2000kr)</SelectItem>
+                  <SelectItem value="8+">8+ dagar (+3000kr)</SelectItem>
                 </SelectContent>
               </Select>
 
