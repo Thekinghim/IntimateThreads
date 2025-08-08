@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -32,9 +33,9 @@ function calculatePriceWithWearDays(basePrice: string, wearDays: number): number
 export default function KitAceProductCard({ product }: KitAceProductCardProps) {
   const { addItem } = useCartStore();
   const { toast } = useToast();
+  const [selectedWearDays, setSelectedWearDays] = useState(product.wearDays || 0);
 
-  const wearDays = product.wearDays || 0;
-  const finalPrice = calculatePriceWithWearDays(product.priceKr, wearDays);
+  const finalPrice = calculatePriceWithWearDays(product.priceKr, selectedWearDays);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
       sellerId: product.sellerId,
       sellerAlias: product.seller.alias,
       priceKr: finalPrice,
+      wearDays: selectedWearDays,
       imageUrl: product.imageUrl || "",
       size: product.size,
     });
@@ -71,10 +73,32 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
             {product.title}
           </h3>
           <p className="text-sm text-gray-600">{product.seller.alias}</p>
-          <div className="space-y-1">
+          <div className="space-y-2">
+            {/* Days selector */}
+            <div className="flex flex-wrap gap-1">
+              {[0, 1, 2, 3, 4, 7, 10].map((days) => (
+                <button
+                  key={days}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setSelectedWearDays(days);
+                  }}
+                  className={`px-2 py-1 text-xs border rounded transition-colors ${
+                    selectedWearDays === days
+                      ? 'border-gray-900 bg-gray-900 text-white'
+                      : 'border-gray-300 text-gray-600 hover:border-gray-400'
+                  }`}
+                >
+                  {days === 0 ? 'Ny' : `${days}d`}
+                </button>
+              ))}
+            </div>
+
+            {/* Price display */}
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
-                {wearDays > 0 && (
+                {selectedWearDays > 0 && (
                   <span className="text-xs text-gray-500 line-through">
                     {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
                   </span>
@@ -83,17 +107,12 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
                   {finalPrice.toLocaleString('sv-SE')} kr
                 </p>
               </div>
-              {wearDays > 0 && (
-                <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
-                  {wearDays} dag{wearDays !== 1 ? 'ar' : ''} använd
+              {selectedWearDays > 0 && (
+                <span className="text-xs text-green-600">
+                  +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr
                 </span>
               )}
             </div>
-            {wearDays > 0 && (
-              <p className="text-xs text-green-600">
-                +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr för extra dagar
-              </p>
-            )}
           </div>
         </div>
       </Link>

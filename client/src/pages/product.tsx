@@ -18,6 +18,7 @@ export default function Product() {
   const [selectedColor, setSelectedColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const [selectedWearDays, setSelectedWearDays] = useState<number>(0);
   
   const sizeChart = {
     'XS': { bust: '78-82', waist: '60-64', hips: '86-90' },
@@ -54,7 +55,7 @@ export default function Product() {
     return base;
   };
 
-  const wearDays = product?.wearDays || 0;
+  const wearDays = selectedWearDays;
   const finalPrice = product ? calculateFinalPrice(product.priceKr, wearDays) : 0;
 
   const handleAddToCart = () => {
@@ -230,6 +231,36 @@ export default function Product() {
                       : 'border-gray-200 hover:border-gray-400'
                   }`}
                 ></button>
+              </div>
+            </div>
+
+            {/* Wear Days Selector */}
+            <div className="border-t border-gray-200 pt-6">
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Antal dagar använd:</h3>
+              <div className="grid grid-cols-4 gap-2 mb-4">
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((days) => (
+                  <button
+                    key={days}
+                    onClick={() => setSelectedWearDays(days)}
+                    className={`px-3 py-2 text-sm border rounded-md transition-colors ${
+                      selectedWearDays === days
+                        ? 'border-gray-900 bg-gray-900 text-white'
+                        : 'border-gray-300 text-gray-700 hover:border-gray-400'
+                    }`}
+                  >
+                    {days === 0 ? 'Ny' : `${days} dag${days > 1 ? 'ar' : ''}`}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Price explanation */}
+              <div className="text-xs text-gray-500 mb-4">
+                {wearDays === 0 && "Grundpris - helt ny produkt"}
+                {wearDays === 1 && "Grundpris + 500 kr"}
+                {wearDays === 2 && "Grundpris + 1,000 kr"}
+                {wearDays === 3 && "Grundpris + 1,500 kr"}
+                {wearDays >= 4 && wearDays <= 7 && "Grundpris + 2,000 kr"}
+                {wearDays >= 8 && "Grundpris + 3,000 kr"}
               </div>
             </div>
 
