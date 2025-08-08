@@ -126,13 +126,13 @@ export default function Cart() {
 
                 <div className="space-y-3">
                   <Link href="/checkout">
-                    <Button className="w-full bg-charcoal text-white hover:bg-gray-800 font-poppins font-medium text-lg py-6">
+                    <Button className="w-full bg-deep-charcoal text-nordic-cream hover:bg-charcoal font-poppins font-medium text-lg py-6 transition-all duration-200">
                       Gå till kassan
                     </Button>
                   </Link>
                   
                   <Link href="/collection">
-                    <Button variant="outline" className="w-full font-poppins font-medium">
+                    <Button variant="outline" className="w-full font-poppins font-medium border-deep-charcoal text-deep-charcoal hover:bg-deep-charcoal hover:text-nordic-cream transition-all duration-200">
                       Fortsätt handla
                     </Button>
                   </Link>

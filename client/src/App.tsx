@@ -20,7 +20,6 @@ import PaymentSetup from "@/pages/payment-setup";
 import TermsOfService from "@/pages/terms-of-service";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
-import PrivacyModeIndicator from "@/components/privacy-mode-indicator";
 import AgeVerification from "@/components/age-verification";
 
 function Router() {
@@ -64,7 +63,6 @@ function App() {
             <Router />
           </main>
           <Footer />
-          <PrivacyModeIndicator />
           <AgeVerification />
         </div>
         <Toaster />
