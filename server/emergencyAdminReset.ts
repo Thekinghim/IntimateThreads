@@ -38,7 +38,7 @@ export async function emergencyAdminReset() {
     console.log('🎉 Emergency admin reset completed successfully!');
     
   } catch (error) {
-    console.error('❌ Emergency reset failed:', error.message);
+    console.error('❌ Emergency reset failed:', error);
     throw error;
   } finally {
     await pool.end();
