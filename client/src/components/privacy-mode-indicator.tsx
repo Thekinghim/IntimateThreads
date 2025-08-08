@@ -1,65 +1,67 @@
-import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Shield, Eye, Lock, CheckCircle, Info } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Shield, X } from "lucide-react";
 
 export default function PrivacyModeIndicator() {
-  const [showDetails, setShowDetails] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isMinimized, setIsMinimized] = useState(false);
 
-  const privacyFeatures = [
-    "No cookies or tracking",
-    "Encrypted data transmission", 
-    "Anonymous browsing history",
-    "Secure payment processing",
-    "Auto-delete personal info after 30 days"
-  ];
+  useEffect(() => {
+    // Check if user has dismissed it before
+    const dismissed = localStorage.getItem('privacy-indicator-dismissed');
+    if (dismissed) {
+      setIsVisible(false);
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    setIsVisible(false);
+    localStorage.setItem('privacy-indicator-dismissed', 'true');
+  };
+
+  const toggleMinimize = () => {
+    setIsMinimized(!isMinimized);
+  };
+
+  if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-4 right-4 z-40">
-      <div className="flex flex-col items-end gap-2">
-        {/* Privacy Details Card */}
-        {showDetails && (
-          <Card className="w-80 border-green-200 bg-green-50/95 backdrop-blur-sm shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <Shield className="h-5 w-5 text-green-600" />
-                <h4 className="font-medium text-green-800">Privacy Protection Active</h4>
-              </div>
-              <ul className="space-y-2 text-sm text-green-700">
-                {privacyFeatures.map((feature, index) => (
-                  <li key={index} className="flex items-center gap-2">
-                    <CheckCircle className="h-3 w-3 text-green-600" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-3 pt-3 border-t border-green-200">
-                <p className="text-xs text-green-600 flex items-center gap-1">
-                  <Lock className="h-3 w-3" />
-                  Your anonymity is guaranteed
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Privacy Indicator Badge */}
-        <Badge
-          variant="outline"
-          className="bg-green-50 text-green-700 border-green-200 shadow-sm hover:shadow-md transition-all cursor-pointer px-3 py-2"
-          onClick={() => setShowDetails(!showDetails)}
+      {isMinimized ? (
+        // Minimized state - just a small icon
+        <button
+          onClick={toggleMinimize}
+          className="bg-white/90 backdrop-blur-sm shadow-lg rounded-full p-2 hover:bg-white transition-all duration-200 border border-gray-200"
         >
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <Eye className="h-3 w-3" />
-            <span className="text-xs font-medium">Anonymous Mode</span>
-            <Button variant="ghost" size="sm" className="h-auto p-0 text-green-700 hover:text-green-800">
-              <Info className="h-3 w-3" />
-            </Button>
+          <Shield className="h-4 w-4 text-gray-600" />
+        </button>
+      ) : (
+        // Expanded state - clean and minimal
+        <div className="bg-white/95 backdrop-blur-sm shadow-lg rounded-lg px-4 py-3 flex items-center gap-3 border border-gray-200 max-w-xs">
+          <Shield className="h-4 w-4 text-gray-500 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-xs text-gray-600 font-medium">Anonymous Mode</p>
+            <p className="text-xs text-gray-500">Your privacy is protected</p>
           </div>
-        </Badge>
-      </div>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={toggleMinimize}
+              className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+              title="Minimize"
+            >
+              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+              </svg>
+            </button>
+            <button
+              onClick={handleDismiss}
+              className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+              title="Close"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
