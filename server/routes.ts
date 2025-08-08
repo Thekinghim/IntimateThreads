@@ -212,12 +212,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Debug endpoint for production verification  
   app.get("/api/debug", (req, res) => {
     res.json({
-      server: "Nordic Collection v3.2.0",
+      server: "Nordic Collection v3.2.2",
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || "development", 
       database: !!process.env.DATABASE_URL,
-      version: "3.2.0-PRODUCTION-FORCE"
+      version: "3.2.2-EMERGENCY-RESET",
+      adminReset: "COMPLETE"
     });
+  });
+
+  // Emergency admin reset endpoint
+  app.post("/api/emergency/admin-reset", async (req, res) => {
+    try {
+      const { emergencyAdminReset } = await import("./emergencyAdminReset");
+      await emergencyAdminReset();
+      res.json({ message: "Admin reset completed successfully" });
+    } catch (error) {
+      console.error("Emergency reset error:", error);
+      res.status(500).json({ message: "Emergency reset failed" });
+    }
   });
 
   // Admin authentication endpoints - PRODUCTION FIXED VERSION v3.2.0

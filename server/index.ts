@@ -4,10 +4,17 @@ import { setupVite, serveStatic, log } from "./vite";
 import { seedAdmins } from "./seedAdmins";
 import { PRODUCTION_VERSION } from "./forceProductionUpdate";
 import { CRITICAL_UPDATE, logProductionStatus } from "./productionForce";
+import { emergencyAdminReset } from "./emergencyAdminReset";
 
-// CRITICAL PRODUCTION UPDATE - v3.2.0 - FORCE SERVER RESTART
-console.log(`🔥 CRITICAL UPDATE: ${CRITICAL_UPDATE.version} - ${CRITICAL_UPDATE.deploymentId}`);
+// EMERGENCY ADMIN RESET - v3.2.2 - COMPLETE PRODUCTION FIX
+console.log(`🚨 EMERGENCY RESET: ${CRITICAL_UPDATE.version} - ${CRITICAL_UPDATE.deploymentId}`);
 logProductionStatus();
+
+// Run emergency admin reset for production
+if (process.env.NODE_ENV === 'production' || !process.env.REPLIT_DEV_DOMAIN) {
+  console.log('🚨 Running emergency admin reset for production...');
+  emergencyAdminReset().catch(console.error);
+}
 
 const app = express();
 app.use(express.json());
