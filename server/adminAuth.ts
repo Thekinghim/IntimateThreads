@@ -31,7 +31,19 @@ export const requireAdminAuth: RequestHandler = async (req, res, next) => {
 
 // Hjälpfunktioner för admin-sessioner
 export async function authenticateAdmin(username: string, password: string) {
-  const admin = await storage.getAdminByUsername(username);
+  // Temporär fix för production - skapa admin om den inte finns
+  let admin = await storage.getAdminByUsername(username);
+  
+  if (!admin && (username === 'admin1' || username === 'admin2') && password === 'adminpass123') {
+    // Skapa admin-användare om den inte finns
+    const passwordHash = await bcrypt.hash(password, 12);
+    admin = await storage.createAdmin({
+      username,
+      passwordHash,
+      name: username === 'admin1' ? 'Admin 1' : 'Admin 2',
+      isActive: true
+    });
+  }
   
   if (!admin || !admin.isActive) {
     return null;
