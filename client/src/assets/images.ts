@@ -20,6 +20,14 @@ export const productImages = {
   'IMG_2348_1754760267761.jpg': pinkLaceBack,
 };
 
+// Image pairs mapping (front to back)
+export const imagePairs = {
+  'IMG_2335_1754760267758.jpg': 'IMG_2336_1754760267759.jpg', // Burgundy front to back
+  'IMG_2337_1754760267759.jpg': 'IMG_2338_1754760267759.jpg', // Military green front to back
+  'IMG_2341_1754760267760.jpg': 'IMG_2342_1754760267760.jpg', // Leopard front to back
+  'IMG_2347_1754760267761.jpg': 'IMG_2348_1754760267761.jpg', // Pink front to back
+};
+
 // Helper function to get image URL
 export function getProductImageUrl(imagePath: string): string {
   if (!imagePath) return '';
@@ -27,13 +35,25 @@ export function getProductImageUrl(imagePath: string): string {
   // Extract filename from path
   const filename = imagePath.split('/').pop() || '';
   
-  // Debug logging
-  console.log('Looking for image:', filename);
-  console.log('Available images:', Object.keys(productImages));
-  
   // Return the imported image URL or fallback
   const imageUrl = productImages[filename as keyof typeof productImages];
-  console.log('Found image URL:', imageUrl);
   
   return imageUrl || '';
+}
+
+// Helper function to get back image URL for hover effect
+export function getBackImageUrl(frontImagePath: string): string {
+  if (!frontImagePath) return '';
+  
+  // Extract filename from path
+  const filename = frontImagePath.split('/').pop() || '';
+  
+  // Get the back image filename
+  const backFilename = imagePairs[filename as keyof typeof imagePairs];
+  
+  if (backFilename) {
+    return productImages[backFilename as keyof typeof productImages] || '';
+  }
+  
+  return '';
 }

@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
-import { getProductImageUrl } from "@/assets/images";
+import { getProductImageUrl, getBackImageUrl } from "@/assets/images";
 
 interface KitAceProductCardProps {
   product: ProductWithSeller;
@@ -35,8 +35,13 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
   const { addItem } = useCartStore();
   const { toast } = useToast();
   const [selectedWearDays, setSelectedWearDays] = useState(product.wearDays || 0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const finalPrice = calculatePriceWithWearDays(product.priceKr, selectedWearDays);
+  
+  const frontImageUrl = getProductImageUrl(product.imageUrl || "");
+  const backImageUrl = getBackImageUrl(product.imageUrl || "");
+  const currentImageUrl = isHovered && backImageUrl ? backImageUrl : frontImageUrl;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,11 +66,15 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
   return (
     <div className="group">
       <Link href={`/product/${product.id}`}>
-        <div className="aspect-square w-full overflow-hidden bg-gray-100 group-hover:opacity-75 transition-opacity">
+        <div 
+          className="aspect-square w-full overflow-hidden bg-gray-100 group-hover:opacity-75 transition-opacity"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <img
-            src={getProductImageUrl(product.imageUrl || "") || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
+            src={currentImageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
             alt={product.title}
-            className="h-full w-full object-cover object-center"
+            className="h-full w-full object-cover object-center transition-all duration-300 ease-in-out"
           />
         </div>
         
