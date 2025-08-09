@@ -74,7 +74,7 @@ export default function Home() {
               <Link href="/how-it-works">
                 <Button 
                   size="lg" 
-                  className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
+                  className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
                 >
                   Så Fungerar Det
                 </Button>
@@ -165,7 +165,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="text-center group">
-              <div className="w-24 h-24 bg-[#064F8C] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <Search className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">1. Välj</h4>
@@ -173,7 +173,7 @@ export default function Home() {
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 bg-[#064F8C] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <CreditCard className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">2. Betala</h4>
@@ -181,7 +181,7 @@ export default function Home() {
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 bg-[#064F8C] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <Truck className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">3. Diskret Frakt</h4>
@@ -189,7 +189,7 @@ export default function Home() {
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 bg-[#064F8C] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <Gift className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">4. Få Hem</h4>
@@ -209,7 +209,7 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 bg-[#064F8C] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
                   <KeyRound className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#2D3748] mb-4">Fullständig Anonymitet</h4>
@@ -217,7 +217,7 @@ export default function Home() {
               </div>
               
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 bg-[#064F8C] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
                   <Gift className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#2D3748] mb-4">Diskret Förpackning</h4>
@@ -225,7 +225,7 @@ export default function Home() {
               </div>
               
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 bg-[#064F8C] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
                   <Shield className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#2D3748] mb-4">Säker Betalning</h4>
