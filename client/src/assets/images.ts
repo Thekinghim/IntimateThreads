@@ -20,12 +20,12 @@ export const productImages = {
   'IMG_2348_1754760267761.jpg': pinkLaceBack,
 };
 
-// Image pairs mapping (front to back)
+// Image pairs mapping (front to back) - Updated with new intimate images
 export const imagePairs = {
-  'IMG_2335_1754760267758.jpg': 'IMG_2336_1754760267759.jpg', // Burgundy front to back
-  'IMG_2337_1754760267759.jpg': 'IMG_2338_1754760267759.jpg', // Military green front to back
+  'IMG_2335_1754760267758.jpg': 'IMG_2336_1754760267759.jpg', // Burgundy lace panty front to bh set
+  'IMG_2337_1754760267759.jpg': 'IMG_2338_1754760267759.jpg', // Military green crossover string front to back
   'IMG_2341_1754760267760.jpg': 'IMG_2342_1754760267760.jpg', // Leopard front to back
-  'IMG_2348_1754760267761.jpg': 'IMG_2347_1754760267761.jpg', // Pink front to back (corrected order)
+  'IMG_2347_1754760267761.jpg': 'IMG_2348_1754760267761.jpg', // Pink front to back
 };
 
 // Helper function to get image URL
