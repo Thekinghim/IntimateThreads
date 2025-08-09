@@ -1,11 +1,11 @@
 // Import new generated intimate product images
-import burgundyLace from '@assets/generated_images/Red_lace_panties_product_da6c36cf.png';
+import burgundyLace from './Red_lace_panties_product_da6c36cf.png';
 import burgundyLaceBack from './IMG_2336_1754760267759.jpg'; // Keep original back view
-import militaryGreen from '@assets/generated_images/Green_crossover_thong_front_212fc008.png';
+import militaryGreen from './Green_crossover_thong_front_212fc008.png';
 import militaryGreenBack from './IMG_2338_1754760267759.jpg'; // Keep original back view
-import leopardLace from '@assets/generated_images/Leopard_lace_panties_front_f8316566.png';
+import leopardLace from './Leopard_lace_panties_front_f8316566.png';
 import leopardLaceBack from './IMG_2342_1754760267760.jpg'; // Keep original back view
-import pinkLace from '@assets/generated_images/Pink_lace_panties_front_f5c63a60.png';
+import pinkLace from './Pink_lace_panties_front_f5c63a60.png';
 import pinkLaceBack from './IMG_2348_1754760267761.jpg'; // Keep original back view
 
 // Export image mapping - Updated with new generated images
