@@ -9,7 +9,7 @@ import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { getProductImageUrl } from "@/assets/images";
+import { getProductImageUrl, getBackImageUrl } from "@/assets/images";
 
 export default function Product() {
   const { id } = useParams();
@@ -36,14 +36,18 @@ export default function Product() {
     gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
   });
   
-  // Create image gallery with multiple views
-  const primaryImage = getProductImageUrl(product?.imageUrl || "") || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800";
+  // Create image gallery with front and back views
+  const frontImage = getProductImageUrl(product?.imageUrl || "");
+  const backImagePath = product?.imageUrl ? getBackImageUrl(product.imageUrl) : "";
+  
   const imageGallery = [
-    primaryImage,
-    primaryImage,
-    primaryImage, 
-    primaryImage
+    frontImage || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"
   ];
+  
+  // Add back image if it exists and is different from front
+  if (backImagePath && backImagePath !== frontImage) {
+    imageGallery.push(backImagePath);
+  }
 
   // Calculate final price with wear days
   const calculateFinalPrice = (basePrice: string, wearDays: number): number => {
@@ -132,7 +136,7 @@ export default function Product() {
             {/* Main product image - adjusted for better PC responsiveness */}
             <div className="aspect-square lg:aspect-[3/4] max-w-full lg:max-w-[500px] xl:max-w-[550px] mx-auto bg-gray-100 rounded-lg overflow-hidden">
               <img
-                src={selectedImage || product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
+                src={selectedImage || frontImage || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
                 alt={product.title}
                 className="w-full h-full object-cover"
                 loading="eager"
@@ -144,17 +148,20 @@ export default function Product() {
               {imageGallery.map((img, i) => (
                 <div 
                   key={i} 
-                  className={`w-16 h-20 sm:w-20 sm:h-24 bg-gray-100 flex-shrink-0 cursor-pointer border-2 ${
-                    selectedImage === img ? 'border-gray-900' : 'border-transparent'
+                  className={`w-16 h-20 sm:w-20 sm:h-24 bg-gray-100 flex-shrink-0 cursor-pointer border-2 transition-all ${
+                    selectedImage === img ? 'border-gold-500' : 'border-transparent hover:border-gold-300'
                   }`}
                   onClick={() => setSelectedImage(img)}
                 >
                   <img
                     src={img}
-                    alt={`${product.title} view ${i + 1}`}
+                    alt={`${product.title} ${i === 0 ? 'framsida' : 'baksida'}`}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
+                  <div className="text-xs text-gray-500 text-center mt-1">
+                    {i === 0 ? 'Fram' : 'Bak'}
+                  </div>
                 </div>
               ))}
             </div>
