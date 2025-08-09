@@ -69,10 +69,10 @@ export default function Navbar() {
                 </div>
               </SelectTrigger>
               <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
-                <SelectItem value="sv" className="hover:bg-[#064F8C]/10">Svenska</SelectItem>
-                <SelectItem value="no" className="hover:bg-[#064F8C]/10">Norsk</SelectItem>
-                <SelectItem value="da" className="hover:bg-[#064F8C]/10">Dansk</SelectItem>
-                <SelectItem value="en" className="hover:bg-[#064F8C]/10">English</SelectItem>
+                <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Svenska</SelectItem>
+                <SelectItem value="no" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Norsk</SelectItem>
+                <SelectItem value="da" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Dansk</SelectItem>
+                <SelectItem value="en" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">English</SelectItem>
               </SelectContent>
             </Select>
             {/* Mobile menu button */}
