@@ -18,12 +18,12 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-[#FEFBEA] via-white to-[#FEFBEA]">
       {/* Hero Section with Background Image */}
       <section 
-        className="relative min-h-[120vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{ 
           backgroundImage: `url(${heroImage})`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#111B3E]/90 via-[#064F8C]/70 via-[#064F8C]/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#111B3E]/90 via-[#064F8C]/70 to-[#064F8C]/30"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
@@ -47,8 +47,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Hero Extension Fade */}
+      <div className="h-48 bg-gradient-to-b from-[#064F8C]/30 via-[#064F8C]/15 to-transparent"></div>
+      
       {/* Featured Collection */}
-      <section className="py-32 bg-gradient-to-b from-transparent via-[#111B3E]/5 to-[#064F8C]/12 relative -mt-32">
+      <section className="py-32 bg-gradient-to-b from-transparent via-[#111B3E]/3 to-[#064F8C]/8 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-24">
             <h3 className="font-bold text-5xl text-[#111B3E] mb-8">Utvald Kollektion</h3>
