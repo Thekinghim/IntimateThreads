@@ -24,6 +24,7 @@ export const products = pgTable("products", {
   material: text("material").notNull(),
   priceKr: decimal("price_kr", { precision: 10, scale: 2 }).notNull(),
   imageUrl: text("image_url"),
+  category: text("category").default("women"),
   isAvailable: boolean("is_available").default(true),
   wearDays: integer("wear_days"),
   createdAt: timestamp("created_at").defaultNow(),

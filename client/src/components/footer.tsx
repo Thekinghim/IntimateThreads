@@ -4,7 +4,6 @@ import { Instagram, Twitter } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="bg-[#F5F1E8] text-[#2D3748] py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
           <div className="col-span-1 md:col-span-2">

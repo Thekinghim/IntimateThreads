@@ -93,32 +93,32 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="text-center group">
-              <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Search className="h-12 w-12 text-[#111B3E]" />
+              <div className="w-24 h-24 bg-[#2D3748] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Search className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">1. Välj</h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">Bläddra igenom vår exklusiva kollektion och välj det plagg som tilltalar dig mest.</p>
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <CreditCard className="h-12 w-12 text-[#111B3E]" />
+              <div className="w-24 h-24 bg-[#2D3748] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <CreditCard className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">2. Betala</h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">Diskret betalning via kryptovaluta, Revolut eller andra säkra betalningsmetoder.</p>
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Truck className="h-12 w-12 text-[#111B3E]" />
+              <div className="w-24 h-24 bg-[#2D3748] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Truck className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">3. Diskret Frakt</h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">Plagget skickas diskret i neutral förpackning utan avslöjande märkningar.</p>
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Gift className="h-12 w-12 text-[#111B3E]" />
+              <div className="w-24 h-24 bg-[#2D3748] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Gift className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">4. Få Hem</h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">Motta ditt paket hemma med fullständig anonymitet och diskretion.</p>
@@ -137,24 +137,24 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <KeyRound className="h-10 w-10 text-[#111B3E]" />
+                <div className="w-20 h-20 bg-[#2D3748] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                  <KeyRound className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#2D3748] mb-4">Fullständig Anonymitet</h4>
                 <p className="text-[#4A5568] text-lg font-light leading-relaxed">All kommunikation och leverans sker diskret utan avslöjande information</p>
               </div>
               
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <Gift className="h-10 w-10 text-[#111B3E]" />
+                <div className="w-20 h-20 bg-[#2D3748] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                  <Gift className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#2D3748] mb-4">Diskret Förpackning</h4>
                 <p className="text-[#4A5568] text-lg font-light leading-relaxed">Neutral förpackning utan logotyper eller avslöjande märkningar</p>
               </div>
               
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <Shield className="h-10 w-10 text-[#111B3E]" />
+                <div className="w-20 h-20 bg-[#2D3748] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                  <Shield className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#2D3748] mb-4">Säker Betalning</h4>
                 <p className="text-[#4A5568] text-lg font-light leading-relaxed">Krypterade betalningar som garanterar din integritet</p>
