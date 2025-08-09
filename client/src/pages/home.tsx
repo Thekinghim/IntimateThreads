@@ -74,7 +74,7 @@ export default function Home() {
               <Link href="/how-it-works">
                 <Button 
                   size="lg" 
-                  className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
+                  className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
                 >
                   Så Fungerar Det
                 </Button>
