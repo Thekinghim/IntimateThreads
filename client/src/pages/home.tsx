@@ -5,7 +5,7 @@ import ProductCard from "@/components/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, CreditCard, Truck, Gift, KeyRound, Shield } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
-import heroImage from "@assets/hero2_1754724738400.jpg";
+import heroImage from "@assets/generated_images/Elegant_woman_bikini_portrait_b799382b.png";
 
 export default function Home() {
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
@@ -23,7 +23,7 @@ export default function Home() {
           backgroundImage: `url(${heroImage})`,
         }}
       >
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-black/60 to-red-900/40"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
