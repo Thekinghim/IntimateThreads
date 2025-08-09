@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
       {/* Hero Extension Fade */}
-      <div className="h-48 bg-gradient-to-b from-[#064F8C]/30 via-[#064F8C]/15 to-transparent"></div>
+      <div className="h-80 bg-gradient-to-b from-[#064F8C]/30 via-[#064F8C]/20 via-[#064F8C]/10 to-transparent"></div>
       
       {/* Featured Collection */}
       <section className="py-32 bg-gradient-to-b from-transparent via-[#111B3E]/3 to-[#064F8C]/8 relative">
