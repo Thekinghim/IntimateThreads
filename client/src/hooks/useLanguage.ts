@@ -21,8 +21,8 @@ export const translations = {
   sv: {
     // Navigation
     all: 'Alla',
-    womensUsed: 'Damkläder Använda',
-    mensUsed: 'Herrkläder Använda',
+    womensUsed: 'Kvinnors Använda',
+    mensUsed: 'Mäns Använda',
     trackOrder: 'Spåra Beställning',
     
     // Home page
@@ -54,9 +54,9 @@ export const translations = {
     // Collection page
     collectionTitle: 'KOLLEKTION',
     collectionDesc: 'Exklusiva plagg från verifierade nordiska kvinnor',
-    womensUsedTitle: 'DAMKLÄDER ANVÄNDA',
+    womensUsedTitle: 'KVINNORS ANVÄNDA',
     womensUsedDesc: 'Exklusiva använda damplagg från verifierade nordiska kvinnor',
-    mensUsedTitle: 'HERRKLÄDER ANVÄNDA',
+    mensUsedTitle: 'MÄNS ANVÄNDA',
     mensUsedDesc: 'Exklusiva använda herrplagg från verifierade nordiska kvinnor',
     
     // Search and filters
