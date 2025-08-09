@@ -85,7 +85,7 @@ export default function Product() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-soft-white py-8">
+      <div className="min-h-screen bg-[#F5F1E8] py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <Skeleton className="h-96 w-full rounded-2xl" />
@@ -103,7 +103,7 @@ export default function Product() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-soft-white py-8">
+      <div className="min-h-screen bg-[#F5F1E8] py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center py-12">
             <h1 className="text-2xl font-bold text-charcoal mb-4">Produkten kunde inte hittas</h1>
@@ -117,7 +117,7 @@ export default function Product() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Breadcrumb */}
       <div className="max-w-6xl mx-auto px-4 py-3">
         <nav className="flex text-sm text-gray-600">

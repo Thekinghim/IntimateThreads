@@ -85,7 +85,8 @@
   
   body {
     @apply text-foreground font-sans antialiased;
-    background: linear-gradient(to right, #FEFBEA, white);
+    background: #F5F1E8;
+    color: #2D3748;
     font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
   }

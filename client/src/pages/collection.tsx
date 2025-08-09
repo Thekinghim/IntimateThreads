@@ -75,7 +75,7 @@ export default function Collection() {
   });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Breadcrumb */}
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -90,8 +90,8 @@ export default function Collection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-light text-gray-900 uppercase tracking-widest mb-4">NORDIC COLLECTION</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-3xl font-light text-[#2D3748] uppercase tracking-widest mb-4">NORDIC COLLECTION</h1>
+          <p className="text-[#4A5568] max-w-2xl mx-auto">
             Exklusiva plagg från verifierade nordiska kvinnor
           </p>
         </div>
