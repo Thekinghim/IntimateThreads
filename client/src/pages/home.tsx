@@ -59,10 +59,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#F5F1E8]/90 via-[#F5F1E8]/70 via-[#F5F1E8]/80 to-[#F5F1E8]/90"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#2D3748] leading-none mb-8 tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#064F8C] leading-none mb-8 tracking-tight">
               <span className="block gold-text-static italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold drop-shadow-lg">Scandiscent</span>
             </h1>
-            <p className="text-2xl md:text-3xl text-[#2D3748] max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-md">
+            <p className="text-2xl md:text-3xl text-[#064F8C] max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-md">
               {t.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
@@ -90,7 +90,7 @@ export default function Home() {
       <section className="py-12 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-20">
-            <h3 className="font-bold text-5xl text-[#2D3748] mb-8">Utvald Kollektion</h3>
+            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">Utvald Kollektion</h3>
             <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Handplockade exklusiva plagg från verifierade nordiska kvinnor</p>
           </div>
 
