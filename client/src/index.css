@@ -136,6 +136,19 @@
     color: #111B3E;
   }
   
+  .gold-button-outline {
+    background: transparent;
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    transition: all 0.3s ease;
+  }
+  
+  .gold-button-outline:hover {
+    background: var(--gold-metallic);
+    color: #111B3E;
+    border-color: #d4af37;
+  }
+  
   .gold-circle {
     background: var(--gold-metallic);
     border: 2px solid rgba(255, 215, 0, 0.3);

@@ -23,7 +23,7 @@ export default function Home() {
           backgroundImage: `url(${heroImage})`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#111B3E]/90 via-[#064F8C]/70 to-[#111B3E]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#111B3E]/90 via-[#064F8C]/70 to-transparent"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
@@ -39,7 +39,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 border-3 border-white hover:bg-white hover:text-[#111B3E] font-medium px-12 py-6 text-xl rounded-3xl shadow-lg transition-all duration-500 hover:scale-105 text-white bg-transparent">
+                <Button variant="outline" size="lg" className="gold-button-outline font-medium px-12 py-6 text-xl rounded-3xl shadow-lg">
                   Så Fungerar Det
                 </Button>
               </Link>
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
       {/* Featured Collection */}
-      <section className="py-32 bg-gradient-to-br from-[#111B3E]/5 to-[#064F8C]/10 relative">
+      <section className="py-32 bg-gradient-to-b from-transparent via-[#111B3E]/3 to-[#064F8C]/8 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-24">
             <h3 className="font-bold text-5xl text-[#111B3E] mb-8">Utvald Kollektion</h3>
