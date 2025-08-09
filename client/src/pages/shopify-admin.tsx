@@ -166,15 +166,11 @@ export default function ShopifyAdmin() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 md:space-x-8">
               <div className="flex items-center space-x-2 md:space-x-4">
-                <div className="w-10 h-10 md:w-14 md:h-14 gradient-charcoal rounded-2xl md:rounded-3xl flex items-center justify-center shadow-luxury hover:shadow-xl transition-all duration-300">
-                  <Settings className="h-5 w-5 md:h-7 md:w-7 text-nordic-cream" />
-                </div>
                 <div>
                   <h1 className="text-lg md:text-3xl font-bold text-deep-charcoal font-poppins tracking-tight">
                     <span className="hidden sm:inline">Scandiscent Admin</span>
                     <span className="sm:hidden">Admin Panel</span>
                   </h1>
-                  <p className="text-xs md:text-sm text-soft-taupe font-medium hidden sm:block">Luxury E-commerce Management</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">

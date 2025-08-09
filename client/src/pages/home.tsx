@@ -19,7 +19,7 @@ export default function Home() {
       <section 
         className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: "url('/images/hero-background.jpg')", // Replace with actual Figma image path
+          backgroundImage: "url('/images/hero2_1754681382469.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-black/30"></div>
