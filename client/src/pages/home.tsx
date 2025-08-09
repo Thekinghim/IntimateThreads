@@ -15,7 +15,7 @@ export default function Home() {
   const featuredProducts = products?.slice(0, 3) || [];
 
   return (
-    <div className="min-h-screen bg-[#FEFBEA] space-y-16">
+    <div className="min-h-screen bg-gradient-to-br from-[#FEFBEA] via-white to-[#FEFBEA]">
       {/* Hero Section with Background Image */}
       <section 
         className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -48,11 +48,11 @@ export default function Home() {
         </div>
       </section>
       {/* Featured Collection */}
-      <section className="py-32 bg-gradient-to-br from-[#064F8C] to-[#111B3E] relative">
+      <section className="py-32 bg-gradient-to-br from-[#111B3E]/5 to-[#064F8C]/10 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-24">
-            <h3 className="font-bold text-5xl gold-text mb-8">Utvald Kollektion</h3>
-            <p className="text-[#FEFBEA] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Handplockade exklusiva plagg från verifierade nordiska kvinnor</p>
+            <h3 className="font-bold text-5xl text-[#111B3E] mb-8">Utvald Kollektion</h3>
+            <p className="text-[#064F8C] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Handplockade exklusiva plagg från verifierade nordiska kvinnor</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -73,7 +73,7 @@ export default function Home() {
 
           <div className="text-center mt-16">
             <Link href="/collection">
-              <Button variant="outline" size="lg" className="border-2 border-[#FEFBEA] text-[#FEFBEA] hover:bg-[#FEFBEA] hover:text-[#111B3E] font-medium px-10 py-5 text-xl rounded-3xl transition-all duration-500 hover:scale-105">
+              <Button variant="outline" size="lg" className="border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-[#FEFBEA] font-medium px-10 py-5 text-xl rounded-3xl transition-all duration-500 hover:scale-105">
                 Se Hela Kollektionen
               </Button>
             </Link>
@@ -81,12 +81,12 @@ export default function Home() {
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-32 bg-gradient-to-br from-[#111B3E] via-[#064F8C] to-[#111B3E] relative">
+      <section className="py-32 bg-gradient-to-br from-[#FEFBEA] via-white to-[#FEFBEA] relative">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/30 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center mb-24">
-            <h3 className="font-bold text-5xl gold-text mb-8">Så Funkar Det</h3>
-            <p className="text-[#FEFBEA] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Enkel och diskret process från beställning till leverans</p>
+            <h3 className="font-bold text-5xl text-[#111B3E] mb-8">Så Funkar Det</h3>
+            <p className="text-[#064F8C] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Enkel och diskret process från beställning till leverans</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -94,43 +94,43 @@ export default function Home() {
               <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <Search className="h-12 w-12 text-[#111B3E]" />
               </div>
-              <h4 className="font-bold text-2xl gold-text mb-6">1. Välj</h4>
-              <p className="text-[#FEFBEA] text-lg font-light leading-relaxed">Bläddra igenom vår exklusiva kollektion och välj det plagg som tilltalar dig mest.</p>
+              <h4 className="font-bold text-2xl text-[#111B3E] mb-6">1. Välj</h4>
+              <p className="text-[#064F8C] text-lg font-light leading-relaxed">Bläddra igenom vår exklusiva kollektion och välj det plagg som tilltalar dig mest.</p>
             </div>
 
             <div className="text-center group">
               <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <CreditCard className="h-12 w-12 text-[#111B3E]" />
               </div>
-              <h4 className="font-bold text-2xl gold-text mb-6">2. Betala</h4>
-              <p className="text-[#FEFBEA] text-lg font-light leading-relaxed">Diskret betalning via kryptovaluta, Revolut eller andra säkra betalningsmetoder.</p>
+              <h4 className="font-bold text-2xl text-[#111B3E] mb-6">2. Betala</h4>
+              <p className="text-[#064F8C] text-lg font-light leading-relaxed">Diskret betalning via kryptovaluta, Revolut eller andra säkra betalningsmetoder.</p>
             </div>
 
             <div className="text-center group">
               <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <Truck className="h-12 w-12 text-[#111B3E]" />
               </div>
-              <h4 className="font-bold text-2xl gold-text mb-6">3. Diskret Frakt</h4>
-              <p className="text-[#FEFBEA] text-lg font-light leading-relaxed">Plagget skickas diskret i neutral förpackning utan avslöjande märkningar.</p>
+              <h4 className="font-bold text-2xl text-[#111B3E] mb-6">3. Diskret Frakt</h4>
+              <p className="text-[#064F8C] text-lg font-light leading-relaxed">Plagget skickas diskret i neutral förpackning utan avslöjande märkningar.</p>
             </div>
 
             <div className="text-center group">
               <div className="w-24 h-24 gold-circle rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
                 <Gift className="h-12 w-12 text-[#111B3E]" />
               </div>
-              <h4 className="font-bold text-2xl gold-text mb-6">4. Få Hem</h4>
-              <p className="text-[#FEFBEA] text-lg font-light leading-relaxed">Motta ditt paket hemma med fullständig anonymitet och diskretion.</p>
+              <h4 className="font-bold text-2xl text-[#111B3E] mb-6">4. Få Hem</h4>
+              <p className="text-[#064F8C] text-lg font-light leading-relaxed">Motta ditt paket hemma med fullständig anonymitet och diskretion.</p>
             </div>
           </div>
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#064F8C] to-[#111B3E]">
+      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#111B3E]/8 via-[#064F8C]/5 to-[#FEFBEA]">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/50 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
-            <h3 className="font-bold text-5xl gold-text mb-8">Upptäck Diskret Elegans</h3>
-            <p className="text-[#FEFBEA] text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-16">
+            <h3 className="font-bold text-5xl text-[#111B3E] mb-8">Upptäck Diskret Elegans</h3>
+            <p className="text-[#064F8C] text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-16">
               Varje plagg berättar sin egen historia med fullständig anonymitet och tidlös elegans
             </p>
             
@@ -139,8 +139,8 @@ export default function Home() {
                 <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
                   <KeyRound className="h-10 w-10 text-[#111B3E]" />
                 </div>
-                <h4 className="font-bold text-2xl gold-text mb-4">Fullständig Anonymitet</h4>
-                <p className="text-[#FEFBEA] text-lg font-light leading-relaxed">All kommunikation och leverans sker diskret utan avslöjande information</p>
+                <h4 className="font-bold text-2xl text-[#111B3E] mb-4">Fullständig Anonymitet</h4>
+                <p className="text-[#064F8C] text-lg font-light leading-relaxed">All kommunikation och leverans sker diskret utan avslöjande information</p>
               </div>
               
               <div className="flex flex-col items-center group">
