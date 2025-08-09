@@ -120,7 +120,7 @@ export default function Womens() {
             {/* Filter dropdowns */}
             <div className="flex gap-4">
               <Select value={filterSize} onValueChange={setFilterSize}>
-                <SelectTrigger className="w-32 border-gray-300">
+                <SelectTrigger className="w-32 gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
                   <SelectValue placeholder="Size" />
                 </SelectTrigger>
                 <SelectContent>
@@ -134,7 +134,7 @@ export default function Womens() {
               </Select>
 
               <Select value={filterMaterial} onValueChange={setFilterMaterial}>
-                <SelectTrigger className="w-32 border-gray-300">
+                <SelectTrigger className="w-32 gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
                   <SelectValue placeholder="Material" />
                 </SelectTrigger>
                 <SelectContent>
@@ -147,7 +147,7 @@ export default function Womens() {
               </Select>
 
               <Select value={filterColor} onValueChange={setFilterColor}>
-                <SelectTrigger className="w-32 border-gray-300">
+                <SelectTrigger className="w-32 gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
                   <SelectValue placeholder="Color" />
                 </SelectTrigger>
                 <SelectContent>
@@ -162,7 +162,7 @@ export default function Womens() {
               </Select>
 
               <Select value={filterWearDays} onValueChange={setFilterWearDays}>
-                <SelectTrigger className="w-32 border-gray-300">
+                <SelectTrigger className="w-32 gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
                   <SelectValue placeholder="Wear Days" />
                 </SelectTrigger>
                 <SelectContent>
@@ -177,7 +177,7 @@ export default function Womens() {
               </Select>
 
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-32 border-gray-300">
+                <SelectTrigger className="w-32 gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
