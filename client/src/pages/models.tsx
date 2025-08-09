@@ -328,18 +328,19 @@ export default function ModelsPage() {
       <div 
         className="relative bg-gradient-to-r from-[#064F8C] to-[#0A5BA8] text-white py-32 overflow-hidden min-h-[500px]"
         style={{
-          backgroundImage: `linear-gradient(rgba(6, 79, 140, 0.7), rgba(10, 91, 168, 0.7)), url(${bedroomSilhouetteImage})`,
+          backgroundImage: `url(${bedroomSilhouetteImage})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center top',
+          backgroundPosition: 'center bottom',
           backgroundRepeat: 'no-repeat'
         }}
       >
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">VÅRA MODELLER</h1>
-          <p className="text-xl opacity-90">Träffa de vackra kvinnorna bakom våra exklusiva kollektioner</p>
-          <div className="flex justify-center items-center gap-2 mt-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">VÅRA MODELLER</h1>
+          <p className="text-xl opacity-90 text-white drop-shadow-md">Träffa de vackra kvinnorna bakom våra exklusiva kollektioner</p>
+          <div className="flex justify-center items-center gap-2 mt-6 text-white">
             <Users className="w-5 h-5" />
-            <span className="text-lg">{models.length} EXKLUSIVA MODELLER</span>
+            <span className="text-lg drop-shadow-md">{models.length} EXKLUSIVA MODELLER</span>
           </div>
         </div>
       </div>
