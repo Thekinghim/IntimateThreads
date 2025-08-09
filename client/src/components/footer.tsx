@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -18,14 +17,7 @@ export default function Footer() {
             <p className="text-[#4A5568] mb-10 max-w-lg text-xl leading-relaxed font-light">
               Exklusiva, personliga plagg från nordiska kvinnor. Vi värnar om diskretion, kvalitet och integritet i varje transaktion.
             </p>
-            <div className="flex space-x-8">
-              <a href="#" className="w-16 h-16 glass rounded-2xl flex items-center justify-center text-soft-taupe hover:text-dusty-rose hover:shadow-rose transition-all duration-500 group hover:scale-110">
-                <Instagram className="h-8 w-8 group-hover:scale-125 transition-all duration-300" />
-              </a>
-              <a href="#" className="w-16 h-16 glass rounded-2xl flex items-center justify-center text-soft-taupe hover:text-dusty-rose hover:shadow-rose transition-all duration-500 group hover:scale-110">
-                <Twitter className="h-8 w-8 group-hover:scale-125 transition-all duration-300" />
-              </a>
-            </div>
+
           </div>
           
           <div>
