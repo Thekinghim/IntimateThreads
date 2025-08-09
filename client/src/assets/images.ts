@@ -25,7 +25,7 @@ export const imagePairs = {
   'IMG_2335_1754760267758.jpg': 'IMG_2336_1754760267759.jpg', // Burgundy front to back
   'IMG_2337_1754760267759.jpg': 'IMG_2338_1754760267759.jpg', // Military green front to back
   'IMG_2341_1754760267760.jpg': 'IMG_2342_1754760267760.jpg', // Leopard front to back
-  'IMG_2347_1754760267761.jpg': 'IMG_2348_1754760267761.jpg', // Pink front to back
+  'IMG_2348_1754760267761.jpg': 'IMG_2347_1754760267761.jpg', // Pink front to back (corrected order)
 };
 
 // Helper function to get image URL
