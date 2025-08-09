@@ -11,6 +11,7 @@ import Collection from "@/pages/collection";
 import Womens from "@/pages/womens";
 import Mens from "@/pages/mens";
 import Models from "@/pages/models";
+import ModelProducts from "@/pages/model-products";
 import Product from "@/pages/product";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
@@ -44,6 +45,7 @@ function Router() {
       <Route path="/womens" component={Womens} />
       <Route path="/mens" component={Mens} />
       <Route path="/models" component={Models} />
+      <Route path="/models/:modelName" component={ModelProducts} />
       <Route path="/product/:id" component={Product} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />

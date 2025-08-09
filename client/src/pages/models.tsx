@@ -237,9 +237,11 @@ export default function ModelsPage() {
           </div>
 
           <div className="flex justify-center gap-4 mb-8">
-            <Button className="bg-[#064F8C] hover:bg-[#053F6F] text-white px-8 py-3 rounded-full">
-              KÖPTE ASTRIDS TROSOR
-            </Button>
+            <Link href={`/models/${currentModel.name.toLowerCase().replace(/\s+/g, '-').replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')}`}>
+              <Button className="gradient-midnight-cyan text-white px-8 py-3 rounded-full hover:opacity-90">
+                SE {currentModel.name.split(' ')[0]}S TROSOR
+              </Button>
+            </Link>
             <Button variant="outline" className="border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white px-8 py-3 rounded-full">
               SKICKA PRIVAT MEDDELANDE
             </Button>
@@ -254,7 +256,7 @@ export default function ModelsPage() {
         {/* About Section */}
         <Card className="mb-12 bg-white/80 backdrop-blur-sm border-[#064F8C]/20">
           <CardContent className="p-8">
-            <h3 className="text-3xl font-bold text-center text-[#064F8C] mb-6">OM ASTRID</h3>
+            <h3 className="text-3xl font-bold text-center text-[#064F8C] mb-6">OM {currentModel.name.split(' ')[0]}</h3>
             <div className="flex justify-center gap-8 mb-6 text-sm text-[#064F8C]">
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">
@@ -275,7 +277,7 @@ export default function ModelsPage() {
 
         {/* Secrets Section */}
         <div className="mb-12">
-          <h3 className="text-4xl font-bold text-center text-[#064F8C] mb-8">ASTRIDS HEMLIGHETER</h3>
+          <h3 className="text-4xl font-bold text-center text-[#064F8C] mb-8">{currentModel.name.split(' ')[0]}S HEMLIGHETER</h3>
           <p className="text-center text-gray-600 mb-8">
             Roliga fakta som vår modell vill dela med sig av
           </p>
