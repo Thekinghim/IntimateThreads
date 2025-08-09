@@ -20,7 +20,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-[#FEFBEA] shadow-sm border-b border-[#E8E4D6]">
+    <nav className="bg-gradient-to-r from-[#FEFBEA] to-white shadow-sm border-b border-[#111B3E]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pl-[10px] pr-[10px]">
         <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
@@ -33,12 +33,12 @@ export default function Navbar() {
           {/* Navigation Links - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link href="/collection">
-              <span className="hover:text-[#111B3E] transition-colors lg:text-base text-[25px] text-[#000000] font-semibold">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
                 Collection
               </span>
             </Link>
             <Link href="/track-order">
-              <span className="hover:text-[#111B3E] transition-colors lg:text-base text-[#000000] text-[25px] font-semibold">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
                 Track Order
               </span>
             </Link>

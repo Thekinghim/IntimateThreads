@@ -29,12 +29,14 @@
   --chart-4: hsl(48 44% 96%);
   --chart-5: hsl(48 20% 85%);
   
-  /* Scandiscent Color Palette */
-  --scandiscent-cream: hsl(48 44% 96%); /* #FEFBEA */
-  --scandiscent-navy: hsl(215 100% 18%); /* #064F8C */
-  --scandiscent-dark: hsl(225 70% 14%); /* #111B3E */
-  --scandiscent-light: hsl(48 20% 92%); /* Light cream */
-  --scandiscent-border: hsl(48 20% 85%);
+  /* Scandiscent Color Palette - Updated */
+  --midnight-blue: hsl(225 70% 14%); /* #111B3E */
+  --cyan-blue: hsl(215 100% 18%); /* #064F8C */
+  --warm-beige: hsl(48 44% 96%); /* #FEFBEA */
+  --luxury-gold: hsl(43 100% 50%); /* Gold accent */
+  --silver-mist: hsl(210 11% 85%); /* Silver tones */
+  --gradient-blue-dark: linear-gradient(135deg, #111B3E 0%, #064F8C 50%, #1a2957 100%);
+  --gradient-blue-light: linear-gradient(135deg, #064F8C 0%, #2563eb 50%, #3b82f6 100%);
   
   /* Gold Gradients for Details */
   --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%);
@@ -150,6 +152,39 @@
 }
 
 @layer utilities {
+  /* Scandiscent Color Palette Utilities */
+  .bg-midnight-blue {
+    background-color: hsl(var(--midnight-blue));
+  }
+
+  .bg-cyan-blue {
+    background-color: hsl(var(--cyan-blue));
+  }
+
+  .text-midnight-blue {
+    color: hsl(var(--midnight-blue));
+  }
+
+  .text-cyan-blue {
+    color: hsl(var(--cyan-blue));
+  }
+
+  .border-midnight-blue {
+    border-color: hsl(var(--midnight-blue));
+  }
+
+  .border-cyan-blue {
+    border-color: hsl(var(--cyan-blue));
+  }
+
+  .gradient-midnight-cyan {
+    background: linear-gradient(135deg, #111B3E 0%, #064F8C 100%);
+  }
+
+  .gradient-cyan-light {
+    background: linear-gradient(135deg, #064F8C 0%, #2563eb 50%, #3b82f6 100%);
+  }
+
   /* Luxury Background Colors */
   .bg-nordic-cream { background-color: var(--nordic-cream); }
   .bg-warm-pearl { background-color: var(--warm-pearl); }

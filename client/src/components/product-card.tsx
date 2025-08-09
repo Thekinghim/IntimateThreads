@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/product/${product.id}`}>
-      <Card className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group cursor-pointer">
+      <Card className="bg-gradient-to-br from-[#FEFBEA] to-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-[#111B3E]/10 hover:border-[#064F8C]/30">
         <div className="relative overflow-hidden">
           <img
             src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
@@ -54,22 +54,22 @@ export default function ProductCard({ product }: ProductCardProps) {
         <CardContent className="p-6">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <h4 className="font-poppins font-medium text-xl text-charcoal">{product.seller.alias}</h4>
-              <p className="text-gray-500 text-sm">{product.seller.location}, {product.seller.age} år</p>
+              <h4 className="font-poppins font-medium text-xl text-[#111B3E]">{product.seller.alias}</h4>
+              <p className="text-[#064F8C] text-sm">{product.seller.location}, {product.seller.age} år</p>
             </div>
             {getAvailabilityBadge()}
           </div>
           
-          <p className="text-gray-600 mb-4 text-sm">{product.description}</p>
+          <p className="text-[#064F8C]/80 mb-4 text-sm">{product.description}</p>
           
           <div className="flex justify-between items-center">
-            <span className="font-poppins font-semibold text-2xl text-charcoal">
+            <span className="font-poppins font-semibold text-2xl text-[#111B3E]">
               {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
             </span>
             <Button 
               onClick={handleAddToCart}
               disabled={!product.isAvailable}
-              className="bg-charcoal text-white hover:bg-gray-800 transition-colors duration-200 font-poppins font-medium text-sm"
+              className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-poppins font-medium text-sm"
             >
               {product.isAvailable ? "Lägg i varukorg" : "Slutsåld"}
             </Button>
