@@ -136,24 +136,24 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <KeyRound className="h-10 w-10 text-[#111B3E]" />
+                <div className="w-20 h-20 bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                  <KeyRound className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#111B3E] mb-4">Fullständig Anonymitet</h4>
                 <p className="text-[#064F8C] text-lg font-light leading-relaxed">All kommunikation och leverans sker diskret utan avslöjande information</p>
               </div>
               
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <Gift className="h-10 w-10 text-[#111B3E]" />
+                <div className="w-20 h-20 bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                  <Gift className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#111B3E] mb-4">Diskret Förpackning</h4>
                 <p className="text-[#064F8C] text-lg font-light leading-relaxed">Neutral förpackning utan logotyper eller avslöjande märkningar</p>
               </div>
               
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <Shield className="h-10 w-10 text-[#111B3E]" />
+                <div className="w-20 h-20 bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
+                  <Shield className="h-10 w-10 text-white" />
                 </div>
                 <h4 className="font-bold text-2xl text-[#111B3E] mb-4">Säker Betalning</h4>
                 <p className="text-[#064F8C] text-lg font-light leading-relaxed">Krypterade betalningar som garanterar din integritet</p>
