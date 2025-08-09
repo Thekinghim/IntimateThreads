@@ -4,25 +4,25 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(48 44% 96%); /* #FEFBEA */
-  --foreground: hsl(215 100% 18%); /* #064F8C */
-  --card: hsl(48 44% 96%); /* #FEFBEA */
-  --card-foreground: hsl(215 100% 18%); /* #064F8C */
-  --popover: hsl(48 44% 96%); /* #FEFBEA */
-  --popover-foreground: hsl(215 100% 18%); /* #064F8C */
-  --primary: hsl(225 70% 14%); /* #111B3E */
-  --primary-foreground: hsl(48 44% 96%); /* #FEFBEA */
-  --secondary: hsl(215 100% 18%); /* #064F8C */
-  --secondary-foreground: hsl(48 44% 96%); /* #FEFBEA */
-  --muted: hsl(48 20% 92%); /* Light cream */
-  --muted-foreground: hsl(215 30% 40%); /* Muted navy */
-  --accent: hsl(215 100% 18%); /* #064F8C */
-  --accent-foreground: hsl(48 44% 96%); /* #FEFBEA */
-  --destructive: hsl(0 70% 50%);
-  --destructive-foreground: hsl(48 44% 96%);
-  --border: hsl(48 20% 85%); /* Light border */
-  --input: hsl(48 20% 90%); /* Input background */
-  --ring: hsl(225 70% 14%); /* #111B3E */
+  --background: hsl(215 45% 8%); /* #0F1724 */
+  --foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --card: hsl(219 33% 12%); /* #111827 */
+  --card-foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --popover: hsl(219 33% 12%); /* #111827 */
+  --popover-foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --primary: hsl(357 70% 46%); /* #C0392B */
+  --primary-foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --secondary: hsl(32 92% 35%); /* #B45309 */
+  --secondary-foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --muted: hsl(219 33% 12%); /* #111827 */
+  --muted-foreground: hsl(219 14% 63%); /* #9CA3AF */
+  --accent: hsl(357 70% 46%); /* #C0392B */
+  --accent-foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --destructive: hsl(357 70% 46%); /* #C0392B */
+  --destructive-foreground: hsl(0 0% 90%); /* #E6E6E6 */
+  --border: hsl(219 14% 20%); /* Darker border */
+  --input: hsl(219 33% 12%); /* #111827 */
+  --ring: hsl(357 70% 46%); /* #C0392B */
   --chart-1: hsl(225 70% 14%);
   --chart-2: hsl(215 100% 18%);
   --chart-3: hsl(43 100% 50%);
