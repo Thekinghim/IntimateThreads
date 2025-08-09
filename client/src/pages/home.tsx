@@ -84,10 +84,10 @@ export default function Home() {
         </div>
       </section>
       {/* Hero Extension Fade */}
-      <div className="h-60 bg-gradient-to-b from-[#F5F1E8]/90 via-[#F5F1E8]/60 via-[#F5F1E8]/35 via-[#F5F1E8]/15 to-[#F5F1E8]"></div>
+      <div className="h-30 bg-gradient-to-b from-[#F5F1E8]/90 via-[#F5F1E8]/60 via-[#F5F1E8]/35 via-[#F5F1E8]/15 to-[#F5F1E8]"></div>
       
       {/* Featured Collection */}
-      <section className="py-24 bg-[#F5F1E8] relative">
+      <section className="py-12 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-20">
             <h3 className="font-bold text-5xl text-[#2D3748] mb-8">Utvald Kollektion</h3>
