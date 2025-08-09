@@ -6,11 +6,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Search, CreditCard, Truck, Gift, KeyRound, Shield } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
 import heroImage from "@assets/generated_images/Elegant_woman_bikini_portrait_b799382b.png";
+import { useTranslations } from "@/hooks/useLanguage";
 
 export default function Home() {
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
   });
+  const t = useTranslations();
 
   const featuredProducts = products?.slice(0, 3) || [];
 
@@ -30,12 +32,12 @@ export default function Home() {
               <span className="block gold-text italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold drop-shadow-lg">Scandiscent</span>
             </h1>
             <p className="text-2xl md:text-3xl text-[#2D3748] max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-md">
-              Exklusiva, personliga plagg från nordiska kvinnor. Diskret, säkert och helt anonymt.
+              {t.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
               <Link href="/collection">
                 <Button size="lg" className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg">
-                  Utforska Kollektion
+                  {t.exploreCollection}
                 </Button>
               </Link>
               <Link href="/how-it-works">
