@@ -62,17 +62,17 @@ export default function Navbar() {
           <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Language Selector */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-24 h-8 text-xs gradient-midnight-cyan text-white border-none hidden sm:flex">
-                <div className="flex items-center space-x-1">
-                  <Globe className="h-3 w-3" />
+              <SelectTrigger className="w-28 h-9 text-sm gradient-midnight-cyan text-white border-none hidden sm:flex rounded-lg hover:bg-[#064F8C] transition-all duration-200 shadow-sm">
+                <div className="flex items-center space-x-2">
+                  <Globe className="h-4 w-4" />
                   <SelectValue />
                 </div>
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="sv">Svenska</SelectItem>
-                <SelectItem value="no">Norsk</SelectItem>
-                <SelectItem value="da">Dansk</SelectItem>
-                <SelectItem value="en">English</SelectItem>
+              <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
+                <SelectItem value="sv" className="hover:bg-[#064F8C]/10">Svenska</SelectItem>
+                <SelectItem value="no" className="hover:bg-[#064F8C]/10">Norsk</SelectItem>
+                <SelectItem value="da" className="hover:bg-[#064F8C]/10">Dansk</SelectItem>
+                <SelectItem value="en" className="hover:bg-[#064F8C]/10">English</SelectItem>
               </SelectContent>
             </Select>
             {/* Mobile menu button */}
@@ -126,17 +126,17 @@ export default function Navbar() {
               {/* Mobile Language Selector */}
               <div className="px-4 py-2">
                 <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-                  <SelectTrigger className="w-full gradient-midnight-cyan text-white border-none">
+                  <SelectTrigger className="w-full gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
                     <div className="flex items-center space-x-2">
                       <Globe className="h-4 w-4" />
                       <span>{getLanguageName(language)}</span>
                     </div>
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="sv">Svenska</SelectItem>
-                    <SelectItem value="no">Norsk</SelectItem>
-                    <SelectItem value="da">Dansk</SelectItem>
-                    <SelectItem value="en">English</SelectItem>
+                  <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
+                    <SelectItem value="sv" className="hover:bg-[#064F8C]/10">Svenska</SelectItem>
+                    <SelectItem value="no" className="hover:bg-[#064F8C]/10">Norsk</SelectItem>
+                    <SelectItem value="da" className="hover:bg-[#064F8C]/10">Dansk</SelectItem>
+                    <SelectItem value="en" className="hover:bg-[#064F8C]/10">English</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
