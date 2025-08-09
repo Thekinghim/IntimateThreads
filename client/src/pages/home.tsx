@@ -5,6 +5,7 @@ import ProductCard from "@/components/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, CreditCard, Truck, Gift, KeyRound, Shield } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
+import heroImage from "@assets/hero2_1754724738400.jpg";
 
 export default function Home() {
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
@@ -19,7 +20,7 @@ export default function Home() {
       <section 
         className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: "url('/images/hero2_1754681382469.jpg')",
+          backgroundImage: `url(${heroImage})`,
         }}
       >
         <div className="absolute inset-0 bg-black/30"></div>
