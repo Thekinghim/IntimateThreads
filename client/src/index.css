@@ -263,6 +263,14 @@
     animation: goldShimmer 4s ease-in-out infinite;
   }
 
+  .gold-text-static {
+    background: var(--gold-metallic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+  }
+
   .gold-border {
     border-image: var(--gold-gradient) 1;
     border-width: 2px;

@@ -60,7 +60,7 @@ export default function Home() {
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#2D3748] leading-none mb-8 tracking-tight">
-              <span className="block gold-text italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold drop-shadow-lg">Scandiscent</span>
+              <span className="block gold-text-static italic tracking-wider text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold drop-shadow-lg">Scandiscent</span>
             </h1>
             <p className="text-2xl md:text-3xl text-[#2D3748] max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-md">
               {t.heroSubtitle}
