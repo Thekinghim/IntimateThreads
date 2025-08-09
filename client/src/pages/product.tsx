@@ -9,6 +9,7 @@ import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { getProductImageUrl } from "@/assets/images";
 
 export default function Product() {
   const { id } = useParams();
@@ -36,11 +37,12 @@ export default function Product() {
   });
   
   // Create image gallery with multiple views
+  const primaryImage = getProductImageUrl(product?.imageUrl || "") || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800";
   const imageGallery = [
-    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800",
-    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=face",
-    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=sides", 
-    product?.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800&crop=back"
+    primaryImage,
+    primaryImage,
+    primaryImage, 
+    primaryImage
   ];
 
   // Calculate final price with wear days

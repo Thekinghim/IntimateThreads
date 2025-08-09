@@ -5,6 +5,7 @@ import { Link } from "wouter";
 import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
+import { getProductImageUrl } from "@/assets/images";
 
 interface KitAceProductCardProps {
   product: ProductWithSeller;
@@ -62,7 +63,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
       <Link href={`/product/${product.id}`}>
         <div className="aspect-square w-full overflow-hidden bg-gray-100 group-hover:opacity-75 transition-opacity">
           <img
-            src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
+            src={getProductImageUrl(product.imageUrl || "") || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
             alt={product.title}
             className="h-full w-full object-cover object-center"
           />
