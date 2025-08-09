@@ -23,7 +23,7 @@ export default function Home() {
           backgroundImage: `url(${heroImage})`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#111B3E]/90 via-[#064F8C]/70 to-[#064F8C]/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#111B3E]/90 via-[#064F8C]/70 via-[#064F8C]/60 to-[#064F8C]/50"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
       {/* Hero Extension Fade */}
-      <div className="h-80 bg-gradient-to-b from-[#064F8C]/30 via-[#064F8C]/20 via-[#064F8C]/10 to-transparent"></div>
+      <div className="h-80 bg-gradient-to-b from-[#064F8C]/50 via-[#064F8C]/35 via-[#064F8C]/20 via-[#064F8C]/10 to-transparent"></div>
       
       {/* Featured Collection */}
       <section className="py-32 bg-gradient-to-b from-transparent via-[#111B3E]/3 to-[#064F8C]/8 relative">
