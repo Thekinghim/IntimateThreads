@@ -5,7 +5,7 @@ import ProductCard from "@/components/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, CreditCard, Truck, Gift, KeyRound, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
-import heroImage from "@assets/generated_images/Swedish_bikini_model_portrait_7e43b21a.png";
+import heroImage from "@assets/IMG_2336_1754760267759.jpg";
 import { useTranslations } from "@/hooks/useLanguage";
 import { useState, useRef, useEffect } from "react";
 
