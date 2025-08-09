@@ -62,7 +62,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Language Selector */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-24 h-8 text-xs border-[#064F8C]/20 hidden sm:flex">
+              <SelectTrigger className="w-24 h-8 text-xs gradient-midnight-cyan text-white border-none hidden sm:flex">
                 <div className="flex items-center space-x-1">
                   <Globe className="h-3 w-3" />
                   <SelectValue />
@@ -126,7 +126,7 @@ export default function Navbar() {
               {/* Mobile Language Selector */}
               <div className="px-4 py-2">
                 <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full gradient-midnight-cyan text-white border-none">
                     <div className="flex items-center space-x-2">
                       <Globe className="h-4 w-4" />
                       <span>{getLanguageName(language)}</span>
