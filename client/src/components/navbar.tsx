@@ -62,17 +62,17 @@ export default function Navbar() {
           <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Language Selector */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-16 h-9 text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] hidden sm:flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-2">
+              <SelectTrigger className="w-20 h-9 text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] hidden sm:flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-2">
                 <div className="flex items-center gap-1">
                   <Globe className="h-3 w-3 flex-shrink-0" />
                   <SelectValue />
                 </div>
               </SelectTrigger>
               <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
-                <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Svenska</SelectItem>
-                <SelectItem value="no" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Norsk</SelectItem>
-                <SelectItem value="da" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Dansk</SelectItem>
-                <SelectItem value="en" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">English</SelectItem>
+                <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Sve</SelectItem>
+                <SelectItem value="no" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Nor</SelectItem>
+                <SelectItem value="da" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Dan</SelectItem>
+                <SelectItem value="en" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Eng</SelectItem>
               </SelectContent>
             </Select>
             {/* Mobile menu button */}
