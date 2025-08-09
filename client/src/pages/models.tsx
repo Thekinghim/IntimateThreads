@@ -330,7 +330,7 @@ export default function ModelsPage() {
         style={{
           backgroundImage: `linear-gradient(rgba(6, 79, 140, 0.7), rgba(10, 91, 168, 0.7)), url(${bedroomSilhouetteImage})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'center top',
           backgroundRepeat: 'no-repeat'
         }}
       >
