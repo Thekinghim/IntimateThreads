@@ -112,9 +112,16 @@
     font-family: 'Lora', serif;
   }
   
-  /* Paragraph text uses beige on dark backgrounds */
+  /* Paragraph text uses midnight blue on light backgrounds by default */
   p {
-    color: hsl(var(--warm-beige));
+    color: hsl(var(--midnight-blue));
+  }
+  
+  /* On dark section backgrounds, text should be beige */
+  section[class*="bg-gradient-to"] p,
+  section[class*="from-[#064F8C]"] p,
+  section[class*="from-[#111B3E]"] p {
+    color: hsl(var(--warm-beige)) !important;
   }
   
   .font-poppins {

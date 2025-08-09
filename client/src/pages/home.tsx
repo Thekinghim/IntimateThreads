@@ -15,7 +15,7 @@ export default function Home() {
   const featuredProducts = products?.slice(0, 3) || [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#111B3E] to-[#064F8C]">
+    <div className="min-h-screen bg-[#FEFBEA] space-y-16">
       {/* Hero Section with Background Image */}
       <section 
         className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
       {/* Featured Collection */}
-<section className="py-32 bg-gradient-to-br from-[#064F8C] to-[#111B3E] relative">
+      <section className="py-32 bg-gradient-to-br from-[#064F8C] to-[#111B3E] relative mx-6 rounded-3xl shadow-xl">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-24">
             <h3 className="font-bold text-5xl gold-text mb-8">Utvald Kollektion</h3>
@@ -81,7 +81,7 @@ export default function Home() {
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-32 bg-gradient-to-br from-[#111B3E] via-[#064F8C] to-[#111B3E] relative">
+      <section className="py-32 bg-gradient-to-br from-[#111B3E] via-[#064F8C] to-[#111B3E] relative mx-6 rounded-3xl shadow-xl">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/30 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center mb-24">
@@ -125,7 +125,7 @@ export default function Home() {
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#064F8C] to-[#111B3E]">
+      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#064F8C] to-[#111B3E] mx-6 rounded-3xl shadow-xl">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/50 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
