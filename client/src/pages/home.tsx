@@ -72,7 +72,10 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/how-it-works">
-                <Button variant="outline" size="lg" className="border-2 border-[#B45309] text-[#B45309] hover:bg-[#B45309] hover:text-white font-medium px-12 py-6 text-xl rounded-3xl shadow-lg">
+                <Button 
+                  size="lg" 
+                  className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
+                >
                   Så Fungerar Det
                 </Button>
               </Link>
@@ -145,7 +148,7 @@ export default function Home() {
 
           <div className="text-center mt-12">
             <Link href="/collection">
-              <Button variant="outline" size="lg" className="gold-button-outline font-medium px-10 py-5 text-xl rounded-3xl transition-all duration-500 hover:scale-105">
+              <Button size="lg" className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg">
                 Se Hela Kollektionen
               </Button>
             </Link>
