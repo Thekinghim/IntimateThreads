@@ -86,16 +86,35 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'DM Sans', sans-serif;
+    color: hsl(var(--midnight-blue)); /* Default body text in midnight blue */
   }
   
-  /* All H1 elements use Cormorant Garamond */
+  /* All H1 elements use Cormorant Garamond with gold */
   h1 {
     font-family: 'Cormorant Garamond', serif;
+    background: var(--gold-metallic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
-  /* All H2 and H3 elements use Lora */
-  h2, h3 {
+  /* All H2 elements use Lora with gold */
+  h2 {
     font-family: 'Lora', serif;
+    background: var(--gold-metallic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* H3 elements keep their current styling */
+  h3 {
+    font-family: 'Lora', serif;
+  }
+  
+  /* Paragraph text uses beige on dark backgrounds */
+  p {
+    color: hsl(var(--warm-beige));
   }
   
   .font-poppins {

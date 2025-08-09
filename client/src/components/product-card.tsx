@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/product/${product.id}`}>
-      <Card className="bg-gradient-to-br from-[#FEFBEA] to-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-[#111B3E]/10 hover:border-[#064F8C]/30">
+      <Card className="bg-[#FEFBEA] rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-[#111B3E]/20 hover:border-[#064F8C]/40">
         <div className="relative overflow-hidden">
           <img
             src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
@@ -60,7 +60,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {getAvailabilityBadge()}
           </div>
           
-          <p className="text-[#064F8C]/80 mb-4 text-sm">{product.description}</p>
+          <p className="text-[#111B3E]/80 mb-4 text-sm">{product.description}</p>
           
           <div className="flex justify-between items-center">
             <span className="font-poppins font-semibold text-2xl text-[#111B3E]">
