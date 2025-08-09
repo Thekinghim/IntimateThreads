@@ -84,7 +84,7 @@ export default function Home() {
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-32 bg-[#111827] relative">
+      <section className="py-20 bg-[#111827] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center mb-24">
             <h3 className="font-bold text-5xl text-[#E6E6E6] mb-8">Så Funkar Det</h3>
