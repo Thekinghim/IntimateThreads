@@ -84,8 +84,10 @@
   }
   
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased;
+    background: linear-gradient(to right, #FEFBEA, white);
     font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
   }
   
   /* All H1 elements use Cormorant Garamond */
