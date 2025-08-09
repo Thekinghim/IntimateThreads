@@ -42,11 +42,14 @@ export const imagePairs = {
 export function getProductImageUrl(imagePath: string): string {
   if (!imagePath) return '';
   
-  // Extract filename from path
-  const filename = imagePath.split('/').pop() || '';
+  // Check for exact path match first (for generated images)
+  let imageUrl = productImages[imagePath as keyof typeof productImages];
   
-  // Return the imported image URL or fallback
-  const imageUrl = productImages[filename as keyof typeof productImages];
+  if (!imageUrl) {
+    // Extract filename from path for legacy images
+    const filename = imagePath.split('/').pop() || '';
+    imageUrl = productImages[filename as keyof typeof productImages];
+  }
   
   return imageUrl || '';
 }
@@ -55,11 +58,14 @@ export function getProductImageUrl(imagePath: string): string {
 export function getBackImageUrl(frontImagePath: string): string {
   if (!frontImagePath) return '';
   
-  // Extract filename from path
-  const filename = frontImagePath.split('/').pop() || '';
+  // Check for exact path match first (for generated images)
+  let backFilename = imagePairs[frontImagePath as keyof typeof imagePairs];
   
-  // Get the back image filename
-  const backFilename = imagePairs[filename as keyof typeof imagePairs];
+  if (!backFilename) {
+    // Extract filename from path for legacy images
+    const filename = frontImagePath.split('/').pop() || '';
+    backFilename = imagePairs[filename as keyof typeof imagePairs];
+  }
   
   if (backFilename) {
     return productImages[backFilename as keyof typeof productImages] || '';
