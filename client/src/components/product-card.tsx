@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
+import { useState } from "react";
+import { getProductImageUrl, getBackImageUrl } from "@/assets/images";
 
 interface ProductCardProps {
   product: ProductWithSeller;
@@ -11,6 +13,11 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCartStore();
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Get front and back images
+  const frontImage = getProductImageUrl(product.imageUrl || "");
+  const backImage = getBackImageUrl(product.imageUrl || "");
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -42,13 +49,26 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/product/${product.id}`}>
-      <Card className="bg-gradient-to-br from-[#FEFBEA] to-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-[#111B3E]/10 hover:border-[#064F8C]/30">
+      <Card 
+        className="bg-gradient-to-br from-[#FEFBEA] to-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-[#111B3E]/10 hover:border-[#064F8C]/30"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div className="relative overflow-hidden">
           <img
-            src={product.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"}
+            src={
+              isHovered && backImage 
+                ? backImage 
+                : frontImage || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400"
+            }
             alt={product.title}
-            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-64 object-cover group-hover:scale-105 transition-all duration-300"
           />
+          {backImage && (
+            <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {isHovered ? 'Baksida' : 'Hover för baksida'}
+            </div>
+          )}
         </div>
         
         <CardContent className="p-6">
