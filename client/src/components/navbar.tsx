@@ -6,6 +6,7 @@ import { ShoppingBag, Menu, Globe } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { useState } from "react";
 import { useLanguage, useTranslations, getLanguageName, type Language } from "@/hooks/useLanguage";
+import Logo from "@/components/logo";
 
 export default function Navbar() {
   const [location] = useLocation();
@@ -29,9 +30,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
           <Link href="/">
-            <div className="flex items-center">
-              <span className="sm:text-xl text-[#111B3E] tracking-wide text-center text-[22px] ml-[6px] mr-[6px] font-light bg-[#00000000]">Scandiscent</span>
-            </div>
+            <Logo size="sm" className="text-[#064F8C]" />
           </Link>
 
           {/* Navigation Links - Hidden on mobile */}
