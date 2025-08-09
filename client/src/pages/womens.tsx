@@ -108,12 +108,12 @@ export default function Womens() {
           <div className="flex flex-wrap items-center gap-6">
             {/* Search */}
             <div className="relative flex-1 min-w-80">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#064F8C]" />
               <Input
                 placeholder="Search products, sellers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-gray-300 focus:border-gray-500"
+                className="pl-10 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm placeholder:text-[#064F8C]/60 focus:border-[#064F8C] focus:ring-2 focus:ring-[#064F8C]/20"
               />
             </div>
             

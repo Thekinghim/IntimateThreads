@@ -183,13 +183,15 @@ export default function ShopifyAdmin() {
             </div>
             
             <div className="flex items-center space-x-2 md:space-x-4">
-              <div className="hidden xl:flex items-center space-x-4 bg-white/60 backdrop-blur-sm rounded-2xl px-4 py-2 border border-dusty-rose/20">
-                <Search className="h-5 w-5 text-soft-taupe" />
-                <input 
-                  type="text" 
-                  placeholder="Sök beställningar, produkter..." 
-                  className="bg-transparent outline-none text-deep-charcoal placeholder-soft-taupe w-64"
-                />
+              <div className="hidden xl:flex items-center space-x-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#064F8C]" />
+                  <input 
+                    type="text" 
+                    placeholder="Sök beställningar, produkter..." 
+                    className="pl-10 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm placeholder:text-[#064F8C]/60 focus:border-[#064F8C] focus:ring-2 focus:ring-[#064F8C]/20 w-64 h-10 px-3 py-2 outline-none"
+                  />
+                </div>
               </div>
               <Button variant="ghost" size="sm" className="hover:bg-dusty-rose/20 rounded-xl md:rounded-2xl p-2 md:p-3 relative">
                 <Bell className="h-4 w-4 md:h-6 md:w-6 text-soft-taupe" />
