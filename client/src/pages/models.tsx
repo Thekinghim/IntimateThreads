@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Star, Eye, MapPin, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
-import bedroomSilhouetteImage from "@assets/generated_images/Elegant_bedroom_silhouette_5ef2d8f7.png";
+import bedroomSilhouetteImage from "@assets/generated_images/Boudoir_bedroom_silhouette_9c89ec5b.png";
 
 export default function ModelsPage() {
   const [selectedModel, setSelectedModel] = useState<number | null>(null);
@@ -326,9 +326,9 @@ export default function ModelsPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#FEFBEA] via-white to-[#F8F4E6]">
       {/* Header with Background Image */}
       <div 
-        className="relative bg-gradient-to-r from-[#064F8C] to-[#0A5BA8] text-white py-16 overflow-hidden"
+        className="relative bg-gradient-to-r from-[#064F8C] to-[#0A5BA8] text-white py-32 overflow-hidden min-h-[500px]"
         style={{
-          backgroundImage: `linear-gradient(rgba(6, 79, 140, 0.8), rgba(10, 91, 168, 0.8)), url(${bedroomSilhouetteImage})`,
+          backgroundImage: `linear-gradient(rgba(6, 79, 140, 0.7), rgba(10, 91, 168, 0.7)), url(${bedroomSilhouetteImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
