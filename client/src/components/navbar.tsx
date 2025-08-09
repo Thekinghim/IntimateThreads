@@ -37,22 +37,22 @@ export default function Navbar() {
           {/* Navigation Links - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link href="/collection">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
                 {t.all}
               </span>
             </Link>
             <Link href="/womens">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
                 {t.womensUsed}
               </span>
             </Link>
             <Link href="/mens">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
                 {t.mensUsed}
               </span>
             </Link>
             <Link href="/track-order">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
                 {t.trackOrder}
               </span>
             </Link>
@@ -103,22 +103,22 @@ export default function Navbar() {
           <div className="md:hidden py-4 border-t border-[#E8E4D6] bg-[#FEFBEA]">
             <div className="flex flex-col space-y-2">
               <Link href="/collection" onClick={() => setMobileMenuOpen(false)}>
-                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded">
+                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
                   {t.all}
                 </span>
               </Link>
               <Link href="/womens" onClick={() => setMobileMenuOpen(false)}>
-                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded">
+                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
                   {t.womensUsed}
                 </span>
               </Link>
               <Link href="/mens" onClick={() => setMobileMenuOpen(false)}>
-                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded">
+                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
                   {t.mensUsed}
                 </span>
               </Link>
               <Link href="/track-order" onClick={() => setMobileMenuOpen(false)}>
-                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded">
+                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
                   {t.trackOrder}
                 </span>
               </Link>
