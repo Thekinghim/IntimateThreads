@@ -48,12 +48,12 @@ export default function Home() {
         </div>
       </section>
       {/* Hero Extension Fade */}
-      <div className="h-80 bg-gradient-to-b from-[#0F1724]/90 via-[#0F1724]/60 via-[#0F1724]/35 via-[#0F1724]/15 to-transparent"></div>
+      <div className="h-60 bg-gradient-to-b from-[#0F1724]/90 via-[#0F1724]/60 via-[#0F1724]/35 via-[#0F1724]/15 to-transparent"></div>
       
       {/* Featured Collection */}
-      <section className="py-32 bg-gradient-to-b from-transparent to-[#111827]/20 relative">
+      <section className="py-24 bg-gradient-to-b from-transparent to-[#111827]/20 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-          <div className="text-center mb-24">
+          <div className="text-center mb-20">
             <h3 className="font-bold text-5xl text-[#E6E6E6] mb-8">Utvald Kollektion</h3>
             <p className="text-[#9CA3AF] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Handplockade exklusiva plagg från verifierade nordiska kvinnor</p>
           </div>
@@ -74,7 +74,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <Link href="/collection">
               <Button variant="outline" size="lg" className="gold-button-outline font-medium px-10 py-5 text-xl rounded-3xl transition-all duration-500 hover:scale-105">
                 Se Hela Kollektionen
@@ -84,9 +84,9 @@ export default function Home() {
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-20 bg-[#111827] relative">
+      <section className="py-16 bg-[#111827] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
-          <div className="text-center mb-24">
+          <div className="text-center mb-16">
             <h3 className="font-bold text-5xl text-[#E6E6E6] mb-8">Så Funkar Det</h3>
             <p className="text-[#9CA3AF] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Enkel och diskret process från beställning till leverans</p>
           </div>
@@ -127,15 +127,15 @@ export default function Home() {
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-32 relative overflow-hidden bg-[#0F1724]">
+      <section className="py-20 relative overflow-hidden bg-[#0F1724]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
             <h3 className="font-bold text-5xl text-[#E6E6E6] mb-8">Upptäck Diskret Elegans</h3>
-            <p className="text-[#9CA3AF] text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-16">
+            <p className="text-[#9CA3AF] text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-12">
               Varje plagg berättar sin egen historia med fullständig anonymitet och tidlös elegans
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
               <div className="flex flex-col items-center group">
                 <div className="w-20 h-20 gold-circle rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
                   <KeyRound className="h-10 w-10 text-[#111B3E]" />
