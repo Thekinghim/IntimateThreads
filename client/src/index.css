@@ -317,4 +317,14 @@
   .shadow-navy {
     box-shadow: 0 8px 32px hsl(215 100% 18% / 0.2);
   }
+
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

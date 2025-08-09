@@ -3,18 +3,49 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Search, CreditCard, Truck, Gift, KeyRound, Shield } from "lucide-react";
+import { Search, CreditCard, Truck, Gift, KeyRound, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
 import heroImage from "@assets/generated_images/Elegant_woman_bikini_portrait_b799382b.png";
 import { useTranslations } from "@/hooks/useLanguage";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
   });
   const t = useTranslations();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const featuredProducts = products?.slice(0, 3) || [];
+  const featuredProducts = products || [];
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    // Initialize scroll state when products load
+    if (scrollRef.current && featuredProducts.length > 0) {
+      handleScroll();
+    }
+  }, [featuredProducts]);
 
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
@@ -60,20 +91,56 @@ export default function Home() {
             <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">Handplockade exklusiva plagg från verifierade nordiska kvinnor</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {isLoading ? (
-              Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="space-y-4">
-                  <Skeleton className="h-64 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
-                  <Skeleton className="h-4 w-1/2" />
-                </div>
-              ))
-            ) : (
-              featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))
-            )}
+          {/* Horizontal Scrolling Product List */}
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <Button
+              variant="outline"
+              size="sm"
+              className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full w-12 h-12 ${
+                !canScrollLeft ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              onClick={scrollLeft}
+              disabled={!canScrollLeft}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+            
+            <Button
+              variant="outline"
+              size="sm"
+              className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full w-12 h-12 ${
+                !canScrollRight ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              onClick={scrollRight}
+              disabled={!canScrollRight}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+
+            {/* Scrollable Container */}
+            <div
+              ref={scrollRef}
+              className="flex gap-6 overflow-x-auto scrollbar-hide px-12 py-4"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              onScroll={handleScroll}
+            >
+              {isLoading ? (
+                Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="flex-none w-80 space-y-4">
+                    <Skeleton className="h-64 w-full" />
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                  </div>
+                ))
+              ) : (
+                featuredProducts.map((product) => (
+                  <div key={product.id} className="flex-none w-80">
+                    <ProductCard product={product} />
+                  </div>
+                ))
+              )}
+            </div>
           </div>
 
           <div className="text-center mt-12">
