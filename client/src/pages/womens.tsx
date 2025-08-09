@@ -89,7 +89,7 @@ export default function Womens() {
           <nav className="flex text-sm">
             <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900">Womens</span>
+            <span className="text-gray-900">Women's Used</span>
           </nav>
         </div>
       </div>
@@ -97,9 +97,9 @@ export default function Womens() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-light text-[#2D3748] uppercase tracking-widest mb-4">WOMENS COLLECTION</h1>
+          <h1 className="text-3xl font-light text-[#2D3748] uppercase tracking-widest mb-4">WOMEN'S USED</h1>
           <p className="text-[#4A5568] max-w-2xl mx-auto">
-            Exklusiva damplagg från verifierade nordiska kvinnor
+            Exklusiva använda damplagg från verifierade nordiska kvinnor
           </p>
         </div>
 

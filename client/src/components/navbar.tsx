@@ -39,12 +39,12 @@ export default function Navbar() {
             </Link>
             <Link href="/womens">
               <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
-                Damkläder
+                Women's Used
               </span>
             </Link>
             <Link href="/mens">
               <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-semibold">
-                Herrkläder
+                Men's Used
               </span>
             </Link>
             <Link href="/track-order">
@@ -90,12 +90,12 @@ export default function Navbar() {
               </Link>
               <Link href="/womens" onClick={() => setMobileMenuOpen(false)}>
                 <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded">
-                  Damkläder
+                  Women's Used
                 </span>
               </Link>
               <Link href="/mens" onClick={() => setMobileMenuOpen(false)}>
                 <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded">
-                  Herrkläder
+                  Men's Used
                 </span>
               </Link>
               <Link href="/track-order" onClick={() => setMobileMenuOpen(false)}>
