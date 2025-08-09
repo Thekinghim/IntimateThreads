@@ -7,9 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Home from "@/pages/home";
-import Collection from "@/pages/collection";
 import Womens from "@/pages/womens";
-import Mens from "@/pages/mens";
 import Models from "@/pages/models";
 import ModelProducts from "@/pages/model-products";
 import Product from "@/pages/product";
@@ -41,9 +39,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/collection" component={Collection} />
       <Route path="/womens" component={Womens} />
-      <Route path="/mens" component={Mens} />
       <Route path="/models" component={Models} />
       <Route path="/models/:modelName" component={ModelProducts} />
       <Route path="/product/:id" component={Product} />

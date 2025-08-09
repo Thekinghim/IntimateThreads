@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Star, Eye, MapPin, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
+import bedroomSilhouetteImage from "@assets/generated_images/Elegant_bedroom_silhouette_5ef2d8f7.png";
 
 export default function ModelsPage() {
   const [selectedModel, setSelectedModel] = useState<number | null>(null);
@@ -323,9 +324,17 @@ export default function ModelsPage() {
   // Main models list view
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FEFBEA] via-white to-[#F8F4E6]">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#064F8C] to-[#0A5BA8] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      {/* Header with Background Image */}
+      <div 
+        className="relative bg-gradient-to-r from-[#064F8C] to-[#0A5BA8] text-white py-16 overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(6, 79, 140, 0.8), rgba(10, 91, 168, 0.8)), url(${bedroomSilhouetteImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">VÅRA MODELLER</h1>
           <p className="text-xl opacity-90">Träffa de vackra kvinnorna bakom våra exklusiva kollektioner</p>
           <div className="flex justify-center items-center gap-2 mt-6">
