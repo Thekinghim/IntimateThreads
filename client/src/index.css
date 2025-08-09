@@ -269,6 +269,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     background-size: 200% 200%;
+    animation: goldShimmer 4s ease-in-out infinite;
   }
 
   .gold-border {
