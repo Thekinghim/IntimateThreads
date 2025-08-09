@@ -91,16 +91,19 @@
     min-height: 100vh;
   }
   
-  /* All H1 elements use Cormorant Garamond with blue color */
-  h1 {
+  /* Typography hierarchy */
+  h1, h2 {
     font-family: 'Cormorant Garamond', serif;
     color: #064F8C;
   }
   
-  /* All H2 and H3 elements use Lora with blue color */
-  h2, h3 {
+  h3 {
     font-family: 'Lora', serif;
     color: #064F8C;
+  }
+  
+  p, body, .font-dm-sans {
+    font-family: 'DM Sans', sans-serif;
   }
   
   .font-poppins {

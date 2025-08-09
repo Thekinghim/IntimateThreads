@@ -5,7 +5,7 @@ import ProductCard from "@/components/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, CreditCard, Truck, Gift, KeyRound, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
-import heroImage from "@assets/generated_images/Swedish_flag_bikini_model_17b009ed.png";
+import heroImage from "@assets/Clara-Gallery-2_1754772829712.webp";
 import { useTranslations } from "@/hooks/useLanguage";
 import { useState, useRef, useEffect } from "react";
 
@@ -54,6 +54,7 @@ export default function Home() {
         className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{ 
           backgroundImage: `url(${heroImage})`,
+          backgroundPosition: 'center top',
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#F5F1E8]/90 via-[#F5F1E8]/70 via-[#F5F1E8]/80 to-[#F5F1E8]/90"></div>
