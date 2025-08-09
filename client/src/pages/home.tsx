@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
       {/* Featured Collection */}
-      <section className="py-32 bg-gradient-to-br from-[#064F8C] to-[#111B3E] relative mx-6 rounded-3xl shadow-xl">
+      <section className="py-32 bg-gradient-to-br from-[#064F8C] to-[#111B3E] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-24">
             <h3 className="font-bold text-5xl gold-text mb-8">Utvald Kollektion</h3>
@@ -81,7 +81,7 @@ export default function Home() {
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-32 bg-gradient-to-br from-[#111B3E] via-[#064F8C] to-[#111B3E] relative mx-6 rounded-3xl shadow-xl">
+      <section className="py-32 bg-gradient-to-br from-[#111B3E] via-[#064F8C] to-[#111B3E] relative">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/30 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center mb-24">
@@ -125,7 +125,7 @@ export default function Home() {
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#064F8C] to-[#111B3E] mx-6 rounded-3xl shadow-xl">
+      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-[#064F8C] to-[#111B3E]">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#F5F2E8]/50 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
