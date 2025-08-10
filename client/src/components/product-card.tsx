@@ -41,7 +41,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     // Simple logic for demo - could be based on creation date, stock, etc.
     const isNew = product.createdAt && new Date(product.createdAt).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000;
     if (isNew) {
-      return <Badge className="bg-powder-pink text-charcoal">Ny</Badge>;
+      return <Badge className="gold-accent text-[#111B3E] font-semibold">Ny</Badge>;
     }
     
     return <Badge variant="secondary">Tillgänglig</Badge>;
@@ -71,7 +71,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
         
-        <CardContent className="p-6">
+        <CardContent className="p-6 h-48 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">
             <div>
               <h4 className="font-poppins font-medium text-xl text-[#111B3E]">{product.seller.alias}</h4>
@@ -80,7 +80,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {getAvailabilityBadge()}
           </div>
           
-          <p className="text-[#064F8C]/80 mb-4 text-sm">{product.description}</p>
+          <p className="text-[#064F8C]/80 mb-4 text-sm flex-grow overflow-hidden text-ellipsis">{product.description}</p>
           
           <div className="flex justify-between items-center">
             <span className="font-poppins font-semibold text-2xl text-[#111B3E]">
