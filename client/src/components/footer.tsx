@@ -27,7 +27,7 @@ export default function Footer() {
           <div>
             <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#064F8C]">Information</h5>
             <ul className="space-y-6 text-[#064F8C]">
-              <li><Link href="/how-it-works" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Om oss</Link></li>
+              <li><Link href="/about" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Om oss</Link></li>
               <li><Link href="/how-it-works" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Så funkar det</Link></li>
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Vanliga frågor</a></li>
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Kontakt</a></li>

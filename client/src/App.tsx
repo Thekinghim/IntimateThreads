@@ -19,7 +19,7 @@ import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
 import MobileAdmin from "@/pages/mobile-admin-v2";
 import AdminLogin from "@/pages/admin-login";
-import PaymentSetup from "@/pages/payment-setup";
+
 import TermsOfService from "@/pages/terms-of-service";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
@@ -51,7 +51,7 @@ function Router() {
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={AdminComponent} />
-      <Route path="/payment-setup" component={PaymentSetup} />
+
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route component={NotFound} />

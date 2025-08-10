@@ -28,7 +28,22 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
 - Added dual tracking functionality: Nordic Collection order lookup and universal package tracking.
 - Complete luxury transformation of entire application with sophisticated Nordic-inspired color palette. Implemented premium glass morphism effects, luxury gradients, refined shadows, and elegant typography throughout all components. Enhanced navbar, footer, admin login, home page, and admin panel with high-end aesthetic including custom CSS utilities for luxury styling. Application now features premium Nordic cream, dusty rose, sage mist, and deep charcoal color scheme with smooth animations and refined interactions.
 
-**LATEST (Aug 9, 2025 - PRODUCTION READY):**
+**LATEST (Aug 10, 2025 - FILE CLEANUP & OPTIMIZATION):**
+- ✅ **CODEBASE CLEANUP**: Removed duplicate and unused pages to improve maintainability
+  * Removed: `adminLogin.tsx`, `admin.tsx`, `mobile-admin.tsx`, `mens.tsx`, `payment-setup.tsx`, `collection.tsx`
+  * Kept: `admin-login.tsx` (active), `mobile-admin-v2.tsx` (active), `shopify-admin.tsx` (active), `womens.tsx` (main products)
+  * Fixed footer "Om oss" link to point to `/about` instead of `/how-it-works` for navigation consistency
+  * Updated homepage "Explore Collection" button to point to `/womens` (main product category)
+- ✅ **NAVIGATION CONSISTENCY**: Unified navigation structure
+  * Navbar: `/womens` (Använda Trosor) - main product listing
+  * Footer: `/about` (Om oss) - company information  
+  * All "Om oss" references now point to same page
+- ✅ **VISUAL CONSISTENCY**: Standardized heading colors and product card styling
+  * Changed "Så Funkar Det" and "Upptäck Diskret Elegans" headings to #064F8C (same as "Utvald Kollektion")
+  * Fixed product card heights with consistent h-48 sizing
+  * Updated "NY" badge to use gold-accent class matching button colors
+
+**PREVIOUS (Aug 9, 2025 - PRODUCTION READY):**
 - ✅ **TYPOGRAPHY STANDARDIZATION**: Established consistent typography hierarchy across entire application
   * H1 & H2: Cormorant Garamond serif font for elegant main headings
   * H3: Lora serif font for section subheadings  

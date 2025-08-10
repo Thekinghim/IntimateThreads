@@ -81,7 +81,7 @@ font-extrabold drop-shadow-lg"
               {t.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-              <Link href="/collection">
+              <Link href="/womens">
                 <Button
                   size="lg"
                   className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
