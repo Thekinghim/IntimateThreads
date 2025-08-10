@@ -149,21 +149,21 @@ export default function About() {
                   <div className="flex items-start gap-3">
                     <Badge variant="outline" className="border-[#064F8C] text-[#064F8C] mt-1">SSL</Badge>
                     <div>
-                      <div className="font-medium">256-bit SSL-kryptering</div>
+                      <div className="font-medium text-[#064F8C] mt-1">256-bit SSL-kryptering</div>
                       <div className="text-sm text-gray-600">All data skyddas med bankstandard kryptering</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Badge variant="outline" className="border-[#064F8C] text-[#064F8C] mt-1">GDPR</Badge>
                     <div>
-                      <div className="font-medium">GDPR-kompatibel</div>
+                      <div className="font-medium text-[#064F8C] mt-1">GDPR-kompatibel</div>
                       <div className="text-sm text-gray-600">Full efterlevnad av EU:s dataskyddsförordning</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Badge variant="outline" className="border-[#064F8C] text-[#064F8C] mt-1">24/7</Badge>
                     <div>
-                      <div className="font-medium">Kontinuerlig övervakning</div>
+                      <div className="font-medium text-[#064F8C] mt-1">Kontinuerlig övervakning</div>
                       <div className="text-sm text-gray-600">Vår säkerhet övervakas dygnet runt</div>
                     </div>
                   </div>
@@ -176,15 +176,15 @@ export default function About() {
                 <h3 className="text-2xl font-bold mb-6">Kontakta Oss</h3>
                 <div className="space-y-4">
                   <div>
-                    <div className="font-medium">Kundsupport</div>
+                    <div className="font-medium text-[#064F8C] mt-1">Kundsupport</div>
                     <div className="text-gray-600">Tillgänglig 24/7 via vårt säkra meddelandesystem</div>
                   </div>
                   <div>
-                    <div className="font-medium">Svarstid</div>
+                    <div className="font-medium text-[#064F8C] mt-1">Svarstid</div>
                     <div className="text-gray-600">Inom 2 timmar, oftast mycket snabbare</div>
                   </div>
                   <div>
-                    <div className="font-medium">Språk</div>
+                    <div className="font-medium text-[#064F8C] mt-1">Språk</div>
                     <div className="text-gray-600">Svenska, Norska, Danska, Engelska</div>
                   </div>
                   <div className="pt-4">

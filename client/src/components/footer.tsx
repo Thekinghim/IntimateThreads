@@ -21,12 +21,12 @@ export default function Footer() {
           </div>
           
           <div>
-            <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#2D3748]">Information</h5>
+            <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#2D3748]">Navigation</h5>
             <ul className="space-y-6 text-[#4A5568]">
-              <li><Link href="/how-it-works" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Om oss</Link></li>
-              <li><Link href="/how-it-works" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Så funkar det</Link></li>
-              <li><a href="#" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Vanliga frågor</a></li>
-              <li><a href="#" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Kontakt</a></li>
+              <li><Link href="/womens" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Använda Trosor</Link></li>
+              <li><Link href="/models" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Våra modeller</Link></li>
+              <li><Link href="/about" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Om Oss</Link></li>
+              <li><Link href="/track-order" className="hover:text-dusty-rose hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Spåra Order</Link></li>
             </ul>
           </div>
           
