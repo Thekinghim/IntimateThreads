@@ -182,25 +182,25 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-soft-white py-8">
+    <div className="min-h-screen bg-[#F5F1E8] py-12">
       <PrivacyBanner />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="font-poppins font-medium text-3xl text-charcoal mb-2">Slutför ditt köp</h1>
-          <p className="text-gray-600">Fyll i leveransuppgifter och välj betalningsmetod</p>
+        <div className="text-center mb-12">
+          <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-4">Slutför ditt köp</h1>
+          <p className="text-[#4A5568] text-lg font-dm-sans">Fyll i leveransuppgifter och välj betalningsmetod</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Form */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Lock className="h-5 w-5 mr-2" />
+            <Card className="bg-white shadow-xl border-none">
+              <CardHeader className="pb-6">
+                <CardTitle className="flex items-center font-lora text-2xl text-[#064F8C]">
+                  <Lock className="h-6 w-6 mr-3 text-[#064F8C]" />
                   Leveransinformation
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
@@ -261,16 +261,16 @@ export default function Checkout() {
                                 <RadioGroupItem value="crypto" id="crypto" className="sr-only" />
                                 <Label 
                                   htmlFor="crypto" 
-                                  className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                  className={`flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all shadow-sm ${
                                     paymentMethod === "crypto" 
-                                      ? 'border-deep-charcoal bg-gray-50' 
-                                      : 'border-gray-300 hover:border-gray-400'
+                                      ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg' 
+                                      : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
                                   }`}
                                 >
-                                  <Bitcoin className="h-6 w-6 mr-3 text-orange-500" />
+                                  <Bitcoin className="h-8 w-8 mr-4 text-orange-500" />
                                   <div>
-                                    <div className="font-medium text-lg">Kryptovaluta</div>
-                                    <div className="text-sm text-gray-600">Bitcoin, Ethereum, USDT - Snabbt och säkert</div>
+                                    <div className="font-lora font-semibold text-xl text-[#064F8C]">Kryptovaluta</div>
+                                    <div className="text-base text-[#4A5568] font-dm-sans mt-1">Bitcoin, Ethereum, USDT - Snabbt och säkert</div>
                                   </div>
                                 </Label>
                               </div>
@@ -279,16 +279,16 @@ export default function Checkout() {
                                 <RadioGroupItem value="revolut" id="revolut" className="sr-only" />
                                 <Label 
                                   htmlFor="revolut" 
-                                  className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                  className={`flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all shadow-sm ${
                                     paymentMethod === "revolut" 
-                                      ? 'border-deep-charcoal bg-gray-50' 
-                                      : 'border-gray-300 hover:border-gray-400'
+                                      ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg' 
+                                      : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
                                   }`}
                                 >
-                                  <CreditCard className="h-6 w-6 mr-3 text-[#064F8C]" />
+                                  <CreditCard className="h-8 w-8 mr-4 text-[#064F8C]" />
                                   <div>
-                                    <div className="font-medium text-lg">Revolut</div>
-                                    <div className="text-sm text-gray-600">Mobil betalning med Revolut-appen</div>
+                                    <div className="font-lora font-semibold text-xl text-[#064F8C]">Revolut</div>
+                                    <div className="text-base text-[#4A5568] font-dm-sans mt-1">Mobil betalning med Revolut-appen</div>
                                   </div>
                                 </Label>
                               </div>
@@ -297,16 +297,16 @@ export default function Checkout() {
                                 <RadioGroupItem value="gumroad" id="gumroad" className="sr-only" />
                                 <Label 
                                   htmlFor="gumroad" 
-                                  className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                  className={`flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all shadow-sm ${
                                     paymentMethod === "gumroad" 
-                                      ? 'border-deep-charcoal bg-gray-50' 
-                                      : 'border-gray-300 hover:border-gray-400'
+                                      ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg' 
+                                      : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
                                   }`}
                                 >
-                                  <Globe className="h-6 w-6 mr-3 text-green-500" />
+                                  <Globe className="h-8 w-8 mr-4 text-green-500" />
                                   <div>
-                                    <div className="font-medium text-lg">Gumroad</div>
-                                    <div className="text-sm text-gray-600">Säker betalning med kort eller PayPal</div>
+                                    <div className="font-lora font-semibold text-xl text-[#064F8C]">Gumroad</div>
+                                    <div className="text-base text-[#4A5568] font-dm-sans mt-1">Säker betalning med kort eller PayPal</div>
                                   </div>
                                 </Label>
                               </div>
@@ -319,9 +319,9 @@ export default function Checkout() {
                     
                     {/* Show crypto selection immediately when crypto is selected */}
                     {paymentMethod === "crypto" && !paymentCreated && (
-                      <div className="bg-gray-50 rounded-lg p-4 space-y-4">
-                        <Label className="text-sm font-medium block">Välj kryptovaluta:</Label>
-                        <div className="grid grid-cols-3 gap-3">
+                      <div className="bg-white/60 rounded-2xl p-6 space-y-6 border border-[#064F8C]/10">
+                        <Label className="text-lg font-lora font-semibold text-[#064F8C] block">Välj kryptovaluta:</Label>
+                        <div className="grid grid-cols-3 gap-4">
                           {popularCryptos.map((crypto) => {
                             const IconComponent = crypto.icon;
                             return (
@@ -329,24 +329,24 @@ export default function Checkout() {
                                 key={crypto.code}
                                 type="button"
                                 onClick={() => setSelectedCrypto(crypto.code)}
-                                className={`flex flex-col items-center p-3 border rounded-lg transition-all ${
+                                className={`flex flex-col items-center p-4 border-2 rounded-2xl transition-all shadow-sm ${
                                   selectedCrypto === crypto.code
-                                    ? 'border-charcoal bg-white shadow-md'
-                                    : 'border-gray-300 hover:border-gray-400 bg-white'
+                                    ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg'
+                                    : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
                                 }`}
                               >
-                                <IconComponent className={`h-6 w-6 mb-1 ${crypto.color}`} />
-                                <span className="text-sm font-medium">{crypto.code.toUpperCase()}</span>
+                                <IconComponent className={`h-8 w-8 mb-2 ${crypto.color}`} />
+                                <span className="text-base font-dm-sans font-medium text-[#064F8C]">{crypto.code.toUpperCase()}</span>
                               </button>
                             );
                           })}
                         </div>
                         
                         {selectedCrypto && estimate && (
-                          <div className="bg-white rounded-lg p-3 border">
+                          <div className="bg-white rounded-2xl p-4 border border-[#064F8C]/20 shadow-sm">
                             <div className="flex justify-between items-center">
-                              <span className="text-sm text-gray-600">Du kommer att betala:</span>
-                              <span className="font-bold">
+                              <span className="text-base text-[#4A5568] font-dm-sans">Du kommer att betala:</span>
+                              <span className="font-bold text-lg text-[#064F8C] font-dm-sans">
                                 {estimate.estimated_amount || 0} {selectedCrypto.toUpperCase()}
                               </span>
                             </div>
@@ -358,7 +358,7 @@ export default function Checkout() {
                     {!paymentCreated && (
                       <Button 
                         type="submit" 
-                        className="w-full bg-deep-charcoal text-nordic-cream hover:bg-charcoal font-poppins font-medium text-lg py-6 transition-all duration-200"
+                        className="gold-button w-full text-lg py-6 rounded-3xl shadow-lg font-medium mt-8"
                         disabled={createOrderMutation.isPending || (paymentMethod === "crypto" && !selectedCrypto)}
                       >
                         {createOrderMutation.isPending ? "Skapar beställning..." : 
@@ -376,27 +376,27 @@ export default function Checkout() {
           {/* Payment Section */}
           <div>
             {/* Order Summary */}
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Ordersammanfattning</CardTitle>
+            <Card className="mb-8 bg-white shadow-xl border-none">
+              <CardHeader className="pb-6">
+                <CardTitle className="font-cormorant font-bold text-3xl text-[#064F8C]">Ordersammanfattning</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-3 mb-4">
+              <CardContent className="pt-0">
+                <div className="space-y-4 mb-6">
                   {items.map((item) => (
-                    <div key={item.id} className="flex justify-between text-sm">
-                      <span className="text-gray-600">
+                    <div key={item.id} className="flex justify-between text-base">
+                      <span className="text-[#4A5568] font-dm-sans">
                         {item.sellerAlias} - {item.title} × {item.quantity}
                       </span>
-                      <span className="font-medium">
+                      <span className="font-bold text-[#064F8C] font-dm-sans">
                         {(item.priceKr * item.quantity).toLocaleString('sv-SE')} kr
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t pt-3">
-                  <div className="flex justify-between font-bold text-lg">
-                    <span>Totalt:</span>
-                    <span>{totalPrice.toLocaleString('sv-SE')} kr</span>
+                <div className="border-t border-[#064F8C]/20 pt-6">
+                  <div className="flex justify-between font-cormorant font-bold text-2xl">
+                    <span className="text-[#064F8C]">Totalt:</span>
+                    <span className="text-[#064F8C]">{totalPrice.toLocaleString('sv-SE')} kr</span>
                   </div>
                 </div>
               </CardContent>
