@@ -22,6 +22,34 @@ export default function About() {
       {/* Main Content */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
+          {/* Statistics */}
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-[#064F8C] mb-2">10,000+</div>
+                <div className="text-gray-600">Nöjda Kunder</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-[#064F8C] mb-2">98%</div>
+                <div className="text-gray-600">Kundnöjdhet</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-[#064F8C] mb-2">500+</div>
+                <div className="text-gray-600">Verifierade Säljare</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-[#064F8C] mb-2">24/7</div>
+                <div className="text-gray-600">Kundsupport</div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Our Story */}
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
@@ -51,34 +79,6 @@ export default function About() {
                 className="w-full h-auto rounded-xl object-cover"
               />
             </div>
-          </div>
-
-          {/* Statistics */}
-          <div className="grid md:grid-cols-4 gap-6 mb-16">
-            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
-              <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">10,000+</div>
-                <div className="text-gray-600">Nöjda Kunder</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
-              <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">98%</div>
-                <div className="text-gray-600">Kundnöjdhet</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
-              <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">500+</div>
-                <div className="text-gray-600">Verifierade Säljare</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
-              <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">24/7</div>
-                <div className="text-gray-600">Kundsupport</div>
-              </CardContent>
-            </Card>
           </div>
 
           {/* How We Work */}
