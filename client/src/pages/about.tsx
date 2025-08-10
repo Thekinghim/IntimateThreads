@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Heart, Users, Award, Clock, Lock } from "lucide-react";
 import { useTranslations } from "@/hooks/useLanguage";
+import heartUnderwearImage from "@assets/generated_images/Heart_pattern_string_underwear_625c1ba1.png";
 
 export default function About() {
   const t = useTranslations();
@@ -43,26 +44,12 @@ export default function About() {
               </div>
             </div>
             
-            <div className="bg-white/60 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-center">Våra Värderingar</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Shield className="w-6 h-6 text-[#064F8C]" />
-                  <span className="font-medium">Säkerhet först</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Lock className="w-6 h-6 text-[#064F8C]" />
-                  <span className="font-medium">Fullständig diskretion</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Heart className="w-6 h-6 text-[#064F8C]" />
-                  <span className="font-medium">Respekt för alla</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Award className="w-6 h-6 text-[#064F8C]" />
-                  <span className="font-medium">Högsta kvalitet</span>
-                </div>
-              </div>
+            <div className="bg-white/60 p-4 rounded-2xl">
+              <img 
+                src={heartUnderwearImage} 
+                alt="Exklusiva hjärt-trosor" 
+                className="w-full h-auto rounded-xl object-cover"
+              />
             </div>
           </div>
 
