@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import Home from "@/pages/home";
 import Womens from "@/pages/womens";
 import Models from "@/pages/models";
+import About from "@/pages/about";
 import ModelProducts from "@/pages/model-products";
 import Product from "@/pages/product";
 import Cart from "@/pages/cart";
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/womens" component={Womens} />
       <Route path="/models" component={Models} />
+      <Route path="/about" component={About} />
       <Route path="/models/:modelName" component={ModelProducts} />
       <Route path="/product/:id" component={Product} />
       <Route path="/cart" component={Cart} />

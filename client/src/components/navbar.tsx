@@ -45,6 +45,11 @@ export default function Navbar() {
                 Våra modeller
               </span>
             </Link>
+            <Link href="/about">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
+                Om Oss
+              </span>
+            </Link>
             <Link href="/track-order">
               <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
                 {t.trackOrder}
@@ -104,6 +109,11 @@ export default function Navbar() {
               <Link href="/models" onClick={() => setMobileMenuOpen(false)}>
                 <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
                   Våra modeller
+                </span>
+              </Link>
+              <Link href="/about" onClick={() => setMobileMenuOpen(false)}>
+                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
+                  Om Oss
                 </span>
               </Link>
               <Link href="/track-order" onClick={() => setMobileMenuOpen(false)}>
