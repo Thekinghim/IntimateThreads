@@ -1,4 +1,4 @@
-import logoImage from "@assets/generated_images/Swedish_flag_underwear_logo_572d5b33.png";
+import logoImage from "@assets/sverige_1754848613465.png";
 
 interface LogoProps {
   className?: string;
@@ -17,7 +17,8 @@ export default function Logo({ className = "", size = "md" }: LogoProps) {
       <img 
         src={logoImage} 
         alt="Scandiscent Logo" 
-        className={`${sizeClasses[size]} object-contain`}
+        className={`${sizeClasses[size]} object-contain bg-transparent`}
+        style={{ backgroundColor: 'transparent' }}
       />
       <span className="text-xl font-light tracking-wide">Scandiscent</span>
     </div>

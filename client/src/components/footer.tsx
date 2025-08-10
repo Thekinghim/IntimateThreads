@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import logoImage from "@assets/sverige_1754848613465.png";
 
 export default function Footer() {
   return (
@@ -7,9 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-4 mb-8">
-              <div className="w-16 h-16 gradient-rose rounded-3xl flex items-center justify-center shadow-luxury">
-                <span className="text-deep-charcoal font-bold text-2xl font-poppins">S</span>
-              </div>
+              <img 
+                src={logoImage} 
+                alt="Scandiscent Logo" 
+                className="w-16 h-16 object-contain bg-transparent"
+                style={{ backgroundColor: 'transparent' }}
+              />
               <div className="flex flex-col">
                 <h4 className="font-poppins font-bold text-3xl text-[#064F8C]">Scandiscent</h4>
               </div>
