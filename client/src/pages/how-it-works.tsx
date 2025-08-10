@@ -5,80 +5,86 @@ import { Search, CreditCard, Truck, Gift, KeyRound, Shield, Package } from "luci
 
 export default function HowItWorks() {
   return (
-    <div className="min-h-screen bg-soft-white">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Hero Section */}
-      <section className="warm-beige py-16">
+      <section className="bg-gradient-to-b from-[#064F8C] to-[#111B3E] py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-poppins font-medium text-4xl text-charcoal mb-6">Så funkar det</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <h1 className="font-cormorant font-bold text-6xl text-white mb-6">Så funkar det</h1>
+          <p className="text-xl text-white/90 max-w-2xl mx-auto font-dm-sans">
             Enkel, diskret och säker process från beställning till leverans. Vi värnar om din integritet i varje steg.
           </p>
         </div>
       </section>
 
       {/* Process Steps */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-[#F5F1E8]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+          <div className="text-center mb-16">
+            <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-6">Så går det till</h2>
+            <p className="text-xl text-[#4A5568] max-w-3xl mx-auto font-dm-sans">
+              Fyra enkla steg från val till leverans
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Step 1 */}
-            <Card className="text-center relative overflow-hidden">
+            <Card className="text-center relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
               <CardContent className="p-8">
-                <div className="bg-warm-beige rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                  <Search className="h-8 w-8 text-powder-pink" />
+                <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <Search className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute top-4 right-4 bg-charcoal text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                <div className="absolute top-4 right-4 gold-gradient text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold shadow-lg">
                   1
                 </div>
-                <h3 className="font-poppins font-medium text-xl text-charcoal mb-4">Utforska & Välj</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Utforska & Välj</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Bläddra genom vår exklusiva kollektion av plagg från verifierade nordiska kvinnor. Varje produkt har detaljerad beskrivning och är kvalitetskontrollerad.
                 </p>
               </CardContent>
             </Card>
 
             {/* Step 2 */}
-            <Card className="text-center relative overflow-hidden">
+            <Card className="text-center relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
               <CardContent className="p-8">
-                <div className="bg-warm-beige rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                  <CreditCard className="h-8 w-8 text-powder-pink" />
+                <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <CreditCard className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute top-4 right-4 bg-charcoal text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                <div className="absolute top-4 right-4 gold-gradient text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold shadow-lg">
                   2
                 </div>
-                <h3 className="font-poppins font-medium text-xl text-charcoal mb-4">Diskret Betalning</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Diskret Betalning</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Betala säkert med kryptovaluta (BTC, ETH, USDT), Revolut eller Gumroad. Alla betalningar är krypterade och helt anonyma.
                 </p>
               </CardContent>
             </Card>
 
             {/* Step 3 */}
-            <Card className="text-center relative overflow-hidden">
+            <Card className="text-center relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
               <CardContent className="p-8">
-                <div className="bg-warm-beige rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                  <Package className="h-8 w-8 text-powder-pink" />
+                <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <Package className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute top-4 right-4 bg-charcoal text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                <div className="absolute top-4 right-4 gold-gradient text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold shadow-lg">
                   3
                 </div>
-                <h3 className="font-poppins font-medium text-xl text-charcoal mb-4">Förpackning</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Förpackning</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Plagget förpackas diskret av säljaren i neutral, ren förpackning utan logotyper eller avslöjande märkningar.
                 </p>
               </CardContent>
             </Card>
 
             {/* Step 4 */}
-            <Card className="text-center relative overflow-hidden">
+            <Card className="text-center relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
               <CardContent className="p-8">
-                <div className="bg-warm-beige rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                  <Truck className="h-8 w-8 text-powder-pink" />
+                <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <Truck className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute top-4 right-4 bg-charcoal text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                <div className="absolute top-4 right-4 gold-gradient text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold shadow-lg">
                   4
                 </div>
-                <h3 className="font-poppins font-medium text-xl text-charcoal mb-4">Säker Leverans</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Säker Leverans</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Paketet skickas med spårbar post inom 3-5 arbetsdagar. Du får spårningsinformation via email.
                 </p>
               </CardContent>
@@ -88,24 +94,24 @@ export default function HowItWorks() {
       </section>
 
       {/* Detailed Information */}
-      <section className="warm-beige py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-poppins font-medium text-3xl text-charcoal text-center mb-12">
+      <section className="bg-gradient-to-b from-white to-[#F5F1E8] py-20">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
+          <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] text-center mb-16">
             Vad gör oss olika?
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-powder-pink rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <KeyRound className="h-6 w-6 text-charcoal" />
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-6">
+                  <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <KeyRound className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">
+                    <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                       Fullständig Anonymitet
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                       Varken du eller säljaren behöver avslöja riktiga namn. Vi använder alias och skyddar alla personuppgifter enligt GDPR.
                     </p>
                   </div>
@@ -113,17 +119,17 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-powder-pink rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <Shield className="h-6 w-6 text-charcoal" />
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-6">
+                  <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <Shield className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">
+                    <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                       Säkra Betalningar
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                       Kryptovaluta-betalningar via NOWPayments.io ger maximal anonymitet. Inga transaktionshistorier sparas.
                     </p>
                   </div>
@@ -131,17 +137,17 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-powder-pink rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <Package className="h-6 w-6 text-charcoal" />
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-6">
+                  <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <Package className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">
+                    <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                       Kvalitetskontroll
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                       Alla säljare är verifierade och alla produkter kvalitetskontrolleras för att säkerställa bästa möjliga upplevelse.
                     </p>
                   </div>
@@ -149,17 +155,17 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-powder-pink rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <Gift className="h-6 w-6 text-charcoal" />
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-6">
+                  <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <Gift className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">
+                    <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                       Diskret Leverans
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                       Neutral förpackning, anonyma avsändare och mottagaruppsättningar som skyddar din integritet helt.
                     </p>
                   </div>
@@ -171,21 +177,21 @@ export default function HowItWorks() {
       </section>
 
       {/* Payment Methods */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-poppins font-medium text-3xl text-charcoal text-center mb-12">
+      <section className="py-20 bg-[#F5F1E8]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
+          <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] text-center mb-16">
             Accepterade Betalningsmetoder
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <CreditCard className="h-8 w-8 text-orange-600" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <CreditCard className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">Kryptovaluta</h3>
-                <p className="text-gray-600 text-sm mb-4">Bitcoin, Ethereum, USDT och 300+ andra kryptovalutor</p>
-                <div className="text-xs text-gray-500">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Kryptovaluta</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans mb-6 leading-relaxed">Bitcoin, Ethereum, USDT och 300+ andra kryptovalutor</p>
+                <div className="text-sm text-[#4A5568] font-dm-sans">
                   ✓ Maximal anonymitet<br/>
                   ✓ Inga transaktionshistorik<br/>
                   ✓ Direkta betalningar
@@ -193,14 +199,14 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <CreditCard className="h-8 w-8 text-blue-600" />
+            <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <CreditCard className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">Revolut</h3>
-                <p className="text-gray-600 text-sm mb-4">Snabba och säkra banköverföringar</p>
-                <div className="text-xs text-gray-500">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Revolut</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans mb-6 leading-relaxed">Snabba och säkra banköverföringar</p>
+                <div className="text-sm text-[#4A5568] font-dm-sans">
                   ✓ Snabba transaktioner<br/>
                   ✓ Europeisk standard<br/>
                   ✓ Säker hantering
@@ -208,14 +214,14 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <CreditCard className="h-8 w-8 text-green-600" />
+            <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <CreditCard className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="font-poppins font-medium text-lg text-charcoal mb-2">Gumroad</h3>
-                <p className="text-gray-600 text-sm mb-4">Säkra betalningar via etablerad plattform</p>
-                <div className="text-xs text-gray-500">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Gumroad</h3>
+                <p className="text-[#4A5568] text-base font-dm-sans mb-6 leading-relaxed">Säkra betalningar via etablerad plattform</p>
+                <div className="text-sm text-[#4A5568] font-dm-sans">
                   ✓ Köparskydd<br/>
                   ✓ Internationellt<br/>
                   ✓ Många betalningsalternativ
@@ -227,43 +233,43 @@ export default function HowItWorks() {
       </section>
 
       {/* FAQ Section */}
-      <section className="warm-beige py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-poppins font-medium text-3xl text-charcoal text-center mb-12">
+      <section className="bg-gradient-to-b from-white to-[#F5F1E8] py-20">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10">
+          <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] text-center mb-16">
             Vanliga Frågor
           </h2>
           
-          <div className="space-y-6">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-poppins font-medium text-lg text-charcoal mb-3">
+          <div className="space-y-8">
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                   Är det verkligen anonymt?
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Ja, vi använder alias för alla parter och kryptovaluta-betalningar lämnar inga digitala fotspår. 
                   Leveransadresser hanteras diskret och all kommunikation sker via vår plattform.
                 </p>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-poppins font-medium text-lg text-charcoal mb-3">
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                   Hur vet jag att produkterna är äkta?
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Alla säljare genomgår en verifieringsprocess och alla produkter kontrolleras innan listning. 
                   Vi har nolltolerans mot falska annonser.
                 </p>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-poppins font-medium text-lg text-charcoal mb-3">
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
                   Vad händer om jag inte är nöjd?
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
                   Vi erbjuder diskret kundservice och arbetar för att lösa eventuella problem. 
                   På grund av produkternas natur kan vi inte erbjuda returer, men vi tar alla klagomål på allvar.
                 </p>
@@ -274,22 +280,22 @@ export default function HowItWorks() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-poppins font-medium text-3xl text-charcoal mb-6">
+      <section className="bg-gradient-to-b from-[#064F8C] to-[#111B3E] py-24">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 text-center">
+          <h2 className="font-cormorant font-bold text-5xl text-white mb-8">
             Redo att börja?
           </h2>
-          <p className="text-gray-600 text-lg mb-8">
+          <p className="text-white/90 text-xl mb-12 font-dm-sans max-w-3xl mx-auto leading-relaxed">
             Utforska vår exklusiva kollektion och upplev diskret shopping på en ny nivå.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/collection">
-              <Button size="lg" className="bg-charcoal text-white hover:bg-gray-800 font-poppins font-medium px-8 py-4">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link href="/womens">
+              <Button size="lg" className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg">
                 Utforska Kollektion
               </Button>
             </Link>
             <Link href="/">
-              <Button variant="outline" size="lg" className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white font-poppins font-medium px-8 py-4">
+              <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-[#064F8C] font-dm-sans font-medium px-12 py-6 text-xl rounded-3xl">
                 Tillbaka till startsidan
               </Button>
             </Link>
