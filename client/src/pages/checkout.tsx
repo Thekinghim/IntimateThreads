@@ -52,7 +52,7 @@ export default function Checkout() {
   const paymentMethod = form.watch("paymentMethod");
 
   // Get crypto estimate
-  const { data: estimate, isLoading: isEstimateLoading } = useQuery({
+  const { data: estimate, isLoading: isEstimateLoading } = useQuery<{ estimated_amount: number }>({
     queryKey: ['/api/nowpayments/estimate', totalPrice, 'sek', selectedCrypto],
     enabled: paymentMethod === "crypto" && totalPrice > 0,
   });
@@ -342,13 +342,12 @@ export default function Checkout() {
                           })}
                         </div>
                         
-                        {/* Show estimate immediately */}
                         {selectedCrypto && estimate && (
                           <div className="bg-white rounded-lg p-3 border">
                             <div className="flex justify-between items-center">
                               <span className="text-sm text-gray-600">Du kommer att betala:</span>
                               <span className="font-bold">
-                                {(estimate as any)?.estimated_amount || 0} {selectedCrypto.toUpperCase()}
+                                {estimate.estimated_amount || 0} {selectedCrypto.toUpperCase()}
                               </span>
                             </div>
                           </div>
