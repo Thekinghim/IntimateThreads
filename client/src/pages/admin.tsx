@@ -220,7 +220,7 @@ export default function Admin() {
       case "pending":
         return <Badge variant="secondary"><Clock className="h-3 w-3 mr-1" />Väntande</Badge>;
       case "confirmed":
-        return <Badge className="bg-blue-100 text-blue-800"><CheckCircle className="h-3 w-3 mr-1" />Bekräftad</Badge>;
+        return <Badge className="bg-[#064F8C]/10 text-[#064F8C] border border-[#064F8C]/20"><CheckCircle className="h-3 w-3 mr-1" />Bekräftad</Badge>;
       case "shipped":
         return <Badge className="bg-purple-100 text-purple-800"><Truck className="h-3 w-3 mr-1" />Skickad</Badge>;
       case "completed":

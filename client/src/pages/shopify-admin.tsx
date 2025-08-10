@@ -139,7 +139,7 @@ export default function ShopifyAdmin() {
   const getStatusBadge = (status: string) => {
     const variants: Record<string, string> = {
       pending: "bg-yellow-100 text-yellow-800",
-      confirmed: "bg-blue-100 text-blue-800", 
+      confirmed: "bg-[#064F8C]/10 text-[#064F8C] border border-[#064F8C]/20", 
       shipped: "bg-purple-100 text-purple-800",
       completed: "bg-green-100 text-green-800",
       cancelled: "bg-red-100 text-red-800",
@@ -221,8 +221,8 @@ export default function ShopifyAdmin() {
             <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 lg:gap-4 mb-6 lg:mb-8">
               <div className="bg-white/40 backdrop-blur-sm rounded-xl lg:rounded-2xl p-3 lg:p-4 border border-dusty-rose/20">
                 <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 lg:w-8 lg:h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <ShoppingBag className="h-3 w-3 lg:h-4 lg:w-4 text-blue-600" />
+                  <div className="w-6 h-6 lg:w-8 lg:h-8 bg-[#064F8C]/10 rounded-lg flex items-center justify-center">
+                    <ShoppingBag className="h-3 w-3 lg:h-4 lg:w-4 text-[#064F8C]" />
                   </div>
                   <div>
                     <p className="text-lg lg:text-2xl font-bold text-deep-charcoal">{stats.totalOrders}</p>

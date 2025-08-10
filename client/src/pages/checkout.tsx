@@ -285,7 +285,7 @@ export default function Checkout() {
                                       : 'border-gray-300 hover:border-gray-400'
                                   }`}
                                 >
-                                  <CreditCard className="h-6 w-6 mr-3 text-blue-500" />
+                                  <CreditCard className="h-6 w-6 mr-3 text-[#064F8C]" />
                                   <div>
                                     <div className="font-medium text-lg">Revolut</div>
                                     <div className="text-sm text-gray-600">Mobil betalning med Revolut-appen</div>
