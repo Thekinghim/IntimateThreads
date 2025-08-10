@@ -182,7 +182,7 @@ font-extrabold drop-shadow-lg"
       <section className="py-16 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center mb-16">
-            <h3 className="font-bold text-5xl text-[#2D3748] mb-8">
+            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
               Så Funkar Det
             </h3>
             <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">
@@ -249,7 +249,7 @@ font-extrabold drop-shadow-lg"
       <section className="py-20 relative overflow-hidden bg-[#F5F1E8]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
-            <h3 className="font-bold text-5xl text-[#2D3748] mb-8">
+            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
               Upptäck Diskret Elegans
             </h3>
             <p className="text-[#4A5568] text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-12">
