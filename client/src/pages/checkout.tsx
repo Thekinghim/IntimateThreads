@@ -208,9 +208,13 @@ export default function Checkout() {
                       name="customerName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Name (or Anonymous Alias)</FormLabel>
+                          <FormLabel className="text-base font-lora font-medium text-[#064F8C]">Name (or Anonymous Alias)</FormLabel>
                           <FormControl>
-                            <Input placeholder="Anonymous User, A.N., etc." {...field} />
+                            <Input 
+                              placeholder="Anonymous User, A.N., etc." 
+                              {...field} 
+                              className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-[#064F8C] placeholder-gray-500 rounded-xl h-12 px-4 font-dm-sans"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -222,9 +226,14 @@ export default function Checkout() {
                       name="customerEmail"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>E-postadress</FormLabel>
+                          <FormLabel className="text-base font-lora font-medium text-[#064F8C]">E-postadress</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="din.email@exempel.se" {...field} />
+                            <Input 
+                              type="email" 
+                              placeholder="din.email@exempel.se" 
+                              {...field} 
+                              className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-[#064F8C] placeholder-gray-500 rounded-xl h-12 px-4 font-dm-sans"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -236,9 +245,13 @@ export default function Checkout() {
                       name="shippingAddress"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Leveransadress</FormLabel>
+                          <FormLabel className="text-base font-lora font-medium text-[#064F8C]">Leveransadress</FormLabel>
                           <FormControl>
-                            <Input placeholder="Fullständig adress med postnummer och ort" {...field} />
+                            <Input 
+                              placeholder="Fullständig adress med postnummer och ort" 
+                              {...field} 
+                              className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-[#064F8C] placeholder-gray-500 rounded-xl h-12 px-4 font-dm-sans"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -250,7 +263,7 @@ export default function Checkout() {
                       name="paymentMethod"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-lg font-semibold">Välj betalningsmetod</FormLabel>
+                          <FormLabel className="text-xl font-lora font-semibold text-[#064F8C]">Välj betalningsmetod</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
