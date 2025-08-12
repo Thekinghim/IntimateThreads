@@ -24,7 +24,7 @@ export default function EmmaProfile() {
       <div className="relative h-96 bg-gradient-to-r from-[#064F8C] to-[#111B3E] flex items-center justify-center">
         <div className="text-center text-white">
           <div className="text-8xl mb-4">👱‍♀️</div>
-          <h1 className="font-cormorant font-bold text-5xl">Emma</h1>
+          <h1 className="font-cormorant font-bold text-5xl gold-text-static">Emma</h1>
           <p className="font-dm-sans text-xl mt-2 opacity-90">24 år • Stockholm</p>
         </div>
       </div>
