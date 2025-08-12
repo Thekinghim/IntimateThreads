@@ -32,34 +32,42 @@ export default function EmmaProfile() {
         </div>
 
         {/* Model Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="text-center group">
-            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
-              <MapPin className="h-10 w-10 text-white" />
+        <div className="flex justify-center items-center gap-12 mb-8 flex-wrap">
+          <div className="flex items-center gap-4 group">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
+              <MapPin className="h-8 w-8 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Ursprung</div>
-            <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Ursprung</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
+            </div>
           </div>
-          <div className="text-center group">
-            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Ruler className="h-10 w-10 text-white" />
+          <div className="flex items-center gap-4 group">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Ruler className="h-8 w-8 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Längd</div>
-            <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Längd</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
+            </div>
           </div>
-          <div className="text-center group">
-            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Weight className="h-10 w-10 text-white" />
+          <div className="flex items-center gap-4 group">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Weight className="h-8 w-8 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Vikt</div>
-            <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Vikt</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
+            </div>
           </div>
-          <div className="text-center group">
-            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Shirt className="h-10 w-10 text-white" />
+          <div className="flex items-center gap-4 group">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Shirt className="h-8 w-8 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Storlek</div>
-            <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Storlek</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
+            </div>
           </div>
         </div>
 
@@ -76,7 +84,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* About Section */}
-        <Card className="bg-white shadow-lg border-none p-8 mb-8">
+        <div className="p-8 mb-8">
           <h1 className="font-cormorant font-bold text-4xl text-[#064F8C] mb-6">Om Emma</h1>
           <h2 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Aktiv sedan 2 år</h2>
           <p className="font-dm-sans text-[#4A5568] text-lg leading-relaxed">
@@ -86,10 +94,10 @@ export default function EmmaProfile() {
             och sina äkta upplevelser som hon delar med sina kunder. Emma älskar intimitet, 
             rollspel och romantiska stunder.
           </p>
-        </Card>
+        </div>
 
         {/* Secrets Section */}
-        <Card className="bg-white shadow-lg border-none p-8">
+        <div className="p-8">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Secrets</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -117,7 +125,7 @@ export default function EmmaProfile() {
               </p>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );
