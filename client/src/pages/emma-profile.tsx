@@ -62,7 +62,6 @@ export default function EmmaProfile() {
                 <ArrowLeft className="h-8 w-8 text-white" />
               </div>
               <div>
-                <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Navigation</div>
                 <div className="font-cormorant font-bold text-lg text-[#064F8C]">Tillbaka till Modeller</div>
               </div>
             </div>
