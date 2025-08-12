@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, MapPin, Ruler, Weight, Crop, Zap } from "lucide-react";
+import { ArrowLeft, MapPin, Ruler, Weight, Square, Triangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -55,14 +55,14 @@ export default function EmmaProfile() {
           </div>
           <div className="text-center group">
             <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Crop className="h-12 w-12 text-white" />
+              <Square className="h-12 w-12 text-white" />
             </div>
             <div className="font-dm-sans text-sm text-[#4A5568] mb-2">BH-storlek</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">75B</div>
           </div>
           <div className="text-center group">
             <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Zap className="h-12 w-12 text-white" />
+              <Triangle className="h-12 w-12 text-white" />
             </div>
             <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Trosstorlek</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
