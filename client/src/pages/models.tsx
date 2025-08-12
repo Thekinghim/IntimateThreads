@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Star, Sparkles, Coffee } from 'lucide-react';
 import { Link } from 'wouter';
 import PrivacyBanner from '@/components/privacy-banner';
+import modelsHeroImage from '@/assets/cj4_1755033026450.jpg';
 
 interface Model {
   id: string;
@@ -126,12 +127,17 @@ export default function ModelsPage() {
       <PrivacyBanner />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[#064F8C] to-[#111B3E] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-cormorant font-bold text-5xl md:text-6xl mb-4">
+      <div 
+        className="relative text-white py-32 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${modelsHeroImage}')`
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="font-cormorant font-bold text-5xl md:text-6xl mb-4 drop-shadow-lg">
             Våra Modeller
           </h1>
-          <p className="text-xl font-dm-sans text-white/90 max-w-2xl mx-auto">
+          <p className="text-xl font-dm-sans text-white/95 max-w-2xl mx-auto drop-shadow-md">
             Möt våra verifierade och erfarna modeller som erbjuder unika och personliga upplevelser
           </p>
         </div>
