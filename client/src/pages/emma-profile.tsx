@@ -55,14 +55,14 @@ export default function EmmaProfile() {
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Button */}
-        <div className="flex justify-start mb-8">
+        <div className="flex justify-start -ml-6 mb-8">
           <Link href="/models">
-            <div className="flex items-center gap-4 cursor-pointer">
-              <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
-                <ArrowLeft className="h-8 w-8 text-white" />
+            <div className="flex items-center gap-3 cursor-pointer">
+              <div className="w-12 h-12 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+                <ArrowLeft className="h-6 w-6 text-white" />
               </div>
               <div>
-                <div className="font-cormorant font-bold text-lg text-[#064F8C]">Tillbaka till Modeller</div>
+                <div className="font-cormorant font-bold text-base text-[#064F8C]">Tillbaka till Modeller</div>
               </div>
             </div>
           </Link>
