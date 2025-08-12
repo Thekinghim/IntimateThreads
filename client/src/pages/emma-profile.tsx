@@ -55,7 +55,7 @@ export default function EmmaProfile() {
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Button */}
-        <div className="flex justify-start -ml-6 mb-8">
+        <div className="flex justify-start -ml-12 mb-8">
           <Link href="/models">
             <div className="flex items-center gap-3 cursor-pointer">
               <div className="w-12 h-12 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
