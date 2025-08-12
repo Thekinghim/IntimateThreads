@@ -90,9 +90,9 @@ export default function EmmaProfile() {
 
         {/* Secrets Section */}
         <Card className="bg-white shadow-lg border-none p-8">
-          <h1 className="font-cormorant font-bold text-4xl text-[#064F8C] mb-8">Emmas Secrets</h1>
+          <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Secrets</h1>
           
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h2 className="font-lora font-semibold text-2xl text-[#064F8C] mb-3">Naturlig Skönhet</h2>
               <p className="font-dm-sans text-[#4A5568] leading-relaxed">
