@@ -1,9 +1,25 @@
 import { Link } from "wouter";
-import { ArrowLeft, MapPin, Ruler, Weight, Shirt, ArrowDown } from "lucide-react";
+import { ArrowLeft, MapPin, Ruler, Weight, Shirt, ArrowDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useState } from "react";
+import cj1 from "@assets/cj_1755031566269.jpg";
+import cj2 from "@assets/cj2_1755031566270.webp";
+import cj3 from "@assets/cj3_1755031566270.webp";
+import cj4 from "@assets/cj4_1755031566271.jpg";
+import cj5 from "@assets/cj5_1755031566271.webp";
 
 export default function EmmaProfile() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  
+  const galleryImages = [
+    { src: cj1, alt: "Emma Gallery 1" },
+    { src: cj2, alt: "Emma Gallery 2" },
+    { src: cj3, alt: "Emma Gallery 3" },
+    { src: cj4, alt: "Emma Gallery 4" },
+    { src: cj5, alt: "Emma Gallery 5" }
+  ];
+
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
       {/* Header */}
@@ -144,44 +160,38 @@ export default function EmmaProfile() {
         <div className="p-8 mt-8">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Galleri</h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
+          <div className="grid grid-cols-3 gap-4">
+            {galleryImages.map((image, index) => (
+              <div key={index} className="aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer">
+                <img 
+                  src={image.src} 
+                  alt={image.alt} 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  onClick={() => setSelectedImage(image.src)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Image Modal */}
+        {selectedImage && (
+          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
+            <div className="relative max-w-4xl max-h-full">
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-4 -right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
+              >
+                <X className="h-6 w-6 text-gray-800" />
+              </button>
               <img 
-                src="@assets/cj_1755031566269.jpg" 
-                alt="Emma Gallery 1" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="@assets/cj2_1755031566270.webp" 
-                alt="Emma Gallery 2" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="@assets/cj3_1755031566270.webp" 
-                alt="Emma Gallery 3" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="@assets/cj4_1755031566271.jpg" 
-                alt="Emma Gallery 4" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="@assets/cj5_1755031566271.webp" 
-                alt="Emma Gallery 5" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                src={selectedImage} 
+                alt="Förstorad bild" 
+                className="max-w-full max-h-full object-contain rounded-lg"
               />
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
