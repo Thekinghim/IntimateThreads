@@ -41,16 +41,14 @@ export default function EmmaProfile() {
       </div>
 
       {/* Gallery Arrow Indicator */}
-      <div className="relative flex justify-center -mt-8 mb-4 z-10">
-        <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
-            <ArrowDown className="h-8 w-8 text-white animate-bounce" />
-          </div>
-          <div>
-            <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Se mer</div>
-            <div className="font-cormorant font-bold text-lg text-[#064F8C]">Emmas Galleri</div>
-          </div>
-        </div>
+      <div className="relative flex justify-start ml-8 -mt-8 mb-4 z-10">
+        <Button
+          onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
+          className="gold-button font-medium px-8 py-4 text-lg rounded-3xl shadow-lg flex items-center gap-3"
+        >
+          <ArrowDown className="h-6 w-6 animate-bounce" />
+          Emmas Galleri
+        </Button>
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
@@ -157,7 +155,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* Gallery Section */}
-        <div className="p-8 mt-8">
+        <div id="gallery" className="p-8 mt-8">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Galleri</h1>
           
           <div className="grid grid-cols-3 gap-4">
