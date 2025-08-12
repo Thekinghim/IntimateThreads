@@ -7,18 +7,22 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { type ProductWithSeller } from "@shared/schema";
 
 export default function ModelProductsPage() {
-  const { modelName } = useParams<{ modelName: string }>();
+  const { modelName, modelSlug } = useParams<{ modelName?: string; modelSlug?: string }>();
+  
+  // Use either modelName (old route) or modelSlug (new route)
+  const currentModelName = modelSlug || modelName;
   
   // Mapping from model display names to seller aliases in database
   const modelToSellerMap: Record<string, string> = {
     "astrid-nordstrom": "Astrid",
     "emma-lindqvist": "Emma", 
-    "sara-andersson": "Emma", // Using Emma as fallback since we only have 3 sellers
-    "nina-karlsson": "Linnea",
+    "sofia-andersson": "Astrid", // Using Astrid as mapping
+    "lina-karlsson": "Linnea",
+    "anna-nilsson": "Emma", // Using Emma as mapping
     "maja-eriksson": "Linnea"
   };
 
-  const sellerAlias = modelToSellerMap[modelName || ""];
+  const sellerAlias = modelToSellerMap[currentModelName || ""];
   
   const { data: allProducts, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
@@ -41,7 +45,7 @@ export default function ModelProductsPage() {
     return modelInfo[modelKey] || { name: "OKÄND MODELL", displayName: "Okänd" };
   };
 
-  const modelInfo = getModelDisplayInfo(modelName || "");
+  const modelInfo = getModelDisplayInfo(currentModelName || "");
 
   if (!sellerAlias) {
     return (

@@ -26,10 +26,10 @@ interface Model {
 // Mapping from model IDs to URL slugs for navigation
 const modelUrlSlugs: Record<string, string> = {
   emma: 'emma-lindqvist',
-  sofia: 'astrid-nordstrom', // Using available seller mapping
-  lina: 'nina-karlsson',
-  anna: 'maja-eriksson',
-  maja: 'astrid-nordstrom' // Using available seller mapping
+  sofia: 'sofia-andersson',
+  lina: 'lina-karlsson',
+  anna: 'anna-nilsson',
+  maja: 'maja-eriksson'
 };
 
 const models: Model[] = [
@@ -222,7 +222,7 @@ export default function ModelsPage() {
 
                 {/* Action Button */}
                 <div>
-                  <Link href={`/models/${modelUrlSlugs[model.id]}`}>
+                  <Link href={`/profile/${modelUrlSlugs[model.id]}`}>
                     <Button className="w-full bg-gradient-to-r from-[#064F8C] to-[#111B3E] hover:from-[#053d6b] hover:to-[#0d1426] text-white font-dm-sans">
                       Se profil & produkter
                     </Button>
