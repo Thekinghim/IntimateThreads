@@ -172,7 +172,7 @@ font-extrabold drop-shadow-lg"
                 size="lg"
                 className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
               >
-                Se Hela Kollektionen
+                Se alla trosor
               </Button>
             </Link>
           </div>
