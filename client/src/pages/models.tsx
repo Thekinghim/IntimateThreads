@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Star, Sparkles, Coffee } from 'lucide-react';
+import { Link } from 'wouter';
 import PrivacyBanner from '@/components/privacy-banner';
 
 interface Model {
@@ -21,6 +22,15 @@ interface Model {
   premium: boolean;
   tags: string[];
 }
+
+// Mapping from model IDs to URL slugs for navigation
+const modelUrlSlugs: Record<string, string> = {
+  emma: 'emma-lindqvist',
+  sofia: 'astrid-nordstrom', // Using available seller mapping
+  lina: 'nina-karlsson',
+  anna: 'maja-eriksson',
+  maja: 'astrid-nordstrom' // Using available seller mapping
+};
 
 const models: Model[] = [
   {
@@ -212,9 +222,11 @@ export default function ModelsPage() {
 
                 {/* Action Button */}
                 <div>
-                  <Button className="w-full bg-gradient-to-r from-[#064F8C] to-[#111B3E] hover:from-[#053d6b] hover:to-[#0d1426] text-white font-dm-sans">
-                    Se profil & produkter
-                  </Button>
+                  <Link href={`/models/${modelUrlSlugs[model.id]}`}>
+                    <Button className="w-full bg-gradient-to-r from-[#064F8C] to-[#111B3E] hover:from-[#053d6b] hover:to-[#0d1426] text-white font-dm-sans">
+                      Se profil & produkter
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
