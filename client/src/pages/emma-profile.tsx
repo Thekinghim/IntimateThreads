@@ -120,15 +120,17 @@ export default function EmmaProfile() {
 
         {/* About Section */}
         <div className="p-8 mb-8">
-          <h1 className="font-cormorant font-bold text-4xl text-[#064F8C] mb-6">Om Emma</h1>
-          <h2 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Aktiv sedan 2 år</h2>
-          <p className="font-dm-sans text-[#4A5568] text-lg leading-relaxed">
-            Emma är en spontan och lekfull tjej som älskar att utforska nya upplevelser. 
-            Hon trivs med att vara naturlig och äkta i allt hon gör. Emma kommer från Stockholm 
-            och har varit aktiv på plattformen i två år. Hon är känd för sin varma personlighet 
-            och sina äkta upplevelser som hon delar med sina kunder. Emma älskar intimitet, 
-            rollspel och romantiska stunder.
-          </p>
+          <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Om Emma</h1>
+          <div className="text-center">
+            <h2 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Aktiv sedan 2 år</h2>
+            <p className="font-dm-sans text-[#4A5568] text-lg leading-relaxed max-w-3xl mx-auto">
+              Emma är en spontan och lekfull tjej som älskar att utforska nya upplevelser. 
+              Hon trivs med att vara naturlig och äkta i allt hon gör. Emma kommer från Stockholm 
+              och har varit aktiv på plattformen i två år. Hon är känd för sin varma personlighet 
+              och sina äkta upplevelser som hon delar med sina kunder. Emma älskar intimitet, 
+              rollspel och romantiska stunder.
+            </p>
+          </div>
         </div>
 
         {/* Secrets Section */}
