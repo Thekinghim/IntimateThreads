@@ -196,8 +196,7 @@ font-extrabold drop-shadow-lg"
                 1. Välj
               </h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                Bläddra igenom vår exklusiva kollektion och välj det plagg som
-                tilltalar dig mest.
+                Bläddra igenom vår exklusiva kollektion med fullständig anonymitet och välj det plagg som tilltalar dig mest.
               </p>
             </div>
 
@@ -206,11 +205,10 @@ font-extrabold drop-shadow-lg"
                 <CreditCard className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
-                2. Betala
+                2. Säker Betalning
               </h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                Diskret betalning via kryptovaluta, Revolut eller andra säkra
-                betalningsmetoder.
+                Diskret och säker betalning via kryptovaluta, Revolut eller andra krypterade betalningsmetoder.
               </p>
             </div>
 
@@ -232,11 +230,10 @@ font-extrabold drop-shadow-lg"
                 <Gift className="h-12 w-12 text-white" />
               </div>
               <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
-                4. Få Hem
+                4. Diskret Leverans
               </h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                Motta ditt paket hemma med fullständig anonymitet och
-                diskretion.
+                Motta ditt paket hemma i neutral förpackning utan avslöjande märkningar eller logotyper.
               </p>
             </div>
           </div>
@@ -249,49 +246,7 @@ font-extrabold drop-shadow-lg"
             <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
               Upptäck Diskret Elegans
             </h3>
-            <p className="text-[#4A5568] text-2xl max-w-4xl mx-auto font-light leading-relaxed mb-12">
-              Varje plagg berättar sin egen historia med fullständig anonymitet
-              och tidlös elegans
-            </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-              <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <KeyRound className="h-10 w-10 text-white" />
-                </div>
-                <h4 className="font-bold text-2xl text-[#2D3748] mb-4">
-                  Fullständig Anonymitet
-                </h4>
-                <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                  All kommunikation och leverans sker diskret utan avslöjande
-                  information
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <Gift className="h-10 w-10 text-white" />
-                </div>
-                <h4 className="font-bold text-2xl text-[#2D3748] mb-4">
-                  Diskret Förpackning
-                </h4>
-                <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                  Neutral förpackning utan logotyper eller avslöjande märkningar
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-500">
-                  <Shield className="h-10 w-10 text-white" />
-                </div>
-                <h4 className="font-bold text-2xl text-[#2D3748] mb-4">
-                  Säker Betalning
-                </h4>
-                <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                  Krypterade betalningar som garanterar din integritet
-                </p>
-              </div>
-            </div>
 
             <Link href="/collection">
               <Button
