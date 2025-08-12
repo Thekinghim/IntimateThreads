@@ -177,7 +177,7 @@ export default function TrackOrder() {
             <Button 
               onClick={handleTrackWith17track}
               disabled={!trackingNumber.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-3 rounded-lg shadow-lg"
             >
               Track with 17track
             </Button>
@@ -235,7 +235,7 @@ export default function TrackOrder() {
             <Button 
               onClick={handleSearch}
               disabled={!orderIdInput.trim() || !emailInput.trim() || isLoading}
-              className="w-full bg-stone-800 hover:bg-stone-900 text-white"
+              className="w-full gold-button font-medium text-lg py-3 rounded-lg shadow-lg"
             >
               {isLoading ? "Searching..." : "Find My Order"}
             </Button>
@@ -443,7 +443,7 @@ export default function TrackOrder() {
                         setTrackingNumber((order as any).trackingNumber);
                         handleTrackWith17track();
                       }}
-                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                      className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-3 rounded-lg shadow-lg"
                     >
                       Track Package with 17track
                     </Button>
