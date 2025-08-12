@@ -173,10 +173,10 @@ export default function EmmaProfile() {
         </div>
 
         {/* Gallery Section */}
-        <div id="gallery" className="p-8 mt-8">
+        <div id="gallery" className="px-6 py-8 mt-8">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Galleri</h1>
           
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
             {galleryImages.map((image, index) => (
               <div key={index} className="aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer">
                 <img 
