@@ -28,13 +28,15 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
 - Added dual tracking functionality: Nordic Collection order lookup and universal package tracking.
 - Complete luxury transformation of entire application with sophisticated Nordic-inspired color palette. Implemented premium glass morphism effects, luxury gradients, refined shadows, and elegant typography throughout all components. Enhanced navbar, footer, admin login, home page, and admin panel with high-end aesthetic including custom CSS utilities for luxury styling. Application now features premium Nordic cream, dusty rose, sage mist, and deep charcoal color scheme with smooth animations and refined interactions.
 
-**LATEST (Aug 12, 2025 - MODEL PROFILE PAGES RESTORED):**
-- ✅ **INDIVIDUAL MODEL PROFILES RESTORED**: Recreated separate profile pages for all 5 models (Emma, Sofia, Lina, Anna, Maja)
-  * Each model now has dedicated profile page showing detailed bio, specialty, personality, interests, stats
-  * Profile pages include contact options and links to their product collections  
-  * Routing fixed: `/profile/emma`, `/profile/sofia`, `/profile/lina`, `/profile/anna`, `/profile/maja`
-  * "Se profil & produkter" buttons from models page now correctly navigate to individual profiles
-  * Each profile links to respective model's product collection via "Se [Name]s Kollektion" button
+**LATEST (Aug 12, 2025 - UNIFIED MODEL PROFILE REDESIGN):**
+- ✅ **COMPLETE MODEL PROFILE RESTRUCTURE**: Redesigned all model profiles with consistent, professional layout
+  * **Hero Section**: Large banner with emoji, model name, age & location prominently displayed
+  * **Stats Section**: 5 uniform stat cards (Ursprung, Längd, Vikt, BH-storlek, Trosstorlek) with matching blue icons
+  * **Golden Collection Button**: Prominent link to "Använda Trosor" section with gold gradient matching site design
+  * **About Section**: "Om [Name]" with randomized activity duration (1-2 years) and descriptive bio text
+  * **Secrets Section**: "[Name]s Secrets" with 3 unique subsections per model revealing personal details
+  * Models: Emma (2 år aktiv), Sofia (1 år aktiv), Lina (2 år aktiv), Anna (1 år aktiv), Maja (2 år aktiv)
+  * Each model has personalized measurements and unique "secrets" content
 
 **PREVIOUS (Aug 10, 2025 - FILE CLEANUP & OPTIMIZATION):**
 - ✅ **CODEBASE CLEANUP**: Removed duplicate and unused pages to improve maintainability
