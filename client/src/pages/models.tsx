@@ -134,7 +134,7 @@ export default function ModelsPage() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-cormorant font-bold text-5xl md:text-6xl mb-4 drop-shadow-lg">
+          <h1 className="font-cormorant font-bold text-5xl md:text-6xl mb-4 drop-shadow-lg gold-gradient-text">
             Våra Modeller
           </h1>
           <p className="text-xl font-dm-sans text-white/95 max-w-2xl mx-auto drop-shadow-md">
@@ -150,23 +150,23 @@ export default function ModelsPage() {
             Varför välja våra verifierade modeller?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-            <div className="text-center">
-              <div className="bg-[#064F8C]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-[#064F8C]" />
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Star className="h-12 w-12 text-white" />
               </div>
               <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-2">Verifierade profiler</h3>
               <p className="font-dm-sans text-gray-600">Alla våra modeller är ID-verifierade och autentiska</p>
             </div>
-            <div className="text-center">
-              <div className="bg-[#064F8C]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="w-8 h-8 text-[#064F8C]" />
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Sparkles className="h-12 w-12 text-white" />
               </div>
               <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-2">Unika upplevelser</h3>
               <p className="font-dm-sans text-gray-600">Personliga och skräddarsydda upplevelser för alla preferenser</p>
             </div>
-            <div className="text-center">
-              <div className="bg-[#064F8C]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Coffee className="w-8 h-8 text-[#064F8C]" />
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Coffee className="h-12 w-12 text-white" />
               </div>
               <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-2">Diskret & säkert</h3>
               <p className="font-dm-sans text-gray-600">100% diskret hantering med säker betalning</p>
