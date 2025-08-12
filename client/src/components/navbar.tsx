@@ -68,10 +68,30 @@ export default function Navbar() {
                 </div>
               </SelectTrigger>
               <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
-                <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Sve</SelectItem>
-                <SelectItem value="no" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Nor</SelectItem>
-                <SelectItem value="da" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Dan</SelectItem>
-                <SelectItem value="en" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">Eng</SelectItem>
+                <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base">🇸🇪</span>
+                    <span>Sve</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="no" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base">🇳🇴</span>
+                    <span>Nor</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="da" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base">🇩🇰</span>
+                    <span>Dan</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="en" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base">🇬🇧</span>
+                    <span>Eng</span>
+                  </div>
+                </SelectItem>
               </SelectContent>
             </Select>
             {/* Mobile menu button */}
