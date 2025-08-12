@@ -32,39 +32,39 @@ export default function EmmaProfile() {
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Model Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-          <div className="text-center">
-            <div className="mb-2">
-              <MapPin className="w-8 h-8 text-[#064F8C] mx-auto" />
+          <div className="text-center group">
+            <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <MapPin className="h-12 w-12 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568]">Ursprung</div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Ursprung</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
           </div>
-          <div className="text-center">
-            <div className="mb-2">
-              <Ruler className="w-8 h-8 text-[#064F8C] mx-auto" />
+          <div className="text-center group">
+            <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Ruler className="h-12 w-12 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568]">Längd</div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Längd</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
           </div>
-          <div className="text-center">
-            <div className="mb-2">
-              <Weight className="w-8 h-8 text-[#064F8C] mx-auto" />
+          <div className="text-center group">
+            <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Weight className="h-12 w-12 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568]">Vikt</div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Vikt</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
           </div>
-          <div className="text-center">
-            <div className="mb-2">
-              <Heart className="w-8 h-8 text-[#064F8C] mx-auto" />
+          <div className="text-center group">
+            <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Heart className="h-12 w-12 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568]">BH-storlek</div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">BH-storlek</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">75B</div>
           </div>
-          <div className="text-center">
-            <div className="mb-2">
-              <Shirt className="w-8 h-8 text-[#064F8C] mx-auto" />
+          <div className="text-center group">
+            <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Shirt className="h-12 w-12 text-white" />
             </div>
-            <div className="font-dm-sans text-sm text-[#4A5568]">Trosstorlek</div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Trosstorlek</div>
             <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
           </div>
         </div>
@@ -72,7 +72,10 @@ export default function EmmaProfile() {
         {/* Collection Link */}
         <div className="text-center mb-8">
           <Link href="/womens">
-            <Button className="bg-gradient-to-r from-[#D4AF37] to-[#B8960F] hover:from-[#B8960F] hover:to-[#9A7A0A] text-white font-dm-sans px-8 py-3 text-lg">
+            <Button
+              size="lg"
+              className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
+            >
               Se Emmas Använda Trosor
             </Button>
           </Link>
