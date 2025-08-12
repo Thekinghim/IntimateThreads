@@ -73,9 +73,7 @@ export default function Home() {
               <span
                 className="block gold-text-static italic tracking-wider text-7xl sm:text-8xl md:text-9xl lg:text-[10rem]
 font-extrabold drop-shadow-lg"
-              >
-                Scandiscent
-              </span>
+              >ScandiScent</span>
             </h1>
             <p className="text-2xl md:text-3xl text-white max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-md">
               {t.heroSubtitle}
@@ -103,7 +101,6 @@ font-extrabold drop-shadow-lg"
       </section>
       {/* Hero Extension Fade */}
       <div className="h-30 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/50 via-[#2D3748]/25 via-[#2D3748]/10 to-[#F5F1E8]"></div>
-
       {/* Featured Collection */}
       <section className="py-12 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
@@ -307,7 +304,6 @@ font-extrabold drop-shadow-lg"
           </div>
         </div>
       </section>
-
       {/* Newsletter Section */}
       <section className="py-8 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
