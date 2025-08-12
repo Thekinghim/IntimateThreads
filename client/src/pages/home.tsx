@@ -307,6 +307,35 @@ font-extrabold drop-shadow-lg"
           </div>
         </div>
       </section>
+
+      {/* Newsletter Section */}
+      <section className="py-20 bg-gradient-to-br from-[#064F8C] to-[#111B3E]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-12 border border-white/20">
+            <h2 className="font-cormorant font-bold text-4xl md:text-5xl text-white mb-6">
+              Gå med i vår trosklubb för att få de senaste nyheterna
+            </h2>
+            <p className="font-dm-sans text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+              Bli först att veta om nya modeller, exklusiva erbjudanden och särskilda kollektioner
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Din e-postadress..."
+                className="flex-1 px-6 py-4 rounded-xl border-none bg-white/20 backdrop-blur-sm text-white placeholder-white/70 focus:ring-2 focus:ring-white/50 focus:outline-none font-dm-sans"
+              />
+              <Button className="bg-white text-[#064F8C] hover:bg-white/90 px-8 py-4 rounded-xl font-dm-sans font-semibold whitespace-nowrap">
+                Gå med nu
+              </Button>
+            </div>
+            
+            <p className="font-dm-sans text-white/70 text-sm mt-4">
+              Vi respekterar din integritet. Ingen spam, bara exklusiva uppdateringar.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
