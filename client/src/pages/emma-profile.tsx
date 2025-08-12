@@ -31,46 +31,6 @@ export default function EmmaProfile() {
           <p className="font-dm-sans text-xl text-[#4A5568]">24 år • Stockholm</p>
         </div>
 
-        {/* Model Stats */}
-        <div className="flex justify-center items-center gap-12 mb-8 flex-wrap">
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <MapPin className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Ursprung</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Ruler className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Längd</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Weight className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Vikt</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Shirt className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Storlek</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
-            </div>
-          </div>
-        </div>
-
         {/* Collection Link */}
         <div className="text-center mb-8">
           <Link href="/womens">
@@ -81,6 +41,46 @@ export default function EmmaProfile() {
               Se Emmas Använda Trosor
             </Button>
           </Link>
+        </div>
+
+        {/* Model Stats */}
+        <div className="flex justify-center items-center gap-12 mb-8 flex-wrap">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+              <MapPin className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Ursprung</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+              <Ruler className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Längd</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+              <Weight className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Vikt</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+              <Shirt className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Storlek</div>
+              <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
+            </div>
+          </div>
         </div>
 
         {/* About Section */}
