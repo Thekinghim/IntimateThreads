@@ -48,16 +48,7 @@ export default function EmmaProfile() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
       </div>
 
-      {/* Gallery Arrow Indicator */}
-      <div className="relative flex justify-start ml-8 -mt-8 mb-4 z-10">
-        <Button
-          onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
-          className="gold-button font-medium px-8 py-4 text-lg rounded-3xl shadow-lg flex items-center gap-3"
-        >
-          <ArrowDown className="h-6 w-6 animate-bounce" />
-          Emmas Galleri
-        </Button>
-      </div>
+
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Model Name and Info */}
@@ -66,12 +57,17 @@ export default function EmmaProfile() {
           <p className="font-dm-sans text-xl text-[#4A5568]">24 år • Stockholm</p>
         </div>
 
-        {/* Collection Link */}
-        <div className="text-center mb-16">
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-8 mb-16">
+          <Button
+            onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
+            className="gold-button font-medium px-8 py-4 text-lg rounded-3xl shadow-lg"
+          >
+            Emmas Galleri
+          </Button>
           <Link href="/womens">
             <Button
-              size="lg"
-              className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
+              className="gold-button font-medium px-8 py-4 text-lg rounded-3xl shadow-lg"
             >
               Se Emmas Använda Trosor
             </Button>
