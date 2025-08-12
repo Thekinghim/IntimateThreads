@@ -12,6 +12,11 @@ import Models from "@/pages/models";
 import About from "@/pages/about";
 import ModelProducts from "@/pages/model-products";
 import Product from "@/pages/product";
+import EmmaProfile from "@/pages/emma-profile";
+import SofiaProfile from "@/pages/sofia-profile";
+import LinaProfile from "@/pages/lina-profile";
+import AnnaProfile from "@/pages/anna-profile";
+import MajaProfile from "@/pages/maja-profile";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
 import HowItWorks from "@/pages/how-it-works";
@@ -43,6 +48,11 @@ function Router() {
       <Route path="/womens" component={Womens} />
       <Route path="/models" component={Models} />
       <Route path="/about" component={About} />
+      <Route path="/profile/emma" component={EmmaProfile} />
+      <Route path="/profile/sofia" component={SofiaProfile} />
+      <Route path="/profile/lina" component={LinaProfile} />
+      <Route path="/profile/anna" component={AnnaProfile} />
+      <Route path="/profile/maja" component={MajaProfile} />
       <Route path="/models/:modelName" component={ModelProducts} />
       <Route path="/product/:id" component={Product} />
       <Route path="/cart" component={Cart} />

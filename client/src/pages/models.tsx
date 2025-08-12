@@ -222,7 +222,7 @@ export default function ModelsPage() {
 
                 {/* Action Button */}
                 <div>
-                  <Link href={`/models/${modelUrlSlugs[model.id]}`}>
+                  <Link href={`/profile/${model.id}`}>
                     <Button className="w-full bg-gradient-to-r from-[#064F8C] to-[#111B3E] hover:from-[#053d6b] hover:to-[#0d1426] text-white font-dm-sans">
                       Se profil & produkter
                     </Button>

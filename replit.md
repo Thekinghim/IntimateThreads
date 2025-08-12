@@ -28,7 +28,15 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
 - Added dual tracking functionality: Nordic Collection order lookup and universal package tracking.
 - Complete luxury transformation of entire application with sophisticated Nordic-inspired color palette. Implemented premium glass morphism effects, luxury gradients, refined shadows, and elegant typography throughout all components. Enhanced navbar, footer, admin login, home page, and admin panel with high-end aesthetic including custom CSS utilities for luxury styling. Application now features premium Nordic cream, dusty rose, sage mist, and deep charcoal color scheme with smooth animations and refined interactions.
 
-**LATEST (Aug 10, 2025 - FILE CLEANUP & OPTIMIZATION):**
+**LATEST (Aug 12, 2025 - MODEL PROFILE PAGES RESTORED):**
+- ✅ **INDIVIDUAL MODEL PROFILES RESTORED**: Recreated separate profile pages for all 5 models (Emma, Sofia, Lina, Anna, Maja)
+  * Each model now has dedicated profile page showing detailed bio, specialty, personality, interests, stats
+  * Profile pages include contact options and links to their product collections  
+  * Routing fixed: `/profile/emma`, `/profile/sofia`, `/profile/lina`, `/profile/anna`, `/profile/maja`
+  * "Se profil & produkter" buttons from models page now correctly navigate to individual profiles
+  * Each profile links to respective model's product collection via "Se [Name]s Kollektion" button
+
+**PREVIOUS (Aug 10, 2025 - FILE CLEANUP & OPTIMIZATION):**
 - ✅ **CODEBASE CLEANUP**: Removed duplicate and unused pages to improve maintainability
   * Removed: `adminLogin.tsx`, `admin.tsx`, `mobile-admin.tsx`, `mens.tsx`, `payment-setup.tsx`, `collection.tsx`
   * Kept: `admin-login.tsx` (active), `mobile-admin-v2.tsx` (active), `shopify-admin.tsx` (active), `womens.tsx` (main products)
