@@ -31,64 +31,52 @@ export default function MajaProfile() {
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Model Stats */}
-        <Card className="bg-white shadow-lg border-none p-8 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="font-dm-sans text-sm text-[#4A5568]">Ursprung</div>
-                <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+          <div className="text-center">
+            <div className="mb-2">
+              <MapPin className="w-8 h-8 text-[#064F8C] mx-auto" />
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center">
-                <Ruler className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="font-dm-sans text-sm text-[#4A5568]">Längd</div>
-                <div className="font-cormorant font-bold text-lg text-[#064F8C]">170 cm</div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center">
-                <Weight className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="font-dm-sans text-sm text-[#4A5568]">Vikt</div>
-                <div className="font-cormorant font-bold text-lg text-[#064F8C]">60 kg</div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center">
-                <Heart className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="font-dm-sans text-sm text-[#4A5568]">BH-storlek</div>
-                <div className="font-cormorant font-bold text-lg text-[#064F8C]">75C</div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-[#064F8C] to-[#111B3E] rounded-full flex items-center justify-center">
-                <Shirt className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="font-dm-sans text-sm text-[#4A5568]">Trosstorlek</div>
-                <div className="font-cormorant font-bold text-lg text-[#064F8C]">M</div>
-              </div>
-            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568]">Ursprung</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
           </div>
+          <div className="text-center">
+            <div className="mb-2">
+              <Ruler className="w-8 h-8 text-[#064F8C] mx-auto" />
+            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568]">Längd</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">170 cm</div>
+          </div>
+          <div className="text-center">
+            <div className="mb-2">
+              <Weight className="w-8 h-8 text-[#064F8C] mx-auto" />
+            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568]">Vikt</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">60 kg</div>
+          </div>
+          <div className="text-center">
+            <div className="mb-2">
+              <Heart className="w-8 h-8 text-[#064F8C] mx-auto" />
+            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568]">BH-storlek</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">75C</div>
+          </div>
+          <div className="text-center">
+            <div className="mb-2">
+              <Shirt className="w-8 h-8 text-[#064F8C] mx-auto" />
+            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568]">Trosstorlek</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">M</div>
+          </div>
+        </div>
 
-          {/* Collection Link */}
-          <div className="mt-8 text-center">
-            <Link href="/womens">
-              <Button className="bg-gradient-to-r from-[#D4AF37] to-[#B8960F] hover:from-[#B8960F] hover:to-[#9A7A0A] text-white font-dm-sans px-8 py-3 text-lg">
-                Se Majas Använda Trosor
-              </Button>
-            </Link>
-          </div>
-        </Card>
+        {/* Collection Link */}
+        <div className="text-center mb-8">
+          <Link href="/womens">
+            <Button className="bg-gradient-to-r from-[#D4AF37] to-[#B8960F] hover:from-[#B8960F] hover:to-[#9A7A0A] text-white font-dm-sans px-8 py-3 text-lg">
+              Se Majas Använda Trosor
+            </Button>
+          </Link>
+        </div>
 
         {/* About Section */}
         <Card className="bg-white shadow-lg border-none p-8 mb-8">
