@@ -105,9 +105,8 @@ font-extrabold drop-shadow-lg"
       <section className="py-12 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="text-center mb-20">
-            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
-              Utvald Kollektion
-            </h3>
+            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">Bläddra bland trosorna
+</h3>
             <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">
               Handplockade exklusiva plagg från verifierade nordiska kvinnor
             </p>
