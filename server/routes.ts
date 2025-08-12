@@ -137,7 +137,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         const product = await storage.getProduct(order.productId);
         await sendOrderConfirmationEmail({
-          customerName: order.customerName,
+          customerName: order.customerName || "Kund",
           customerEmail: order.customerEmail,
           orderId: order.id,
           products: [{
