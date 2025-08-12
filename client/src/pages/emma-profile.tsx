@@ -161,6 +161,18 @@ export default function EmmaProfile() {
           </div>
         </div>
 
+        {/* Collection Link */}
+        <div className="text-center mb-12">
+          <Link href="/womens">
+            <Button
+              size="lg"
+              className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
+            >
+              Se Emmas Använda Trosor
+            </Button>
+          </Link>
+        </div>
+
         {/* Gallery Section */}
         <div id="gallery" className="p-8 mt-8">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Galleri</h1>
