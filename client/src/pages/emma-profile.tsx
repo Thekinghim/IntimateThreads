@@ -23,19 +23,7 @@ export default function EmmaProfile() {
 
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
-      {/* Header */}
-      <div className="bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-4">
-            <Link href="/models">
-              <Button variant="outline" size="sm" className="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Tillbaka till Modeller
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+
 
       {/* Hero Image Section */}
       <div 
@@ -66,6 +54,21 @@ export default function EmmaProfile() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
+        {/* Back Button */}
+        <div className="flex justify-start mb-8">
+          <Link href="/models">
+            <div className="flex items-center gap-4 cursor-pointer">
+              <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+                <ArrowLeft className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Navigation</div>
+                <div className="font-cormorant font-bold text-lg text-[#064F8C]">Tillbaka till Modeller</div>
+              </div>
+            </div>
+          </Link>
+        </div>
+
         {/* Model Name and Info */}
         <div className="text-center mb-12">
           <h1 className="font-cormorant font-bold text-8xl gold-text-static mb-4">Emma</h1>
