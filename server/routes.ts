@@ -141,14 +141,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           customerEmail: order.customerEmail,
           orderId: order.id,
           products: [{
-            name: product?.name || "Produkt",
+            name: product?.title || "Produkt",
             quantity: 1,
             price: parseFloat(order.totalAmountKr)
           }],
           totalAmount: parseFloat(order.totalAmountKr),
           paymentMethod: order.paymentMethod,
-          cryptoCurrency: order.cryptoCurrency,
-          cryptoAmount: order.cryptoAmount,
+          cryptoCurrency: order.cryptoCurrency || undefined,
+          cryptoAmount: order.cryptoAmount || undefined,
           shippingAddress: order.shippingAddress
         });
       } catch (emailError) {
