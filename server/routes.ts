@@ -5,6 +5,7 @@ import { insertProductSchema, insertOrderSchema, adminLoginSchema } from "@share
 import { z } from "zod";
 import { requireAdminAuth, authenticateAdmin, logoutAdmin } from "./adminAuth";
 import { randomUUID } from "crypto";
+import { sendOrderConfirmationEmail } from "./email";
 
 const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY || process.env.API_KEY || "your_api_key_here";
 const nowpaymentsBaseUrl = process.env.NODE_ENV === "production" 
@@ -131,6 +132,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const orderData = insertOrderSchema.parse(req.body);
       const order = await storage.createOrder(orderData);
+      
+      // Send order confirmation email
+      try {
+        const product = await storage.getProduct(order.productId);
+        await sendOrderConfirmationEmail({
+          customerName: order.customerName,
+          customerEmail: order.customerEmail,
+          orderId: order.id,
+          products: [{
+            name: product?.name || "Produkt",
+            quantity: 1,
+            price: parseFloat(order.totalAmountKr)
+          }],
+          totalAmount: parseFloat(order.totalAmountKr),
+          paymentMethod: order.paymentMethod,
+          cryptoCurrency: order.cryptoCurrency,
+          cryptoAmount: order.cryptoAmount,
+          shippingAddress: order.shippingAddress
+        });
+      } catch (emailError) {
+        console.error("Failed to send order confirmation email:", emailError);
+        // Don't fail the order if email fails
+      }
+      
       res.status(201).json(order);
     } catch (error) {
       if (error instanceof z.ZodError) {
