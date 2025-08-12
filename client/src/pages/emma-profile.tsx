@@ -75,7 +75,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* Model Stats */}
-        <div className="flex justify-center items-center gap-12 mb-8 flex-wrap">
+        <div className="flex justify-center items-center gap-12 mb-12 flex-wrap">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
               <MapPin className="h-8 w-8 text-white" />
@@ -115,7 +115,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* About Section */}
-        <div className="p-8 mb-8">
+        <div className="p-8 mb-12">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Om Emma</h1>
           <div className="text-center">
             <h2 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Aktiv sedan 2 år</h2>
@@ -130,7 +130,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* Secrets Section */}
-        <div className="p-8">
+        <div className="p-8 mb-12">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Secrets</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -173,7 +173,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* Gallery Section */}
-        <div id="gallery" className="px-6 py-8 mt-8">
+        <div id="gallery" className="px-6 py-8">
           <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Galleri</h1>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
