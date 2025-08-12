@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, Star, Sparkles, Coffee } from 'lucide-react';
+import { Star, Sparkles, Coffee } from 'lucide-react';
 import PrivacyBanner from '@/components/privacy-banner';
 
 interface Model {
@@ -202,26 +202,18 @@ export default function ModelsPage() {
                   </div>
                 </div>
 
-                {/* Experience & Personality */}
+                {/* Experience */}
                 <div className="space-y-2 mb-6">
                   <div className="flex justify-between items-center">
                     <span className="font-dm-sans text-sm text-gray-600">Erfarenhet:</span>
                     <span className="font-dm-sans text-sm font-medium text-[#064F8C]">{model.experience}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-dm-sans text-sm text-gray-600">Personlighet:</span>
-                    <span className="font-dm-sans text-sm font-medium text-[#064F8C]">{model.personality}</span>
-                  </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="space-y-3">
+                {/* Action Button */}
+                <div>
                   <Button className="w-full bg-gradient-to-r from-[#064F8C] to-[#111B3E] hover:from-[#053d6b] hover:to-[#0d1426] text-white font-dm-sans">
                     Se profil & produkter
-                  </Button>
-                  <Button variant="outline" className="w-full border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white font-dm-sans">
-                    <Heart className="w-4 h-4 mr-2" />
-                    Lägg till favoriter
                   </Button>
                 </div>
               </CardContent>
