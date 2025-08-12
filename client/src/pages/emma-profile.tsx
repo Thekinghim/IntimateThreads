@@ -39,8 +39,11 @@ export default function EmmaProfile() {
 
       {/* Hero Image Section */}
       <div 
-        className="relative h-96 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${emmaHero})` }}
+        className="relative h-96 bg-cover bg-no-repeat"
+        style={{ 
+          backgroundImage: `url(${emmaHero})`,
+          backgroundPosition: 'center 65%'
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
       </div>
