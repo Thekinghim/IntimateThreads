@@ -84,7 +84,7 @@ font-extrabold drop-shadow-lg"
                   size="lg"
                   className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
                 >
-                  {t.exploreCollection}
+                  Använda trosor
                 </Button>
               </Link>
               <Link href="/how-it-works">
