@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, Star, Sparkles, Crown, Coffee } from 'lucide-react';
+import { Heart, Star, Sparkles, Coffee } from 'lucide-react';
 import PrivacyBanner from '@/components/privacy-banner';
 
 interface Model {
@@ -165,14 +165,6 @@ export default function ModelsPage() {
               </div>
 
               <CardContent className="p-6">
-                {/* Premium Badge */}
-                {model.premium && (
-                  <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black border-none mb-4">
-                    <Crown className="w-3 h-3 mr-1" />
-                    Premium
-                  </Badge>
-                )}
-
                 {/* Bio */}
                 <p className="font-dm-sans text-gray-700 text-sm mb-4 leading-relaxed">
                   {model.bio}
