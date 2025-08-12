@@ -6,7 +6,7 @@ import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 
 export default function Cart() {
-  const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCartStore();
+  const { items, removeItem, updateQuantity, getTotalPrice, clearCart, debugClearStorage } = useCartStore();
 
   const totalPrice = getTotalPrice();
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
@@ -140,13 +140,21 @@ export default function Cart() {
                   </Link>
                 </div>
 
-                <div className="mt-8 text-center">
+                <div className="mt-8 text-center space-y-2">
                   <Button
                     variant="ghost"
                     onClick={clearCart}
                     className="text-red-500 hover:text-red-700 hover:bg-red-50 text-base font-dm-sans"
                   >
                     Töm varukorg
+                  </Button>
+                  <br />
+                  <Button
+                    variant="ghost"
+                    onClick={debugClearStorage}
+                    className="text-orange-500 hover:text-orange-700 hover:bg-orange-50 text-sm font-dm-sans"
+                  >
+                    Debug: Rensa localStorage
                   </Button>
                 </div>
 
