@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, MapPin, Ruler, Weight, Shirt } from "lucide-react";
+import { ArrowLeft, MapPin, Ruler, Weight, Shirt, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -22,6 +22,19 @@ export default function EmmaProfile() {
 
       {/* Hero Image Section */}
       <div className="relative h-64 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
+      </div>
+
+      {/* Gallery Arrow Indicator */}
+      <div className="relative flex justify-center -mt-8 mb-4 z-10">
+        <div className="flex items-center gap-3 group cursor-pointer">
+          <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg">
+            <ArrowDown className="h-8 w-8 text-white animate-bounce" />
+          </div>
+          <div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Se mer</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">Emmas Galleri</div>
+          </div>
+        </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
