@@ -243,11 +243,6 @@ font-extrabold drop-shadow-lg"
       <section className="py-14 relative overflow-hidden bg-[#F5F1E8]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
-            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
-              Upptäck Diskret Elegans
-            </h3>
-
-
             <Link href="/collection">
               <Button
                 size="lg"
