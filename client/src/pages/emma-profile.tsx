@@ -67,7 +67,7 @@ export default function EmmaProfile() {
         </div>
 
         {/* Collection Link */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-16">
           <Link href="/womens">
             <Button
               size="lg"
