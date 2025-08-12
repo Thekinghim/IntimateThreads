@@ -126,6 +126,49 @@ export default function EmmaProfile() {
             </div>
           </div>
         </div>
+
+        {/* Gallery Section */}
+        <div className="p-8 mt-8">
+          <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-8 text-center">Emmas Galleri</h1>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="@assets/cj_1755031566269.jpg" 
+                alt="Emma Gallery 1" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="@assets/cj2_1755031566270.webp" 
+                alt="Emma Gallery 2" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="@assets/cj3_1755031566270.webp" 
+                alt="Emma Gallery 3" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="@assets/cj4_1755031566271.jpg" 
+                alt="Emma Gallery 4" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="@assets/cj5_1755031566271.webp" 
+                alt="Emma Gallery 5" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
