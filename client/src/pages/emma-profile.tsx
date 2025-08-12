@@ -8,6 +8,7 @@ import cj2 from "@assets/cj2_1755031566270.webp";
 import cj3 from "@assets/cj3_1755031566270.webp";
 import cj4 from "@assets/cj4_1755031566271.jpg";
 import cj5 from "@assets/cj5_1755031566271.webp";
+import emmaHero from "@assets/cj5_1755031566271.webp";
 
 export default function EmmaProfile() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -37,7 +38,11 @@ export default function EmmaProfile() {
       </div>
 
       {/* Hero Image Section */}
-      <div className="relative h-64 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
+      <div 
+        className="relative h-96 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${emmaHero})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
       </div>
 
       {/* Gallery Arrow Indicator */}
