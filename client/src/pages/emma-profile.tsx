@@ -21,51 +21,45 @@ export default function EmmaProfile() {
       </div>
 
       {/* Hero Image Section */}
-      <div className="relative h-96 bg-gradient-to-r from-[#064F8C] to-[#111B3E] flex items-center justify-center">
-        <div className="text-center text-white">
-          <h1 className="font-cormorant font-bold text-5xl gold-text-static">Emma</h1>
-          <p className="font-dm-sans text-xl mt-2 opacity-90">24 år • Stockholm</p>
-        </div>
+      <div className="relative h-64 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
+        {/* Model Name and Info */}
+        <div className="text-center mb-12">
+          <h1 className="font-cormorant font-bold text-6xl gold-text-static mb-4">Emma</h1>
+          <p className="font-dm-sans text-xl text-[#4A5568]">24 år • Stockholm</p>
+        </div>
+
         {/* Model Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <MapPin className="h-8 w-8 text-white" />
+          <div className="text-center group">
+            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <MapPin className="h-10 w-10 text-white" />
             </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Ursprung</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
-            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Ursprung</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">Sverige</div>
           </div>
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Ruler className="h-8 w-8 text-white" />
+          <div className="text-center group">
+            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Ruler className="h-10 w-10 text-white" />
             </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Längd</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
-            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Längd</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">168 cm</div>
           </div>
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Weight className="h-8 w-8 text-white" />
+          <div className="text-center group">
+            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Weight className="h-10 w-10 text-white" />
             </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Vikt</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
-            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Vikt</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">58 kg</div>
           </div>
-          <div className="flex items-center gap-4 group">
-            <div className="w-16 h-16 gradient-midnight-cyan rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500">
-              <Shirt className="h-8 w-8 text-white" />
+          <div className="text-center group">
+            <div className="w-20 h-20 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-500">
+              <Shirt className="h-10 w-10 text-white" />
             </div>
-            <div>
-              <div className="font-dm-sans text-sm text-[#4A5568] mb-1">Storlek</div>
-              <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
-            </div>
+            <div className="font-dm-sans text-sm text-[#4A5568] mb-2">Storlek</div>
+            <div className="font-cormorant font-bold text-lg text-[#064F8C]">S</div>
           </div>
         </div>
 
