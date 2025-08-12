@@ -68,7 +68,7 @@ export default function EmmaProfile() {
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Model Name and Info */}
         <div className="text-center mb-12">
-          <h1 className="font-cormorant font-bold text-6xl gold-text-static mb-4">Emma</h1>
+          <h1 className="font-cormorant font-bold text-8xl gold-text-static mb-4">Emma</h1>
           <p className="font-dm-sans text-xl text-[#4A5568]">24 år • Stockholm</p>
         </div>
 
