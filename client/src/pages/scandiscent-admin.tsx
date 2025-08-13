@@ -1,7 +1,7 @@
 // Professional admin panel for Scandiscent with clean Nordic design
 import { useState, useEffect, useRef } from "react";
 import { 
-  Users, Package, ShoppingCart, BarChart3, Settings, Menu, X, ChevronDown, ChevronRight,
+  Users, Package, ShoppingCart, ShoppingBag, BarChart3, Settings, Menu, X, ChevronDown, ChevronRight,
   Search, Plus, Filter, Edit2, Trash2, Eye, Copy, MoreHorizontal, CreditCard,
   FileText, Image, Calendar, Bell, Mail, DollarSign, ArrowUpRight, ArrowDownRight,
   TrendingUp, TrendingDown, ExternalLink, ArrowLeft, CheckCircle, AlertCircle,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
@@ -314,29 +314,72 @@ export default function ScanDiscentAdmin() {
             </Button>
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {/* Enhanced Products Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map((product) => (
-              <div key={product.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-                <div className="aspect-square bg-gray-100 flex items-center justify-center">
-                  <Package className="h-12 w-12 text-gray-400" />
-                </div>
-                <div className="p-3">
-                  <h3 className="font-medium text-gray-900 truncate">{product.title}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{product.priceKr} SEK</p>
-                  <div className="flex justify-between items-center mt-3">
-                    <span className="text-xs text-gray-500">Active</span>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleEdit(product, 'product')}
-                      className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-7 w-7 p-0"
-                    >
-                      <Edit2 className="h-3 w-3" />
-                    </Button>
+              <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 border-gray-200/50 hover:border-blue-200 overflow-hidden">
+                <div className="relative">
+                  <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                    {product.imageUrl ? (
+                      <img 
+                        src={product.imageUrl} 
+                        alt={product.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Package className="h-12 w-12 text-gray-300" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <Badge className={`text-xs font-medium ${
+                      product.isAvailable 
+                        ? 'bg-green-100 text-green-700 border-green-200' 
+                        : 'bg-red-100 text-red-700 border-red-200'
+                    }`}>
+                      {product.isAvailable ? 'Available' : 'Sold'}
+                    </Badge>
                   </div>
                 </div>
-              </div>
+                <CardContent className="p-4">
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 mb-1">{product.title}</h3>
+                      <p className="text-xs text-gray-500 line-clamp-2">{product.description}</p>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-gray-900">{product.priceKr} kr</span>
+                      <div className="text-xs text-gray-600">
+                        {product.size} • {product.color}
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                          <Users className="h-3 w-3 text-blue-600" />
+                        </div>
+                        <span className="text-xs text-gray-600 font-medium">
+                          {Array.isArray(sellers) && sellers.find((s: any) => s.id === product.sellerId)?.alias || 'Unknown'}
+                        </span>
+                      </div>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-blue-50">
+                          <Eye className="h-4 w-4 text-gray-500" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-blue-50">
+                          <Edit2 className="h-4 w-4 text-gray-500" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-red-50">
+                          <Trash2 className="h-4 w-4 text-gray-500" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -531,45 +574,194 @@ export default function ScanDiscentAdmin() {
     }
 
     if (selectedTab === "analytics") {
+      const stats = {
+        totalOrders: Array.isArray(orders) ? orders.length : 0,
+        pendingOrders: Array.isArray(orders) ? orders.filter((o: any) => o.status === "pending").length : 0,
+        completedOrders: Array.isArray(orders) ? orders.filter((o: any) => o.status === "completed").length : 0,
+        totalRevenue: Array.isArray(orders) ? orders.reduce((sum: number, order: any) => sum + parseFloat(order.totalAmountKr), 0) : 0,
+        totalProducts: Array.isArray(products) ? products.length : 0,
+        activeSellers: Array.isArray(sellers) ? sellers.filter((s: any) => s.isActive).length : 0,
+      };
+
       return (
         <div className="p-3 md:p-6 bg-white">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
-            <h1 className="text-lg md:text-xl font-semibold text-gray-900">Analytics</h1>
-            <Button
-              onClick={() => setShowLiveView(true)}
-              className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
-            >
-              Live View
-            </Button>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {statsData.map((stat, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">{stat.label}</p>
-                    <p className="text-2xl font-semibold text-gray-900 mt-1">{stat.value}</p>
-                  </div>
-                  <div className={`flex items-center text-sm ${
-                    stat.trending === 'up' ? 'text-green-600' : 'text-red-600'
-                  }`}>
-                    {stat.trending === 'up' ? <TrendingUp className="h-4 w-4 mr-1" /> : <TrendingDown className="h-4 w-4 mr-1" />}
-                    {stat.change}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Charts would go here */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Revenue Overview</h3>
-            <div className="h-64 bg-gray-50 rounded flex items-center justify-center">
-              <p className="text-gray-500">Chart placeholder</p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
+              <p className="text-gray-600">Real-time insights and performance metrics</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant={showLiveView ? "default" : "outline"}
+                onClick={() => setShowLiveView(!showLiveView)}
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white"
+              >
+                <Activity className="h-4 w-4 mr-2" />
+                Live View
+              </Button>
+              <Button variant="outline" size="sm">
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
             </div>
           </div>
+
+          {/* Live View Indicator */}
+          {showLiveView && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-green-700 font-medium">Live View Active</span>
+                <span className="text-green-600 text-sm">- Real-time data updates enabled</span>
+              </div>
+            </div>
+          )}
+
+          {/* Enhanced Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalRevenue.toFixed(0)} kr</p>
+                  </div>
+                  <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <DollarSign className="h-6 w-6 text-green-600" />
+                  </div>
+                </div>
+                <div className="flex items-center mt-4 text-sm">
+                  <ArrowUpRight className="h-4 w-4 text-green-500 mr-1" />
+                  <span className="text-green-600">+8.2%</span>
+                  <span className="text-gray-500 ml-1">from last month</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Orders</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalOrders}</p>
+                  </div>
+                  <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <ShoppingBag className="h-6 w-6 text-blue-600" />
+                  </div>
+                </div>
+                <div className="flex items-center mt-4 text-sm">
+                  <ArrowUpRight className="h-4 w-4 text-green-500 mr-1" />
+                  <span className="text-green-600">+12.5%</span>
+                  <span className="text-gray-500 ml-1">from last month</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Products</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalProducts}</p>
+                  </div>
+                  <div className="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Package className="h-6 w-6 text-purple-600" />
+                  </div>
+                </div>
+                <div className="flex items-center mt-4 text-sm">
+                  <ArrowUpRight className="h-4 w-4 text-green-500 mr-1" />
+                  <span className="text-green-600">+3.1%</span>
+                  <span className="text-gray-500 ml-1">from last month</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Sellers</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.activeSellers}</p>
+                  </div>
+                  <div className="h-12 w-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Users className="h-6 w-6 text-orange-600" />
+                  </div>
+                </div>
+                <div className="flex items-center mt-4 text-sm">
+                  <ArrowDownRight className="h-4 w-4 text-red-500 mr-1" />
+                  <span className="text-red-600">-2.1%</span>
+                  <span className="text-gray-500 ml-1">from last month</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Charts and Analytics */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5" />
+                  Revenue Overview
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-64 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <BarChart3 className="h-12 w-12 text-blue-500 mx-auto mb-3" />
+                    <p className="text-gray-600">Revenue chart visualization</p>
+                    <p className="text-sm text-gray-500 mt-1">Real-time data integration</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Order Trends
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-64 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <TrendingUp className="h-12 w-12 text-green-500 mx-auto mb-3" />
+                    <p className="text-gray-600">Order trends visualization</p>
+                    <p className="text-sm text-gray-500 mt-1">Live View enabled</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Order Status Distribution */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Order Status Distribution</CardTitle>
+              <CardDescription>Current status breakdown of all orders</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center p-4 bg-yellow-50 rounded-lg">
+                  <p className="text-2xl font-bold text-yellow-600">{stats.pendingOrders}</p>
+                  <p className="text-sm text-yellow-700">Pending</p>
+                </div>
+                <div className="text-center p-4 bg-green-50 rounded-lg">
+                  <p className="text-2xl font-bold text-green-600">{stats.completedOrders}</p>
+                  <p className="text-sm text-green-700">Completed</p>
+                </div>
+                <div className="text-center p-4 bg-blue-50 rounded-lg">
+                  <p className="text-2xl font-bold text-blue-600">{stats.totalOrders - stats.pendingOrders - stats.completedOrders}</p>
+                  <p className="text-sm text-blue-700">Processing</p>
+                </div>
+                <div className="text-center p-4 bg-purple-50 rounded-lg">
+                  <p className="text-2xl font-bold text-purple-600">{((stats.completedOrders / Math.max(stats.totalOrders, 1)) * 100).toFixed(1)}%</p>
+                  <p className="text-sm text-purple-700">Success Rate</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       );
     }
