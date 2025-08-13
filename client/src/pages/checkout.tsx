@@ -1,538 +1,390 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useCartStore } from "@/lib/cart";
-import { nowPayments, type PaymentResponse } from "@/lib/nowpayments";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
+import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { Lock, Bitcoin, CreditCard, Globe, Copy, QrCode, Shield, Eye, ArrowLeft } from "lucide-react";
-import PrivacyBanner from "@/components/privacy-banner";
-import { AnonymousCheckoutBanner } from "@/components/anonymous-features";
-
-const checkoutSchema = z.object({
-  customerName: z.string().min(1, "Namn krävs"),
-  customerEmail: z.string().email("Ogiltig e-postadress"),
-  shippingAddress: z.string().min(10, "Fullständig adress krävs"),
-  paymentMethod: z.enum(["crypto", "revolut", "gumroad"]),
-});
-
-type CheckoutForm = z.infer<typeof checkoutSchema>;
+import PayPalButton from "@/components/PayPalButton";
+import { ArrowLeft } from "lucide-react";
 
 export default function Checkout() {
-  const [, setLocation] = useLocation();
   const { items, getTotalPrice, clearCart } = useCartStore();
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
-  const [selectedCrypto, setSelectedCrypto] = useState("btc");
-  const [paymentCreated, setPaymentCreated] = useState<PaymentResponse | null>(null);
-  const [showAnonymousMode, setShowAnonymousMode] = useState(true);
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    company: '',
+    address: '',
+    apartment: '',
+    city: '',
+    country: 'SE',
+    state: '',
+    zipCode: '',
+    phone: '',
+    deliveryMethod: 'ship',
+    emailUpdates: false
+  });
 
+  const [promoCode, setPromoCode] = useState('');
+  const [appliedPromo, setAppliedPromo] = useState<any>(null);
+  
   const totalPrice = getTotalPrice();
+  const shipping = 0; // Free shipping
+  const discount = appliedPromo ? parseFloat(appliedPromo.discountKr) : 0;
+  const finalTotal = totalPrice - discount + shipping;
 
-  const form = useForm<CheckoutForm>({
-    resolver: zodResolver(checkoutSchema),
-    defaultValues: {
-      customerName: "",
-      customerEmail: "",
-      shippingAddress: "",
-      paymentMethod: "crypto",
-    },
-  });
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
-  const paymentMethod = form.watch("paymentMethod");
-
-  // Get crypto estimate
-  const { data: estimate, isLoading: isEstimateLoading } = useQuery<{ estimated_amount: number }>({
-    queryKey: ['/api/nowpayments/estimate', totalPrice, 'sek', selectedCrypto],
-    enabled: paymentMethod === "crypto" && totalPrice > 0,
-  });
-
-  // Get available currencies
-  const { data: currencies } = useQuery({
-    queryKey: ['/api/nowpayments/currencies'],
-    enabled: paymentMethod === "crypto",
-  });
-
-  const popularCryptos = [
-    { code: 'btc', name: 'Bitcoin', icon: Bitcoin, color: 'text-orange-500' },
-    { code: 'eth', name: 'Ethereum', icon: Globe, color: 'text-blue-500' },
-    { code: 'usdt', name: 'USDT', icon: CreditCard, color: 'text-green-500' },
-  ];
-
-  const createOrderMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const response = await apiRequest('POST', '/api/orders', data);
-      return response.json();
-    },
-  });
-
-  const createPaymentMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const response = await apiRequest('POST', '/api/nowpayments/payment', data);
-      return response.json();
-    },
-  });
-
-  const onSubmit = async (data: CheckoutForm) => {
-    if (items.length === 0) {
-      toast({
-        title: "Tom varukorg",
-        description: "Du måste lägga till produkter i varukorgen först.",
-        variant: "destructive",
-      });
-      return;
-    }
+  const applyPromoCode = async () => {
+    if (!promoCode.trim()) return;
 
     try {
-      // Create orders for each item (simplified - in real app might want to batch)  
-      const orders = [];
-      for (const item of items) {
-        const itemTotal = item.priceKr * item.quantity;
-        const commission = itemTotal * 0.45; // 45% commission
-        const orderData = {
-          productId: item.id,
-          sellerId: item.sellerId || "8a97dd0f-644d-4769-9f2c-03d858c96463", // fallback seller ID
-          customerName: data.customerName,
-          customerEmail: data.customerEmail,
-          shippingAddress: data.shippingAddress,
-          totalAmountKr: itemTotal.toString(),
-          commissionKr: commission.toString(),
-          paymentMethod: data.paymentMethod,
-          paymentStatus: "pending",
-          status: "pending",
-          ...(data.paymentMethod === "crypto" && {
-            cryptoCurrency: selectedCrypto.toUpperCase(),
-            cryptoAmount: (estimate as any)?.estimated_amount?.toString() || "0",
-          }),
-        };
+      const response = await fetch(`/api/promo-codes/${promoCode.trim()}`);
+      const data = await response.json();
 
-        const order = await createOrderMutation.mutateAsync(orderData);
-        orders.push(order);
-      }
-
-      if (data.paymentMethod === "crypto") {
-        // Create NOWPayments payment
-        const paymentData = {
-          price_amount: totalPrice,
-          pay_currency: selectedCrypto,
-          order_id: orders[0].id, // Use first order ID as reference
-          order_description: `Diskreta Kollektion - ${items.length} artiklar`,
-        };
-
-        const payment = await createPaymentMutation.mutateAsync(paymentData);
-        setPaymentCreated(payment);
-        
-        toast({
-          title: "Betalning skapad",
-          description: "Slutför betalningen för att bekräfta din beställning.",
-        });
+      if (response.ok) {
+        setAppliedPromo(data);
+        setPromoCode('');
+        toast({ title: "Rabattkod tillämpad", description: `${data.discountKr} SEK rabatt tillagd` });
       } else {
-        // Handle other payment methods
-        toast({
-          title: "Beställning mottagen",
-          description: "Vi kommer kontakta dig med betalningsinstruktioner.",
-        });
-        clearCart();
-        setLocation("/");
+        toast({ title: "Ogiltig rabattkod", description: data.message || 'Rabattkoden kunde inte tillämpas', variant: "destructive" });
       }
     } catch (error) {
-      toast({
-        title: "Fel uppstod",
-        description: "Kunde inte slutföra beställningen. Försök igen.",
-        variant: "destructive",
-      });
+      console.error('Promo code error:', error);
+      toast({ title: "Fel", description: "Kunde inte validera rabattkod", variant: "destructive" });
     }
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast({
-      title: "Kopierat",
-      description: "Adress kopierad till urklipp",
-    });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.email || !formData.firstName || !formData.lastName || !formData.address || !formData.city || !formData.zipCode) {
+      toast({ title: "Fyll i alla obligatoriska fält", variant: "destructive" });
+      return;
+    }
+
+    // Create order
+    const orderData = {
+      customerEmail: formData.email,
+      items: items.map(item => ({
+        productId: item.id,
+        quantity: item.quantity,
+        size: item.size,
+        price: item.priceKr
+      })),
+      total: finalTotal,
+      paymentMethod: 'pending',
+      status: 'pending',
+      shippingAddress: {
+        name: `${formData.firstName} ${formData.lastName}`,
+        address: formData.address,
+        apartment: formData.apartment,
+        city: formData.city,
+        country: formData.country,
+        zipCode: formData.zipCode,
+        phone: formData.phone
+      }
+    };
+
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+      });
+
+      if (response.ok) {
+        const order = await response.json();
+        clearCart();
+        setLocation(`/order-confirmation/${order.id}`);
+      } else {
+        toast({ title: "Beställningsfel", description: "Kunde inte skapa beställning", variant: "destructive" });
+      }
+    } catch (error) {
+      console.error('Order creation error:', error);
+      toast({ title: "Fel", description: "Ett fel uppstod vid beställning", variant: "destructive" });
+    }
   };
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-soft-white py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center py-12">
-            <h1 className="font-poppins font-medium text-2xl text-charcoal mb-4">Varukorg är tom</h1>
-            <p className="text-gray-600 mb-8">Du måste lägga till produkter innan du kan gå till kassan</p>
-            <Button 
-              onClick={() => setLocation("/collection")}
-              className="bg-charcoal text-white hover:bg-gray-800"
-            >
-              Tillbaka till kollektionen
-            </Button>
-          </div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-medium mb-4">Din varukorg är tom</h1>
+          <Link href="/womens">
+            <Button>Fortsätt handla</Button>
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F1E8] py-12">
-      <PrivacyBanner />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="font-cormorant font-bold text-5xl text-[#064F8C] mb-4">Slutför ditt köp</h1>
-          <p className="text-[#4A5568] text-lg font-dm-sans">Fyll i leveransuppgifter och välj betalningsmetod</p>
-        </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+          {/* Left Side - Form */}
+          <div className="bg-white p-6 lg:p-12">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8">
+              <h1 className="text-2xl font-bold text-gray-900">SCANDISCENT</h1>
+              <div className="flex items-center text-sm text-gray-500 space-x-2">
+                <span>Cart</span>
+                <span>&gt;</span>
+                <span>Information</span>
+                <span>&gt;</span>
+                <span>Shipping</span>
+                <span>&gt;</span>
+                <span className="text-gray-900">Payment</span>
+              </div>
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Order Form */}
-          <div>
-            <Card className="bg-white shadow-xl border-none">
-              <CardHeader className="pb-6">
-                <CardTitle className="flex items-center font-lora text-2xl text-[#064F8C]">
-                  <Lock className="h-6 w-6 mr-3 text-[#064F8C]" />
-                  Leveransinformation
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="customerName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base font-lora font-medium text-[#064F8C]">Name (or Anonymous Alias)</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Anonymous User, A.N., etc." 
-                              {...field} 
-                              className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-[#064F8C] placeholder-gray-500 rounded-xl h-12 px-4 font-dm-sans"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+            {/* Express Checkout */}
+            <div className="mb-8">
+              <p className="text-lg font-medium mb-4">Express checkout</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                <Button 
+                  className="bg-[#5A31F4] hover:bg-[#4A28E4] text-white py-3 px-6 rounded text-sm font-medium"
+                >
+                  Shop Pay
+                </Button>
+                <Button 
+                  className="bg-[#FFC439] hover:bg-[#F0B429] text-black py-3 px-6 rounded text-sm font-medium flex items-center justify-center"
+                  onClick={() => {
+                    // PayPal integration will be activated when secret is provided
+                    toast({ title: "PayPal kommer snart", description: "PayPal-betalningar aktiveras när API-nycklar är konfigurerade" });
+                  }}
+                >
+                  PayPal
+                </Button>
+                <Button 
+                  className="bg-black hover:bg-gray-900 text-white py-3 px-6 rounded text-sm font-medium"
+                >
+                  G Pay
+                </Button>
+              </div>
+              <div className="text-center text-gray-500 text-sm">OR</div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Contact Information */}
+              <div>
+                <h2 className="text-lg font-medium mb-4">Contact information</h2>
+                <div className="space-y-4">
+                  <div>
+                    <Input
+                      type="email"
+                      placeholder="Email or mobile phone number"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      required
+                      className="w-full"
                     />
-
-                    <FormField
-                      control={form.control}
-                      name="customerEmail"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base font-lora font-medium text-[#064F8C]">E-postadress</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="email" 
-                              placeholder="din.email@exempel.se" 
-                              {...field} 
-                              className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-[#064F8C] placeholder-gray-500 rounded-xl h-12 px-4 font-dm-sans"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="email-updates"
+                      checked={formData.emailUpdates}
+                      onCheckedChange={(checked) => handleInputChange('emailUpdates', checked as boolean)}
                     />
-
-                    <FormField
-                      control={form.control}
-                      name="shippingAddress"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base font-lora font-medium text-[#064F8C]">Leveransadress</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Fullständig adress med postnummer och ort" 
-                              {...field} 
-                              className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-[#064F8C] placeholder-gray-500 rounded-xl h-12 px-4 font-dm-sans"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="paymentMethod"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xl font-lora font-semibold text-[#064F8C]">Välj betalningsmetod</FormLabel>
-                          <FormControl>
-                            <RadioGroup
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              className="grid grid-cols-1 gap-4 mt-4"
-                            >
-                              <div className="relative">
-                                <RadioGroupItem value="crypto" id="crypto" className="sr-only" />
-                                <Label 
-                                  htmlFor="crypto" 
-                                  className={`flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all shadow-sm ${
-                                    paymentMethod === "crypto" 
-                                      ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg' 
-                                      : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
-                                  }`}
-                                >
-                                  <Bitcoin className="h-8 w-8 mr-4 text-orange-500" />
-                                  <div>
-                                    <div className="font-lora font-semibold text-xl text-[#064F8C]">Kryptovaluta</div>
-                                    <div className="text-base text-[#4A5568] font-dm-sans mt-1">Bitcoin, Ethereum, USDT - Snabbt och säkert</div>
-                                  </div>
-                                </Label>
-                              </div>
-                              
-                              <div className="relative">
-                                <RadioGroupItem value="revolut" id="revolut" className="sr-only" />
-                                <Label 
-                                  htmlFor="revolut" 
-                                  className={`flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all shadow-sm ${
-                                    paymentMethod === "revolut" 
-                                      ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg' 
-                                      : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
-                                  }`}
-                                >
-                                  <CreditCard className="h-8 w-8 mr-4 text-[#064F8C]" />
-                                  <div>
-                                    <div className="font-lora font-semibold text-xl text-[#064F8C]">Revolut</div>
-                                    <div className="text-base text-[#4A5568] font-dm-sans mt-1">Mobil betalning med Revolut-appen</div>
-                                  </div>
-                                </Label>
-                              </div>
-                              
-                              <div className="relative">
-                                <RadioGroupItem value="gumroad" id="gumroad" className="sr-only" />
-                                <Label 
-                                  htmlFor="gumroad" 
-                                  className={`flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all shadow-sm ${
-                                    paymentMethod === "gumroad" 
-                                      ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg' 
-                                      : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
-                                  }`}
-                                >
-                                  <Globe className="h-8 w-8 mr-4 text-green-500" />
-                                  <div>
-                                    <div className="font-lora font-semibold text-xl text-[#064F8C]">Gumroad</div>
-                                    <div className="text-base text-[#4A5568] font-dm-sans mt-1">Säker betalning med kort eller PayPal</div>
-                                  </div>
-                                </Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    {/* Show crypto selection immediately when crypto is selected */}
-                    {paymentMethod === "crypto" && !paymentCreated && (
-                      <div className="bg-white/60 rounded-2xl p-6 space-y-6 border border-[#064F8C]/10">
-                        <Label className="text-lg font-lora font-semibold text-[#064F8C] block">Välj kryptovaluta:</Label>
-                        <div className="grid grid-cols-3 gap-4">
-                          {popularCryptos.map((crypto) => {
-                            const IconComponent = crypto.icon;
-                            return (
-                              <button
-                                key={crypto.code}
-                                type="button"
-                                onClick={() => setSelectedCrypto(crypto.code)}
-                                className={`flex flex-col items-center p-4 border-2 rounded-2xl transition-all shadow-sm ${
-                                  selectedCrypto === crypto.code
-                                    ? 'border-[#064F8C] bg-[#064F8C]/5 shadow-lg'
-                                    : 'border-gray-300 hover:border-[#064F8C]/50 bg-white'
-                                }`}
-                              >
-                                <IconComponent className={`h-8 w-8 mb-2 ${crypto.color}`} />
-                                <span className="text-base font-dm-sans font-medium text-[#064F8C]">{crypto.code.toUpperCase()}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                        
-                        {selectedCrypto && estimate && (
-                          <div className="bg-white rounded-2xl p-4 border border-[#064F8C]/20 shadow-sm">
-                            <div className="flex justify-between items-center">
-                              <span className="text-base text-[#4A5568] font-dm-sans">Du kommer att betala:</span>
-                              <span className="font-bold text-lg text-[#064F8C] font-dm-sans">
-                                {estimate.estimated_amount || 0} {selectedCrypto.toUpperCase()}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {!paymentCreated && (
-                      <Button 
-                        type="submit" 
-                        className="gold-button w-full text-lg py-6 rounded-3xl shadow-lg font-medium mt-8"
-                        disabled={createOrderMutation.isPending || (paymentMethod === "crypto" && !selectedCrypto)}
-                      >
-                        {createOrderMutation.isPending ? "Skapar beställning..." : 
-                         paymentMethod === "crypto" && selectedCrypto ? `Slutför betalning med ${selectedCrypto.toUpperCase()}` :
-                         paymentMethod === "crypto" ? "Välj kryptovaluta först" :
-                         "Slutför beställning"}
-                      </Button>
-                    )}
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Payment Section */}
-          <div>
-            {/* Order Summary */}
-            <Card className="mb-8 bg-white shadow-xl border-none">
-              <CardHeader className="pb-6">
-                <CardTitle className="font-cormorant font-bold text-3xl text-[#064F8C]">Ordersammanfattning</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="space-y-4 mb-6">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex justify-between text-base">
-                      <span className="text-[#4A5568] font-dm-sans">
-                        {item.sellerAlias} - {item.title} × {item.quantity}
-                      </span>
-                      <span className="font-bold text-[#064F8C] font-dm-sans">
-                        {(item.priceKr * item.quantity).toLocaleString('sv-SE')} kr
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div className="border-t border-[#064F8C]/20 pt-6">
-                  <div className="flex justify-between font-cormorant font-bold text-2xl">
-                    <span className="text-[#064F8C]">Totalt:</span>
-                    <span className="text-[#064F8C]">{totalPrice.toLocaleString('sv-SE')} kr</span>
+                    <Label htmlFor="email-updates" className="text-sm text-red-600">
+                      Email me with news and offers
+                    </Label>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* Crypto Payment Details */}
-            {paymentMethod === "crypto" && paymentCreated && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <Bitcoin className="h-5 w-5 mr-2 text-orange-500" />
-                      Kryptovaluta Betalning
+              {/* Delivery Method */}
+              <div>
+                <h2 className="text-lg font-medium mb-4">Delivery method</h2>
+                <RadioGroup value={formData.deliveryMethod} onValueChange={(value) => handleInputChange('deliveryMethod', value)}>
+                  <div className="flex items-center space-x-2 p-3 border rounded">
+                    <RadioGroupItem value="ship" id="ship" className="text-red-600" />
+                    <Label htmlFor="ship" className="flex-1">Ship</Label>
+                  </div>
+                  <div className="flex items-center space-x-2 p-3 border rounded opacity-50">
+                    <RadioGroupItem value="pickup" id="pickup" disabled />
+                    <Label htmlFor="pickup" className="flex-1">Pick up</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* Shipping Address */}
+              <div>
+                <h2 className="text-lg font-medium mb-4">Shipping address</h2>
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <Input
+                    placeholder="First name"
+                    value={formData.firstName}
+                    onChange={(e) => handleInputChange('firstName', e.target.value)}
+                    required
+                  />
+                  <Input
+                    placeholder="Last name"
+                    value={formData.lastName}
+                    onChange={(e) => handleInputChange('lastName', e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-4">
+                  <Input
+                    placeholder="Company (optional)"
+                    value={formData.company}
+                    onChange={(e) => handleInputChange('company', e.target.value)}
+                  />
+                  <Input
+                    placeholder="Address"
+                    value={formData.address}
+                    onChange={(e) => handleInputChange('address', e.target.value)}
+                    required
+                  />
+                  <Input
+                    placeholder="Apartment, suite, etc. (optional)"
+                    value={formData.apartment}
+                    onChange={(e) => handleInputChange('apartment', e.target.value)}
+                  />
+                  <Input
+                    placeholder="City"
+                    value={formData.city}
+                    onChange={(e) => handleInputChange('city', e.target.value)}
+                    required
+                  />
+                  <div className="grid grid-cols-3 gap-4">
+                    <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Country/region" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="SE">Sweden</SelectItem>
+                        <SelectItem value="NO">Norway</SelectItem>
+                        <SelectItem value="DK">Denmark</SelectItem>
+                        <SelectItem value="FI">Finland</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={formData.state} onValueChange={(value) => handleInputChange('state', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="State" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="stockholm">Stockholm</SelectItem>
+                        <SelectItem value="gothenburg">Göteborg</SelectItem>
+                        <SelectItem value="malmo">Malmö</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      placeholder="ZIP code"
+                      value={formData.zipCode}
+                      onChange={(e) => handleInputChange('zipCode', e.target.value)}
+                      required
+                    />
+                  </div>
+                  <Input
+                    placeholder="Phone (optional)"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex items-center justify-between pt-6">
+                <Button type="submit" className="bg-gray-900 hover:bg-gray-800 text-white py-3 px-8">
+                  Continue to shipping
+                </Button>
+                <Link href="/cart" className="text-blue-600 hover:underline text-sm">
+                  Return to cart
+                </Link>
+              </div>
+            </form>
+
+            {/* Footer Links */}
+            <div className="mt-8 pt-8 border-t text-xs text-gray-500 space-x-4">
+              <Link href="/terms" className="hover:underline">Refund policy</Link>
+              <Link href="/privacy" className="hover:underline">Privacy policy</Link>
+              <Link href="/terms" className="hover:underline">Terms of service</Link>
+            </div>
+          </div>
+
+          {/* Right Side - Order Summary */}
+          <div className="bg-gray-50 p-6 lg:p-12">
+            <div className="sticky top-8">
+              {/* Product List */}
+              <div className="space-y-4 mb-6">
+                {items.map((item) => (
+                  <div key={item.id} className="flex items-center space-x-4">
+                    <div className="relative">
+                      <img
+                        src={`/api/assets/${item.imageUrl}`}
+                        alt={item.title}
+                        className="w-16 h-16 object-cover rounded border"
+                      />
+                      <span className="absolute -top-2 -right-2 bg-gray-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                        {item.quantity}
+                      </span>
                     </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => {
-                        setPaymentCreated(null);
-                        setSelectedCrypto('btc');
-                      }}
-                      className="text-sm"
-                    >
-                      Byt krypto
-                    </Button>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {paymentCreated && (
-                    /* Payment Created - Show Payment Details */
-                    <div className="space-y-4">
-                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                        <h3 className="font-medium text-green-800 mb-2 flex items-center">
-                          ✓ Betalning skapad!
-                        </h3>
-                        <p className="text-sm text-green-700">
-                          Skicka exakt <span className="font-bold text-lg">{paymentCreated.pay_amount} {paymentCreated.pay_currency.toUpperCase()}</span> till adressen nedan
-                        </p>
-                      </div>
-
-                      <div className="bg-gray-50 rounded-lg p-4">
-                        <Label className="text-sm font-medium mb-2 block">Betalningsadress:</Label>
-                        <div className="flex items-center space-x-2">
-                          <code className="flex-1 bg-white p-3 rounded border text-sm break-all">
-                            {paymentCreated.pay_address}
-                          </code>
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => copyToClipboard(paymentCreated.pay_address)}
-                          >
-                            <Copy className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-
-                      <div className="text-center">
-                        <div className="bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 inline-block">
-                          <img 
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${paymentCreated.pay_currency}:${paymentCreated.pay_address}?amount=${paymentCreated.pay_amount}`)}`}
-                            alt="Payment QR Code"
-                            className="h-32 w-32"
-                          />
-                        </div>
-                        <p className="text-xs text-gray-600 mt-2">
-                          Skanna med din wallet-app för att betala
-                        </p>
-                      </div>
-
-                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                        <h4 className="font-medium text-yellow-800 mb-2">Viktigt att komma ihåg:</h4>
-                        <ul className="text-sm text-yellow-700 space-y-1">
-                          <li>• Skicka exakt {paymentCreated.pay_amount} {paymentCreated.pay_currency.toUpperCase()}</li>
-                          <li>• Betalningen gäller i 15 minuter</li>
-                          <li>• Du kommer få bekräftelse via email</li>
-                        </ul>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <Button 
-                          onClick={() => {
-                            clearCart();
-                            setLocation(`/order-tracking?orderId=${paymentCreated.order_id}`);
-                          }}
-                          className="w-full bg-green-600 hover:bg-green-700 text-white font-poppins font-medium text-lg py-6"
-                        >
-                          ✓ Jag har slutfört betalningen
-                        </Button>
-                        <Button 
-                          onClick={() => {
-                            setLocation('/');
-                          }}
-                          variant="outline"
-                          className="w-full font-poppins"
-                        >
-                          Avbryt och gå tillbaka
-                        </Button>
-                      </div>
+                    <div className="flex-1">
+                      <h3 className="font-medium text-sm">{item.sellerAlias}</h3>
+                      <p className="text-sm text-gray-600">{item.title}</p>
+                      <p className="text-xs text-gray-500">Size: {item.size}</p>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            )}
+                    <p className="font-medium">{item.priceKr.toFixed(2)} SEK</p>
+                  </div>
+                ))}
+              </div>
 
-            {/* Other Payment Methods */}
-            {paymentMethod !== "crypto" && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    {paymentMethod === "revolut" ? "Revolut Betalning" : "Gumroad Betalning"}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">
-                    {paymentMethod === "revolut" 
-                      ? "Du kommer få instruktioner för Revolut-betalning via email efter att du slutfört beställningen."
-                      : "Du kommer omdirigeras till Gumroad för säker betalning."
-                    }
-                  </p>
-                </CardContent>
-              </Card>
-            )}
+              {/* Promo Code */}
+              <div className="border-t pt-4 mb-6">
+                <div className="flex space-x-2">
+                  <Input
+                    placeholder="Gift card or discount code"
+                    value={promoCode}
+                    onChange={(e) => setPromoCode(e.target.value)}
+                    className="flex-1"
+                  />
+                  <Button onClick={applyPromoCode} variant="outline">
+                    Apply
+                  </Button>
+                </div>
+                {appliedPromo && (
+                  <div className="mt-2 text-sm text-green-600">
+                    Rabattkod "{appliedPromo.code}" tillämpad (-{appliedPromo.discountKr} SEK)
+                  </div>
+                )}
+              </div>
+
+              {/* Summary */}
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>{totalPrice.toFixed(2)} SEK</span>
+                </div>
+                {appliedPromo && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Discount ({appliedPromo.code})</span>
+                    <span>-{appliedPromo.discountKr} SEK</span>
+                  </div>
+                )}
+                <div className="flex justify-between">
+                  <span>Shipping</span>
+                  <span>Calculated at next step</span>
+                </div>
+                <Separator />
+                <div className="flex justify-between text-lg font-medium">
+                  <span>Total</span>
+                  <span>SEK {finalTotal.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

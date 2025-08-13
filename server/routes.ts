@@ -6,6 +6,7 @@ import { z } from "zod";
 import { requireAdminAuth, authenticateAdmin, logoutAdmin } from "./adminAuth";
 import { randomUUID } from "crypto";
 import { sendOrderConfirmationEmail } from "./email";
+import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "./paypal";
 
 const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY || process.env.API_KEY || "your_api_key_here";
 const nowpaymentsBaseUrl = process.env.NODE_ENV === "production" 
@@ -680,6 +681,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       revolut: !!process.env.REVOLUT_API_KEY,
       gumroad: !!process.env.GUMROAD_API_KEY
     });
+  });
+
+  // PayPal routes
+  app.get("/paypal/setup", async (req, res) => {
+    await loadPaypalDefault(req, res);
+  });
+
+  app.post("/paypal/order", async (req, res) => {
+    // Request body should contain: { intent, amount, currency }
+    await createPaypalOrder(req, res);
+  });
+
+  app.post("/paypal/order/:orderID/capture", async (req, res) => {
+    await capturePaypalOrder(req, res);
   });
 
   const httpServer = createServer(app);
