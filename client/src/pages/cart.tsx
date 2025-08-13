@@ -63,7 +63,7 @@ export default function Cart() {
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-4 bg-[#F5F1E8] rounded-2xl px-4 py-2">
+                    <div className="flex items-center space-x-4 rounded-2xl px-4 py-2 bg-[#064f8c] text-[#ffffff]">
                       <Button
                         variant="outline"
                         size="sm"
