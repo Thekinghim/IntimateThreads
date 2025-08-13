@@ -43,112 +43,156 @@ export default function Cart() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
-            {items.map((item) => (
-              <Card key={item.id} className="overflow-hidden bg-white shadow-lg border-none">
-                <CardContent className="p-0">
-                  <div className="flex items-center space-x-6 p-6">
-                    <img
-                      src={getProductImageUrl(item.imageUrl) || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=300&h=300&fit=crop&crop=center"}
-                      alt={item.title}
-                      className="w-32 h-32 object-cover rounded-2xl shadow-lg flex-shrink-0"
-                      loading="lazy"
-                    />
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-2">
-                        {item.sellerAlias} - {item.title}
-                      </h3>
-                      <p className="text-[#4A5568] text-lg font-dm-sans mb-2">Storlek: {item.size}</p>
-                      <p className="font-dm-sans font-bold text-[#064F8C] text-xl">
-                        {item.priceKr.toLocaleString('sv-SE')} kr
-                      </p>
+          <div className="lg:col-span-2">
+            <Card className="bg-white shadow-lg border-none overflow-hidden">
+              <CardContent className="p-0">
+                {/* Header */}
+                <div className="grid grid-cols-12 gap-4 p-6 border-b border-gray-200 bg-gray-50">
+                  <div className="col-span-6 text-sm font-medium text-[#4A5568] uppercase tracking-wide">PRODUKT DETALJER</div>
+                  <div className="col-span-2 text-sm font-medium text-[#4A5568] uppercase tracking-wide text-center">KVANTITET</div>
+                  <div className="col-span-2 text-sm font-medium text-[#4A5568] uppercase tracking-wide text-center">PRIS</div>
+                  <div className="col-span-2 text-sm font-medium text-[#4A5568] uppercase tracking-wide text-center">TOTALT</div>
+                </div>
+
+                {/* Cart Items */}
+                {items.map((item, index) => (
+                  <div key={item.id} className={`grid grid-cols-12 gap-4 p-6 ${index !== items.length - 1 ? 'border-b border-gray-100' : ''}`}>
+                    {/* Product Details */}
+                    <div className="col-span-6 flex items-center space-x-4">
+                      <img
+                        src={getProductImageUrl(item.imageUrl) || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=300&h=300&fit=crop&crop=center"}
+                        alt={item.title}
+                        className="w-16 h-16 object-cover rounded-lg shadow-sm flex-shrink-0"
+                        loading="lazy"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-lora font-semibold text-lg text-[#064F8C] mb-1">
+                          {item.sellerAlias} - {item.title}
+                        </h3>
+                        <p className="text-[#4A5568] text-sm font-dm-sans">Storlek: {item.size}</p>
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          className="text-red-500 hover:text-red-700 text-sm font-dm-sans mt-1"
+                        >
+                          Ta bort
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="flex flex-col items-center space-y-4">
-                      <div className="flex items-center space-x-3 rounded-2xl px-4 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F4E971] shadow-lg">
+                    {/* Quantity */}
+                    <div className="col-span-2 flex items-center justify-center">
+                      <div className="flex items-center space-x-2 rounded-lg border border-gray-300 bg-white">
                         <Button
-                          variant="outline"
+                          variant="ghost"
                           size="sm"
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
-                          className="h-10 w-10 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md disabled:opacity-50"
+                          className="h-8 w-8 p-0 hover:bg-gray-100 disabled:opacity-50"
                         >
-                          <Minus className="h-4 w-4" />
+                          <Minus className="h-3 w-3" />
                         </Button>
                         
-                        <span className="w-8 text-center font-bold text-lg text-[#064F8C] drop-shadow-sm">{item.quantity}</span>
+                        <span className="w-8 text-center font-medium text-sm text-[#064F8C]">{item.quantity}</span>
                         
                         <Button
-                          variant="outline"
+                          variant="ghost"
                           size="sm"
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="h-10 w-10 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md"
+                          className="h-8 w-8 p-0 hover:bg-gray-100"
                         >
-                          <Plus className="h-4 w-4" />
+                          <Plus className="h-3 w-3" />
                         </Button>
                       </div>
+                    </div>
 
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeItem(item.id)}
-                        className="text-red-500 hover:text-red-700 hover:bg-red-50 h-10 w-10 rounded-full"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                    {/* Price */}
+                    <div className="col-span-2 flex items-center justify-center">
+                      <span className="font-dm-sans font-medium text-[#064F8C]">
+                        {item.priceKr.toLocaleString('sv-SE')} kr
+                      </span>
+                    </div>
+
+                    {/* Total */}
+                    <div className="col-span-2 flex items-center justify-center">
+                      <span className="font-dm-sans font-bold text-[#064F8C]">
+                        {(item.priceKr * item.quantity).toLocaleString('sv-SE')} kr
+                      </span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+
+                {/* Continue Shopping */}
+                <div className="p-6 border-t border-gray-100">
+                  <Link href="/womens">
+                    <Button variant="ghost" className="text-[#064F8C] hover:text-[#111B3E] font-dm-sans">
+                      ← Fortsätt handla
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <Card className="sticky top-8 bg-white shadow-xl border-none">
-              <CardContent className="p-8">
-                <h2 className="font-cormorant font-bold gold-text mb-8 text-[25px]">Ordersammanfattning</h2>
+            <Card className="sticky top-8 bg-white shadow-lg border-none">
+              <CardContent className="p-6">
+                <h2 className="font-cormorant font-bold text-2xl text-[#064F8C] mb-6">Ordersammanfattning</h2>
                 
-                <div className="space-y-6 mb-8">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex justify-between text-base">
-                      <span className="text-[#4A5568] truncate max-w-[60%] font-dm-sans">
-                        {item.sellerAlias} × {item.quantity}
-                      </span>
-                      <span className="text-[#064F8C] font-bold font-dm-sans">
-                        {(item.priceKr * item.quantity).toLocaleString('sv-SE')} kr
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                <div className="space-y-4 mb-6">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-[#4A5568] font-dm-sans">ARTIKLAR: {itemCount}</span>
+                    <span className="text-[#064F8C] font-bold font-dm-sans">{totalPrice.toLocaleString('sv-SE')} kr</span>
+                  </div>
 
-                <div className="border-t border-[#064F8C]/20 pt-6 mb-8">
-                  <div className="flex justify-between font-cormorant font-bold text-2xl">
-                    <span className="gold-text">Totalt:</span>
-                    <span className="gold-text">{totalPrice.toLocaleString('sv-SE')} kr</span>
+                  <div className="border-b border-gray-200 pb-4">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-[#4A5568] font-dm-sans">FRAKT:</span>
+                    </div>
+                    <div className="ml-4">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-[#4A5568] font-dm-sans">Standard leverans - 65 kr</span>
+                        <button className="text-[#064F8C] hover:text-[#111B3E]">▼</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-b border-gray-200 pb-4">
+                    <div className="text-sm text-[#4A5568] font-dm-sans mb-2">RABATTKOD:</div>
+                    <div className="flex space-x-2">
+                      <input
+                        type="text"
+                        placeholder="Ange din kod"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm font-dm-sans focus:outline-none focus:border-[#064F8C]"
+                      />
+                      <Button 
+                        size="sm" 
+                        className="bg-red-400 hover:bg-red-500 text-white px-4 py-2 text-sm font-dm-sans"
+                      >
+                        ANVÄND
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <div className="flex justify-between font-bold text-lg">
+                      <span className="text-[#064F8C] font-cormorant">TOTAL KOSTNAD:</span>
+                      <span className="text-[#064F8C] font-cormorant">{(totalPrice + 65).toLocaleString('sv-SE')} kr</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="text-[#ffffff]">
-                  <Link href="/checkout">
-                    <Button className="gold-button w-full text-lg py-6 rounded-3xl shadow-lg font-medium mb-4">
-                      Gå till kassan
-                    </Button>
-                  </Link>
-                  
-                  <Link href="/womens">
-                    <Button className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-6 rounded-3xl shadow-lg">
-                      Fortsätt handla
-                    </Button>
-                  </Link>
-                </div>
+                <Link href="/checkout">
+                  <Button className="w-full bg-[#6366f1] hover:bg-[#5855eb] text-white py-4 rounded font-medium text-lg mb-4">
+                    CHECKOUT
+                  </Button>
+                </Link>
 
-                <div className="mt-8 text-center space-y-2">
+                <div className="mt-6 text-center space-y-2">
                   <Button
                     variant="ghost"
                     onClick={clearCart}
-                    className="text-red-500 hover:text-red-700 hover:bg-red-50 text-base font-dm-sans"
+                    className="text-red-500 hover:text-red-700 hover:bg-red-50 text-sm font-dm-sans"
                   >
                     Töm varukorg
                   </Button>
@@ -156,17 +200,10 @@ export default function Cart() {
                   <Button
                     variant="ghost"
                     onClick={debugClearStorage}
-                    className="text-orange-500 hover:text-orange-700 hover:bg-orange-50 text-sm font-dm-sans"
+                    className="text-orange-500 hover:text-orange-700 hover:bg-orange-50 text-xs font-dm-sans"
                   >
                     Debug: Rensa localStorage
                   </Button>
-                </div>
-
-                {/* Security notice */}
-                <div className="mt-8 p-6 bg-white/60 rounded-2xl border border-[#064F8C]/10">
-                  <p className="text-sm text-[#4A5568] text-center font-dm-sans">
-                    🔒 Säker betalning med kryptovaluta eller andra diskreta metoder
-                  </p>
                 </div>
               </CardContent>
             </Card>
