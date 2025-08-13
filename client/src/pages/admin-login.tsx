@@ -155,7 +155,7 @@ export default function AdminLogin() {
 
               <Button
                 type="submit"
-                className="w-full bg-gray-800 hover:bg-gray-900 text-white py-3 px-4 h-12 rounded-md font-medium transition-colors text-base"
+                className="w-full bg-[#16a34a] hover:bg-gray-900 text-white py-3 px-4 h-12 rounded-md font-medium transition-colors text-base"
                 disabled={isLoading}
               >
                 {isLoading ? "Logging in..." : "Continue with email"}
