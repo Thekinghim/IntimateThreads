@@ -120,11 +120,16 @@ export default function CheckoutForm() {
   };
 
   const handleCryptoPayment = async () => {
+    // Show crypto selection modal or redirect to crypto page
+    setShowCryptoModal(true);
+  };
+
+  const createCryptoPayment = async (currency: string) => {
     try {
       // Create payment with NOWPayments
       const paymentData = {
         price_amount: finalTotal,
-        pay_currency: 'btc',
+        pay_currency: currency.toLowerCase(),
         order_id: `order_${Date.now()}`,
         order_description: `Scandiscent Purchase - ${items.length} items`
       };
@@ -163,26 +168,26 @@ export default function CheckoutForm() {
           {/* Left Side - Form */}
           <div className="bg-white p-6 lg:p-12 shadow-sm">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 pb-4 border-b border-gray-100 gap-4">
               <h1 className="text-2xl font-bold text-[#064F8C] font-cormorant">SCANDISCENT</h1>
-              <div className="flex items-center text-sm text-gray-500 space-x-2">
-                <span>Kundvagn</span>
+              <div className="flex items-center text-xs sm:text-sm text-gray-500 space-x-2 overflow-x-auto">
+                <span className="whitespace-nowrap">Kundvagn</span>
                 <span className="text-[#064F8C]">→</span>
-                <span>Information</span>
+                <span className="whitespace-nowrap">Information</span>
                 <span className="text-[#064F8C]">→</span>
-                <span>Frakt</span>
+                <span className="whitespace-nowrap">Frakt</span>
                 <span className="text-[#064F8C]">→</span>
-                <span className="text-[#064F8C] font-medium">Betalning</span>
+                <span className="text-[#064F8C] font-medium whitespace-nowrap">Betalning</span>
               </div>
             </div>
 
             {/* Express Checkout */}
             <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
               <p className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Snabb utcheckning</p>
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                 <div 
                   id="paypal-button-container" 
-                  className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-lg flex items-center justify-center h-12 cursor-pointer transition-all duration-200 relative border border-[#E6B800] shadow-sm"
+                  className="w-full bg-[#0070ba] hover:bg-[#005ea6] rounded-lg flex items-center justify-center h-12 cursor-pointer transition-all duration-200 relative border border-[#005ea6] shadow-sm"
                 >
                   <PayPalButton 
                     amount={finalTotal.toString()} 
@@ -193,10 +198,11 @@ export default function CheckoutForm() {
                 
                 <Button
                   onClick={handleCryptoPayment}
-                  className="w-full bg-[#F7931A] hover:bg-[#D9821A] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#D9821A] shadow-sm"
+                  className="w-full bg-[#F7931A] hover:bg-[#D9821A] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#D9821A] shadow-sm flex items-center justify-center gap-2"
                   data-testid="button-crypto-payment"
                 >
-                  Bitcoin/Krypto
+                  <span className="text-lg">₿</span>
+                  Kryptovaluta
                 </Button>
               </div>
               <div className="flex items-center my-6">
@@ -205,6 +211,52 @@ export default function CheckoutForm() {
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
             </div>
+
+            {/* Crypto Currency Selection Modal */}
+            {showCryptoModal && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <div className="bg-white rounded-lg max-w-md w-full p-6">
+                  <h3 className="text-lg font-semibold text-[#064F8C] mb-4">Välj kryptovaluta</h3>
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <Button
+                      onClick={() => { setShowCryptoModal(false); createCryptoPayment('btc'); }}
+                      className="h-12 bg-[#F7931A] hover:bg-[#D9821A] text-white flex items-center justify-center gap-2"
+                    >
+                      <span className="text-lg">₿</span>
+                      Bitcoin
+                    </Button>
+                    <Button
+                      onClick={() => { setShowCryptoModal(false); createCryptoPayment('eth'); }}
+                      className="h-12 bg-[#627EEA] hover:bg-[#4E6BDB] text-white flex items-center justify-center gap-2"
+                    >
+                      <span className="text-lg">Ξ</span>
+                      Ethereum
+                    </Button>
+                    <Button
+                      onClick={() => { setShowCryptoModal(false); createCryptoPayment('usdt'); }}
+                      className="h-12 bg-[#26A17B] hover:bg-[#209B6C] text-white flex items-center justify-center gap-2"
+                    >
+                      <span className="text-lg">₮</span>
+                      USDT
+                    </Button>
+                    <Button
+                      onClick={() => { setShowCryptoModal(false); createCryptoPayment('ltc'); }}
+                      className="h-12 bg-[#BFBBBB] hover:bg-[#A8A4A4] text-white flex items-center justify-center gap-2"
+                    >
+                      <span className="text-lg">Ł</span>
+                      Litecoin
+                    </Button>
+                  </div>
+                  <Button
+                    onClick={() => setShowCryptoModal(false)}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    Avbryt
+                  </Button>
+                </div>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Contact Information */}
@@ -359,7 +411,7 @@ export default function CheckoutForm() {
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="bg-[#F8F6F3] p-6 lg:p-12">
+          <div className="bg-[#F8F6F3] p-6 lg:p-12 overflow-y-auto">
             <div className="sticky top-8">
               {/* Product List */}
               <div className="space-y-4 mb-6">
@@ -367,9 +419,13 @@ export default function CheckoutForm() {
                   <div key={item.id} className="flex items-center space-x-4">
                     <div className="relative">
                       <img
-                        src={`/api/assets/${item.imageUrl}`}
+                        src={item.imageUrl?.startsWith('http') ? item.imageUrl : `/api/assets/${item.imageUrl}`}
                         alt={item.title}
                         className="w-16 h-16 object-cover rounded border"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/api/assets/generated_images/Red_lace_panties_product_da6c36cf.png';
+                        }}
                       />
                       <span className="absolute -top-2 -right-2 bg-[#064F8C] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                         {item.quantity}
@@ -387,24 +443,25 @@ export default function CheckoutForm() {
 
               {/* Promo Code */}
               <div className="border-t border-gray-300 pt-4 mb-6">
-                <div className="flex space-x-2">
+                <div className="flex gap-2">
                   <Input
                     placeholder="Presentkort eller rabattkod"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
-                    className="flex-1 h-10 border-gray-300 rounded-md focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="flex-1 h-10 bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-900"
                   />
                   <Button 
                     onClick={applyPromoCode} 
-                    variant="outline"
-                    className="px-4 py-2 h-10 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-md"
+                    className="px-6 h-10 bg-[#064F8C] text-white hover:bg-[#053D6B] border border-[#064F8C] font-medium"
                   >
                     Tillämpa
                   </Button>
                 </div>
                 {appliedPromo && (
-                  <div className="mt-2 text-sm text-green-600">
-                    Rabattkod "{appliedPromo.code}" tillämpad (-{appliedPromo.discountKr} SEK)
+                  <div className="mt-2 p-2 bg-green-50 border border-green-200 rounded-md">
+                    <div className="text-sm text-green-700 font-medium">
+                      ✓ Rabattkod "{appliedPromo.code}" tillämpad (-{appliedPromo.discountKr} SEK)
+                    </div>
                   </div>
                 )}
               </div>
