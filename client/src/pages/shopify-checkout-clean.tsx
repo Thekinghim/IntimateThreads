@@ -447,7 +447,7 @@ export default function ShopifyCheckout() {
                 {selectedPayment === 'crypto' && (
                   <div className="px-4 pb-4 border-t border-gray-200">
                     <div className="pt-4">
-                      {cartTotal > 0 ? (
+                      {discountedTotal > 0 ? (
                         <div className="space-y-4">
                           <div className="bg-orange-50 border border-orange-200 rounded-md p-4">
                             <h4 className="font-medium text-orange-900 mb-2">Betala med Kryptovaluta</h4>
@@ -455,7 +455,7 @@ export default function ShopifyCheckout() {
                               Säker och anonym betalning med Bitcoin, Ethereum eller USDT
                             </p>
                             <p className="text-sm font-medium text-orange-900">
-                              Total: {cartTotal.toFixed(2)} SEK
+                              Total: {discountedTotal.toFixed(2)} SEK
                             </p>
                           </div>
                           
@@ -466,7 +466,7 @@ export default function ShopifyCheckout() {
                                   method: 'POST',
                                   headers: { 'Content-Type': 'application/json' },
                                   body: JSON.stringify({ 
-                                    amount: cartTotal,
+                                    amount: discountedTotal,
                                     currency: 'SEK',
                                     order_description: `Scandiscent Order - ${cartItems.length} items`
                                   })
@@ -485,7 +485,7 @@ export default function ShopifyCheckout() {
                             }}
                             className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-md font-medium"
                           >
-                            Betala {cartTotal.toFixed(2)} SEK med Crypto
+                            Betala {discountedTotal.toFixed(2)} SEK med Crypto
                           </button>
                         </div>
                       ) : (
@@ -523,7 +523,7 @@ export default function ShopifyCheckout() {
               className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               data-testid="button-complete-order"
               onClick={async () => {
-                if (cartTotal === 0) {
+                if (discountedTotal === 0) {
                   alert('Din kundvagn är tom. Lägg till produkter först.');
                   return;
                 }
@@ -534,7 +534,7 @@ export default function ShopifyCheckout() {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({ 
-                        amount: cartTotal,
+                        amount: discountedTotal,
                         items: cartItems 
                       })
                     });
@@ -545,7 +545,7 @@ export default function ShopifyCheckout() {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({ 
-                        amount: cartTotal,
+                        amount: discountedTotal,
                         currency: 'SEK',
                         order_description: `Scandiscent Order - ${cartItems.length} items`
                       })
