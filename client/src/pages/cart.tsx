@@ -34,8 +34,8 @@ export default function Cart() {
     <div className="min-h-screen bg-[#F5F1E8] py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-10">
-          <h1 className="font-cormorant font-bold text-5xl text-[#064F8C]">Varukorg</h1>
-          <Badge variant="secondary" className="bg-[#064F8C] text-white text-base px-4 py-2">
+          <h1 className="font-cormorant font-bold text-5xl gold-text">Varukorg</h1>
+          <Badge variant="secondary" className="gradient-midnight-cyan text-white text-base px-4 py-2">
             {itemCount} {itemCount === 1 ? 'artikel' : 'artiklar'}
           </Badge>
         </div>
@@ -104,7 +104,7 @@ export default function Cart() {
           <div className="lg:col-span-1">
             <Card className="sticky top-8 bg-white shadow-xl border-none">
               <CardContent className="p-8">
-                <h2 className="font-cormorant font-bold text-3xl text-[#064F8C] mb-8">Ordersammanfattning</h2>
+                <h2 className="font-cormorant font-bold text-3xl gold-text mb-8">Ordersammanfattning</h2>
                 
                 <div className="space-y-6 mb-8">
                   {items.map((item) => (
@@ -121,8 +121,8 @@ export default function Cart() {
 
                 <div className="border-t border-[#064F8C]/20 pt-6 mb-8">
                   <div className="flex justify-between font-cormorant font-bold text-2xl">
-                    <span className="text-[#064F8C]">Totalt:</span>
-                    <span className="text-[#064F8C]">{totalPrice.toLocaleString('sv-SE')} kr</span>
+                    <span className="gold-text">Totalt:</span>
+                    <span className="gold-text">{totalPrice.toLocaleString('sv-SE')} kr</span>
                   </div>
                 </div>
 
@@ -134,7 +134,7 @@ export default function Cart() {
                   </Link>
                   
                   <Link href="/womens">
-                    <Button variant="outline" className="w-full font-dm-sans font-medium border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 py-4 rounded-2xl">
+                    <Button className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-4 rounded-2xl shadow-lg">
                       Fortsätt handla
                     </Button>
                   </Link>
