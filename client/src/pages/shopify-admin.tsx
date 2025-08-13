@@ -1142,18 +1142,15 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                           <TableCell>{format(new Date(product.createdAt), 'MMM dd, yyyy')}</TableCell>
                           <TableCell className="pr-6">
                             <div className="flex items-center space-x-2">
-                              <Button 
-                                variant="ghost" 
-                                size="sm"
-                                onClick={() => {
-                                  toast({ 
-                                    title: "Redigera produkt", 
-                                    description: `Redigering av ${product.title} - funktionalitet kommer snart` 
-                                  });
+                              <ProductManager 
+                                sellers={Array.isArray(sellers) ? sellers : []} 
+                                product={product}
+                                isEdit={true}
+                                onSuccess={() => {
+                                  // Refresh products data
+                                  queryClient.invalidateQueries({ queryKey: ['/api/products'] });
                                 }}
-                              >
-                                <Edit className="h-4 w-4" />
-                              </Button>
+                              />
                               <Button 
                                 variant="ghost" 
                                 size="sm"

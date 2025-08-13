@@ -23,9 +23,29 @@ export function ImageUploader({ value, onChange, placeholder = "Enter image URL"
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // For now, we'll convert to base64 - in production you'd upload to a cloud service
     setIsUploading(true);
     try {
+      // Try to upload to Object Storage first
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const response = await fetch('/api/upload-image', {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (response.ok) {
+          const { url } = await response.json();
+          handleUrlChange(url);
+          setIsUploading(false);
+          return;
+        }
+      } catch (uploadError) {
+        console.log('Object storage upload failed, using base64 fallback');
+      }
+      
+      // Fallback to base64 if object storage fails
       const reader = new FileReader();
       reader.onload = (e) => {
         const base64 = e.target?.result as string;

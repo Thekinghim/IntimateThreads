@@ -8,9 +8,19 @@ import { requireAdminAuth, authenticateAdmin, logoutAdmin } from "./adminAuth";
 import { randomUUID } from "crypto";
 import { sendOrderConfirmationEmail } from "./email";
 import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "./paypal";
+import multer from 'multer';
+import { ObjectStorageService } from './objectStorage';
 
 const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY;
 const nowpaymentsBaseUrl = "https://api.nowpayments.io/v1"; // Production API
+
+// Configure multer for file uploads
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  }
+});
 
 // Initialize Stripe
 if (!process.env.STRIPE_SECRET_KEY) {
@@ -769,6 +779,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error("Crypto payment error:", error);
       res.status(500).json({ message: "Error creating crypto payment: " + error.message });
+    }
+  });
+
+  // Image upload endpoint (with admin auth for security)
+  app.post("/api/upload-image", requireAdminAuth, upload.single('file'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      const objectStorage = new ObjectStorageService();
+      const uploadUrl = await objectStorage.getObjectEntityUploadURL();
+      
+      // Upload file to object storage
+      const response = await fetch(uploadUrl, {
+        method: 'PUT',
+        body: req.file.buffer,
+        headers: {
+          'Content-Type': req.file.mimetype,
+          'Content-Length': req.file.size.toString()
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload to object storage');
+      }
+
+      // Extract object path from upload URL
+      const normalizedPath = objectStorage.normalizeObjectEntityPath(uploadUrl);
+      
+      res.json({ 
+        url: normalizedPath,
+        originalUrl: uploadUrl 
+      });
+    } catch (error) {
+      console.error('Image upload error:', error);
+      res.status(500).json({ error: 'Failed to upload image' });
     }
   });
 
