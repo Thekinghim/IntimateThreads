@@ -19,6 +19,7 @@ import AnnaProfile from "@/pages/anna-profile";
 import MajaProfile from "@/pages/maja-profile";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
+import CheckoutForm from "@/pages/checkout-form";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
@@ -57,6 +58,7 @@ function Router() {
       <Route path="/product/:id" component={Product} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/checkout-form" component={CheckoutForm} />
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />
