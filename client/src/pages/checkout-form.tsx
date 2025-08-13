@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import PayPalButton from "@/components/PayPalButton";
+import { nowPayments } from "@/lib/nowpayments";
 
 export default function CheckoutForm() {
   const { items, getTotalPrice, clearCart } = useCartStore();
@@ -34,6 +35,7 @@ export default function CheckoutForm() {
 
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<any>(null);
+  const [showCryptoModal, setShowCryptoModal] = useState(false);
   
   const totalPrice = getTotalPrice();
   const shipping = 0; // Free shipping
@@ -117,6 +119,30 @@ export default function CheckoutForm() {
     }
   };
 
+  const handleCryptoPayment = async () => {
+    try {
+      // Create payment with NOWPayments
+      const paymentData = {
+        price_amount: finalTotal,
+        pay_currency: 'btc',
+        order_id: `order_${Date.now()}`,
+        order_description: `Scandiscent Purchase - ${items.length} items`
+      };
+
+      const payment = await nowPayments.createPayment(paymentData);
+      
+      // Redirect to crypto payment page with payment details
+      setLocation(`/crypto-payment/${payment.payment_id}`);
+    } catch (error) {
+      console.error('Crypto payment error:', error);
+      toast({ 
+        title: "Betalningsfel", 
+        description: "Kunde inte initiera kryptovaluta-betalning", 
+        variant: "destructive" 
+      });
+    }
+  };
+
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -153,7 +179,7 @@ export default function CheckoutForm() {
             {/* Express Checkout */}
             <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
               <p className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Snabb utcheckning</p>
-              <div className="space-y-3 mb-4">
+              <div className="grid grid-cols-2 gap-3 mb-4">
                 <div 
                   id="paypal-button-container" 
                   className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-lg flex items-center justify-center h-12 cursor-pointer transition-all duration-200 relative border border-[#E6B800] shadow-sm"
@@ -164,6 +190,14 @@ export default function CheckoutForm() {
                     intent="CAPTURE" 
                   />
                 </div>
+                
+                <Button
+                  onClick={handleCryptoPayment}
+                  className="w-full bg-[#F7931A] hover:bg-[#D9821A] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#D9821A] shadow-sm"
+                  data-testid="button-crypto-payment"
+                >
+                  Bitcoin/Krypto
+                </Button>
               </div>
               <div className="flex items-center my-6">
                 <div className="flex-1 border-t border-gray-300"></div>
