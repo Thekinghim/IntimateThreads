@@ -5,11 +5,20 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 
-// Initialize Stripe
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
+// Initialize Stripe with public key
+const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+console.log('Stripe key type:', STRIPE_PUBLIC_KEY?.substring(0, 10));
+
+if (!STRIPE_PUBLIC_KEY) {
+  throw new Error('Missing required Stripe public key: VITE_STRIPE_PUBLIC_KEY');
 }
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+if (STRIPE_PUBLIC_KEY.startsWith('sk_')) {
+  throw new Error('Do not use secret key on client side. Use publishable key (starts with pk_)');
+}
+if (!STRIPE_PUBLIC_KEY.startsWith('pk_')) {
+  throw new Error('Invalid Stripe key format. Publishable key must start with pk_');
+}
+const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 interface StripeCheckoutFormProps {
   amount: number;
