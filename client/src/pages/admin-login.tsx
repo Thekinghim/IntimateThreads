@@ -163,14 +163,6 @@ export default function AdminLogin() {
             </form>
           </Form>
 
-          {/* Sign in with passkey */}
-          <div className="mt-4 text-center">
-            <button className="text-gray-600 text-sm flex items-center justify-center space-x-2 hover:text-gray-800">
-              <Key className="w-4 h-4" />
-              <span>Sign in with passkey</span>
-            </button>
-          </div>
-
           {/* Dev credentials hint */}
           <div className="mt-6 text-center p-3 bg-gray-50 rounded-lg">
             <p className="text-xs text-gray-600">
