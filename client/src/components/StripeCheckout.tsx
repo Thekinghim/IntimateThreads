@@ -7,7 +7,6 @@ import { apiRequest } from '@/lib/queryClient';
 
 // Initialize Stripe with public key
 const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
-console.log('Stripe key type:', STRIPE_PUBLIC_KEY?.substring(0, 10));
 
 if (!STRIPE_PUBLIC_KEY) {
   throw new Error('Missing required Stripe public key: VITE_STRIPE_PUBLIC_KEY');
