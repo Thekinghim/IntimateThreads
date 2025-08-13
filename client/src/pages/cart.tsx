@@ -46,11 +46,11 @@ export default function Cart() {
             {items.map((item) => (
               <Card key={item.id} className="overflow-hidden bg-white shadow-lg border-none">
                 <CardContent className="p-0">
-                  <div className="flex items-center space-x-6 p-8">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 p-4 sm:p-8">
                     <img
                       src={item.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=150"}
                       alt={item.title}
-                      className="w-24 h-24 object-cover rounded-xl shadow-md"
+                      className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-xl shadow-md flex-shrink-0"
                     />
                     
                     <div className="flex-1 min-w-0">
@@ -63,24 +63,24 @@ export default function Cart() {
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-4 rounded-2xl px-4 py-2 bg-[#064f8c] text-[#ffffff]">
+                    <div className="flex items-center space-x-2 sm:space-x-4 rounded-2xl px-2 sm:px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#F4E971] shadow-lg">
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         disabled={item.quantity <= 1}
-                        className="h-10 w-10 rounded-full border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white"
+                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md disabled:opacity-50"
                       >
                         <Minus className="h-4 w-4" />
                       </Button>
                       
-                      <span className="w-8 text-center font-bold text-lg text-[#064F8C]">{item.quantity}</span>
+                      <span className="w-6 sm:w-8 text-center font-bold text-base sm:text-lg text-[#064F8C] drop-shadow-sm">{item.quantity}</span>
                       
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="h-10 w-10 rounded-full border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white"
+                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md"
                       >
                         <Plus className="h-4 w-4" />
                       </Button>
