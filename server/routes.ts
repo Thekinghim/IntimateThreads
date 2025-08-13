@@ -17,7 +17,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
 }
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2023-10-16",
+  apiVersion: "2025-07-30.basil",
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -714,8 +714,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             quantity: 1,
           },
         ],
-        success_url: `${req.headers.origin}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/checkout-form`,
+        success_url: `${req.headers.origin || 'http://localhost:5000'}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin || 'http://localhost:5000'}/checkout-form`,
         metadata: {
           source: "scandiscent_production_checkout"
         }
@@ -755,15 +755,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         price_currency: currency || "SEK",
         pay_currency: "btc", // Default to Bitcoin
         order_description: order_description || "Scandiscent Order",
-        ipn_callback_url: `${req.headers.origin}/api/crypto-webhook`,
-        success_url: `${req.headers.origin}/order-confirmation`,
-        cancel_url: `${req.headers.origin}/checkout-form`
+        ipn_callback_url: `${req.headers.origin || 'http://localhost:5000'}/api/crypto-webhook`,
+        success_url: `${req.headers.origin || 'http://localhost:5000'}/order-confirmation`,
+        cancel_url: `${req.headers.origin || 'http://localhost:5000'}/checkout-form`
       };
 
       const response = await fetch(`${nowpaymentsBaseUrl}/payment`, {
         method: "POST",
         headers: {
-          "x-api-key": nowpaymentsApiKey,
+          "x-api-key": nowpaymentsApiKey!,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(paymentData),
