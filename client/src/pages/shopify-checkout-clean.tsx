@@ -21,17 +21,22 @@ function StripePaymentForm({ amount }: { amount: number }) {
     setIsProcessing(true);
     setMessage('');
 
-    const { error } = await stripe.confirmPayment({
+    // Use confirmPayment without redirect for inline completion
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: window.location.origin + '/order-confirmation',
-      },
+      redirect: 'if_required', // Only redirect if absolutely necessary
     });
 
     if (error) {
       setMessage(error.message || 'Något gick fel med betalningen');
+    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+      setMessage('✅ Betalning genomförd! Din order har bekräftats.');
+      // Handle successful payment without redirect
+      setTimeout(() => {
+        alert('Betalning genomförd! Tack för ditt köp.');
+      }, 1000);
     } else {
-      setMessage('Betalning genomförd!');
+      setMessage('Betalningen kräver ytterligare verifiering.');
     }
     setIsProcessing(false);
   };
@@ -65,6 +70,11 @@ function StripeCheckout({ amount }: { amount: number }) {
 
   useEffect(() => {
     if (amount > 0) {
+      // Reset states when amount changes
+      setClientSecret('');
+      setLoading(true);
+      setError('');
+      
       fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -114,6 +124,7 @@ function StripeCheckout({ amount }: { amount: number }) {
 
   return (
     <Elements 
+      key={clientSecret} // Force re-render when clientSecret changes
       stripe={stripePromise} 
       options={{ 
         clientSecret,
