@@ -51,7 +51,7 @@ export default function About() {
           </div>
 
           {/* Our Story */}
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
+          <div className="grid md:grid-cols-2 gap-12 mb-8">
             <div>
               <h2 className="text-4xl font-bold mb-6">Vår Historia</h2>
               <div className="space-y-4 text-gray-700">
