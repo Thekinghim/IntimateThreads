@@ -5,12 +5,32 @@ import { Badge } from "@/components/ui/badge";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { getProductImageUrl } from "@/assets/images";
+import { useState } from "react";
 
 export default function Cart() {
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart, debugClearStorage } = useCartStore();
+  const [promoCode, setPromoCode] = useState('');
+  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [promoDiscount, setPromoDiscount] = useState(0);
 
   const totalPrice = getTotalPrice();
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
+  const discountedTotal = totalPrice - promoDiscount;
+
+  const applyPromoCode = () => {
+    const validPromoCodes = {
+      'WELCOME10': 100, // 100 kr rabatt
+      'SUMMER20': 200,  // 200 kr rabatt
+      'VIP15': 150      // 150 kr rabatt
+    };
+
+    if (validPromoCodes[promoCode.toUpperCase() as keyof typeof validPromoCodes]) {
+      const discount = validPromoCodes[promoCode.toUpperCase() as keyof typeof validPromoCodes];
+      setAppliedPromo(promoCode.toUpperCase());
+      setPromoDiscount(discount);
+      setPromoCode('');
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -40,16 +60,16 @@ export default function Cart() {
             <div className="lg:col-span-2 p-4 sm:p-8">
               {/* Header */}
               <div className="flex items-center justify-between mb-8">
-                <h1 className="text-2xl font-bold text-gray-800">Shopping Cart</h1>
-                <span className="text-lg font-medium text-gray-600">{itemCount} Items</span>
+                <h1 className="text-2xl font-bold text-gray-800">Varukorg</h1>
+                <span className="text-lg font-medium text-gray-600">{itemCount} {itemCount === 1 ? 'Artikel' : 'Artiklar'}</span>
               </div>
 
               {/* Column Headers - Hidden on mobile */}
               <div className="hidden sm:grid grid-cols-6 gap-4 pb-4 border-b border-gray-200 mb-4">
-                <div className="col-span-3 text-sm font-medium text-gray-500 uppercase tracking-wide">PRODUCT DETAILS</div>
-                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">QUANTITY</div>
-                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">PRICE</div>
-                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">TOTAL</div>
+                <div className="col-span-3 text-sm font-medium text-gray-500 uppercase tracking-wide">PRODUKTDETALJER</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">KVANTITET</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">PRIS</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">TOTALT</div>
               </div>
 
               {/* Cart Items */}
@@ -76,7 +96,7 @@ export default function Cart() {
                             onClick={() => removeItem(item.id)}
                             className="text-xs text-red-500 hover:text-red-700"
                           >
-                            Remove
+                            Ta bort
                           </button>
                         </div>
                       </div>
@@ -99,7 +119,7 @@ export default function Cart() {
                         </div>
                         <div className="text-right">
                           <div className="text-sm text-gray-600">
-                            {item.priceKr.toLocaleString('sv-SE')} kr each
+                            {item.priceKr.toLocaleString('sv-SE')} kr styck
                           </div>
                           <div className="font-bold text-gray-800">
                             {(item.priceKr * item.quantity).toLocaleString('sv-SE')} kr
@@ -126,7 +146,7 @@ export default function Cart() {
                             onClick={() => removeItem(item.id)}
                             className="text-sm text-red-500 hover:text-red-700"
                           >
-                            Remove
+                            Ta bort
                           </button>
                         </div>
                       </div>
@@ -173,62 +193,63 @@ export default function Cart() {
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <Link href="/womens">
                   <Button variant="ghost" className="text-blue-600 hover:text-blue-800">
-                    ← Continue Shopping
+                    ← Fortsätt handla
                   </Button>
                 </Link>
               </div>
             </div>
 
             {/* Order Summary */}
-            <div className="bg-gray-50 p-8">
-              <h2 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h2>
+            <div className="bg-gray-50 p-4 sm:p-8">
+              <h2 className="text-xl font-bold text-gray-800 mb-6">Ordersammanfattning</h2>
               
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">ITEMS {itemCount}</span>
+                  <span className="text-gray-600">ARTIKLAR {itemCount}</span>
                   <span className="font-medium">{totalPrice.toLocaleString('sv-SE')} kr</span>
                 </div>
 
                 <div className="border-t border-gray-200 pt-4">
                   <div className="mb-2">
-                    <span className="text-gray-600 text-sm">SHIPPING</span>
+                    <span className="text-gray-600 text-sm">RABATTKOD</span>
                   </div>
-                  <div className="flex items-center justify-between bg-white border border-gray-300 rounded p-3">
-                    <span className="text-sm">Standard Delivery - 65 kr</span>
-                    <button className="text-gray-400">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="mb-2">
-                    <span className="text-gray-600 text-sm">PROMO CODE</span>
-                  </div>
-                  <div className="flex space-x-2">
-                    <input
-                      type="text"
-                      placeholder="Enter your code"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
-                    />
-                    <Button className="bg-red-400 hover:bg-red-500 text-white px-4 py-2 text-sm">
-                      APPLY
-                    </Button>
-                  </div>
+                  {appliedPromo ? (
+                    <div className="bg-green-50 border border-green-200 rounded p-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-green-700 text-sm font-medium">{appliedPromo} tillämpat</span>
+                        <span className="text-green-700 font-bold">-{promoDiscount} kr</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex space-x-2">
+                      <input
+                        type="text"
+                        placeholder="Ange din kod (t.ex. WELCOME10)"
+                        value={promoCode}
+                        onChange={(e) => setPromoCode(e.target.value)}
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
+                      />
+                      <Button 
+                        onClick={applyPromoCode}
+                        disabled={!promoCode.trim()}
+                        className="bg-red-400 hover:bg-red-500 disabled:bg-gray-300 text-white px-4 py-2 text-sm"
+                      >
+                        ANVÄND
+                      </Button>
+                    </div>
+                  )}
                 </div>
 
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex justify-between text-lg font-bold">
-                    <span>TOTAL COST</span>
-                    <span>{(totalPrice + 65).toLocaleString('sv-SE')} kr</span>
+                    <span>TOTALKOSTNAD</span>
+                    <span>{totalPrice.toLocaleString('sv-SE')} kr</span>
                   </div>
                 </div>
 
                 <Link href="/checkout">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded text-lg font-medium mt-6">
-                    CHECKOUT
+                    GÅ TILL KASSAN
                   </Button>
                 </Link>
               </div>
