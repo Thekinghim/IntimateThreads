@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, Package, CreditCard, Clock, CheckCircle, AlertCircle } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -96,9 +96,6 @@ export function OrderDetailsModal({ order, isOpen, onClose }: OrderDetailsModalP
             {getStatusIcon(order.status || "pending")}
             Order #{order.id.slice(0, 8)}
           </DialogTitle>
-          <DialogDescription>
-            Order details and status management
-          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
