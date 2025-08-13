@@ -136,7 +136,7 @@ export default function AdminLogin() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="text-[#000000]">
                     <FormLabel className="text-sm font-medium text-gray-700">
                       Password
                     </FormLabel>
