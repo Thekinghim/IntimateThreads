@@ -26,18 +26,30 @@ export default function OrderConfirmation() {
     const orderNum = 'HMT' + Math.random().toString().substr(2, 6);
     setOrderNumber(orderNum);
 
-    // Save order items immediately before clearing cart
-    if (cartItems.length > 0) {
+    // Load order data from localStorage first
+    const savedOrderItems = localStorage.getItem('orderItemsData');
+    const savedOrderTotal = localStorage.getItem('orderTotalData');
+    const savedCustomerData = localStorage.getItem('orderCustomerData');
+
+    if (savedOrderItems) {
+      setOrderItems(JSON.parse(savedOrderItems));
+      localStorage.removeItem('orderItemsData');
+    } else if (cartItems.length > 0) {
+      // Fallback: use cart items if localStorage data is not available
       setOrderItems([...cartItems]);
+    }
+
+    if (savedOrderTotal) {
+      setOrderTotal(parseFloat(savedOrderTotal));
+      localStorage.removeItem('orderTotalData');
+    } else if (cartItems.length > 0) {
+      // Fallback: calculate from cart items
       const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.priceKr * item.quantity), 0);
       setOrderTotal(total);
     }
 
-    // Load customer data from localStorage
-    const savedCustomerData = localStorage.getItem('orderCustomerData');
     if (savedCustomerData) {
       setCustomerData(JSON.parse(savedCustomerData));
-      // Clean up localStorage after loading
       localStorage.removeItem('orderCustomerData');
     }
 

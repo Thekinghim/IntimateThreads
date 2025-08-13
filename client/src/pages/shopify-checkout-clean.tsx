@@ -173,6 +173,15 @@ export default function ShopifyCheckout() {
   const cartTotal = getTotalPrice();
   const discountedTotal = cartTotal - promoDiscount;
 
+  // Save order data immediately when component loads
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      localStorage.setItem('orderItemsData', JSON.stringify(cartItems));
+      const total = cartItems.reduce((sum, item) => sum + (item.priceKr * item.quantity), 0);
+      localStorage.setItem('orderTotalData', total.toString());
+    }
+  }, [cartItems]);
+
   const handleInputChange = (field: string, value: string | boolean) => {
     const newFormData = { ...formData, [field]: value };
     setFormData(newFormData);
