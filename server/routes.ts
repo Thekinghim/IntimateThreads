@@ -651,6 +651,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Update product endpoint
+  app.patch("/api/admin/products/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updateData = req.body;
+      
+      // Validate the update data
+      const validatedData = insertProductSchema.partial().parse(updateData);
+      
+      const updatedProduct = await storage.updateProduct(id, validatedData);
+      if (!updatedProduct) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      
+      res.json(updatedProduct);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid product data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to update product" });
+    }
+  });
+
   // Update order status (protected admin endpoint)
   app.patch("/api/orders/:id", requireAdminAuth, async (req, res) => {
     try {
