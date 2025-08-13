@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { queryClient } from "@/lib/queryClient";
@@ -501,6 +501,15 @@ export default function ShopifyStyleAdmin() {
   const [isCreateContentOpen, setIsCreateContentOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showLiveView, setShowLiveView] = useState(false);
+  const [liveStats, setLiveStats] = useState({
+    activeVisitors: 12,
+    sessionsToday: 247,
+    totalPageViews: 1583,
+    avgSessionDuration: '3:42',
+    topProduct: 'Elegant Lace Set',
+    topProductRevenue: 2450
+  });
 
   const handleOrderClick = (order: any) => {
     setSelectedOrder(order);
@@ -511,6 +520,21 @@ export default function ShopifyStyleAdmin() {
     setIsOrderModalOpen(false);
     setSelectedOrder(null);
   };
+
+  // Simulate live updates for analytics
+  useEffect(() => {
+    if (showLiveView) {
+      const interval = setInterval(() => {
+        setLiveStats(prev => ({
+          ...prev,
+          activeVisitors: Math.max(5, prev.activeVisitors + Math.floor(Math.random() * 3) - 1),
+          sessionsToday: prev.sessionsToday + Math.floor(Math.random() * 2),
+          totalPageViews: prev.totalPageViews + Math.floor(Math.random() * 4),
+        }));
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [showLiveView]);
 
   // Promo codes queries
   const { data: promoCodes = [], refetch } = useQuery({
@@ -1075,61 +1099,217 @@ export default function ShopifyStyleAdmin() {
         );
 
       case "analytics":
+        if (showLiveView) {
+          return (
+            <div className="p-3 md:p-6 bg-white">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+                <div className="flex items-center gap-3">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowLiveView(false)}
+                    className="text-blue-600 hover:text-blue-800 h-8"
+                  >
+                    ← Back to Analytics
+                  </Button>
+                  <h1 className="text-lg md:text-xl font-semibold text-gray-900">Live View</h1>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-gray-600">Live</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Live Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                  <div className="text-xs text-gray-600 font-medium mb-1">Active Visitors</div>
+                  <div className="text-2xl md:text-3xl font-bold text-gray-900">{liveStats.activeVisitors}</div>
+                  <div className="text-xs text-green-600">Right now</div>
+                </div>
+                <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                  <div className="text-xs text-gray-600 font-medium mb-1">Sessions Today</div>
+                  <div className="text-2xl md:text-3xl font-bold text-gray-900">{liveStats.sessionsToday}</div>
+                  <div className="text-xs text-gray-600">Since midnight</div>
+                </div>
+                <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                  <div className="text-xs text-gray-600 font-medium mb-1">Page Views</div>
+                  <div className="text-2xl md:text-3xl font-bold text-gray-900">{liveStats.totalPageViews}</div>
+                  <div className="text-xs text-gray-600">Today</div>
+                </div>
+                <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                  <div className="text-xs text-gray-600 font-medium mb-1">Avg. Session</div>
+                  <div className="text-2xl md:text-3xl font-bold text-gray-900">{liveStats.avgSessionDuration}</div>
+                  <div className="text-xs text-gray-600">Duration</div>
+                </div>
+              </div>
+
+              {/* Top Product Performance */}
+              <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto mb-6">
+                <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                  <h3 className="text-sm font-medium text-gray-900">Top Performing Product (Live)</h3>
+                </div>
+                <div className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900">{liveStats.topProduct}</h4>
+                      <p className="text-sm text-gray-600">Revenue generated today</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-green-600">${liveStats.topProductRevenue}</div>
+                      <div className="text-xs text-gray-600">+{Math.floor(Math.random() * 15) + 5}% vs yesterday</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 bg-gray-200 rounded-full h-2">
+                    <div className="bg-blue-600 h-2 rounded-full" style={{ width: '68%' }}></div>
+                  </div>
+                  <div className="text-xs text-gray-600 mt-1">68% of total product revenue</div>
+                </div>
+              </div>
+
+              {/* Live Activity */}
+              <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+                <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                  <h3 className="text-sm font-medium text-gray-900">Real-time Activity</h3>
+                </div>
+                <div className="p-4 space-y-3">
+                  {[
+                    "New visitor from Stockholm viewing Product Page",
+                    "Customer from Göteborg added item to cart",
+                    "Order completed: Elegant Lace Set - 299 kr",
+                    "New visitor from Malmö viewing Home Page",
+                    "Customer from Stockholm viewing Checkout"
+                  ].map((activity, index) => (
+                    <div key={index} className="flex items-center gap-3 text-sm">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="text-gray-700">{activity}</span>
+                      <span className="text-xs text-gray-500 ml-auto">{index + 1}s ago</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        }
+
         return (
           <div className="p-3 md:p-6 bg-white">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Analytics</h1>
+              <Button
+                onClick={() => setShowLiveView(true)}
+                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+              >
+                Live View
+              </Button>
             </div>
             
             {/* Analytics Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
               <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
-                <div className="text-xs text-gray-600 font-medium mb-1">Page Views</div>
-                <div className="text-lg md:text-xl font-bold text-gray-900">1,247</div>
-                <div className="text-xs text-green-600">+12% from last week</div>
+                <div className="text-xs text-gray-600 font-medium mb-1">Total Sales</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">$250,000</div>
+                <div className="text-xs text-green-600">+20% from last month</div>
               </div>
               <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
-                <div className="text-xs text-gray-600 font-medium mb-1">Unique Visitors</div>
-                <div className="text-lg md:text-xl font-bold text-gray-900">892</div>
+                <div className="text-xs text-gray-600 font-medium mb-1">Net Sales</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">$15,000</div>
                 <div className="text-xs text-green-600">+8% from last week</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Sessions</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">40K</div>
+                <div className="text-xs text-green-600">+5% from last week</div>
               </div>
               <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
                 <div className="text-xs text-gray-600 font-medium mb-1">Conversion Rate</div>
                 <div className="text-lg md:text-xl font-bold text-gray-900">3.2%</div>
                 <div className="text-xs text-red-600">-0.5% from last week</div>
               </div>
-              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
-                <div className="text-xs text-gray-600 font-medium mb-1">Avg. Order Value</div>
-                <div className="text-lg md:text-xl font-bold text-gray-900">${stats.totalSales > 0 ? Math.round(stats.totalSales / stats.totalOrders) : 0}</div>
-                <div className="text-xs text-green-600">+5% from last week</div>
+            </div>
+
+            {/* Gross Sales by Product */}
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto mb-6">
+              <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                <h3 className="text-sm font-medium text-gray-900">Gross sales by product</h3>
+              </div>
+              <div className="p-4 space-y-3">
+                {[
+                  { name: "Wind cup", sales: "$10K", percent: "+8%", width: "85%" },
+                  { name: "Crewneck", sales: "$9.75K", percent: "+2%", width: "80%" },
+                  { name: "Blouse", sales: "$7.5K", percent: "+4%", width: "65%" },
+                  { name: "T-shirt", sales: "$8.5K", percent: "+12%", width: "70%" },
+                  { name: "Long sleeve", sales: "$6K", percent: "+6%", width: "50%" }
+                ].map((product, index) => (
+                  <div key={index} className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-900 font-medium">{product.name}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-900 font-medium">{product.sales}</span>
+                        <span className="text-green-600 text-xs">{product.percent}</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: product.width }}></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Top Products Table */}
-            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
-              <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
-                <h3 className="text-sm font-medium text-gray-900">Top Products</h3>
+            {/* Sessions by Device Type */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden">
+                <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                  <h3 className="text-sm font-medium text-gray-900">Sessions by device type</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-3">
+                    {[
+                      { device: "Mobile", count: "10K", percent: "+5%", color: "bg-blue-500" },
+                      { device: "Desktop", count: "6K", percent: "+3%", color: "bg-green-500" },
+                      { device: "Tablet", count: "6K", percent: "+1%", color: "bg-purple-500" },
+                      { device: "Other", count: "4K", percent: "+4%", color: "bg-pink-500" }
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-3 h-3 rounded-full ${item.color}`}></div>
+                          <span className="text-sm text-gray-700">{item.device}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-gray-900">{item.count}</span>
+                          <span className="text-xs text-green-600">{item.percent}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Product</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Views</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Orders</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Revenue</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {products.slice(0, 5).map((product: any, index: number) => (
-                    <TableRow key={product.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
-                      <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">{product.name}</TableCell>
-                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">{125 - index * 20}</TableCell>
-                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">{15 - index * 3}</TableCell>
-                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">${(product.priceKr * (15 - index * 3))}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+
+              <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden">
+                <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                  <h3 className="text-sm font-medium text-gray-900">Sessions by country</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-3">
+                    {[
+                      { country: "Sweden", flag: "🇸🇪", percent: "45%" },
+                      { country: "Norway", flag: "🇳🇴", percent: "25%" },
+                      { country: "Denmark", flag: "🇩🇰", percent: "15%" },
+                      { country: "Finland", flag: "🇫🇮", percent: "10%" },
+                      { country: "Other", flag: "🌐", percent: "5%" }
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{item.flag}</span>
+                          <span className="text-sm text-gray-700">{item.country}</span>
+                        </div>
+                        <span className="text-sm font-medium text-gray-900">{item.percent}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         );
