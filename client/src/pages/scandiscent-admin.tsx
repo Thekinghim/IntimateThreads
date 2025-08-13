@@ -5,15 +5,23 @@ import {
   Search, Plus, Filter, Edit2, Trash2, Eye, Copy, MoreHorizontal, CreditCard,
   FileText, Image, Calendar, Bell, Mail, DollarSign, ArrowUpRight, ArrowDownRight,
   TrendingUp, TrendingDown, ExternalLink, ArrowLeft, CheckCircle, AlertCircle,
-  Clock, RefreshCw, Truck, Star, Activity
+  Clock, RefreshCw, Truck, Star, Activity, LogOut
 } from "lucide-react";
 import { 
-  Dialog, DialogContent, DialogTitle, DialogTrigger 
+  Dialog, DialogContent, DialogTitle, DialogTrigger, DialogHeader, DialogFooter
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import type { Order, Product, Seller, SelectOrder, SelectProduct, SelectSeller } from "@shared/schema";
 import { OrderDetailsModal } from "../components/OrderDetailsModal";
 
@@ -39,6 +47,7 @@ const navigationItems = [
 ];
 
 export default function ScanDiscentAdmin() {
+  const { isAuthenticated, isLoading, adminUser, logout, getAuthHeader } = useAdminAuth();
   const [selectedTab, setSelectedTab] = useState("orders");
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -53,25 +62,51 @@ export default function ScanDiscentAdmin() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  // Fetch data
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      window.location.href = '/admin/login';
+    }
+  }, [isAuthenticated, isLoading]);
+
+  // Custom query function with auth headers
+  const authenticatedQuery = async ({ queryKey }: { queryKey: readonly unknown[] }) => {
+    const authHeaders = getAuthHeader();
+    const response = await fetch(queryKey.join("/"), {
+      headers: {
+        ...authHeaders,
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
+  };
+
+  // Fetch data with authentication
   const { data: orders = [] } = useQuery<SelectOrder[]>({
     queryKey: ["/api/admin/orders"],
-    enabled: selectedTab === "orders"
+    queryFn: authenticatedQuery,
+    enabled: selectedTab === "orders" && isAuthenticated
   });
 
   const { data: products = [] } = useQuery<SelectProduct[]>({
     queryKey: ["/api/products"],
-    enabled: selectedTab === "products"
+    enabled: selectedTab === "products" && isAuthenticated
   });
 
   const { data: sellers = [] } = useQuery<SelectSeller[]>({
     queryKey: ["/api/sellers"],
-    enabled: selectedTab === "customers"
+    enabled: selectedTab === "customers" && isAuthenticated
   });
 
   const { data: promoCodes = [] } = useQuery<any[]>({
     queryKey: ["/api/admin/promo-codes"],
-    enabled: selectedTab === "discounts"
+    queryFn: authenticatedQuery,
+    enabled: selectedTab === "discounts" && isAuthenticated
   });
 
   const openOrderModal = (order: SelectOrder) => {
@@ -92,8 +127,7 @@ export default function ScanDiscentAdmin() {
 
   const handleLogout = async () => {
     try {
-      await apiRequest("POST", "/api/admin/logout");
-      window.location.href = "/admin-login";
+      await logout();
     } catch (error) {
       toast({
         title: "Logout failed",
@@ -102,6 +136,86 @@ export default function ScanDiscentAdmin() {
       });
     }
   };
+
+  // Add the mutations for creating/updating content
+  const createProductMutation = useMutation({
+    mutationFn: async (productData: any) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/products', {
+        method: 'POST',
+        headers: {
+          ...authHeaders,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+      if (!response.ok) throw new Error('Failed to create product');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/products'] });
+      setIsCreateProductOpen(false);
+      toast({ title: "Produkt skapad", description: "Ny produkt har lagts till." });
+    },
+  });
+
+  const createSellerMutation = useMutation({
+    mutationFn: async (sellerData: any) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/sellers', {
+        method: 'POST',
+        headers: {
+          ...authHeaders,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sellerData),
+      });
+      if (!response.ok) throw new Error('Failed to create seller');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/sellers'] });
+      setIsCreateCustomerOpen(false);
+      toast({ title: "Säljare skapad", description: "Ny säljare har lagts till." });
+    },
+  });
+
+  const createPromoCodeMutation = useMutation({
+    mutationFn: async (promoData: any) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/promo-codes', {
+        method: 'POST',
+        headers: {
+          ...authHeaders,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(promoData),
+      });
+      if (!response.ok) throw new Error('Failed to create promo code');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/promo-codes'] });
+      toast({ title: "Rabattkod skapad", description: "Ny rabattkod har skapats." });
+    },
+  });
+
+  // If still loading, show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Laddar admin panel...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If not authenticated, don't render anything (redirect will happen)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   // Content renderer
   const renderContent = () => {
@@ -304,7 +418,10 @@ export default function ScanDiscentAdmin() {
         <div className="p-3 md:p-6 bg-white">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
             <h1 className="text-lg md:text-xl font-semibold text-gray-900">Discount codes</h1>
-            <Button className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto">
+            <Button 
+              onClick={() => setIsCreateContentOpen(true)}
+              className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+            >
               <Plus className="h-4 w-4 mr-1.5" />
               Create discount code
             </Button>
@@ -773,16 +890,106 @@ export default function ScanDiscentAdmin() {
             </div>
           </div>
           <div className="p-6">
-            <p className="text-gray-600">Product creation form would be implemented here</p>
-            <Button 
-              className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6 mt-4"
-              onClick={() => {
-                toast({ title: "Product created", description: "The new product has been added." });
-                setIsCreateProductOpen(false);
-              }}
-            >
-              Save product
-            </Button>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Produkttitel</label>
+                  <Input 
+                    placeholder="Ange produkttitel"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Beskrivning</label>
+                  <Textarea 
+                    placeholder="Beskriv produkten..."
+                    className="w-full h-24"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Pris (SEK)</label>
+                  <Input 
+                    type="number"
+                    placeholder="2999"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Säljare</label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Välj säljare" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {sellers.map((seller) => (
+                        <SelectItem key={seller.id} value={seller.id}>
+                          {seller.alias}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Välj kategori" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="used_panties">Använda trosor</SelectItem>
+                      <SelectItem value="bras">BH</SelectItem>
+                      <SelectItem value="lingerie">Underkläder</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <Select defaultValue="active">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">Aktiv</SelectItem>
+                      <SelectItem value="draft">Utkast</SelectItem>
+                      <SelectItem value="archived">Arkiverad</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Storlek</label>
+                  <Input 
+                    placeholder="S, M, L, etc."
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Färg</label>
+                  <Input 
+                    placeholder="Svart, vit, röd, etc."
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 mt-6 pt-6 border-t">
+              <Button 
+                variant="outline"
+                onClick={() => setIsCreateProductOpen(false)}
+              >
+                Avbryt
+              </Button>
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Produkt skapad", description: "Den nya produkten har lagts till." });
+                  setIsCreateProductOpen(false);
+                }}
+              >
+                Spara produkt
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
@@ -808,16 +1015,70 @@ export default function ScanDiscentAdmin() {
             </div>
           </div>
           <div className="p-6">
-            <p className="text-gray-600">Seller creation form would be implemented here</p>
-            <Button 
-              className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6 mt-4"
-              onClick={() => {
-                toast({ title: "Säljare skapad", description: "Den nya säljaren har lagts till." });
-                setIsCreateCustomerOpen(false);
-              }}
-            >
-              Skapa säljare
-            </Button>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Alias</label>
+                  <Input 
+                    placeholder="Emma"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Ålder</label>
+                  <Input 
+                    type="number"
+                    placeholder="25"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Plats</label>
+                  <Input 
+                    placeholder="Stockholm"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Provision (%)</label>
+                  <Input 
+                    type="number"
+                    placeholder="45"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                  <Textarea 
+                    placeholder="Kort beskrivning om säljaren..."
+                    className="w-full h-32"
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch defaultChecked />
+                  <span className="text-sm text-gray-700">Aktiv säljare</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 mt-6 pt-6 border-t">
+              <Button 
+                variant="outline"
+                onClick={() => setIsCreateCustomerOpen(false)}
+              >
+                Avbryt
+              </Button>
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Säljare skapad", description: "Ny säljare har lagts till." });
+                  setIsCreateCustomerOpen(false);
+                }}
+              >
+                Spara säljare
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
@@ -843,16 +1104,89 @@ export default function ScanDiscentAdmin() {
             </div>
           </div>
           <div className="p-6">
-            <p className="text-gray-600">Content creation form would be implemented here</p>
-            <Button 
-              className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6 mt-4"
-              onClick={() => {
-                toast({ title: "Innehåll skapat", description: "Det nya innehållet har lagts till." });
-                setIsCreateContentOpen(false);
-              }}
-            >
-              Skapa innehåll
-            </Button>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Rabattkod</label>
+                  <Input 
+                    placeholder="SUMMER20"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Typ</label>
+                  <Select defaultValue="fixed">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="fixed">Fast belopp (SEK)</SelectItem>
+                      <SelectItem value="percentage">Procent (%)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Värde</label>
+                  <Input 
+                    type="number"
+                    placeholder="100"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Max användningar</label>
+                  <Input 
+                    type="number"
+                    placeholder="100"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Beskrivning</label>
+                  <Textarea 
+                    placeholder="Beskrivning av rabattkoden..."
+                    className="w-full h-24"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Giltig från</label>
+                  <Input 
+                    type="date"
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Giltig till</label>
+                  <Input 
+                    type="date"
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch defaultChecked />
+                  <span className="text-sm text-gray-700">Aktiv rabattkod</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 mt-6 pt-6 border-t">
+              <Button 
+                variant="outline"
+                onClick={() => setIsCreateContentOpen(false)}
+              >
+                Avbryt
+              </Button>
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Rabattkod skapad", description: "Ny rabattkod har skapats." });
+                  setIsCreateContentOpen(false);
+                }}
+              >
+                Spara rabattkod
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
