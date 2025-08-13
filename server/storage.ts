@@ -1,6 +1,6 @@
-import { type Seller, type Product, type Order, type InsertSeller, type InsertProduct, type InsertOrder, type ProductWithSeller, type OrderWithDetails, type Admin, type AdminSession, type InsertAdmin, sellers, products, orders, admins, adminSessions } from "@shared/schema";
+import { type Seller, type Product, type Order, type InsertSeller, type InsertProduct, type InsertOrder, type ProductWithSeller, type OrderWithDetails, type Admin, type AdminSession, type InsertAdmin, type PromoCode, type InsertPromoCode, sellers, products, orders, admins, adminSessions, promoCodes } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, gt } from "drizzle-orm";
+import { eq, and, gt, sql } from "drizzle-orm";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
 
@@ -32,6 +32,14 @@ export interface IStorage {
   createAdminSession(adminId: string, token: string, expiresAt: Date): Promise<AdminSession>;
   getValidAdminSession(token: string): Promise<AdminSession & { admin: Admin } | undefined>;
   deleteAdminSession(token: string): Promise<void>;
+
+  // Promo codes
+  getPromoCodes(): Promise<PromoCode[]>;
+  getPromoCode(code: string): Promise<PromoCode | undefined>;
+  createPromoCode(promoCode: InsertPromoCode): Promise<PromoCode>;
+  updatePromoCode(id: string, updates: Partial<PromoCode>): Promise<PromoCode | undefined>;
+  deletePromoCode(id: string): Promise<void>;
+  incrementPromoCodeUsage(code: string): Promise<void>;
 }
 
 // MemStorage removed - now using DatabaseStorage only
@@ -217,6 +225,49 @@ export class DatabaseStorage implements IStorage {
 
   async getAllAdminSessions(): Promise<AdminSession[]> {
     return await db.select().from(adminSessions);
+  }
+
+  // Promo codes
+  async getPromoCodes(): Promise<PromoCode[]> {
+    return await db.select().from(promoCodes);
+  }
+
+  async getPromoCode(code: string): Promise<PromoCode | undefined> {
+    const [promoCode] = await db.select().from(promoCodes).where(eq(promoCodes.code, code.toUpperCase()));
+    return promoCode || undefined;
+  }
+
+  async createPromoCode(insertPromoCode: InsertPromoCode): Promise<PromoCode> {
+    const [promoCode] = await db
+      .insert(promoCodes)
+      .values({
+        ...insertPromoCode,
+        code: insertPromoCode.code.toUpperCase(),
+      })
+      .returning();
+    return promoCode;
+  }
+
+  async updatePromoCode(id: string, updates: Partial<PromoCode>): Promise<PromoCode | undefined> {
+    const [promoCode] = await db
+      .update(promoCodes)
+      .set(updates)
+      .where(eq(promoCodes.id, id))
+      .returning();
+    return promoCode || undefined;
+  }
+
+  async deletePromoCode(id: string): Promise<void> {
+    await db.delete(promoCodes).where(eq(promoCodes.id, id));
+  }
+
+  async incrementPromoCodeUsage(code: string): Promise<void> {
+    await db
+      .update(promoCodes)
+      .set({
+        usageCount: sql`${promoCodes.usageCount} + 1`,
+      })
+      .where(eq(promoCodes.code, code.toUpperCase()));
   }
 }
 

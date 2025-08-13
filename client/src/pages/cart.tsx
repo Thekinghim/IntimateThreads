@@ -17,18 +17,24 @@ export default function Cart() {
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const discountedTotal = totalPrice - promoDiscount;
 
-  const applyPromoCode = () => {
-    const validPromoCodes = {
-      'WELCOME10': 100, // 100 kr rabatt
-      'SUMMER20': 200,  // 200 kr rabatt
-      'VIP15': 150      // 150 kr rabatt
-    };
+  const applyPromoCode = async () => {
+    if (!promoCode.trim()) return;
 
-    if (validPromoCodes[promoCode.toUpperCase() as keyof typeof validPromoCodes]) {
-      const discount = validPromoCodes[promoCode.toUpperCase() as keyof typeof validPromoCodes];
-      setAppliedPromo(promoCode.toUpperCase());
-      setPromoDiscount(discount);
-      setPromoCode('');
+    try {
+      const response = await fetch(`/api/promo-codes/${promoCode.trim()}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setAppliedPromo(data.code);
+        setPromoDiscount(parseFloat(data.discountKr));
+        setPromoCode('');
+      } else {
+        // Show error message briefly
+        alert(data.message || 'Ogiltig rabattkod');
+      }
+    } catch (error) {
+      console.error('Promo code validation error:', error);
+      alert('Fel vid validering av rabattkod');
     }
   };
 
@@ -240,10 +246,19 @@ export default function Cart() {
                   )}
                 </div>
 
+                {appliedPromo && (
+                  <div className="border-t border-gray-200 pt-4">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Rabatt ({appliedPromo})</span>
+                      <span className="text-green-600 font-medium">-{promoDiscount.toLocaleString('sv-SE')} kr</span>
+                    </div>
+                  </div>
+                )}
+
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex justify-between text-lg font-bold">
                     <span>TOTALKOSTNAD</span>
-                    <span>{totalPrice.toLocaleString('sv-SE')} kr</span>
+                    <span>{discountedTotal.toLocaleString('sv-SE')} kr</span>
                   </div>
                 </div>
 

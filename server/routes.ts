@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProductSchema, insertOrderSchema, adminLoginSchema } from "@shared/schema";
+import { insertProductSchema, insertOrderSchema, adminLoginSchema, insertPromoCodeSchema } from "@shared/schema";
 import { z } from "zod";
 import { requireAdminAuth, authenticateAdmin, logoutAdmin } from "./adminAuth";
 import { randomUUID } from "crypto";
@@ -420,6 +420,101 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ message: "Utloggad" });
     } catch (error) {
       res.status(500).json({ message: "Utloggningsfel" });
+    }
+  });
+
+  // Promo Code API endpoints
+  
+  // Get all promo codes (admin only)
+  app.get("/api/admin/promo-codes", requireAdminAuth, async (req, res) => {
+    try {
+      const promoCodes = await storage.getPromoCodes();
+      res.json(promoCodes);
+    } catch (error) {
+      console.error("Get promo codes error:", error);
+      res.status(500).json({ message: "Failed to fetch promo codes" });
+    }
+  });
+
+  // Validate promo code (public endpoint for cart)
+  app.get("/api/promo-codes/:code", async (req, res) => {
+    try {
+      const promoCode = await storage.getPromoCode(req.params.code);
+      
+      if (!promoCode) {
+        return res.status(404).json({ message: "Rabattkod hittades inte" });
+      }
+
+      if (!promoCode.isActive) {
+        return res.status(400).json({ message: "Rabattkoden är inte aktiv" });
+      }
+
+      // Check if max usage reached
+      if (promoCode.maxUsage && promoCode.usageCount >= promoCode.maxUsage) {
+        return res.status(400).json({ message: "Rabattkoden har uppnått maximal användning" });
+      }
+
+      // Check validity dates
+      const now = new Date();
+      if (promoCode.validUntil && now > new Date(promoCode.validUntil)) {
+        return res.status(400).json({ message: "Rabattkoden har gått ut" });
+      }
+
+      if (promoCode.validFrom && now < new Date(promoCode.validFrom)) {
+        return res.status(400).json({ message: "Rabattkoden är inte giltig än" });
+      }
+
+      res.json({
+        code: promoCode.code,
+        discountKr: promoCode.discountKr,
+        description: promoCode.description
+      });
+    } catch (error) {
+      console.error("Validate promo code error:", error);
+      res.status(500).json({ message: "Failed to validate promo code" });
+    }
+  });
+
+  // Create promo code (admin only)
+  app.post("/api/admin/promo-codes", requireAdminAuth, async (req, res) => {
+    try {
+      const promoCodeData = insertPromoCodeSchema.parse(req.body);
+      const promoCode = await storage.createPromoCode(promoCodeData);
+      res.json(promoCode);
+    } catch (error) {
+      console.error("Create promo code error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Ogiltig indata", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create promo code" });
+    }
+  });
+
+  // Update promo code (admin only)
+  app.put("/api/admin/promo-codes/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const updates = req.body;
+      const promoCode = await storage.updatePromoCode(req.params.id, updates);
+      
+      if (!promoCode) {
+        return res.status(404).json({ message: "Promo code not found" });
+      }
+      
+      res.json(promoCode);
+    } catch (error) {
+      console.error("Update promo code error:", error);
+      res.status(500).json({ message: "Failed to update promo code" });
+    }
+  });
+
+  // Delete promo code (admin only)
+  app.delete("/api/admin/promo-codes/:id", requireAdminAuth, async (req, res) => {
+    try {
+      await storage.deletePromoCode(req.params.id);
+      res.json({ message: "Promo code deleted successfully" });
+    } catch (error) {
+      console.error("Delete promo code error:", error);
+      res.status(500).json({ message: "Failed to delete promo code" });
     }
   });
 

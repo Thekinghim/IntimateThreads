@@ -80,7 +80,7 @@ export default function AdminLogin() {
       <div className="absolute inset-0 bg-gradient-to-br from-dusty-rose/10 to-sage-mist/10"></div>
       <div className="w-full max-w-sm sm:max-w-lg relative">
         <Card className="glass shadow-luxury border-0 backdrop-blur-3xl">
-          <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-10">
+          <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-10 text-[#000000]">
             <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury">
               <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-nordic-cream" />
             </div>
