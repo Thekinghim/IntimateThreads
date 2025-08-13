@@ -114,7 +114,7 @@ export default function AdminLogin() {
                       Email
                     </FormLabel>
                     <FormControl>
-                      <div className="relative">
+                      <div className="relative text-[#000000]">
                         <Input
                           placeholder="admin1@scandiscent.com"
                           className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-gray-400 text-base bg-[#ffffff]"
