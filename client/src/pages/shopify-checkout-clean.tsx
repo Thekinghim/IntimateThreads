@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PayPalButton from '@/components/PayPalButton';
 import StripeCheckout from '@/components/StripeCheckout';
+import { useCartStore } from '@/lib/cart';
 
 export default function ShopifyCheckout() {
   const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal'>('stripe');
@@ -19,8 +20,8 @@ export default function ShopifyCheckout() {
     useBillingAddress: true
   });
 
-  const [cartTotal, setCartTotal] = useState(0);
-  const [cartItems, setCartItems] = useState<Array<{id: number, name: string, variant: string, price: number, quantity: number}>>([]);
+  const { items: cartItems, getTotalPrice, getTotalItems } = useCartStore();
+  const cartTotal = getTotalPrice();
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -404,20 +405,27 @@ export default function ShopifyCheckout() {
 
             <div className="space-y-4 mb-6">
               {cartItems.length > 0 ? (
-                cartItems.map((item, index) => (
+                cartItems.map((item) => (
                   <div key={item.id} className="flex items-center space-x-4">
                     <div className="relative">
-                      <div className="w-16 h-16 bg-gray-200 rounded-lg border"></div>
+                      <img 
+                        src={item.imageUrl} 
+                        alt={item.title}
+                        className="w-16 h-16 object-cover rounded-lg border"
+                      />
                       <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                         {item.quantity}
                       </span>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm font-medium text-gray-900">{item.name}</h3>
-                      <p className="text-sm text-gray-500">{item.variant}</p>
+                      <h3 className="text-sm font-medium text-gray-900">{item.title}</h3>
+                      <p className="text-sm text-gray-500">{item.size} • {item.sellerAlias}</p>
+                      {item.wearDays && (
+                        <p className="text-sm text-gray-500">{item.wearDays} dagars användning</p>
+                      )}
                     </div>
                     <div className="text-sm font-medium text-gray-900">
-                      kr{item.price.toFixed(2)}
+                      kr{(item.priceKr * item.quantity).toFixed(2)}
                     </div>
                   </div>
                 ))
