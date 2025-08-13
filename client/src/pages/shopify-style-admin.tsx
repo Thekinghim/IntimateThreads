@@ -2292,76 +2292,296 @@ export default function ShopifyStyleAdmin() {
         </DialogContent>
       </Dialog>
 
-      {/* Create Customer/Seller Modal */}
+      {/* Create Customer/Seller Modal - Shopify Style */}
       <Dialog open={isCreateCustomerOpen} onOpenChange={setIsCreateCustomerOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>Lägg till ny säljare</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Alias</label>
-              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="T.ex. Emma" />
+        <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+          {/* Shopify-style Header */}
+          <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 md:gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsCreateCustomerOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                >
+                  <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+                <div>
+                  <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">Lägg till ny säljare</DialogTitle>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Ålder</label>
-              <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="25" />
+          </div>
+
+          {/* Shopify-style Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
+            {/* Left column - Main details */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Säljare Information</h3>
+                </div>
+                <div className="p-3 md:p-4 space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Alias</label>
+                    <input 
+                      type="text" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="T.ex. Emma"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Ålder</label>
+                    <input 
+                      type="number" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="25"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Plats</label>
+                    <input 
+                      type="text" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Stockholm, Sverige"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Bio</label>
+                    <textarea 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      rows={4}
+                      placeholder="Beskriv säljaren..."
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Plats</label>
-              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Stockholm" />
+
+            {/* Right column - Settings */}
+            <div className="space-y-4">
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Provision</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Provision (%)</label>
+                    <input 
+                      type="number" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="45"
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Status</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="active">Aktiv</option>
+                    <option value="inactive">Inaktiv</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Kontakt</h3>
+                </div>
+                <div className="p-3 md:p-4 space-y-3">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">E-post (valfritt)</label>
+                    <input 
+                      type="email" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="emma@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Telefon (valfritt)</label>
+                    <input 
+                      type="tel" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="+46 70 123 45 67"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Provision (%)</label>
-              <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="50" min="0" max="100" />
-            </div>
-            <div className="flex justify-end space-x-3">
-              <Button variant="outline" onClick={() => setIsCreateCustomerOpen(false)}>Avbryt</Button>
-              <Button onClick={() => {
-                toast({ title: "Säljare skapad", description: "Den nya säljaren har lagts till." });
-                setIsCreateCustomerOpen(false);
-              }}>Skapa säljare</Button>
+          </div>
+
+          {/* Footer with Save button */}
+          <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex justify-end">
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Säljare skapad", description: "Den nya säljaren har lagts till." });
+                  setIsCreateCustomerOpen(false);
+                }}
+              >
+                Skapa säljare
+              </Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* Create Content Modal */}
+      {/* Create Content Modal - Shopify Style */}
       <Dialog open={isCreateContentOpen} onOpenChange={setIsCreateContentOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>Skapa nytt innehåll</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Titel</label>
-              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="T.ex. Ny bloggpost" />
+        <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+          {/* Shopify-style Header */}
+          <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 md:gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsCreateContentOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                >
+                  <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+                <div>
+                  <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">Skapa nytt innehåll</DialogTitle>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Typ</label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-                <option>Sida</option>
-                <option>Bloggpost</option>
-                <option>FAQ</option>
-              </select>
+          </div>
+
+          {/* Shopify-style Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
+            {/* Left column - Main content */}
+            <div className="lg:col-span-2 space-y-4">
+              {/* Title Section */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Titel</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <input 
+                    type="text" 
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="T.ex. Ny bloggpost"
+                  />
+                </div>
+              </div>
+
+              {/* Content Section */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Innehåll</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="border border-gray-300 rounded">
+                    <div className="border-b border-gray-200 p-2 flex items-center gap-1 bg-gray-50">
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        <strong>B</strong>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        <em>I</em>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        <u>U</u>
+                      </Button>
+                    </div>
+                    <textarea 
+                      className="w-full px-3 py-2 border-0 focus:outline-none resize-none"
+                      rows={8}
+                      placeholder="Skriv ditt innehåll här..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* SEO Section */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">SEO & Metadata</h3>
+                </div>
+                <div className="p-3 md:p-4 space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Meta beskrivning</label>
+                    <textarea 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      rows={3}
+                      placeholder="SEO beskrivning..."
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">URL slug</label>
+                    <input 
+                      type="text" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="ny-bloggpost"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Status</label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-                <option>Utkast</option>
-                <option>Publicerad</option>
-              </select>
+
+            {/* Right column - Settings */}
+            <div className="space-y-4">
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Typ</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option>Sida</option>
+                    <option>Bloggpost</option>
+                    <option>FAQ</option>
+                    <option>Hjälp artikel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Status</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="draft">Utkast</option>
+                    <option value="published">Publicerad</option>
+                    <option value="scheduled">Schemalagd</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Publiceringsdatum</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <input 
+                    type="datetime-local" 
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Innehåll</label>
-              <textarea className="w-full px-3 py-2 border border-gray-300 rounded-md" rows={4} placeholder="Skriv ditt innehåll här..." />
-            </div>
-            <div className="flex justify-end space-x-3">
-              <Button variant="outline" onClick={() => setIsCreateContentOpen(false)}>Avbryt</Button>
-              <Button onClick={() => {
-                toast({ title: "Innehåll skapat", description: "Det nya innehållet har lagts till." });
-                setIsCreateContentOpen(false);
-              }}>Skapa innehåll</Button>
+          </div>
+
+          {/* Footer with Save button */}
+          <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex justify-end">
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Innehåll skapat", description: "Det nya innehållet har lagts till." });
+                  setIsCreateContentOpen(false);
+                }}
+              >
+                Skapa innehåll
+              </Button>
             </div>
           </div>
         </DialogContent>
@@ -2369,53 +2589,61 @@ export default function ShopifyStyleAdmin() {
 
       {/* Edit Modal (Generic) */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-        <DialogContent className={selectedItem?.type === 'product' ? "max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full" : "max-w-md"}>
-          {selectedItem?.type === 'product' ? (
-            <>
-              {/* Shopify-style Header for Products */}
-              <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 md:gap-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setIsEditModalOpen(false)}
-                      className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
-                    >
-                      <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
-                    </Button>
-                    <div>
-                      <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">{selectedItem?.title || 'Edit Product'}</DialogTitle>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 md:gap-3">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Duplicate product clicked');
-                      }}
-                    >
-                      Duplicate
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('View product clicked');
-                      }}
-                    >
-                      View
-                    </Button>
-                  </div>
+        <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+          {/* Shopify-style Header for ALL modals */}
+          <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 md:gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsEditModalOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                >
+                  <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+                <div>
+                  <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">
+                    {selectedItem?.type === 'product' && (selectedItem?.title || 'Edit Product')}
+                    {selectedItem?.type === 'seller' && `Edit ${selectedItem?.alias || 'Seller'}`}
+                    {selectedItem?.type === 'customer' && `Edit ${selectedItem?.name || 'Customer'}`}
+                    {selectedItem?.type === 'content' && `Edit ${selectedItem?.title || 'Content'}`}
+                    {selectedItem?.type === 'page' && `Edit ${selectedItem?.title || 'Page'}`}
+                    {selectedItem?.type === 'blog' && `Edit ${selectedItem?.title || 'Blog Post'}`}
+                  </DialogTitle>
                 </div>
               </div>
+              <div className="flex items-center gap-2 md:gap-3">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Duplicate clicked');
+                  }}
+                >
+                  Duplicate
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('View clicked');
+                  }}
+                >
+                  View
+                </Button>
+              </div>
+            </div>
+          </div>
 
-              {/* Shopify-style Main Content */}
+          {selectedItem?.type === 'product' ? (
+            <>
+
+              {/* Shopify-style Main Content for Products */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
                 {/* Left column - Main product details */}
                 <div className="lg:col-span-2 space-y-4">
@@ -2565,75 +2793,169 @@ export default function ShopifyStyleAdmin() {
             </>
           ) : (
             <>
-              <DialogHeader>
-                <DialogTitle>
-                  {selectedItem?.type === 'seller' && 'Redigera säljare'}
-                  {selectedItem?.type === 'content' && 'Redigera innehåll'}
-                  {selectedItem?.type === 'customer' && 'Redigera kund'}
-                  {selectedItem?.type === 'page' && 'Redigera sida'}
-                  {selectedItem?.type === 'blog' && 'Redigera bloggpost'}
-                </DialogTitle>
-              </DialogHeader>
-              <div className="space-y-4">
-            {(selectedItem?.type === 'seller' || selectedItem?.type === 'customer') && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Alias</label>
-                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.alias} />
+              {/* Shopify-style Main Content for other types */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
+                {/* Left column - Main details */}
+                <div className="lg:col-span-2 space-y-4">
+                  
+                  {/* General Info Section */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">
+                        {selectedItem?.type === 'seller' && 'Säljare Information'}
+                        {selectedItem?.type === 'customer' && 'Kund Information'}
+                        {selectedItem?.type === 'content' && 'Innehåll'}
+                        {selectedItem?.type === 'page' && 'Sida'}
+                        {selectedItem?.type === 'blog' && 'Bloggpost'}
+                      </h3>
+                    </div>
+                    <div className="p-3 md:p-4 space-y-4">
+                      {(selectedItem?.type === 'seller' || selectedItem?.type === 'customer') && (
+                        <>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Alias/Namn</label>
+                            <input 
+                              type="text" 
+                              className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                              defaultValue={selectedItem?.alias || selectedItem?.name}
+                              placeholder="Ange alias eller namn"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Ålder</label>
+                            <input 
+                              type="number" 
+                              className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                              defaultValue={selectedItem?.age}
+                              placeholder="25"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Plats</label>
+                            <input 
+                              type="text" 
+                              className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                              defaultValue={selectedItem?.location}
+                              placeholder="Stockholm, Sverige"
+                            />
+                          </div>
+                        </>
+                      )}
+                      
+                      {(selectedItem?.type === 'content' || selectedItem?.type === 'page' || selectedItem?.type === 'blog') && (
+                        <>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Titel</label>
+                            <input 
+                              type="text" 
+                              className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                              defaultValue={selectedItem?.name || selectedItem?.title}
+                              placeholder="Ange titel"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">Innehåll</label>
+                            <textarea 
+                              className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                              rows={6}
+                              defaultValue={selectedItem?.content || selectedItem?.description}
+                              placeholder="Skriv innehåll här..."
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Additional fields section */}
+                  {selectedItem?.type === 'blog' && (
+                    <div className="bg-white border border-gray-200 rounded-lg">
+                      <div className="p-3 md:p-4 border-b border-gray-200">
+                        <h3 className="text-sm font-medium text-gray-900">SEO & Metadata</h3>
+                      </div>
+                      <div className="p-3 md:p-4 space-y-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">Meta beskrivning</label>
+                          <textarea 
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                            rows={3}
+                            placeholder="SEO beskrivning..."
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">Taggar</label>
+                          <input 
+                            type="text" 
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="tag1, tag2, tag3"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Ålder</label>
-                  <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.age} />
+
+                {/* Right column - Status & Settings */}
+                <div className="space-y-4">
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Status</h3>
+                    </div>
+                    <div className="p-3 md:p-4">
+                      <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="active">Aktiv</option>
+                        <option value="inactive">Inaktiv</option>
+                        <option value="draft">Utkast</option>
+                        <option value="published">Publicerad</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {selectedItem?.type === 'seller' && (
+                    <div className="bg-white border border-gray-200 rounded-lg">
+                      <div className="p-3 md:p-4 border-b border-gray-200">
+                        <h3 className="text-sm font-medium text-gray-900">Provision</h3>
+                      </div>
+                      <div className="p-3 md:p-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-1">Provision (%)</label>
+                          <input 
+                            type="number" 
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                            defaultValue="45"
+                            min="0"
+                            max="100"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Plats</label>
-                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.location} />
+              </div>
+
+              {/* Footer with Save button */}
+              <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+                <div className="flex justify-end">
+                  <Button 
+                    className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                    onClick={async () => {
+                      try {
+                        console.log('Saving changes for:', selectedItem);
+                        toast({ 
+                          title: "Ändringar sparade", 
+                          description: `${selectedItem?.type === 'seller' ? 'Säljaren' : selectedItem?.type === 'customer' ? 'Kunden' : 'Innehållet'} har uppdaterats framgångsrikt.` 
+                        });
+                        setIsEditModalOpen(false);
+                        setSelectedItem(null);
+                      } catch (error) {
+                        console.error('Save error:', error);
+                        toast({ title: "Fel", description: "Kunde inte spara ändringarna.", variant: "destructive" });
+                      }
+                    }}
+                  >
+                    Save {selectedItem?.type === 'seller' ? 'seller' : selectedItem?.type === 'customer' ? 'customer' : selectedItem?.type === 'blog' ? 'blog post' : 'item'}
+                  </Button>
                 </div>
-              </>
-            )}
-            {(selectedItem?.type === 'content' || selectedItem?.type === 'page' || selectedItem?.type === 'blog') && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Titel</label>
-                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.name} />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Status</label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.status}>
-                    <option>Utkast</option>
-                    <option>Publicerad</option>
-                  </select>
-                </div>
-              </>
-            )}
-            <div className="flex justify-end space-x-3">
-              <Button 
-                variant="outline" 
-                onClick={() => setIsEditModalOpen(false)}
-                className="border-gray-300 text-gray-700 hover:bg-gray-50"
-              >
-                Avbryt
-              </Button>
-              <Button 
-                onClick={async () => {
-                  try {
-                    console.log('Saving changes for:', selectedItem);
-                    toast({ 
-                      title: "Ändringar sparade", 
-                      description: `${selectedItem?.type === 'product' ? 'Produkten' : selectedItem?.type === 'seller' ? 'Säljaren' : 'Innehållet'} har uppdaterats framgångsrikt.` 
-                    });
-                    setIsEditModalOpen(false);
-                    setSelectedItem(null);
-                  } catch (error) {
-                    console.error('Save error:', error);
-                    toast({ title: "Fel", description: "Kunde inte spara ändringarna.", variant: "destructive" });
-                  }
-                }}
-                className="bg-[#005bd3] hover:bg-[#004fc4]"
-              >
-                Spara ändringar
-              </Button>
-            </div>
               </div>
             </>
           )}
