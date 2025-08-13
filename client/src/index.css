@@ -389,4 +389,38 @@
   textarea::placeholder {
     color: #6b7280 !important;
   }
+
+  /* PayPal Button Styling */
+  #paypal-button-container {
+    position: relative;
+  }
+
+  #paypal-button-container paypal-button,
+  #paypal-button-container #paypal-button {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    background: transparent !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+  }
+
+  #paypal-button-container paypal-button::before {
+    content: "PayPal";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 10;
+  }
 }

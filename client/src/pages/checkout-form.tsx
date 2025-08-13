@@ -131,56 +131,43 @@ export default function CheckoutForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F5F1E8]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
           {/* Left Side - Form */}
           <div className="bg-white p-6 lg:p-12">
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
-              <h1 className="text-2xl font-bold text-gray-900">SCANDISCENT</h1>
+              <h1 className="text-2xl font-bold text-[#064F8C]">SCANDISCENT</h1>
               <div className="flex items-center text-sm text-gray-500 space-x-2">
-                <span>Cart</span>
+                <span>Kundvagn</span>
                 <span>&gt;</span>
                 <span>Information</span>
                 <span>&gt;</span>
-                <span>Shipping</span>
+                <span>Frakt</span>
                 <span>&gt;</span>
-                <span className="text-gray-900">Payment</span>
+                <span className="text-gray-900">Betalning</span>
               </div>
             </div>
 
             {/* Express Checkout */}
             <div className="mb-8">
-              <p className="text-lg font-medium mb-4">Express checkout</p>
+              <p className="text-lg font-medium mb-4 text-gray-900">Snabb utcheckning</p>
               <div className="space-y-3 mb-4">
-                <Button 
-                  className="w-full bg-[#5A31F4] hover:bg-[#4A28E4] text-white py-3 px-6 rounded-md text-sm font-medium h-12"
+                <div 
+                  id="paypal-button-container" 
+                  className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-md flex items-center justify-center h-12 cursor-pointer transition-colors relative overflow-hidden"
                 >
-                  <span className="flex items-center justify-center">
-                    <span className="font-bold text-base">Shop</span>
-                    <span className="ml-1 font-normal">Pay</span>
-                  </span>
-                </Button>
-                <div className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-md overflow-hidden flex items-center justify-center h-12">
                   <PayPalButton 
                     amount={finalTotal.toString()} 
                     currency="SEK" 
                     intent="CAPTURE" 
                   />
                 </div>
-                <Button 
-                  className="w-full bg-black hover:bg-gray-900 text-white py-3 px-6 rounded-md text-sm font-medium h-12"
-                >
-                  <span className="flex items-center justify-center">
-                    <span className="font-bold text-base">G</span>
-                    <span className="ml-1 font-normal">Pay</span>
-                  </span>
-                </Button>
               </div>
               <div className="flex items-center my-6">
                 <div className="flex-1 border-t border-gray-300"></div>
-                <span className="mx-4 text-gray-500 text-sm">OR</span>
+                <span className="mx-4 text-gray-500 text-sm">ELLER</span>
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
             </div>
@@ -188,16 +175,16 @@ export default function CheckoutForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Contact Information */}
               <div>
-                <h2 className="text-lg font-medium mb-4">Contact information</h2>
+                <h2 className="text-lg font-medium mb-4 text-gray-900">Kontaktinformation</h2>
                 <div className="space-y-4">
                   <div>
                     <Input
                       type="email"
-                      placeholder="Email or mobile phone number"
+                      placeholder="E-post eller mobilnummer"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       required
-                      className="w-full"
+                      className="w-full border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                     />
                   </div>
                   <div className="flex items-center space-x-2">
@@ -206,8 +193,8 @@ export default function CheckoutForm() {
                       checked={formData.emailUpdates}
                       onCheckedChange={(checked) => handleInputChange('emailUpdates', checked as boolean)}
                     />
-                    <Label htmlFor="email-updates" className="text-sm text-red-600">
-                      Email me with news and offers
+                    <Label htmlFor="email-updates" className="text-sm text-gray-600">
+                      Skicka mig nyheter och erbjudanden via e-post
                     </Label>
                   </div>
                 </div>
@@ -215,74 +202,76 @@ export default function CheckoutForm() {
 
               {/* Delivery Method */}
               <div>
-                <h2 className="text-lg font-medium mb-4">Delivery method</h2>
+                <h2 className="text-lg font-medium mb-4 text-gray-900">Leveranssätt</h2>
                 <RadioGroup value={formData.deliveryMethod} onValueChange={(value) => handleInputChange('deliveryMethod', value)}>
-                  <div className="flex items-center space-x-2 p-3 border rounded">
-                    <RadioGroupItem value="ship" id="ship" className="text-red-600" />
-                    <Label htmlFor="ship" className="flex-1">Ship</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 p-3 border rounded opacity-50">
-                    <RadioGroupItem value="pickup" id="pickup" disabled />
-                    <Label htmlFor="pickup" className="flex-1">Pick up</Label>
+                  <div className="flex items-center space-x-2 p-4 border border-gray-300 rounded-lg bg-white">
+                    <RadioGroupItem value="ship" id="ship" className="text-[#064F8C]" />
+                    <Label htmlFor="ship" className="flex-1 text-gray-900">Skicka</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               {/* Shipping Address */}
               <div>
-                <h2 className="text-lg font-medium mb-4">Shipping address</h2>
+                <h2 className="text-lg font-medium mb-4 text-gray-900">Leveransadress</h2>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <Input
-                    placeholder="First name"
+                    placeholder="Förnamn"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
                     required
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                   <Input
-                    placeholder="Last name"
+                    placeholder="Efternamn"
                     value={formData.lastName}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
                     required
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                 </div>
                 <div className="space-y-4">
                   <Input
-                    placeholder="Company (optional)"
+                    placeholder="Företag (valfritt)"
                     value={formData.company}
                     onChange={(e) => handleInputChange('company', e.target.value)}
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                   <Input
-                    placeholder="Address"
+                    placeholder="Adress"
                     value={formData.address}
                     onChange={(e) => handleInputChange('address', e.target.value)}
                     required
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                   <Input
-                    placeholder="Apartment, suite, etc. (optional)"
+                    placeholder="Lägenhet, svit, etc. (valfritt)"
                     value={formData.apartment}
                     onChange={(e) => handleInputChange('apartment', e.target.value)}
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                   <Input
-                    placeholder="City"
+                    placeholder="Stad"
                     value={formData.city}
                     onChange={(e) => handleInputChange('city', e.target.value)}
                     required
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                   <div className="grid grid-cols-3 gap-4">
                     <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Country/region" />
+                      <SelectTrigger className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]">
+                        <SelectValue placeholder="Land/region" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="SE">Sweden</SelectItem>
-                        <SelectItem value="NO">Norway</SelectItem>
-                        <SelectItem value="DK">Denmark</SelectItem>
+                        <SelectItem value="SE">Sverige</SelectItem>
+                        <SelectItem value="NO">Norge</SelectItem>
+                        <SelectItem value="DK">Danmark</SelectItem>
                         <SelectItem value="FI">Finland</SelectItem>
                       </SelectContent>
                     </Select>
                     <Select value={formData.state} onValueChange={(value) => handleInputChange('state', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="State" />
+                      <SelectTrigger className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]">
+                        <SelectValue placeholder="Län" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="stockholm">Stockholm</SelectItem>
@@ -291,28 +280,34 @@ export default function CheckoutForm() {
                       </SelectContent>
                     </Select>
                     <Input
-                      placeholder="ZIP code"
+                      placeholder="Postnummer"
                       value={formData.zipCode}
                       onChange={(e) => handleInputChange('zipCode', e.target.value)}
                       required
+                      className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                     />
                   </div>
                   <Input
-                    placeholder="Phone (optional)"
+                    placeholder="Telefon (valfritt)"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
+                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                 </div>
               </div>
 
               {/* Submit Button */}
               <div className="pt-6">
-                <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white py-4 px-8 rounded-md text-base font-medium">
-                  Continue to shipping
+                <Button 
+                  type="submit" 
+                  className="w-full bg-[#064F8C] hover:bg-[#053D6B] text-white py-4 px-8 rounded-md text-base font-medium"
+                  data-testid="button-continue-to-shipping"
+                >
+                  Fortsätt till frakt
                 </Button>
                 <div className="flex items-center justify-between mt-4">
-                  <Link href="/cart" className="text-blue-600 hover:underline text-sm">
-                    ← Return to cart
+                  <Link href="/cart" className="text-[#064F8C] hover:underline text-sm">
+                    ← Tillbaka till kundvagn
                   </Link>
                   <div className="text-xs text-gray-400">
                     Powered by Scandiscent
@@ -323,14 +318,14 @@ export default function CheckoutForm() {
 
             {/* Footer Links */}
             <div className="mt-8 pt-8 border-t text-xs text-gray-500 space-x-4">
-              <Link href="/terms" className="hover:underline">Refund policy</Link>
-              <Link href="/privacy" className="hover:underline">Privacy policy</Link>
-              <Link href="/terms" className="hover:underline">Terms of service</Link>
+              <Link href="/terms-of-service" className="hover:underline">Återbetalningspolicy</Link>
+              <Link href="/privacy-policy" className="hover:underline">Integritetspolicy</Link>
+              <Link href="/terms-of-service" className="hover:underline">Användarvillkor</Link>
             </div>
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="bg-gray-50 p-6 lg:p-12">
+          <div className="bg-[#F8F6F3] p-6 lg:p-12">
             <div className="sticky top-8">
               {/* Product List */}
               <div className="space-y-4 mb-6">
@@ -342,35 +337,35 @@ export default function CheckoutForm() {
                         alt={item.title}
                         className="w-16 h-16 object-cover rounded border"
                       />
-                      <span className="absolute -top-2 -right-2 bg-gray-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      <span className="absolute -top-2 -right-2 bg-[#064F8C] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                         {item.quantity}
                       </span>
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-medium text-sm">{item.sellerAlias}</h3>
+                      <h3 className="font-medium text-sm text-gray-900">{item.sellerAlias}</h3>
                       <p className="text-sm text-gray-600">{item.title}</p>
-                      <p className="text-xs text-gray-500">Size: {item.size}</p>
+                      <p className="text-xs text-gray-500">Storlek: {item.size}</p>
                     </div>
-                    <p className="font-medium">{item.priceKr.toFixed(2)} SEK</p>
+                    <p className="font-medium text-gray-900">{item.priceKr.toFixed(2)} SEK</p>
                   </div>
                 ))}
               </div>
 
               {/* Promo Code */}
-              <div className="border-t pt-4 mb-6">
+              <div className="border-t border-gray-300 pt-4 mb-6">
                 <div className="flex space-x-2">
                   <Input
-                    placeholder="Gift card or discount code"
+                    placeholder="Presentkort eller rabattkod"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
-                    className="flex-1 h-10 border-gray-300 rounded-md"
+                    className="flex-1 h-10 border-gray-300 rounded-md focus:border-[#064F8C] focus:ring-[#064F8C]"
                   />
                   <Button 
                     onClick={applyPromoCode} 
                     variant="outline"
                     className="px-4 py-2 h-10 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-md"
                   >
-                    Apply
+                    Tillämpa
                   </Button>
                 </div>
                 {appliedPromo && (
@@ -381,10 +376,10 @@ export default function CheckoutForm() {
               </div>
 
               {/* Summary */}
-              <div className="space-y-3 text-sm border-t pt-4">
+              <div className="space-y-3 text-sm border-t border-gray-300 pt-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="font-medium">{totalPrice.toFixed(2)} SEK</span>
+                  <span className="font-medium text-gray-900">{totalPrice.toFixed(2)} SEK</span>
                 </div>
                 {appliedPromo && (
                   <div className="flex justify-between text-green-600">
@@ -393,13 +388,13 @@ export default function CheckoutForm() {
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="text-gray-600">Calculated at next step</span>
+                  <span className="text-gray-600">Frakt</span>
+                  <span className="text-gray-600">Beräknas i nästa steg</span>
                 </div>
                 <Separator className="my-3" />
                 <div className="flex justify-between text-lg font-semibold">
-                  <span>Total</span>
-                  <span>SEK {finalTotal.toFixed(2)}</span>
+                  <span className="text-gray-900">Totalt</span>
+                  <span className="text-gray-900">SEK {finalTotal.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -407,7 +402,7 @@ export default function CheckoutForm() {
               <div className="mt-6">
                 <Button 
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-md text-lg font-medium"
+                  className="w-full bg-[#064F8C] hover:bg-[#053D6B] text-white py-4 px-6 rounded-md text-lg font-medium"
                   data-testid="button-complete-order"
                 >
                   Slutför beställning
