@@ -108,6 +108,23 @@ export class DatabaseStorage implements IStorage {
     return product;
   }
 
+  async updateProduct(id: string, updates: Partial<InsertProduct>): Promise<Product | undefined> {
+    const [updated] = await db
+      .update(products)
+      .set(updates)
+      .where(eq(products.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteProduct(id: string): Promise<void> {
+    await db.delete(products).where(eq(products.id, id));
+  }
+
+  async deleteSeller(id: string): Promise<void> {
+    await db.delete(sellers).where(eq(sellers.id, id));
+  }
+
   async updateProduct(id: string, updates: Partial<Product>): Promise<Product | undefined> {
     const [product] = await db
       .update(products)

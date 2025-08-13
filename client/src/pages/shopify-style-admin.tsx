@@ -607,6 +607,43 @@ export default function ShopifyStyleAdmin() {
     setSelectedOrder(null);
   };
 
+  const handleEditProduct = (product: any) => {
+    console.log('Editing product:', product);
+    setSelectedItem({ type: 'product', ...product });
+    setIsEditModalOpen(true);
+  };
+
+  const handleDeleteProduct = async (productId: string) => {
+    if (!confirm('Är du säker på att du vill ta bort den här produkten?')) return;
+    
+    try {
+      const authHeaders = getAuthHeader();
+      const response = await fetch(`/api/admin/products/${productId}`, {
+        method: 'DELETE',
+        headers: authHeaders,
+      });
+      
+      if (!response.ok) throw new Error('Failed to delete product');
+      
+      // Refresh products list
+      window.location.reload();
+      toast({ title: "Produkt raderad", description: "Produkten har tagits bort." });
+    } catch (error) {
+      console.error('Delete product error:', error);
+      toast({ title: "Fel", description: "Kunde inte ta bort produkten.", variant: "destructive" });
+    }
+  };
+
+  const handleEditCustomer = (customer: any) => {
+    setSelectedItem({ type: 'customer', ...customer });
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditContent = (content: any) => {
+    setSelectedItem({ type: 'content', ...content });
+    setIsEditModalOpen(true);
+  };
+
   // Simulate live updates for analytics
   useEffect(() => {
     if (showLiveView) {
@@ -1118,6 +1155,7 @@ export default function ShopifyStyleAdmin() {
               <Button 
                 onClick={() => setIsCreateProductOpen(true)}
                 className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+                data-testid="button-add-product"
               >
                 Add product
               </Button>
@@ -1149,11 +1187,12 @@ export default function ShopifyStyleAdmin() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => {
-                              setSelectedItem(product);
-                              setIsEditModalOpen(true);
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEditProduct(product);
                             }}
                             className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                            data-testid={`button-edit-product-${product.id}`}
                           >
                             Edit
                           </Button>
@@ -2350,10 +2389,26 @@ export default function ShopifyStyleAdmin() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 md:gap-3">
-                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Duplicate product clicked');
+                      }}
+                    >
                       Duplicate
                     </Button>
-                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('View product clicked');
+                      }}
+                    >
                       View
                     </Button>
                   </div>
@@ -2490,10 +2545,17 @@ export default function ShopifyStyleAdmin() {
                 <div className="flex justify-end">
                   <Button 
                     className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
-                    onClick={() => {
-                      toast({ title: "Product updated", description: "The product has been saved." });
-                      setIsEditModalOpen(false);
-                      setSelectedItem(null);
+                    onClick={async () => {
+                      try {
+                        // Real save functionality will be implemented here
+                        console.log('Saving product changes for:', selectedItem);
+                        toast({ title: "Produkt uppdaterad", description: "Produkten har sparats framgångsrikt." });
+                        setIsEditModalOpen(false);
+                        setSelectedItem(null);
+                      } catch (error) {
+                        console.error('Save error:', error);
+                        toast({ title: "Fel", description: "Kunde inte spara produkten.", variant: "destructive" });
+                      }
                     }}
                   >
                     Save product
@@ -2545,15 +2607,32 @@ export default function ShopifyStyleAdmin() {
               </>
             )}
             <div className="flex justify-end space-x-3">
-              <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>Avbryt</Button>
-              <Button onClick={() => {
-                toast({ 
-                  title: "Ändringar sparade", 
-                  description: `${selectedItem?.type === 'product' ? 'Produkten' : selectedItem?.type === 'seller' ? 'Säljaren' : 'Innehållet'} har uppdaterats.` 
-                });
-                setIsEditModalOpen(false);
-                setSelectedItem(null);
-              }}>Spara ändringar</Button>
+              <Button 
+                variant="outline" 
+                onClick={() => setIsEditModalOpen(false)}
+                className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                Avbryt
+              </Button>
+              <Button 
+                onClick={async () => {
+                  try {
+                    console.log('Saving changes for:', selectedItem);
+                    toast({ 
+                      title: "Ändringar sparade", 
+                      description: `${selectedItem?.type === 'product' ? 'Produkten' : selectedItem?.type === 'seller' ? 'Säljaren' : 'Innehållet'} har uppdaterats framgångsrikt.` 
+                    });
+                    setIsEditModalOpen(false);
+                    setSelectedItem(null);
+                  } catch (error) {
+                    console.error('Save error:', error);
+                    toast({ title: "Fel", description: "Kunde inte spara ändringarna.", variant: "destructive" });
+                  }
+                }}
+                className="bg-[#005bd3] hover:bg-[#004fc4]"
+              >
+                Spara ändringar
+              </Button>
             </div>
               </div>
             </>

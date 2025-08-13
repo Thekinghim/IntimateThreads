@@ -76,6 +76,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Admin: Update seller
+  app.put("/api/admin/sellers/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const updatedSeller = await storage.updateSeller(req.params.id, req.body);
+      res.json(updatedSeller);
+    } catch (error) {
+      console.error("Update seller error:", error);
+      res.status(500).json({ message: "Failed to update seller" });
+    }
+  });
+
+  // Admin: Delete seller
+  app.delete("/api/admin/sellers/:id", requireAdminAuth, async (req, res) => {
+    try {
+      await storage.deleteSeller(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete seller error:", error);
+      res.status(500).json({ message: "Failed to delete seller" });
+    }
+  });
+
+  // Admin: Update seller
   app.patch("/api/admin/sellers/:id", requireAdminAuth, async (req, res) => {
     try {
       const seller = await storage.updateSeller(req.params.id, req.body);
@@ -110,6 +132,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Admin: Update product
   app.patch("/api/admin/products/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const updates = {
+        ...req.body,
+        priceKr: req.body.priceKr ? parseFloat(req.body.priceKr).toString() : undefined,
+        wearDays: req.body.wearDays ? parseInt(req.body.wearDays) : undefined
+      };
+      const product = await storage.updateProduct(req.params.id, updates);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json(product);
+    } catch (error) {
+      console.error("Update product error:", error);
+      res.status(500).json({ message: "Failed to update product" });
+    }
+  });
+
+  // Admin: Delete product
+  app.delete("/api/admin/products/:id", requireAdminAuth, async (req, res) => {
+    try {
+      await storage.deleteProduct(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete product error:", error);
+      res.status(500).json({ message: "Failed to delete product" });
+    }
+  });
+
+  // Admin: Update product
+  app.put("/api/admin/products/:id", requireAdminAuth, async (req, res) => {
     try {
       const updates = {
         ...req.body,
