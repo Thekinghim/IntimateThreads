@@ -402,6 +402,22 @@ export default function CheckoutForm() {
                   <span>SEK {finalTotal.toFixed(2)}</span>
                 </div>
               </div>
+
+              {/* Complete Order Button */}
+              <div className="mt-6">
+                <Button 
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-md text-lg font-medium"
+                  data-testid="button-complete-order"
+                >
+                  Slutför beställning
+                </Button>
+                <p className="text-xs text-gray-500 mt-2 text-center">
+                  Genom att klicka "Slutför beställning" godkänner du våra 
+                  <Link href="/terms-of-service" className="underline"> villkor</Link> och 
+                  <Link href="/privacy-policy" className="underline"> integritetspolicy</Link>.
+                </p>
+              </div>
             </div>
           </div>
         </div>
