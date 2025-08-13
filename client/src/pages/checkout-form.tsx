@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import PayPalButton from "@/components/PayPalButton";
+import StripeCheckout from "@/components/StripeCheckout";
 import { nowPayments } from "@/lib/nowpayments";
 
 export default function CheckoutForm() {
@@ -36,6 +37,7 @@ export default function CheckoutForm() {
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<any>(null);
   const [showCryptoModal, setShowCryptoModal] = useState(false);
+  const [showStripeModal, setShowStripeModal] = useState(false);
   
   const totalPrice = getTotalPrice();
   const shipping = 0; // Free shipping
@@ -184,7 +186,7 @@ export default function CheckoutForm() {
             {/* Express Checkout */}
             <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
               <p className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Snabb utcheckning</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                 <div 
                   id="paypal-button-container" 
                   className="w-full bg-[#0070ba] hover:bg-[#005ea6] rounded-lg flex items-center justify-center h-12 cursor-pointer transition-all duration-200 relative border border-[#005ea6] shadow-sm"
@@ -195,6 +197,15 @@ export default function CheckoutForm() {
                     intent="CAPTURE" 
                   />
                 </div>
+                
+                <Button
+                  onClick={() => setShowStripeModal(true)}
+                  className="w-full bg-[#635BFF] hover:bg-[#4F46E5] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#4F46E5] shadow-sm flex items-center justify-center gap-2"
+                  data-testid="button-stripe-payment"
+                >
+                  <span className="text-lg">💳</span>
+                  Kort
+                </Button>
                 
                 <Button
                   onClick={handleCryptoPayment}
@@ -256,6 +267,19 @@ export default function CheckoutForm() {
                   </Button>
                 </div>
               </div>
+            )}
+
+            {/* Stripe Checkout Modal */}
+            {showStripeModal && (
+              <StripeCheckout
+                amount={finalTotal}
+                onSuccess={() => {
+                  setShowStripeModal(false);
+                  clearCart();
+                  setLocation('/order-confirmation/stripe-success');
+                }}
+                onClose={() => setShowStripeModal(false)}
+              />
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">

@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertProductSchema, insertOrderSchema, adminLoginSchema, insertPromoCodeSchema } from "@shared/schema";
 import { z } from "zod";
@@ -12,6 +13,14 @@ const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY || process.env.API_KEY
 const nowpaymentsBaseUrl = process.env.NODE_ENV === "production" 
   ? "https://api.nowpayments.io/v1" 
   : "https://api-sandbox.nowpayments.io/v1";
+
+// Initialize Stripe
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Get all products
@@ -684,6 +693,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // PayPal routes
+  // Stripe payment intent route
+  app.post("/api/create-payment-intent", async (req, res) => {
+    try {
+      const { amount } = req.body;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(amount * 100), // Convert to öre (SEK cents)
+        currency: "sek",
+        metadata: {
+          source: "scandiscent_checkout"
+        }
+      });
+      res.json({ clientSecret: paymentIntent.client_secret });
+    } catch (error: any) {
+      console.error('Stripe payment intent error:', error);
+      res.status(500).json({ message: "Error creating payment intent: " + error.message });
+    }
+  });
+
   app.get("/paypal/setup", async (req, res) => {
     await loadPaypalDefault(req, res);
   });
