@@ -43,8 +43,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Always use ScanDiscentAdmin for all devices - it's fully responsive
-  const AdminComponent = ScanDiscentAdmin;
+  // Use MobileAdminV2 for all devices - it has full functionality including Live View and working forms
+  const AdminComponent = MobileAdmin;
 
   return (
     <Switch>
