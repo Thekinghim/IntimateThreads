@@ -170,17 +170,8 @@ export default function CheckoutForm() {
           {/* Left Side - Form */}
           <div className="bg-white p-6 lg:p-12 shadow-sm">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 pb-4 border-b border-gray-100 gap-4">
-              <h1 className="text-2xl font-bold text-[#064F8C] font-cormorant">SCANDISCENT</h1>
-              <div className="flex items-center text-xs sm:text-sm text-gray-500 space-x-2 overflow-x-auto">
-                <span className="whitespace-nowrap">Kundvagn</span>
-                <span className="text-[#064F8C]">→</span>
-                <span className="whitespace-nowrap">Information</span>
-                <span className="text-[#064F8C]">→</span>
-                <span className="whitespace-nowrap">Frakt</span>
-                <span className="text-[#064F8C]">→</span>
-                <span className="text-[#064F8C] font-medium whitespace-nowrap">Betalning</span>
-              </div>
+            <div className="flex justify-center mb-8 pb-4 border-b border-gray-100">
+              <h1 className="text-3xl font-bold text-[#064F8C] font-cormorant">SCANDISCENT</h1>
             </div>
 
             {/* Express Checkout */}
@@ -203,16 +194,20 @@ export default function CheckoutForm() {
                   className="w-full bg-[#635BFF] hover:bg-[#4F46E5] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#4F46E5] shadow-sm flex items-center justify-center gap-2"
                   data-testid="button-stripe-payment"
                 >
-                  <span className="text-lg">💳</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M1 4h22v2H1V4zm0 4h22v12H1V8zm2 2v8h18v-8H3zm2 2h4v2H5v-2zm6 0h6v1h-6v-1z"/>
+                  </svg>
                   Kort
                 </Button>
                 
                 <Button
                   onClick={handleCryptoPayment}
-                  className="w-full bg-[#F7931A] hover:bg-[#D9821A] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#D9821A] shadow-sm flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-[#F7931A] to-[#FFB84D] hover:from-[#D9821A] hover:to-[#E6A73C] text-white h-12 rounded-lg font-semibold transition-all duration-200 border border-[#D9821A] shadow-sm flex items-center justify-center gap-2"
                   data-testid="button-crypto-payment"
                 >
-                  <span className="text-lg">₿</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.176-.943 1.937-1.788 2.319.653.394 1.088 1.013.95 1.837-.2 1.196-1.063 1.683-2.263 1.683H9.5l-.5 2h-1.5l.5-2H6.5l.5-2h1.461c.537 0 .98-.443.98-.98 0-.537-.443-.98-.98-.98H7l.5-2h1.5l.5-2h1.5l-.5 2h2.961c1.2 0 2.063.487 2.263 1.683.138.824-.297 1.443-.95 1.837.845-.382 1.608-1.143 1.788-2.319z"/>
+                  </svg>
                   Kryptovaluta
                 </Button>
               </div>
