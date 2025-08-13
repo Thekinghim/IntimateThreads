@@ -391,8 +391,8 @@ export default function ShopifyCheckout() {
                           <div id="paypal-section-main">
                             <PayPalButton
                               amount={cartTotal.toString()}
-                              currency="SEK"
-                              intent="capture"
+                              currency="USD"
+                              intent="CAPTURE"
                             />
                           </div>
                         ) : (

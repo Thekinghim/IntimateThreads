@@ -107,12 +107,12 @@ export async function createPaypalOrder(req: Request, res: Response) {
 
     const collect = {
       body: {
-        intent: intent,
+        intent: "CAPTURE",
         purchaseUnits: [
           {
             amount: {
-              currencyCode: currency,
-              value: amount,
+              currencyCode: "USD", // PayPal requires USD for capture intent
+              value: (parseFloat(amount) * 0.092).toFixed(2), // Convert SEK to USD (approx rate)
             },
           },
         ],
