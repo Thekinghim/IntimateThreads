@@ -3,22 +3,22 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Shield, Lock, Eye, EyeOff } from "lucide-react";
+import { Key } from "lucide-react";
+import { SiApple, SiFacebook, SiGoogle } from "react-icons/si";
 
 const loginSchema = z.object({
-  username: z.string().min(1, "Användarnamn krävs"),
-  password: z.string().min(1, "Lösenord krävs"),
+  username: z.string().min(1, "Email is required"),
+  password: z.string().min(1, "Password is required"),
 });
 
 type LoginForm = z.infer<typeof loginSchema>;
 
 export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<LoginForm>({
@@ -44,7 +44,6 @@ export default function AdminLogin() {
       const result = await response.json();
 
       if (response.ok) {
-        // Spara token och användardata
         localStorage.setItem('adminToken', result.token);
         localStorage.setItem('adminUser', JSON.stringify(result.admin));
         
@@ -53,9 +52,8 @@ export default function AdminLogin() {
           description: "Omdirigerar till admin-panelen...",
         });
 
-        // Omdirigera till admin panel
         setTimeout(() => {
-          window.location.href = '/admin';
+          window.location.href = '/shopify-admin';
         }, 1000);
       } else {
         toast({
@@ -76,113 +74,152 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen gradient-nordic flex items-center justify-center px-4 sm:px-6 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-dusty-rose/10 to-sage-mist/10"></div>
-      <div className="w-full max-w-sm sm:max-w-lg relative">
-        <Card className="glass shadow-luxury border-0 backdrop-blur-3xl">
-          <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-10 text-[#000000]">
-            <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 gradient-charcoal rounded-3xl flex items-center justify-center shadow-luxury">
-              <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-nordic-cream" />
+    <div 
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      }}
+    >
+      <Card className="w-full max-w-md bg-white shadow-2xl border-0 rounded-lg">
+        <CardHeader className="pb-8 pt-8">
+          {/* Shopify Logo */}
+          <div className="flex items-center justify-start mb-8">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
+                <span className="text-white font-bold text-sm">S</span>
+              </div>
+              <span className="text-xl font-semibold text-gray-900">shopify</span>
             </div>
-            <div>
-              <CardTitle className="text-2xl sm:text-3xl font-bold text-deep-charcoal font-poppins">Admin Panel</CardTitle>
-              <CardDescription className="text-soft-taupe mt-2 sm:mt-3 text-base sm:text-lg font-light px-2">
-                Logga in för att komma åt administratörspanelen
-              </CardDescription>
-            </div>
-          </CardHeader>
+          </div>
           
-          <CardContent className="px-4 sm:px-6">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-deep-charcoal font-medium text-base sm:text-lg">Användarnamn</FormLabel>
-                      <FormControl>
+          <div className="text-left">
+            <CardTitle className="text-2xl font-semibold text-gray-900 mb-2">
+              Log in
+            </CardTitle>
+            <CardDescription className="text-gray-600 font-normal">
+              Continue to Shopify
+            </CardDescription>
+          </div>
+        </CardHeader>
+        
+        <CardContent className="px-8 pb-8">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium text-gray-700">
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
                         <Input
-                          placeholder="admin1 eller admin2"
-                          className="h-12 sm:h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-base sm:text-lg rounded-2xl shadow-luxury"
+                          placeholder="admin1@shopify.com"
+                          className="w-full px-3 py-2 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                           {...field}
                         />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-deep-charcoal font-medium text-base sm:text-lg">Lösenord</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="adminpass123"
-                            className="h-12 sm:h-14 border-2 border-dusty-rose/30 focus:border-dusty-rose focus:ring-dusty-rose/20 bg-white/90 text-deep-charcoal text-base sm:text-lg rounded-2xl shadow-luxury pr-12 sm:pr-14"
-                            {...field}
-                          />
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="sm"
-                            className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 p-0 text-soft-taupe hover:text-dusty-rose rounded-xl"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-5 w-5" />
-                            ) : (
-                              <Eye className="h-5 w-5" />
-                            )}
-                          </Button>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                        {field.value && (
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <div className="w-4 h-4 text-green-500">✓</div>
+                          </div>
+                        )}
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                <Button
-                  type="submit"
-                  className="w-full h-14 sm:h-16 btn-luxury text-nordic-cream font-medium text-base sm:text-lg rounded-2xl font-poppins"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <div className="flex items-center space-x-3">
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-nordic-cream"></div>
-                      <span>Loggar in...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-3">
-                      <Lock className="h-5 w-5" />
-                      <span>Logga in</span>
-                    </div>
-                  )}
-                </Button>
-              </form>
-            </Form>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium text-gray-700">
+                      Password
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="adminpass123"
+                        className="w-full px-3 py-2 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <div className="mt-6 sm:mt-10 pt-6 sm:pt-8 border-t border-dusty-rose/20 space-y-4">
-              <div className="text-center space-y-2">
-                <p className="text-sm sm:text-base text-soft-taupe font-light">
-                  <strong>Användare:</strong> admin1 eller admin2
-                </p>
-                <p className="text-sm sm:text-base text-soft-taupe font-light">
-                  <strong>Lösenord:</strong> adminpass123
-                </p>
-              </div>
-              <p className="text-center text-sm sm:text-base text-soft-taupe font-light">
-                Endast auktoriserad personal
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              <Button
+                type="submit"
+                className="w-full bg-gray-800 hover:bg-gray-900 text-white py-3 px-4 h-12 rounded-md font-medium transition-colors text-base"
+                disabled={isLoading}
+              >
+                {isLoading ? "Logging in..." : "Continue with email"}
+              </Button>
+            </form>
+          </Form>
+
+          {/* Sign in with passkey */}
+          <div className="mt-4 text-center">
+            <button className="text-gray-600 text-sm flex items-center justify-center space-x-2 hover:text-gray-800">
+              <Key className="w-4 h-4" />
+              <span>Sign in with passkey</span>
+            </button>
+          </div>
+
+          {/* Divider */}
+          <div className="mt-6 mb-6 text-center">
+            <span className="text-gray-500 text-sm">or</span>
+          </div>
+
+          {/* Social Login Buttons */}
+          <div className="space-y-3">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full bg-gray-50 border-gray-200 hover:bg-gray-100 py-3 px-4 rounded-md flex items-center justify-center space-x-3"
+            >
+              <SiApple className="w-5 h-5 text-gray-900" />
+            </Button>
+            
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full bg-gray-50 border-gray-200 hover:bg-gray-100 py-3 px-4 rounded-md flex items-center justify-center space-x-3"
+            >
+              <SiFacebook className="w-5 h-5 text-blue-600" />
+            </Button>
+            
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full bg-gray-50 border-gray-200 hover:bg-gray-100 py-3 px-4 rounded-md flex items-center justify-center space-x-3"
+            >
+              <SiGoogle className="w-5 h-5 text-red-500" />
+            </Button>
+          </div>
+
+          {/* Admin Instructions */}
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-600">
+              Test credentials:{" "}
+              <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs">admin1</span>
+              {" / "}
+              <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs">adminpass123</span>
+            </p>
+          </div>
+
+          <div className="mt-4 flex justify-center space-x-4 text-xs text-gray-500">
+            <a href="#" className="hover:text-gray-700">Help</a>
+            <a href="#" className="hover:text-gray-700">Privacy</a>
+            <a href="#" className="hover:text-gray-700">Terms</a>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
