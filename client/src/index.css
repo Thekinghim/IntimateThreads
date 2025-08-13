@@ -423,4 +423,57 @@
     position: relative !important;
     z-index: 20 !important;
   }
+
+  /* Remove all red/blue outlines and focus rings globally */
+  *,
+  *:focus,
+  *:active,
+  *:focus-visible,
+  input,
+  input:focus,
+  input:active,
+  input:focus-visible,
+  button,
+  button:focus,
+  button:active,
+  button:focus-visible,
+  textarea,
+  textarea:focus,
+  textarea:active,
+  textarea:focus-visible,
+  select,
+  select:focus,
+  select:active,
+  select:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #d1d5db !important;
+  }
+
+  /* Remove autofill styling */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px white inset !important;
+    border: 1px solid #d1d5db !important;
+    outline: none !important;
+  }
+
+  /* Remove Firefox autofill outline */
+  input:-moz-ui-invalid {
+    box-shadow: none !important;
+    border-color: #d1d5db !important;
+  }
+
+  /* Force no red outline on invalid inputs */
+  input:invalid,
+  input:invalid:focus,
+  textarea:invalid,
+  textarea:invalid:focus {
+    border-color: #d1d5db !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
 }
