@@ -1060,7 +1060,7 @@ export default function ShopifyStyleAdmin() {
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Products</h1>
               <Button 
                 onClick={() => setIsCreateProductOpen(true)}
-                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
                 Add product
               </Button>
@@ -1125,7 +1125,7 @@ export default function ShopifyStyleAdmin() {
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Customers</h1>
               <Button 
                 onClick={() => setIsCreateCustomerOpen(true)}
-                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
                 Add customer
               </Button>
@@ -1194,7 +1194,7 @@ export default function ShopifyStyleAdmin() {
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Discounts</h1>
               <Button
                 onClick={() => setIsCreateDialogOpen(true)}
-                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
                 Create discount
               </Button>
@@ -1486,7 +1486,7 @@ export default function ShopifyStyleAdmin() {
           <div className="p-3 md:p-6 bg-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Marketing</h1>
-              <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto">
+              <Button className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto">
                 Create campaign
               </Button>
             </div>
@@ -1815,13 +1815,13 @@ export default function ShopifyStyleAdmin() {
   return (
     <div className="min-h-screen bg-white">
       {/* Shopify Header - Exact colors */}
-      <header className="bg-[#303030] text-white h-14 flex items-center px-4 border-b border-gray-800">
+      <header className="bg-[#f1f1f1] text-gray-900 h-14 flex items-center px-4 border-b border-gray-200">
         <div className="flex items-center justify-between w-full">
           {/* Left side */}
           <div className="flex items-center space-x-3">
             <div className="bg-[#5c946e] text-white px-1.5 py-0.5 rounded text-xs font-bold">S</div>
-            <span className="text-white font-medium text-sm">scandiscent</span>
-            <span className="text-gray-400 text-xs">Summer '25</span>
+            <span className="text-gray-900 font-medium text-sm">scandiscent</span>
+
           </div>
           
           {/* Center search */}
@@ -1831,7 +1831,7 @@ export default function ShopifyStyleAdmin() {
               <input 
                 type="text" 
                 placeholder="Search" 
-                className="w-full pl-9 pr-12 py-1.5 bg-[#404040] text-white border border-[#505050] rounded text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                className="w-full pl-9 pr-12 py-1.5 bg-white text-gray-900 border border-gray-300 rounded text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">Ctrl K</span>
             </div>
@@ -1844,7 +1844,7 @@ export default function ShopifyStyleAdmin() {
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
-              className="text-white hover:bg-[#404040] h-7 px-2 md:hidden"
+              className="text-gray-900 hover:bg-gray-200 h-7 px-2 md:hidden"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -1857,7 +1857,7 @@ export default function ShopifyStyleAdmin() {
               variant="ghost" 
               size="sm" 
               onClick={logout}
-              className="text-white hover:bg-[#404040] h-7 px-2 text-xs"
+              className="text-gray-900 hover:bg-gray-200 h-7 px-2 text-xs"
             >
               <span className="hidden sm:inline">Logga ut</span>
               <span className="sm:hidden">Ut</span>
@@ -2183,7 +2183,7 @@ export default function ShopifyStyleAdmin() {
           <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
             <div className="flex justify-end">
               <Button 
-                className="bg-[#008060] hover:bg-[#006b52] text-white px-6"
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
                 onClick={() => {
                   toast({ title: "Product created", description: "The new product has been added." });
                   setIsCreateProductOpen(false);
@@ -2432,7 +2432,7 @@ export default function ShopifyStyleAdmin() {
               <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
                 <div className="flex justify-end">
                   <Button 
-                    className="bg-[#008060] hover:bg-[#006b52] text-white px-6"
+                    className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
                     onClick={() => {
                       toast({ title: "Product updated", description: "The product has been saved." });
                       setIsEditModalOpen(false);
