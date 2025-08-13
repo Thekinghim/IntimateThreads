@@ -8,7 +8,7 @@ import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 // Stripe Payment Component
-function StripePaymentForm({ amount }: { amount: number }) {
+function StripePaymentForm({ amount, formValid }: { amount: number; formValid: boolean }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -16,7 +16,10 @@ function StripePaymentForm({ amount }: { amount: number }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!stripe || !elements || amount <= 0) return;
+    if (!stripe || !elements || amount <= 0 || !formValid) {
+      setMessage('Vänligen fyll i alla obligatoriska fält först.');
+      return;
+    }
 
     setIsProcessing(true);
     setMessage('');
@@ -53,17 +56,19 @@ function StripePaymentForm({ amount }: { amount: number }) {
       )}
       <button
         type="submit"
-        disabled={!stripe || isProcessing || amount <= 0}
+        disabled={!stripe || isProcessing || amount <= 0 || !formValid}
         className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 rounded-md font-medium transition-colors"
       >
-        {isProcessing ? 'Bearbetar betalning...' : `Betala ${amount.toFixed(2)} SEK`}
+        {!formValid ? 'Fyll i adressuppgifter först' : 
+         isProcessing ? 'Bearbetar betalning...' : 
+         `Betala ${amount.toFixed(2)} SEK`}
       </button>
     </form>
   );
 }
 
 // Wrapper that creates Payment Intent and provides Stripe Elements
-function StripeCheckout({ amount }: { amount: number }) {
+function StripeCheckout({ amount, formValid }: { amount: number; formValid: boolean }) {
   const [clientSecret, setClientSecret] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -136,7 +141,7 @@ function StripeCheckout({ amount }: { amount: number }) {
         }
       }}
     >
-      <StripePaymentForm amount={amount} />
+      <StripePaymentForm amount={amount} formValid={formValid} />
     </Elements>
   );
 }
@@ -147,6 +152,7 @@ export default function ShopifyCheckout() {
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [promoDiscount, setPromoDiscount] = useState(0);
+  const [formValid, setFormValid] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -166,7 +172,13 @@ export default function ShopifyCheckout() {
   const discountedTotal = cartTotal - promoDiscount;
 
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    const newFormData = { ...formData, [field]: value };
+    setFormData(newFormData);
+    
+    // Validate required fields
+    const requiredFields = ['email', 'firstName', 'lastName', 'address', 'postalCode', 'city'];
+    const isValid = requiredFields.every(field => newFormData[field as keyof typeof newFormData]?.toString().trim() !== '');
+    setFormValid(isValid);
   };
 
   const applyPromoCode = async () => {
@@ -230,12 +242,17 @@ export default function ShopifyCheckout() {
             <h2 className="text-lg font-medium mb-4">Contact</h2>
             <div className="space-y-4">
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="email"
                   placeholder="Email or mobile phone number"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  className={`w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${
+                    !formData.email.trim() ? 'border-red-300' : 'border-gray-300'
+                  }`}
                   data-testid="input-email"
                 />
               </div>
@@ -303,42 +320,60 @@ export default function ShopifyCheckout() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">First name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Förnamn <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
+                    placeholder="First name"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                    className={`w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${
+                      !formData.firstName.trim() ? 'border-red-300' : 'border-gray-300'
+                    }`}
                     data-testid="input-first-name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Last name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Efternamn <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
+                    placeholder="Last name"
                     value={formData.lastName}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                    className={`w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${
+                      !formData.lastName.trim() ? 'border-red-300' : 'border-gray-300'
+                    }`}
                     data-testid="input-last-name"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Adress <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
+                  placeholder="Address"
                   value={formData.address}
                   onChange={(e) => handleInputChange('address', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  className={`w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${
+                    !formData.address.trim() ? 'border-red-300' : 'border-gray-300'
+                  }`}
                   data-testid="input-address"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Apartment, suite, etc. (optional)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Lägenhet, svit, etc. (valfritt)
+                </label>
                 <input
                   type="text"
+                  placeholder="Apartment, suite, etc. (optional)"
                   value={formData.apartment}
                   onChange={(e) => handleInputChange('apartment', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -348,22 +383,32 @@ export default function ShopifyCheckout() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Postal code</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Postnummer <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
+                    placeholder="Postal code"
                     value={formData.postalCode}
                     onChange={(e) => handleInputChange('postalCode', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                    className={`w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${
+                      !formData.postalCode.trim() ? 'border-red-300' : 'border-gray-300'
+                    }`}
                     data-testid="input-postal-code"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Stad <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
+                    placeholder="City"
                     value={formData.city}
                     onChange={(e) => handleInputChange('city', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                    className={`w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${
+                      !formData.city.trim() ? 'border-red-300' : 'border-gray-300'
+                    }`}
                     data-testid="input-city"
                   />
                 </div>
@@ -444,7 +489,7 @@ export default function ShopifyCheckout() {
                             </p>
                           </div>
                           
-                          <StripeCheckout amount={discountedTotal} />
+                          <StripeCheckout amount={discountedTotal} formValid={formValid} />
                         </div>
                       ) : (
                         <div className="text-center py-6">
@@ -489,12 +534,16 @@ export default function ShopifyCheckout() {
                         <p className="text-sm text-gray-600 mb-4">
                           After clicking "Complete order", you'll be redirected to PayPal to finish your purchase.
                         </p>
-                        {discountedTotal > 0 ? (
+                        {discountedTotal > 0 && formValid ? (
                           <PayPalButton
                             amount={discountedTotal.toString()}
                             currency="USD"
                             intent="CAPTURE"
                           />
+                        ) : !formValid ? (
+                          <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center">
+                            <div className="text-gray-600 font-medium">Fyll i adressuppgifter för att betala</div>
+                          </div>
                         ) : (
                           <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center opacity-60">
                             <div className="text-gray-600 font-semibold text-lg">PayPal (Tom kundvagn)</div>
@@ -548,6 +597,11 @@ export default function ShopifyCheckout() {
                           
                           <button
                             onClick={async () => {
+                              if (!formValid) {
+                                alert('Vänligen fyll i alla obligatoriska adressuppgifter först.');
+                                return;
+                              }
+                              
                               try {
                                 const response = await fetch('/api/create-crypto-payment', {
                                   method: 'POST',
@@ -570,9 +624,10 @@ export default function ShopifyCheckout() {
                                 alert('Krypto-betalning misslyckades. Försök igen.');
                               }
                             }}
-                            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-md font-medium"
+                            disabled={!formValid}
+                            className="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-gray-400 text-white py-3 rounded-md font-medium transition-colors"
                           >
-                            Betala {discountedTotal.toFixed(2)} SEK med Crypto
+                            {!formValid ? 'Fyll i adressuppgifter först' : `Betala ${discountedTotal.toFixed(2)} SEK med Crypto`}
                           </button>
                         </div>
                       ) : (
