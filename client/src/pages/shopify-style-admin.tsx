@@ -1009,7 +1009,7 @@ export default function ShopifyStyleAdmin() {
                       
                       toast({ title: "Export klar", description: `${csvData.length} beställningar exporterade till CSV.` });
                     }}
-                    className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm"
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground rounded-md h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm bg-[#005bd3] text-[#ffffff]"
                   >
                     <span className="hidden sm:inline">Export</span>
                     <span className="sm:hidden">Exp</span>
@@ -1074,7 +1074,7 @@ export default function ShopifyStyleAdmin() {
                       variant="outline" 
                       size="sm" 
                       onClick={() => setIsFilterOpen(true)}
-                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0 rounded"
+                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0 rounded bg-[#005bd3] text-[#ffffff]"
                     >
                       Filter
                     </Button>
