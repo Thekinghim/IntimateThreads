@@ -388,11 +388,13 @@ export default function ShopifyCheckout() {
                           After clicking "Complete order", you'll be redirected to PayPal to finish your purchase.
                         </p>
                         {cartTotal > 0 ? (
-                          <PayPalButton
-                            amount={cartTotal.toString()}
-                            currency="SEK"
-                            intent="capture"
-                          />
+                          <div id="paypal-section-main">
+                            <PayPalButton
+                              amount={cartTotal.toString()}
+                              currency="SEK"
+                              intent="capture"
+                            />
+                          </div>
                         ) : (
                           <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center opacity-60">
                             <div className="text-gray-600 font-semibold text-lg">PayPal (Tom kundvagn)</div>
@@ -543,7 +545,20 @@ export default function ShopifyCheckout() {
                       alert('Krypto-betalning kunde inte initieras. Försök igen.');
                     }
                   } else if (selectedPayment === 'paypal') {
-                    alert('För PayPal: Klicka på PayPal-knappen i express checkout sektionen ovan.');
+                    // Try to trigger PayPal button click programmatically
+                    const paypalButtons = document.querySelectorAll('[id="paypal-button"]');
+                    let buttonClicked = false;
+                    
+                    paypalButtons.forEach(button => {
+                      if (button && !buttonClicked) {
+                        (button as HTMLElement).click();
+                        buttonClicked = true;
+                      }
+                    });
+                    
+                    if (!buttonClicked) {
+                      alert('PayPal-betalning kunde inte startas automatiskt. Använd PayPal-knappen ovan istället.');
+                    }
                   }
                 } catch (error) {
                   console.error('Payment error:', error);
