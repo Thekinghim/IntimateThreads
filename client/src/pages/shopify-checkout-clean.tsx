@@ -19,10 +19,8 @@ export default function ShopifyCheckout() {
     useBillingAddress: true
   });
 
-  const [cartTotal, setCartTotal] = useState(299);
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Premium Trosor', variant: 'Medium / Svart', price: 299, quantity: 1 }
-  ]);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [cartItems, setCartItems] = useState<Array<{id: number, name: string, variant: string, price: number, quantity: number}>>([]);
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -46,11 +44,17 @@ export default function ShopifyCheckout() {
             
             {/* Express Payment Methods */}
             <div className="space-y-3">
-              <PayPalButton
-                amount={cartTotal.toString()}
-                currency="SEK"
-                intent="capture"
-              />
+              {cartTotal > 0 ? (
+                <PayPalButton
+                  amount={cartTotal.toString()}
+                  currency="SEK"
+                  intent="capture"
+                />
+              ) : (
+                <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center opacity-60">
+                  <div className="text-gray-600 font-semibold text-lg">PayPal (Tom kundvagn)</div>
+                </div>
+              )}
               
               <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center cursor-not-allowed opacity-60">
                 <div className="text-gray-600 font-medium flex items-center">
@@ -288,14 +292,26 @@ export default function ShopifyCheckout() {
                 {selectedPayment === 'stripe' && (
                   <div className="px-4 pb-4 border-t border-gray-200">
                     <div className="pt-4">
-                      <StripeCheckout
-                        amount={cartTotal}
-                        onSuccess={() => {
-                          console.log('Stripe payment successful');
-                          window.location.href = '/order-confirmation';
-                        }}
-                        onClose={() => console.log('Stripe checkout closed')}
-                      />
+                      {cartTotal > 0 ? (
+                        <StripeCheckout
+                          amount={cartTotal}
+                          onSuccess={() => {
+                            console.log('Stripe payment successful');
+                            window.location.href = '/order-confirmation';
+                          }}
+                          onClose={() => console.log('Stripe checkout closed')}
+                        />
+                      ) : (
+                        <div className="text-center py-6">
+                          <p className="text-gray-500">Din kundvagn är tom. Lägg till produkter för att betala.</p>
+                          <button 
+                            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                            onClick={() => window.location.href = '/womens'}
+                          >
+                            Fortsätt handla
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -328,11 +344,17 @@ export default function ShopifyCheckout() {
                         <p className="text-sm text-gray-600 mb-4">
                           After clicking "Complete order", you'll be redirected to PayPal to finish your purchase.
                         </p>
-                        <PayPalButton
-                          amount={cartTotal.toString()}
-                          currency="SEK"
-                          intent="capture"
-                        />
+                        {cartTotal > 0 ? (
+                          <PayPalButton
+                            amount={cartTotal.toString()}
+                            currency="SEK"
+                            intent="capture"
+                          />
+                        ) : (
+                          <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center opacity-60">
+                            <div className="text-gray-600 font-semibold text-lg">PayPal (Tom kundvagn)</div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -381,23 +403,36 @@ export default function ShopifyCheckout() {
             </div>
 
             <div className="space-y-4 mb-6">
-              {cartItems.map((item, index) => (
-                <div key={item.id} className="flex items-center space-x-4">
-                  <div className="relative">
-                    <div className="w-16 h-16 bg-gray-200 rounded-lg border"></div>
-                    <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      {item.quantity}
-                    </span>
+              {cartItems.length > 0 ? (
+                cartItems.map((item, index) => (
+                  <div key={item.id} className="flex items-center space-x-4">
+                    <div className="relative">
+                      <div className="w-16 h-16 bg-gray-200 rounded-lg border"></div>
+                      <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {item.quantity}
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-gray-900">{item.name}</h3>
+                      <p className="text-sm text-gray-500">{item.variant}</p>
+                    </div>
+                    <div className="text-sm font-medium text-gray-900">
+                      kr{item.price.toFixed(2)}
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-sm font-medium text-gray-900">{item.name}</h3>
-                    <p className="text-sm text-gray-500">{item.variant}</p>
-                  </div>
-                  <div className="text-sm font-medium text-gray-900">
-                    kr{item.price.toFixed(2)}
-                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-gray-100 rounded-lg border mx-auto mb-4"></div>
+                  <p className="text-gray-500 text-sm">Din kundvagn är tom</p>
+                  <button 
+                    className="mt-2 text-blue-600 hover:text-blue-500 text-sm"
+                    onClick={() => window.location.href = '/womens'}
+                  >
+                    Fortsätt handla
+                  </button>
                 </div>
-              ))}
+              )}
             </div>
 
             <div className="mb-6">
