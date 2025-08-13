@@ -262,7 +262,7 @@ export default function Cart() {
                   </div>
                 </div>
 
-                <Link href="/checkout">
+                <Link href="/checkout-form">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded text-lg font-medium mt-6">
                     GÅ TILL KASSAN
                   </Button>

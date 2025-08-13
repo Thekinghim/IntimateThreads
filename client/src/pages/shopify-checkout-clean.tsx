@@ -42,21 +42,11 @@ export default function ShopifyCheckout() {
           <div className="mb-8">
             <h2 className="text-lg font-medium mb-4">Express checkout</h2>
             
-            {/* Express Payment Methods */}
+            {/* Express Payment Methods - Removed to avoid duplicates */}
             <div className="space-y-3">
-              {cartTotal > 0 ? (
-                <PayPalButton
-                  amount={cartTotal.toString()}
-                  currency="SEK"
-                  intent="capture"
-                />
-              ) : (
-                <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center opacity-60">
-                  <div className="text-gray-600 font-semibold text-lg">PayPal (Tom kundvagn)</div>
-                </div>
-              )}
-              
-
+              <div className="w-full h-14 bg-gray-100 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center">
+                <div className="text-gray-500 font-medium">Välj betalningsmetod nedan</div>
+              </div>
             </div>
 
 
@@ -388,13 +378,11 @@ export default function ShopifyCheckout() {
                           After clicking "Complete order", you'll be redirected to PayPal to finish your purchase.
                         </p>
                         {cartTotal > 0 ? (
-                          <div id="paypal-section-main">
-                            <PayPalButton
-                              amount={cartTotal.toString()}
-                              currency="USD"
-                              intent="CAPTURE"
-                            />
-                          </div>
+                          <PayPalButton
+                            amount={cartTotal.toString()}
+                            currency="USD"
+                            intent="CAPTURE"
+                          />
                         ) : (
                           <div className="w-full h-14 bg-gray-300 rounded-md flex items-center justify-center opacity-60">
                             <div className="text-gray-600 font-semibold text-lg">PayPal (Tom kundvagn)</div>
