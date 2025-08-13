@@ -93,10 +93,10 @@ export default function AdminLogin() {
           </div>
           
           <div className="text-left">
-            <CardTitle className="text-2xl font-semibold text-gray-900 mt-[5px] mb-[5px] ml-[100px] mr-[100px]">
+            <CardTitle className="text-2xl font-semibold text-gray-900 mt-[5px] mb-[5px] ml-[100px] mr-[100px] text-center">
               Log in
             </CardTitle>
-            <CardDescription className="text-gray-600 font-normal">
+            <CardDescription className="text-gray-600 font-normal ml-[0px] mr-[0px] mt-[0px] mb-[0px] pt-[0px] pb-[0px] pl-[0px] pr-[0px] text-[13px] text-center">
               Continue to Scandiscent
             </CardDescription>
           </div>
