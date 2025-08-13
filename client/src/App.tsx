@@ -27,7 +27,7 @@ import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
 import MobileAdmin from "@/pages/mobile-admin-v2";
-import ShopifyStyleAdmin from "@/pages/shopify-style-admin";
+import ScanDiscentAdmin from "@/pages/scandiscent-admin";
 import AdminLogin from "@/pages/admin-login";
 
 import TermsOfService from "@/pages/terms-of-service";
@@ -43,8 +43,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Always use ShopifyStyleAdmin for all devices - it's fully responsive
-  const AdminComponent = ShopifyStyleAdmin;
+  // Always use ScanDiscentAdmin for all devices - it's fully responsive
+  const AdminComponent = ScanDiscentAdmin;
 
   return (
     <Switch>
