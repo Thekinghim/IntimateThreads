@@ -281,6 +281,7 @@ export default function ShopifyStyleAdmin() {
   const { toast } = useToast();
   const [selectedTab, setSelectedTab] = useState("home");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Promo codes queries
   const { data: promoCodes = [], refetch } = useQuery({
@@ -422,12 +423,12 @@ export default function ShopifyStyleAdmin() {
     switch (selectedTab) {
       case "home":
         return (
-          <div className="p-6">
+          <div className="p-6 bg-white">
             {/* Header exactly like Shopify */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-3">
                 <Select defaultValue="today">
-                  <SelectTrigger className="w-[100px] h-8 text-sm border-gray-300">
+                  <SelectTrigger className="w-[80px] h-7 text-xs border-gray-300 bg-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -437,7 +438,7 @@ export default function ShopifyStyleAdmin() {
                   </SelectContent>
                 </Select>
                 <Select defaultValue="all">
-                  <SelectTrigger className="w-[140px] h-8 text-sm border-gray-300">
+                  <SelectTrigger className="w-[120px] h-7 text-xs border-gray-300 bg-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -447,34 +448,34 @@ export default function ShopifyStyleAdmin() {
                 </Select>
               </div>
               <div className="text-right">
-                <p className="text-xs text-gray-500">Next payout</p>
-                <p className="text-sm font-medium text-gray-900">${stats.totalSales}</p>
+                <p className="text-xs text-gray-500 font-medium">Next payout</p>
+                <p className="text-sm font-semibold text-gray-900">${stats.totalSales}.00</p>
               </div>
             </div>
 
-            {/* Stats Grid exactly like Shopify */}
-            <div className="grid grid-cols-4 gap-4 mb-6">
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="text-xs text-gray-600 mb-1">Sessions</div>
-                <div className="text-2xl font-bold text-gray-900">{stats.sessions}</div>
-                <div className="text-xs text-gray-500">—</div>
+            {/* Stats Grid - Responsive */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Sessions</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">{stats.sessions}</div>
+                <div className="text-xs text-gray-400">—</div>
               </div>
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="text-xs text-gray-600 mb-1">Total sales</div>
-                <div className="text-2xl font-bold text-gray-900">${stats.totalSales}</div>
-                <div className="text-xs text-gray-500">—</div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Total sales</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">${stats.totalSales}</div>
+                <div className="text-xs text-gray-400">—</div>
               </div>
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="text-xs text-gray-600 mb-1">Total orders</div>
-                <div className="text-2xl font-bold text-gray-900">{stats.totalOrders}</div>
-                <div className="text-xs text-gray-500">—</div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Total orders</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">{stats.totalOrders}</div>
+                <div className="text-xs text-gray-400">—</div>
               </div>
-              <div className="bg-gray-100 p-4 rounded-lg relative">
-                <div className="text-xs text-gray-600 mb-1">Conversion rate</div>
-                <div className="text-2xl font-bold text-gray-900">{stats.conversionRate}</div>
-                <div className="text-xs text-gray-500">—</div>
-                <button className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded relative">
+                <div className="text-xs text-gray-600 font-medium mb-1">Conversion rate</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">{stats.conversionRate}</div>
+                <div className="text-xs text-gray-400">—</div>
+                <button className="absolute top-2 md:top-3 right-2 md:right-3 text-gray-400 hover:text-gray-600">
+                  <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                   </svg>
                 </button>
@@ -482,37 +483,38 @@ export default function ShopifyStyleAdmin() {
             </div>
 
             {/* Chart section exactly like Shopify */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="h-80 relative">
-                {/* Chart area with grid lines */}
-                <div className="absolute inset-0 bg-gray-50 rounded">
+            <div className="bg-white border border-[#e1e3e5] rounded">
+              <div className="h-72 relative bg-[#fafbfb] m-4 rounded">
+                {/* Chart background with exact Shopify styling */}
+                <div className="absolute inset-0">
                   <svg className="w-full h-full">
-                    {/* Grid lines */}
+                    {/* Grid pattern like Shopify */}
                     <defs>
-                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
+                      <pattern id="shopifyGrid" width="50" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 50 0 L 0 0 0 40" fill="none" stroke="#e8e8e8" strokeWidth="0.5"/>
                       </pattern>
                     </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
+                    <rect width="100%" height="100%" fill="url(#shopifyGrid)" />
                     
-                    {/* Mock Shopify-style chart line */}
+                    {/* Shopify chart line - cyan blue */}
                     <path 
-                      d="M 60 320 L 120 280 L 180 260 L 240 200 L 300 80 L 360 60 L 420 50 L 480 100 L 540 120 L 600 300 L 660 280"
+                      d="M 50 220 L 100 200 L 150 180 L 200 120 L 250 40 L 300 35 L 350 30 L 400 60 L 450 80 L 500 210 L 550 190 L 600 200"
                       fill="none" 
-                      stroke="#00b4d8" 
+                      stroke="#5DBEA3" 
                       strokeWidth="2"
                     />
+                    {/* Dotted comparison line */}
                     <path 
-                      d="M 60 320 L 120 300 L 180 290 L 240 280 L 300 270 L 360 260 L 420 250 L 480 240 L 540 230 L 600 320 L 660 310"
+                      d="M 50 230 L 100 220 L 150 210 L 200 200 L 250 190 L 300 180 L 350 170 L 400 160 L 450 150 L 500 220 L 550 210 L 600 220"
                       fill="none" 
-                      stroke="#ccc" 
+                      stroke="#d1d5db" 
                       strokeWidth="1"
-                      strokeDasharray="5,5"
+                      strokeDasharray="2,3"
                     />
                   </svg>
                   
-                  {/* Time labels */}
-                  <div className="absolute bottom-2 left-0 w-full flex justify-between text-xs text-gray-500 px-4">
+                  {/* Time labels exactly like Shopify */}
+                  <div className="absolute bottom-1 left-0 w-full flex justify-between text-xs text-gray-500 px-8">
                     <span>12:00 AM</span>
                     <span>3:00 AM</span>
                     <span>6:00 AM</span>
@@ -523,21 +525,21 @@ export default function ShopifyStyleAdmin() {
                     <span>9:00 PM</span>
                   </div>
 
-                  {/* Legend */}
-                  <div className="absolute bottom-4 right-4 flex items-center space-x-4 text-xs">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-0.5 bg-blue-500"></div>
+                  {/* Legend like Shopify */}
+                  <div className="absolute bottom-3 right-6 flex items-center space-x-4 text-xs">
+                    <div className="flex items-center space-x-1.5">
+                      <div className="w-2.5 h-0.5 bg-[#5DBEA3]"></div>
                       <span className="text-gray-600">Sep 7, 2023</span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-0.5 bg-gray-400 border-dashed"></div>
+                    <div className="flex items-center space-x-1.5">
+                      <div className="w-2.5 h-px bg-gray-400" style={{borderTop: '1px dashed #d1d5db'}}></div>
                       <span className="text-gray-600">Sep 6, 2023</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Y-axis labels */}
-                <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-500 py-4">
+                <div className="absolute left-2 top-0 h-full flex flex-col justify-between text-xs text-gray-500 py-3">
                   <span>2</span>
                   <span>1.5</span>
                   <span>1</span>
@@ -551,39 +553,39 @@ export default function ShopifyStyleAdmin() {
 
       case "orders":
         return (
-          <div className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900">Orders</h1>
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Orders</h1>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-b border-gray-200 bg-gray-50">
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Order</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Date</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Customer</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Payment status</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Total</TableHead>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Order</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Date</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap hidden sm:table-cell">Customer</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Total</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {orders.map((order: any) => (
-                    <TableRow key={order.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <TableCell className="px-6 py-4 font-medium text-blue-600">#{order.id.slice(-8)}</TableCell>
-                      <TableCell className="px-6 py-4 text-sm text-gray-700">
+                    <TableRow key={order.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                      <TableCell className="px-2 md:px-4 py-3 font-medium text-[#008060] text-xs md:text-sm">#{order.id.slice(-8)}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 whitespace-nowrap">
                         {new Date(order.createdAt).toLocaleDateString('en-US')}
                       </TableCell>
-                      <TableCell className="px-6 py-4 text-sm text-gray-700">{order.customerEmail}</TableCell>
-                      <TableCell className="px-6 py-4">
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">{order.customerEmail}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3">
                         <Badge className={
-                          order.status === 'completed' ? "bg-green-100 text-green-800 border-green-200" :
-                          order.status === 'pending' ? "bg-yellow-100 text-yellow-800 border-yellow-200" :
-                          "bg-gray-100 text-gray-600 border-gray-200"
+                          order.status === 'completed' ? "bg-green-100 text-green-700 border-green-200 text-xs" :
+                          order.status === 'pending' ? "bg-yellow-100 text-yellow-700 border-yellow-200 text-xs" :
+                          "bg-gray-100 text-gray-600 border-gray-200 text-xs"
                         }>
                           {order.status}
                         </Badge>
                       </TableCell>
-                      <TableCell className="px-6 py-4 text-sm font-medium text-gray-900">${order.totalAmountKr}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">${order.totalAmountKr}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -680,54 +682,54 @@ export default function ShopifyStyleAdmin() {
 
       case "discounts":
         return (
-          <div className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900">Discounts</h1>
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Discounts</h1>
               <Button
                 onClick={() => setIsCreateDialogOpen(true)}
-                className="bg-gray-900 hover:bg-gray-800 text-white h-8 px-4 text-sm"
+                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
                 Create discount
               </Button>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-b border-gray-200 bg-gray-50">
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Code</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Discount</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Uses</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Valid until</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Status</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 uppercase tracking-wide px-6 py-3">Actions</TableHead>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Code</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Discount</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap hidden sm:table-cell">Uses</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap hidden md:table-cell">Valid until</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {promoCodes.map((promo: any) => (
-                    <TableRow key={promo.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <TableCell className="px-6 py-4 font-medium text-gray-900">{promo.code}</TableCell>
-                      <TableCell className="px-6 py-4 text-sm text-gray-700">${promo.discountKr}</TableCell>
-                      <TableCell className="px-6 py-4 text-sm text-gray-700">
+                    <TableRow key={promo.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                      <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">{promo.code}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">${promo.discountKr}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">
                         {promo.usageCount}{promo.maxUsage ? ` / ${promo.maxUsage}` : ''}
                       </TableCell>
-                      <TableCell className="px-6 py-4 text-sm text-gray-700">
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden md:table-cell">
                         {promo.validUntil 
                           ? new Date(promo.validUntil).toLocaleDateString('en-US')
                           : '—'
                         }
                       </TableCell>
-                      <TableCell className="px-6 py-4">
-                        <Badge className={promo.isActive ? "bg-green-100 text-green-800 border-green-200" : "bg-gray-100 text-gray-600 border-gray-200"}>
+                      <TableCell className="px-2 md:px-4 py-3">
+                        <Badge className={promo.isActive ? "bg-green-100 text-green-700 border-green-200 text-xs" : "bg-gray-100 text-gray-600 border-gray-200 text-xs"}>
                           {promo.isActive ? 'Active' : 'Inactive'}
                         </Badge>
                       </TableCell>
-                      <TableCell className="px-6 py-4">
-                        <div className="flex items-center space-x-2">
+                      <TableCell className="px-2 md:px-4 py-3">
+                        <div className="flex items-center space-x-1">
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => togglePromoMutation.mutate({ id: promo.id, isActive: !promo.isActive })}
-                            className="text-xs text-gray-600 hover:text-gray-900 h-6 px-2"
+                            className="text-xs text-gray-600 hover:text-gray-900 h-6 px-1 md:px-2"
                           >
                             {promo.isActive ? 'Disable' : 'Enable'}
                           </Button>
@@ -735,7 +737,7 @@ export default function ShopifyStyleAdmin() {
                             variant="ghost"
                             size="sm"
                             onClick={() => deletePromoMutation.mutate(promo.id)}
-                            className="text-xs text-red-600 hover:text-red-800 h-6 px-2"
+                            className="text-xs text-red-600 hover:text-red-800 h-6 px-1 md:px-2"
                           >
                             <Trash2 className="h-3 w-3" />
                           </Button>
@@ -774,25 +776,25 @@ export default function ShopifyStyleAdmin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Shopify Header - Dark Navy Blue */}
-      <header className="bg-[#1a1a1a] text-white h-14 flex items-center px-4">
+    <div className="min-h-screen bg-white">
+      {/* Shopify Header - Exact colors */}
+      <header className="bg-[#303030] text-white h-14 flex items-center px-4 border-b border-gray-800">
         <div className="flex items-center justify-between w-full">
           {/* Left side */}
-          <div className="flex items-center space-x-4">
-            <div className="bg-green-500 text-white px-2 py-1 rounded text-sm font-semibold">S</div>
-            <span className="text-white font-medium">scandiscent</span>
-            <span className="text-gray-400 text-sm">Summer '25</span>
+          <div className="flex items-center space-x-3">
+            <div className="bg-[#5c946e] text-white px-1.5 py-0.5 rounded text-xs font-bold">S</div>
+            <span className="text-white font-medium text-sm">scandiscent</span>
+            <span className="text-gray-400 text-xs">Summer '25</span>
           </div>
           
           {/* Center search */}
           <div className="flex-1 max-w-md mx-8">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5 text-gray-400" />
               <input 
                 type="text" 
                 placeholder="Search" 
-                className="w-full pl-10 pr-12 py-2 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                className="w-full pl-9 pr-12 py-1.5 bg-[#404040] text-white border border-[#505050] rounded text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">Ctrl K</span>
             </div>
@@ -800,40 +802,82 @@ export default function ShopifyStyleAdmin() {
 
           {/* Right side */}
           <div className="flex items-center space-x-3">
-            <div className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">1</div>
-            <span className="text-sm text-gray-300">Website Builder Insider...</span>
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+              className="text-white hover:bg-[#404040] h-7 px-2 md:hidden"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </Button>
+            
+            <div className="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-medium">1</div>
+            <span className="text-xs text-gray-300 max-w-32 truncate hidden sm:block">Website Builder Insider...</span>
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={logout}
-              className="text-white hover:bg-gray-800 h-8"
+              className="text-white hover:bg-[#404040] h-7 px-2 text-xs"
             >
-              Logga ut
+              <span className="hidden sm:inline">Logga ut</span>
+              <span className="sm:hidden">Ut</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <div className="flex">
-        {/* Sidebar - Light Gray like Shopify */}
-        <aside className="w-64 bg-[#f1f1f1] min-h-screen border-r border-gray-300">
-          <nav className="py-4">
+      <div className="flex relative">
+        {/* Mobile Sidebar Overlay */}
+        {isMobileSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+        )}
+
+        {/* Sidebar - Responsive */}
+        <aside className={`
+          w-48 bg-[#f6f6f7] min-h-screen border-r border-[#e1e3e5]
+          md:relative md:translate-x-0 transition-transform duration-300 ease-in-out
+          ${isMobileSidebarOpen ? 'fixed z-50 translate-x-0' : 'fixed z-50 -translate-x-full md:translate-x-0'}
+        `}>
+          <nav className="py-2 h-full overflow-y-auto">
+            {/* Close button for mobile */}
+            <div className="md:hidden flex justify-end p-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsMobileSidebarOpen(false)}
+                className="text-gray-600 hover:bg-gray-200 h-6 w-6 p-0"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+
             {/* Main Navigation */}
-            <ul className="space-y-1">
+            <ul className="space-y-0.5">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <li key={item.id}>
                     <button
-                      onClick={() => setSelectedTab(item.id)}
-                      className={`w-full flex items-center space-x-3 px-4 py-2 text-left text-sm transition-colors ${
+                      onClick={() => {
+                        setSelectedTab(item.id);
+                        setIsMobileSidebarOpen(false);
+                      }}
+                      className={`w-full flex items-center space-x-2.5 px-3 py-1.5 text-left text-sm transition-colors ${
                         selectedTab === item.id
-                          ? 'bg-white text-gray-900 font-medium border-r-2 border-blue-500'
-                          : 'text-gray-700 hover:bg-gray-200'
+                          ? 'bg-white text-gray-900 font-medium border-r-2 border-[#008060] shadow-sm'
+                          : 'text-gray-700 hover:bg-[#f1f2f3]'
                       }`}
                     >
-                      <Icon className="h-4 w-4" />
-                      <span>{item.label}</span>
+                      <Icon className="h-4 w-4 text-gray-600" />
+                      <span className="text-sm">{item.label}</span>
                     </button>
                   </li>
                 );
@@ -841,23 +885,19 @@ export default function ShopifyStyleAdmin() {
             </ul>
 
             {/* Sales Channels Section */}
-            <div className="mt-6">
-              <div className="px-4 py-2">
-                <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Sales channels</h3>
-                <button className="text-gray-500 hover:text-gray-700">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+            <div className="mt-4 px-3">
+              <div className="flex items-center justify-between py-2">
+                <h3 className="text-xs font-medium text-gray-600 uppercase tracking-wider">Sales channels</h3>
+                <ChevronRight className="h-3 w-3 text-gray-500" />
               </div>
-              <ul className="space-y-1">
+              <ul className="space-y-0.5">
                 {salesChannelItems.map((item) => {
                   const Icon = item.icon;
                   return (
                     <li key={item.id}>
-                      <button
-                        className="w-full flex items-center space-x-3 px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-200"
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span>{item.label}</span>
+                      <button className="w-full flex items-center space-x-2.5 px-0 py-1 text-left text-sm text-gray-700 hover:bg-[#f1f2f3] rounded">
+                        <Icon className="h-4 w-4 text-gray-600" />
+                        <span className="text-sm">{item.label}</span>
                       </button>
                     </li>
                   );
@@ -866,34 +906,36 @@ export default function ShopifyStyleAdmin() {
             </div>
 
             {/* Apps Section */}
-            <div className="mt-6">
-              <div className="px-4 py-2">
-                <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Apps</h3>
-                <button className="text-gray-500 hover:text-gray-700">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+            <div className="mt-4 px-3">
+              <div className="flex items-center justify-between py-2">
+                <h3 className="text-xs font-medium text-gray-600 uppercase tracking-wider">Apps</h3>
+                <ChevronRight className="h-3 w-3 text-gray-500" />
               </div>
             </div>
 
             {/* Settings at bottom */}
-            <div className="absolute bottom-4 w-full px-4">
+            <div className="absolute bottom-4 w-full px-3">
               <button
-                onClick={() => setSelectedTab("settings")}
-                className={`w-full flex items-center space-x-3 px-4 py-2 text-left text-sm transition-colors rounded ${
+                onClick={() => {
+                  setSelectedTab("settings");
+                  setIsMobileSidebarOpen(false);
+                }}
+                className={`w-full flex items-center space-x-2.5 px-0 py-1.5 text-left text-sm transition-colors ${
                   selectedTab === "settings"
-                    ? 'bg-white text-gray-900 font-medium'
-                    : 'text-gray-700 hover:bg-gray-200'
+                    ? 'bg-white text-gray-900 font-medium shadow-sm rounded'
+                    : 'text-gray-700 hover:bg-[#f1f2f3] rounded'
                 }`}
               >
-                <Settings className="h-4 w-4" />
-                <span>Settings</span>
+                <Settings className="h-4 w-4 text-gray-600" />
+                <span className="text-sm">Settings</span>
               </button>
             </div>
           </nav>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 bg-white">
+        {/* Main Content - Responsive */}
+        <main className="flex-1 bg-white md:ml-0">
+          <div className="md:hidden h-0"></div> {/* Spacer for mobile */}
           {renderContent()}
         </main>
       </div>
