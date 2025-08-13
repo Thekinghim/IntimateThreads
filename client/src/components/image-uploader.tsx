@@ -77,14 +77,18 @@ export function ImageUploader({ value, onChange, placeholder = "Enter image URL"
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2">
-        <Input
-          type="url"
-          placeholder={placeholder}
-          value={previewUrl}
-          onChange={(e) => handleUrlChange(e.target.value)}
-          className="flex-1"
-        />
+      {/* Large Mobile-Optimized Upload Button */}
+      <div className="w-full">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => fileInputRef.current?.click()}
+          disabled={isUploading}
+          className="w-full h-16 text-lg flex items-center justify-center gap-3 border-2 border-dashed border-blue-300 hover:border-blue-500 bg-blue-50 hover:bg-blue-100"
+        >
+          <Upload className="w-6 h-6" />
+          {isUploading ? "Laddar upp bild..." : "KLICKA FÖR ATT LADDA UPP BILD"}
+        </Button>
         <input
           ref={fileInputRef}
           type="file"
@@ -92,35 +96,38 @@ export function ImageUploader({ value, onChange, placeholder = "Enter image URL"
           onChange={handleFileSelect}
           className="hidden"
         />
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={isUploading}
-          className="flex-shrink-0"
-        >
-          <Upload className="h-4 w-4 mr-2" />
-          {isUploading ? "Uploading..." : "Upload"}
-        </Button>
-        {previewUrl && (
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={clearImage}
-            className="flex-shrink-0"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        )}
+      </div>
+      
+      {/* URL Input as secondary option */}
+      <div className="space-y-2">
+        <label className="text-sm text-gray-600">Eller ange bild-URL:</label>
+        <div className="flex gap-2">
+          <Input
+            type="url"
+            placeholder={placeholder}
+            value={previewUrl}
+            onChange={(e) => handleUrlChange(e.target.value)}
+            className="flex-1"
+          />
+          {previewUrl && (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={clearImage}
+              className="px-3"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          )}
+        </div>
       </div>
       
       {previewUrl && (
-        <div className="mt-2">
+        <div className="w-full">
           <img 
             src={previewUrl} 
             alt="Preview" 
-            className="w-32 h-32 object-cover rounded-lg border"
+            className="w-full max-h-48 object-cover rounded-lg border"
             onError={(e) => {
               e.currentTarget.src = "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=400";
             }}

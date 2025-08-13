@@ -141,8 +141,8 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
-              {/* Left Column */}
+            <div className="space-y-6">
+              {/* Mobile-First Single Column Layout */}
               <div className="space-y-4">
                 <FormField
                   control={form.control}
@@ -224,114 +224,109 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="material"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Material</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select material" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {materialOptions.map(material => (
-                              <SelectItem key={material} value={material}>{material}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="priceKr"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Price (SEK)</FormLabel>
+                <FormField
+                  control={form.control}
+                  name="material"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Material</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <Input 
-                            type="text" 
-                            placeholder="499" 
-                            {...field}
-                            onChange={e => {
-                              // Remove any leading zeros and non-numeric characters except decimal point
-                              const value = e.target.value.replace(/^0+/, '').replace(/[^0-9.]/g, '');
-                              field.onChange(value);
-                            }}
-                          />
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select material" />
+                          </SelectTrigger>
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                        <SelectContent>
+                          {materialOptions.map(material => (
+                            <SelectItem key={material} value={material}>{material}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="sellerId"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Seller</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select seller" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {sellers.map(seller => (
-                              <SelectItem key={seller.id} value={seller.id}>
-                                {seller.alias} - {seller.location}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormField
+                  control={form.control}
+                  name="priceKr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-lg font-semibold text-blue-600">Pris (SEK) - OBLIGATORISKT</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="text" 
+                          placeholder="499" 
+                          className="text-lg py-3 border-2 border-blue-300 focus:border-blue-500"
+                          {...field}
+                          onChange={e => {
+                            // Remove any leading zeros and non-numeric characters except decimal point
+                            const value = e.target.value.replace(/^0+/, '').replace(/[^0-9.]/g, '');
+                            field.onChange(value);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="wearDays"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Wear Days (Optional)</FormLabel>
+                <FormField
+                  control={form.control}
+                  name="sellerId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Seller</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <Input 
-                            type="number" 
-                            placeholder="3"
-                            {...field}
-                            onChange={e => field.onChange(Number(e.target.value))}
-                          />
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select seller" />
+                          </SelectTrigger>
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
+                        <SelectContent>
+                          {sellers.map(seller => (
+                            <SelectItem key={seller.id} value={seller.id}>
+                              {seller.alias} - {seller.location}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              {/* Right Column - Image Upload */}
-              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="wearDays"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Wear Days (Optional)</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          placeholder="3"
+                          {...field}
+                          onChange={e => field.onChange(Number(e.target.value))}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Image Upload - Now in single column for mobile */}
                 <FormField
                   control={form.control}
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Produktbild</FormLabel>
+                      <FormLabel className="text-lg font-semibold text-green-600">Produktbild - OBLIGATORISK</FormLabel>
                       <FormControl>
                         <ImageUploader
                           value={field.value}
                           onChange={field.onChange}
-                          placeholder="Ange bild-URL eller ladda upp fil"
+                          placeholder="Klicka för att ladda upp bild"
                         />
                       </FormControl>
                       <FormMessage />
