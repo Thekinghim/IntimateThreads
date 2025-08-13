@@ -104,7 +104,7 @@ export default function Cart() {
           <div className="lg:col-span-1">
             <Card className="sticky top-8 bg-white shadow-xl border-none">
               <CardContent className="p-8">
-                <h2 className="font-cormorant font-bold text-3xl gold-text mb-8">Ordersammanfattning</h2>
+                <h2 className="font-cormorant font-bold gold-text mb-8 text-[25px]">Ordersammanfattning</h2>
                 
                 <div className="space-y-6 mb-8">
                   {items.map((item) => (
