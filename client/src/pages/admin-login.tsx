@@ -93,7 +93,7 @@ export default function AdminLogin() {
           </div>
           
           <div className="text-left">
-            <CardTitle className="text-2xl font-semibold text-gray-900 mb-2">
+            <CardTitle className="text-2xl font-semibold text-gray-900 mt-[5px] mb-[5px] ml-[100px] mr-[100px]">
               Log in
             </CardTitle>
             <CardDescription className="text-gray-600 font-normal">
