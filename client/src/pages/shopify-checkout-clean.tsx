@@ -294,44 +294,16 @@ export default function ShopifyCheckout() {
                 {selectedPayment === 'stripe' && (
                   <div className="px-4 pb-4 border-t border-gray-200">
                     <div className="pt-4">
-                      {cartTotal > 0 ? (
+                      {discountedTotal > 0 ? (
                         <div className="space-y-4">
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Kortnummer</label>
-                            <input
-                              type="text"
-                              placeholder="1234 1234 1234 1234"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                            />
-                          </div>
-                          
-                          <div className="grid grid-cols-2 gap-3">
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">Utgångsdatum (MM/ÅÅ)</label>
-                              <input
-                                type="text"
-                                placeholder="MM/ÅÅ"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                              />
-                            </div>
-                            
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">Säkerhetskod</label>
-                              <input
-                                type="text"
-                                placeholder="123"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                              />
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Namn på kort</label>
-                            <input
-                              type="text"
-                              placeholder="Namn på kort"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                            />
+                          <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
+                            <h4 className="font-medium text-blue-900 mb-2">Säker kortbetalning</h4>
+                            <p className="text-sm text-blue-800 mb-3">
+                              Betala säkert med Visa, Mastercard, American Express eller andra kort
+                            </p>
+                            <p className="text-sm font-medium text-blue-900">
+                              Total: {discountedTotal.toFixed(2)} SEK
+                            </p>
                           </div>
                           
                           <button
@@ -341,7 +313,7 @@ export default function ShopifyCheckout() {
                                   method: 'POST',
                                   headers: { 'Content-Type': 'application/json' },
                                   body: JSON.stringify({ 
-                                    amount: cartTotal,
+                                    amount: discountedTotal,
                                     items: cartItems 
                                   })
                                 });
@@ -356,7 +328,7 @@ export default function ShopifyCheckout() {
                             }}
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-medium"
                           >
-                            Betala {cartTotal.toFixed(2)} SEK med kort
+                            Betala {discountedTotal.toFixed(2)} SEK med kort
                           </button>
                         </div>
                       ) : (

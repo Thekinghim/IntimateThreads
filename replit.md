@@ -34,12 +34,14 @@ The application uses **PostgreSQL** as the primary database with **Drizzle ORM**
   * **PayPal Sandbox Integration**: Functional PayPal payments with valid client tokens (TESTED ✅)  
   * **NOWPayments Production**: Cryptocurrency payments (BTC/ETH/USDT) configured with production API
 - ✅ **CHECKOUT FUNCTIONALITY COMPLETE**: 
-  * **Dynamic Pricing**: All payment methods use real cart totals, no fixed amounts
+  * **Dynamic Pricing**: All payment methods use real cart totals with discount code support
+  * **Discount Code System**: TEST3KR (2995 kr discount) and TEST1KR (2997 kr discount) for testing
   * **Complete Order Button**: Fully functional "Slutför beställning" button triggers correct payment flows
   * **Payment Method Selection**: Three options - Stripe, PayPal, and Crypto with proper UI
   * **Cart Integration**: Real product data flows from cart to checkout to payment processing
 - ✅ **UI/UX OPTIMIZATION**:
-  * **Removed Unused Elements**: Eliminated non-functional Apple Pay/Google Pay buttons
+  * **Product Images Fixed**: Proper image display using getProductImageUrl in checkout
+  * **Discount Code UI**: Apply/remove functionality with visual feedback
   * **Shopify Design Maintained**: Exact visual match to butikkubik.se checkout layout
   * **Swedish Language**: Complete Swedish localization throughout payment flow
   * **Error Handling**: Proper error messages and fallbacks for all payment methods
