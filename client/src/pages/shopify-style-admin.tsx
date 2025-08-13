@@ -36,86 +36,98 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0">
-        {/* Header exactly like Shopify */}
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
+      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+        {/* Header exactly like Shopify - Mobile responsive */}
+        <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600 h-8 w-8 p-0"
+                className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0 flex-shrink-0"
               >
-                <ArrowLeft className="h-5 w-5" />
+                <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
-              <div>
-                <DialogTitle className="text-xl font-medium text-gray-900">#{order.id.slice(-4)}</DialogTitle>
-                <p className="text-sm text-gray-600">
-                  {new Date(order.createdAt).toLocaleDateString('en-US', { 
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric'
-                  })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    hour12: true
-                  })} from ReCharge Recurring Billing & Subscriptions (via import)
+              <div className="min-w-0 flex-1">
+                <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">#{order.id.slice(-4)}</DialogTitle>
+                <p className="text-xs md:text-sm text-gray-600 truncate">
+                  <span className="hidden md:inline">
+                    {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                      hour12: true
+                    })} from ReCharge
+                  </span>
+                  <span className="md:hidden">
+                    {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                      month: 'short',
+                      day: 'numeric'
+                    })}
+                  </span>
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Badge className="bg-gray-100 text-gray-600">Paid</Badge>
-              <Badge className="bg-yellow-100 text-yellow-700">Unfulfilled</Badge>
-              <Button variant="outline" size="sm" className="h-8">
-                Print order
+            <div className="flex items-center gap-1 md:gap-3 flex-shrink-0">
+              <Badge className="bg-gray-100 text-gray-600 text-xs">Paid</Badge>
+              <Badge className="bg-yellow-100 text-yellow-700 text-xs">Unfulfilled</Badge>
+              <Button variant="outline" size="sm" className="h-6 md:h-8 px-1 md:px-3 text-xs hidden sm:inline-flex">
+                <span className="hidden md:inline">Print order</span>
+                <span className="md:hidden">Print</span>
               </Button>
-              <Button variant="outline" size="sm" className="h-8">
-                More actions
+              <Button variant="outline" size="sm" className="h-6 md:h-8 px-1 md:px-3 text-xs">
+                <span className="hidden md:inline">More actions</span>
+                <span className="md:hidden">⋯</span>
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-[#f6f6f7]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
           {/* Left column - Order details */}
           <div className="lg:col-span-2 space-y-4">
             {/* Unfulfilled items exactly like Shopify */}
             <div className="bg-white border border-gray-200 rounded-lg">
-              <div className="px-4 py-3 border-b border-gray-200 bg-yellow-50">
-                <div className="flex items-center gap-3">
+              <div className="px-3 md:px-4 py-3 border-b border-gray-200 bg-yellow-50">
+                <div className="flex items-center gap-2 md:gap-3">
                   <div className="bg-yellow-500 rounded-full p-1">
                     <Package className="h-3 w-3 text-white" />
                   </div>
-                  <h3 className="font-medium text-gray-900">Unfulfilled (1)</h3>
-                  <div className="ml-auto flex gap-2">
-                    <Button size="sm" variant="outline" className="h-7 px-3 text-xs">
-                      Mark as fulfilled
+                  <h3 className="font-medium text-gray-900 text-sm md:text-base">Unfulfilled (1)</h3>
+                  <div className="ml-auto flex gap-1 md:gap-2">
+                    <Button size="sm" variant="outline" className="h-6 md:h-7 px-2 md:px-3 text-xs">
+                      <span className="hidden sm:inline">Mark as fulfilled</span>
+                      <span className="sm:hidden">Mark</span>
                     </Button>
-                    <Button size="sm" className="h-7 px-3 text-xs bg-blue-600 hover:bg-blue-700">
-                      Create shipping label
+                    <Button size="sm" className="h-6 md:h-7 px-2 md:px-3 text-xs bg-blue-600 hover:bg-blue-700">
+                      <span className="hidden sm:inline">Create shipping label</span>
+                      <span className="sm:hidden">Label</span>
                     </Button>
                   </div>
                 </div>
               </div>
               
-              <div className="p-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
-                    <Package className="h-6 w-6 text-gray-400" />
+              <div className="p-3 md:p-4">
+                <div className="flex items-start gap-3 md:gap-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Package className="h-5 w-5 md:h-6 md:w-6 text-gray-400" />
                   </div>
-                  <div className="flex-1">
-                    <h4 className="font-medium text-gray-900">Grass Block Auto renew (Ships every 1 Months)</h4>
-                    <p className="text-sm text-gray-600">Plans / Small</p>
-                    <p className="text-sm text-gray-600">SKU: 02210</p>
-                    <div className="text-xs text-gray-500 mt-1">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-medium text-gray-900 text-sm md:text-base truncate">Grass Block Auto renew (Ships every 1 Months)</h4>
+                    <p className="text-xs md:text-sm text-gray-600 truncate">Plans / Small</p>
+                    <p className="text-xs md:text-sm text-gray-600">SKU: 02210</p>
+                    <div className="text-xs text-gray-500 mt-1 hidden md:block">
                       <p>shipping_interval_frequency: 1</p>
                       <p>shipping_interval_unit_type: Months</p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium">$10.00 × 1</p>
-                    <p className="text-sm text-gray-600">$10.00</p>
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-medium text-sm md:text-base">$10.00 × 1</p>
+                    <p className="text-xs md:text-sm text-gray-600">$10.00</p>
                   </div>
                 </div>
               </div>
@@ -876,23 +888,25 @@ export default function ShopifyStyleAdmin() {
       case "orders":
         return (
           <div className="flex flex-col h-screen bg-[#f6f6f7]">
-            {/* Header exactly like Shopify */}
-            <div className="bg-white border-b border-gray-200 px-6 py-4">
+            {/* Header exactly like Shopify - Mobile responsive */}
+            <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 md:gap-4">
                   <button className="text-gray-400 hover:text-gray-600">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
-                  <h1 className="text-xl font-medium text-gray-900">Orders</h1>
+                  <h1 className="text-lg md:text-xl font-medium text-gray-900">Orders</h1>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Button variant="outline" size="sm" className="h-8 px-3 text-sm">
-                    Export
+                <div className="flex items-center gap-2 md:gap-3">
+                  <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                    <span className="hidden sm:inline">Export</span>
+                    <span className="sm:hidden">Exp</span>
                   </Button>
-                  <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm">
-                    Create order
+                  <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                    <span className="hidden sm:inline">Create order</span>
+                    <span className="sm:hidden">Create</span>
                   </Button>
                 </div>
               </div>
@@ -901,26 +915,27 @@ export default function ShopifyStyleAdmin() {
             {/* Orders List */}
             <div className="flex-1 overflow-auto">
               <div className="bg-white">
-                {/* Filter tabs exactly like Shopify */}
+                {/* Filter tabs exactly like Shopify - Mobile responsive */}
                 <div className="border-b border-gray-200">
-                  <div className="flex px-6">
+                  <div className="flex px-3 md:px-6 overflow-x-auto">
                     {[
-                      { name: 'All orders', count: orders.length },
-                      { name: 'Unfulfilled', count: orders.filter((o: any) => o.fulfillmentStatus !== 'fulfilled').length },
-                      { name: 'Unpaid', count: orders.filter((o: any) => o.paymentStatus !== 'completed').length },
-                      { name: 'Open', count: orders.filter((o: any) => o.status === 'pending').length }
+                      { name: 'All orders', shortName: 'All', count: orders.length },
+                      { name: 'Unfulfilled', shortName: 'Unfulfilled', count: orders.filter((o: any) => o.fulfillmentStatus !== 'fulfilled').length },
+                      { name: 'Unpaid', shortName: 'Unpaid', count: orders.filter((o: any) => o.paymentStatus !== 'completed').length },
+                      { name: 'Open', shortName: 'Open', count: orders.filter((o: any) => o.status === 'pending').length }
                     ].map((tab, index) => (
                       <button
                         key={tab.name}
-                        className={`px-4 py-3 text-sm font-medium border-b-2 ${
+                        className={`px-2 md:px-4 py-3 text-xs md:text-sm font-medium border-b-2 whitespace-nowrap ${
                           index === 0 
                             ? 'border-[#008060] text-[#008060]' 
                             : 'border-transparent text-gray-500 hover:text-gray-700'
                         }`}
                       >
-                        {tab.name}
+                        <span className="hidden sm:inline">{tab.name}</span>
+                        <span className="sm:hidden">{tab.shortName}</span>
                         {tab.count > 0 && (
-                          <span className="ml-2 bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">
+                          <span className="ml-1 md:ml-2 bg-gray-100 text-gray-600 text-xs px-1.5 md:px-2 py-0.5 rounded-full">
                             {tab.count}
                           </span>
                         )}
@@ -929,98 +944,110 @@ export default function ShopifyStyleAdmin() {
                   </div>
                 </div>
 
-                {/* Search and filter bar */}
-                <div className="px-6 py-4 border-b border-gray-200 bg-white">
-                  <div className="flex items-center gap-4">
-                    <div className="relative flex-1 max-w-md">
+                {/* Search and filter bar - Mobile responsive */}
+                <div className="px-3 md:px-6 py-3 md:py-4 border-b border-gray-200 bg-white">
+                  <div className="flex items-center gap-2 md:gap-4">
+                    <div className="relative flex-1">
                       <input
                         type="text"
                         placeholder="Search orders"
-                        className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#008060] focus:border-[#008060]"
+                        className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-[#008060] focus:border-[#008060]"
                       />
-                      <svg className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute right-3 top-2.5 h-3 w-3 md:h-4 md:w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
-                    <Button variant="outline" size="sm" className="h-8 px-3 text-sm">
+                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0">
                       Filter
                     </Button>
                   </div>
                 </div>
 
-                {/* Table exactly like Shopify */}
-                <Table>
-                  <TableHeader>
-                    <TableRow className="border-b border-gray-200 bg-gray-50">
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left w-12">
-                        <input type="checkbox" className="rounded border-gray-300" />
-                      </TableHead>
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Order</TableHead>
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Date</TableHead>
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Customer</TableHead>
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Payment status</TableHead>
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Fulfillment status</TableHead>
-                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left text-right">Total</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {orders?.map((order: any) => (
-                      <TableRow 
-                        key={order.id} 
-                        className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
-                        onClick={() => handleOrderClick(order)}
-                      >
-                        <TableCell className="px-6 py-4">
+                {/* Table exactly like Shopify - with mobile responsiveness */}
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-b border-gray-200 bg-gray-50">
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left w-12">
                           <input type="checkbox" className="rounded border-gray-300" />
-                        </TableCell>
-                        <TableCell className="px-6 py-4 font-medium text-blue-600 hover:underline">
-                          #{order.id.slice(-4)}
-                        </TableCell>
-                        <TableCell className="px-6 py-4 text-sm text-gray-900">
-                          {new Date(order.createdAt).toLocaleDateString('en-US', { 
-                            month: 'long', 
-                            day: 'numeric',
-                            year: 'numeric'
-                          })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
-                            hour: 'numeric',
-                            minute: '2-digit',
-                            hour12: true
-                          })}
-                        </TableCell>
-                        <TableCell className="px-6 py-4 text-sm text-gray-900">
-                          {order.customerEmail}
-                        </TableCell>
-                        <TableCell className="px-6 py-4">
-                          <Badge className={
-                            order.paymentStatus === 'completed' 
-                              ? "bg-green-50 text-green-700 border-green-200" 
-                              : order.paymentStatus === 'pending'
-                              ? "bg-yellow-50 text-yellow-700 border-yellow-200"
-                              : "bg-red-50 text-red-700 border-red-200"
-                          }>
-                            {order.paymentStatus === 'completed' ? 'Paid' : 
-                             order.paymentStatus === 'pending' ? 'Pending' : 'Unpaid'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="px-6 py-4">
-                          <Badge className={
-                            order.fulfillmentStatus === 'fulfilled' 
-                              ? "bg-green-50 text-green-700 border-green-200" 
-                              : order.fulfillmentStatus === 'pending'
-                              ? "bg-yellow-50 text-yellow-700 border-yellow-200"
-                              : "bg-orange-50 text-orange-700 border-orange-200"
-                          }>
-                            {order.fulfillmentStatus === 'fulfilled' ? 'Fulfilled' : 
-                             order.fulfillmentStatus === 'pending' ? 'Pending' : 'Unfulfilled'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="px-6 py-4 text-sm font-medium text-gray-900 text-right">
-                          {order.totalKr} kr
-                        </TableCell>
+                        </TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[80px]">Order</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[120px] hidden sm:table-cell">Date</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[150px] hidden md:table-cell">Customer</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[120px]">Payment</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[120px] hidden lg:table-cell">Fulfillment</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left text-right min-w-[80px]">Total</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {orders?.map((order: any) => (
+                        <TableRow 
+                          key={order.id} 
+                          className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
+                          onClick={() => handleOrderClick(order)}
+                        >
+                          <TableCell className="px-3 md:px-6 py-4">
+                            <input type="checkbox" className="rounded border-gray-300" />
+                          </TableCell>
+                          <TableCell className="px-3 md:px-6 py-4 font-medium text-blue-600 hover:underline text-sm">
+                            #{order.id.slice(-4)}
+                          </TableCell>
+                          <TableCell className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 hidden sm:table-cell">
+                            <div className="md:hidden">
+                              {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric'
+                              })}
+                            </div>
+                            <div className="hidden md:block">
+                              {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                                month: 'long', 
+                                day: 'numeric',
+                                year: 'numeric'
+                              })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true
+                              })}
+                            </div>
+                          </TableCell>
+                          <TableCell className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 hidden md:table-cell">
+                            <div className="truncate max-w-[150px]">
+                              {order.customerEmail}
+                            </div>
+                          </TableCell>
+                          <TableCell className="px-3 md:px-6 py-4">
+                            <Badge className={`text-xs ${
+                              order.paymentStatus === 'completed' 
+                                ? "bg-green-50 text-green-700 border-green-200" 
+                                : order.paymentStatus === 'pending'
+                                ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                                : "bg-red-50 text-red-700 border-red-200"
+                            }`}>
+                              {order.paymentStatus === 'completed' ? 'Paid' : 
+                               order.paymentStatus === 'pending' ? 'Pending' : 'Unpaid'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="px-3 md:px-6 py-4 hidden lg:table-cell">
+                            <Badge className={`text-xs ${
+                              order.fulfillmentStatus === 'fulfilled' 
+                                ? "bg-green-50 text-green-700 border-green-200" 
+                                : order.fulfillmentStatus === 'pending'
+                                ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                                : "bg-orange-50 text-orange-700 border-orange-200"
+                            }`}>
+                              {order.fulfillmentStatus === 'fulfilled' ? 'Fulfilled' : 
+                               order.fulfillmentStatus === 'pending' ? 'Pending' : 'Unfulfilled'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="px-3 md:px-6 py-4 text-xs md:text-sm font-medium text-gray-900 text-right">
+                            {order.totalKr} kr
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             </div>
           </div>

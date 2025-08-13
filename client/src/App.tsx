@@ -39,9 +39,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Check if mobile device - always use v2 for mobile
-  const isMobile = window.innerWidth < 768;
-  const AdminComponent = isMobile ? MobileAdmin : ShopifyStyleAdmin;
+  // Always use ShopifyStyleAdmin for all devices - it's fully responsive
+  const AdminComponent = ShopifyStyleAdmin;
 
   return (
     <Switch>
