@@ -162,8 +162,14 @@ export default function CheckoutForm() {
                   </span>
                 </Button>
                 <Button 
-                  className="w-full bg-[#FFC439] hover:bg-[#F0B429] text-black py-3 px-6 rounded-md text-sm font-medium h-12"
-                  onClick={handleSubmit}
+                  className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white py-3 px-6 rounded-md text-sm font-medium h-12"
+                  onClick={() => {
+                    toast({ 
+                      title: "PayPal integration", 
+                      description: "PayPal-integrationen är tillfälligt inaktiverad. Använd krypto-betalning istället.",
+                      variant: "destructive"
+                    });
+                  }}
                 >
                   <span className="flex items-center justify-center">
                     <span className="font-bold text-base">Pay</span>
