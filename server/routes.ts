@@ -696,35 +696,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { amount, items } = req.body;
       
-      // Create a real Stripe checkout session
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        mode: 'payment',
+      // Create Payment Intent for inline payment
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(amount * 100), // Convert to öre
         currency: 'sek',
-        line_items: [
-          {
-            price_data: {
-              currency: 'sek',
-              product_data: {
-                name: 'Scandiscent Order',
-                description: 'Premium Nordic garments'
-              },
-              unit_amount: Math.round(amount * 100), // Convert to öre
-            },
-            quantity: 1,
-          },
-        ],
-        success_url: `${req.headers.origin || 'http://localhost:5000'}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin || 'http://localhost:5000'}/checkout-form`,
+        payment_method_types: ['card'],
         metadata: {
-          source: "scandiscent_production_checkout"
+          source: "scandiscent_production_checkout",
+          items: JSON.stringify(items || [])
         }
       });
       
-      res.json({ sessionId: session.id, url: session.url });
+      res.json({ 
+        clientSecret: paymentIntent.client_secret,
+        paymentIntentId: paymentIntent.id
+      });
     } catch (error: any) {
-      console.error('Stripe checkout session error:', error);
-      res.status(500).json({ message: "Error creating checkout session: " + error.message });
+      console.error('Stripe payment intent error:', error);
+      res.status(500).json({ message: "Error creating payment intent: " + error.message });
     }
   });
 
