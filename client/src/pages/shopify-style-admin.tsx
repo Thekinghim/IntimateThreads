@@ -414,8 +414,6 @@ export default function ShopifyStyleAdmin() {
   ];
 
   const salesChannelItems = [
-    { id: "online-store", label: "Online Store", icon: Package },
-    { id: "point-of-sale", label: "Point of Sale", icon: Package },
     { id: "buy-button", label: "Buy Button", icon: Package },
   ];
 
@@ -758,15 +756,292 @@ export default function ShopifyStyleAdmin() {
           </div>
         );
 
+      case "analytics":
+        return (
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Analytics</h1>
+            </div>
+            
+            {/* Analytics Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Page Views</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">1,247</div>
+                <div className="text-xs text-green-600">+12% from last week</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Unique Visitors</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">892</div>
+                <div className="text-xs text-green-600">+8% from last week</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Conversion Rate</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">3.2%</div>
+                <div className="text-xs text-red-600">-0.5% from last week</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Avg. Order Value</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">${stats.totalSales > 0 ? Math.round(stats.totalSales / stats.totalOrders) : 0}</div>
+                <div className="text-xs text-green-600">+5% from last week</div>
+              </div>
+            </div>
+
+            {/* Top Products Table */}
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+              <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                <h3 className="text-sm font-medium text-gray-900">Top Products</h3>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Product</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Views</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Orders</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Revenue</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {products.slice(0, 5).map((product: any, index: number) => (
+                    <TableRow key={product.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                      <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">{product.name}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">{125 - index * 20}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">{15 - index * 3}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">${(product.priceKr * (15 - index * 3))}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        );
+
+      case "marketing":
+        return (
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Marketing</h1>
+              <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto">
+                Create campaign
+              </Button>
+            </div>
+
+            {/* Marketing Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Email Subscribers</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">2,347</div>
+                <div className="text-xs text-green-600">+18 this week</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Campaign ROI</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">320%</div>
+                <div className="text-xs text-green-600">+45% from last month</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Click Rate</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">4.8%</div>
+                <div className="text-xs text-green-600">+0.3% from last week</div>
+              </div>
+            </div>
+
+            {/* Recent Campaigns */}
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+              <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                <h3 className="text-sm font-medium text-gray-900">Recent Campaigns</h3>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Campaign</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Type</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Results</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">Summer Collection Launch</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Email</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">1,247 opens</TableCell>
+                  </TableRow>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">Weekend Sale</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Social</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-gray-100 text-gray-600 border-gray-200 text-xs">Completed</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">892 clicks</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        );
+
+      case "content":
+        return (
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Content</h1>
+              <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto">
+                Add content
+              </Button>
+            </div>
+
+            {/* Content Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Blog Posts</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">24</div>
+                <div className="text-xs text-gray-400">Total published</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Pages</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">12</div>
+                <div className="text-xs text-gray-400">Active pages</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">Media Files</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">156</div>
+                <div className="text-xs text-gray-400">Images & videos</div>
+              </div>
+              <div className="bg-[#f8f8f8] p-3 md:p-4 rounded">
+                <div className="text-xs text-gray-600 font-medium mb-1">SEO Score</div>
+                <div className="text-lg md:text-xl font-bold text-gray-900">87%</div>
+                <div className="text-xs text-green-600">Good optimization</div>
+              </div>
+            </div>
+
+            {/* Recent Content */}
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+              <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                <h3 className="text-sm font-medium text-gray-900">Recent Content</h3>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Title</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Type</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Updated</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">About Our Nordic Heritage</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Page</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Published</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">2 days ago</TableCell>
+                  </TableRow>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">Summer Fashion Trends</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Blog</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-yellow-100 text-yellow-700 border-yellow-200 text-xs">Draft</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">1 week ago</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        );
+
       case "settings":
         return (
-          <div className="space-y-6">
-            <h1 className="text-2xl font-semibold text-gray-900">Inställningar</h1>
-            <Card className="border border-gray-200 shadow-sm">
-              <CardContent className="p-6">
-                <p className="text-gray-600">Inställningar kommer här</p>
-              </CardContent>
-            </Card>
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Settings</h1>
+            </div>
+
+            {/* Settings Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="bg-[#f8f8f8] p-4 rounded">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">General Settings</h3>
+                <div className="space-y-2 text-xs text-gray-600">
+                  <div>Store Name: Scandiscent</div>
+                  <div>Time Zone: Europe/Stockholm</div>
+                  <div>Currency: SEK</div>
+                  <div>Language: Swedish</div>
+                </div>
+              </div>
+              <div className="bg-[#f8f8f8] p-4 rounded">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">Payment Settings</h3>
+                <div className="space-y-2 text-xs text-gray-600">
+                  <div>Payment Methods: 3 active</div>
+                  <div>Default Currency: SEK</div>
+                  <div>Tax Settings: Configured</div>
+                  <div>Shipping: 2 zones</div>
+                </div>
+              </div>
+              <div className="bg-[#f8f8f8] p-4 rounded">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">Security</h3>
+                <div className="space-y-2 text-xs text-gray-600">
+                  <div>Two-Factor Auth: Enabled</div>
+                  <div>SSL Certificate: Active</div>
+                  <div>Admin Sessions: 2 active</div>
+                  <div>Last Login: Today</div>
+                </div>
+              </div>
+              <div className="bg-[#f8f8f8] p-4 rounded">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">Notifications</h3>
+                <div className="space-y-2 text-xs text-gray-600">
+                  <div>Email Alerts: Enabled</div>
+                  <div>Order Notifications: On</div>
+                  <div>Marketing Emails: On</div>
+                  <div>System Updates: On</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Settings Table */}
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+              <div className="p-4 border-b border-[#e1e3e5] bg-[#fafbfb]">
+                <h3 className="text-sm font-medium text-gray-900">System Configuration</h3>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Setting</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Value</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Last Updated</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">Database Backup</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Daily at 2:00 AM</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Today</TableCell>
+                  </TableRow>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">API Rate Limit</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">1000 req/min</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Normal</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">Yesterday</TableCell>
+                  </TableRow>
+                  <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                    <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">System Version</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">v3.2.0</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                      <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Latest</Badge>
+                    </TableCell>
+                    <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">1 week ago</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
         );
 
@@ -905,13 +1180,7 @@ export default function ShopifyStyleAdmin() {
               </ul>
             </div>
 
-            {/* Apps Section */}
-            <div className="mt-4 px-3">
-              <div className="flex items-center justify-between py-2">
-                <h3 className="text-xs font-medium text-gray-600 uppercase tracking-wider">Apps</h3>
-                <ChevronRight className="h-3 w-3 text-gray-500" />
-              </div>
-            </div>
+
 
             {/* Settings at bottom */}
             <div className="absolute bottom-4 w-full px-3">
