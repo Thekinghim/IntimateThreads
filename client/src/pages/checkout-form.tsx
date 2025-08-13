@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import PayPalButton from "@/components/PayPalButton";
 
 export default function CheckoutForm() {
   const { items, getTotalPrice, clearCart } = useCartStore();
@@ -161,21 +162,13 @@ export default function CheckoutForm() {
                     <span className="ml-1 font-normal">Pay</span>
                   </span>
                 </Button>
-                <Button 
-                  className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white py-3 px-6 rounded-md text-sm font-medium h-12"
-                  onClick={() => {
-                    toast({ 
-                      title: "PayPal integration", 
-                      description: "PayPal-integrationen är tillfälligt inaktiverad. Använd krypto-betalning istället.",
-                      variant: "destructive"
-                    });
-                  }}
-                >
-                  <span className="flex items-center justify-center">
-                    <span className="font-bold text-base">Pay</span>
-                    <span className="ml-1 font-normal">Pal</span>
-                  </span>
-                </Button>
+                <div className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-md overflow-hidden flex items-center justify-center h-12">
+                  <PayPalButton 
+                    amount={finalTotal.toString()} 
+                    currency="SEK" 
+                    intent="CAPTURE" 
+                  />
+                </div>
                 <Button 
                   className="w-full bg-black hover:bg-gray-900 text-white py-3 px-6 rounded-md text-sm font-medium h-12"
                 >
