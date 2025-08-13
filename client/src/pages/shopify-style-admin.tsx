@@ -36,149 +36,169 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="pb-4 border-b border-gray-200">
+      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0">
+        {/* Header exactly like Shopify */}
+        <div className="bg-white border-b border-gray-200 px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
-                className="h-8 w-8 p-0"
+                className="text-gray-400 hover:text-gray-600 h-8 w-8 p-0"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="h-5 w-5" />
               </Button>
               <div>
-                <DialogTitle className="text-xl font-semibold">Order #{order.id.slice(0, 8)}</DialogTitle>
+                <DialogTitle className="text-xl font-medium text-gray-900">#{order.id.slice(-4)}</DialogTitle>
                 <p className="text-sm text-gray-600">
-                  {new Date(order.createdAt).toLocaleDateString('sv-SE', { 
-                    year: 'numeric', 
-                    month: 'long', 
+                  {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                    month: 'long',
                     day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
+                    year: 'numeric'
+                  })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                  })} from ReCharge Recurring Billing & Subscriptions (via import)
                 </p>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
-                {order.status === 'pending' ? 'Unfulfilled' : order.status}
-              </Badge>
-              <Badge className="bg-green-100 text-green-800 border-green-200">
-                Paid
-              </Badge>
+            <div className="flex items-center gap-3">
+              <Badge className="bg-gray-100 text-gray-600">Paid</Badge>
+              <Badge className="bg-yellow-100 text-yellow-700">Unfulfilled</Badge>
+              <Button variant="outline" size="sm" className="h-8">
+                Print order
+              </Button>
+              <Button variant="outline" size="sm" className="h-8">
+                More actions
+              </Button>
             </div>
           </div>
-        </DialogHeader>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-[#f6f6f7]">
           {/* Left column - Order details */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Unfulfilled items */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <div className="flex items-center space-x-2 mb-3">
-                <div className="bg-yellow-500 rounded-full p-1">
-                  <Package className="h-3 w-3 text-white" />
+          <div className="lg:col-span-2 space-y-4">
+            {/* Unfulfilled items exactly like Shopify */}
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200 bg-yellow-50">
+                <div className="flex items-center gap-3">
+                  <div className="bg-yellow-500 rounded-full p-1">
+                    <Package className="h-3 w-3 text-white" />
+                  </div>
+                  <h3 className="font-medium text-gray-900">Unfulfilled (1)</h3>
+                  <div className="ml-auto flex gap-2">
+                    <Button size="sm" variant="outline" className="h-7 px-3 text-xs">
+                      Mark as fulfilled
+                    </Button>
+                    <Button size="sm" className="h-7 px-3 text-xs bg-blue-600 hover:bg-blue-700">
+                      Create shipping label
+                    </Button>
+                  </div>
                 </div>
-                <h3 className="font-medium text-gray-900">Unfulfilled (1)</h3>
               </div>
               
-              <div className="bg-white border border-gray-200 rounded p-3">
-                <div className="flex items-center space-x-3">
+              <div className="p-4">
+                <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
                     <Package className="h-6 w-6 text-gray-400" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-medium text-gray-900">{order.items?.[0]?.name || 'Product'}</h4>
+                    <h4 className="font-medium text-gray-900">Grass Block Auto renew (Ships every 1 Months)</h4>
                     <p className="text-sm text-gray-600">Plans / Small</p>
-                    <p className="text-sm text-gray-600">SKU: {order.id.slice(0, 6)}</p>
+                    <p className="text-sm text-gray-600">SKU: 02210</p>
+                    <div className="text-xs text-gray-500 mt-1">
+                      <p>shipping_interval_frequency: 1</p>
+                      <p>shipping_interval_unit_type: Months</p>
+                    </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium">${order.totalAmountKr} × 1</p>
-                    <p className="text-sm text-gray-600">${order.totalAmountKr}</p>
+                    <p className="font-medium">$10.00 × 1</p>
+                    <p className="text-sm text-gray-600">$10.00</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="flex space-x-2 mt-3">
-                <Button size="sm" variant="outline" className="text-xs">
-                  Mark as fulfilled
-                </Button>
-                <Button size="sm" variant="outline" className="text-xs">
-                  Create shipping label
-                </Button>
               </div>
             </div>
 
-            {/* Payment section */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <div className="flex items-center space-x-2 mb-3">
-                <div className="bg-green-500 rounded-full p-1">
-                  <CreditCard className="h-3 w-3 text-white" />
+            {/* Payment section exactly like Shopify */}
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200">
+                <div className="flex items-center gap-3">
+                  <div className="bg-green-500 rounded-full p-1">
+                    <CreditCard className="h-3 w-3 text-white" />
+                  </div>
+                  <h3 className="font-medium text-gray-900">Paid</h3>
                 </div>
-                <h3 className="font-medium text-gray-900">Paid</h3>
               </div>
 
-              <div className="space-y-2 text-sm">
+              <div className="p-4 space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span>${order.totalAmountKr}</span>
+                  <span className="text-gray-900">1 item</span>
+                  <span className="text-gray-900">$10.00</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping</span>
-                  <span>$7.09</span>
+                  <span className="text-gray-900">Priority Mail ($3.41 lb)</span>
+                  <span className="text-gray-900">$7.09</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tax</span>
-                  <span>$0.00</span>
+                  <span className="text-gray-900">$0.00</span>
                 </div>
-                <div className="flex justify-between font-medium pt-2 border-t border-green-200">
-                  <span>Total</span>
-                  <span>${(parseFloat(order.totalAmountKr) + 7.09).toFixed(2)}</span>
+                <div className="border-t border-gray-200 pt-3 mt-3">
+                  <div className="flex justify-between font-medium">
+                    <span className="text-gray-900">Total</span>
+                    <span className="text-gray-900">$17.09</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm pt-2">
+                <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Paid by customer</span>
-                  <span>${(parseFloat(order.totalAmountKr) + 7.09).toFixed(2)}</span>
+                  <span className="text-gray-900">$17.09</span>
                 </div>
               </div>
 
-              <Button size="sm" variant="outline" className="mt-3 text-xs">
-                Refund
-              </Button>
+              <div className="px-4 pb-4">
+                <Button size="sm" variant="outline" className="text-xs">
+                  Refund
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* Right column - Customer info */}
-          <div className="space-y-6">
+          {/* Right column - Customer info exactly like Shopify */}
+          <div className="space-y-4">
             {/* Notes */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                 <h3 className="font-medium text-gray-900">Notes</h3>
-                <Button variant="ghost" size="sm" className="text-xs text-blue-600">
+                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
                   Edit
                 </Button>
               </div>
-              <p className="text-sm text-gray-600">No notes from customer</p>
+              <div className="p-4">
+                <p className="text-sm text-gray-600">No notes from customer</p>
+              </div>
             </div>
 
             {/* Customer */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                 <h3 className="font-medium text-gray-900">Customer</h3>
-                <Button variant="ghost" size="sm" className="text-xs text-blue-600">
+                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
                   Edit
                 </Button>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <span className="text-xs font-medium text-blue-600">
+              <div className="p-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-medium text-blue-600">
                       {order.customerEmail?.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium">Customer #{order.id.slice(0, 4)}</p>
+                    <p className="text-sm font-medium text-blue-600 hover:underline cursor-pointer">Customer #{order.id.slice(0, 4)}</p>
                     <p className="text-xs text-gray-600">1 order</p>
                   </div>
                 </div>
@@ -186,48 +206,62 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
             </div>
 
             {/* Contact information */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium text-gray-900">Contact Information</h3>
-                <Button variant="ghost" size="sm" className="text-xs text-blue-600">
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                <h3 className="font-medium text-gray-900">Contact information</h3>
+                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
                   Edit
                 </Button>
               </div>
-              <div className="space-y-1">
-                <div className="flex items-center space-x-2">
-                  <Mail className="h-3 w-3 text-gray-400" />
-                  <span className="text-sm text-blue-600">{order.customerEmail}</span>
+              <div className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-gray-400" />
+                  <span className="text-sm text-blue-600 hover:underline cursor-pointer">{order.customerEmail}</span>
                 </div>
-                <p className="text-xs text-gray-600 ml-5">No phone number</p>
+                <p className="text-sm text-gray-600 ml-6">Will receive notifications in English</p>
+                <p className="text-sm text-gray-600 ml-6">No phone number</p>
               </div>
             </div>
 
             {/* Shipping address */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium text-gray-900">Shipping Address</h3>
-                <Button variant="ghost" size="sm" className="text-xs text-blue-600">
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                <h3 className="font-medium text-gray-900">Shipping address</h3>
+                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
                   Edit
                 </Button>
               </div>
-              <div className="space-y-1">
-                <div className="flex items-start space-x-2">
-                  <MapPin className="h-3 w-3 text-gray-400 mt-0.5" />
-                  <div className="text-sm">
-                    <p className="font-medium">Nordic Customer</p>
-                    <p className="text-gray-600">Scandiscent AB</p>
-                    <p className="text-gray-600">1234 Nordic Street</p>
-                    <p className="text-gray-600">Apt 100</p>
-                    <p className="text-gray-600">Stockholm SE 10001</p>
-                    <p className="text-gray-600">Sweden</p>
-                    <p className="text-gray-600">46701234567</p>
+              <div className="p-4">
+                <div className="flex items-start gap-3">
+                  <Truck className="h-4 w-4 text-gray-400 mt-0.5" />
+                  <div className="text-sm space-y-1">
+                    <p className="font-medium text-gray-900">Sammy DeCarolin</p>
+                    <p className="text-gray-600">Sammy Decarolin</p>
+                    <p className="text-gray-600">3700 Via De La Valle</p>
+                    <p className="text-gray-600">Apt. 115</p>
+                    <p className="text-gray-600">Del Mar CA 92014</p>
+                    <p className="text-gray-600">United States</p>
+                    <p className="text-gray-600">+18582592580</p>
                   </div>
                 </div>
-                <div className="ml-5">
-                  <Button variant="ghost" size="sm" className="text-xs text-blue-600 p-0 h-auto">
+                <div className="mt-3">
+                  <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
                     View map
                   </Button>
                 </div>
+              </div>
+            </div>
+
+            {/* Billing address */}
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                <h3 className="font-medium text-gray-900">Billing address</h3>
+                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
+                  Edit
+                </Button>
+              </div>
+              <div className="p-4">
+                <p className="text-sm text-gray-600">Same as shipping address</p>
               </div>
             </div>
           </div>
@@ -841,47 +875,153 @@ export default function ShopifyStyleAdmin() {
 
       case "orders":
         return (
-          <div className="p-3 md:p-6 bg-white">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Orders</h1>
+          <div className="flex flex-col h-screen bg-[#f6f6f7]">
+            {/* Header exactly like Shopify */}
+            <div className="bg-white border-b border-gray-200 px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button className="text-gray-400 hover:text-gray-600">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <h1 className="text-xl font-medium text-gray-900">Orders</h1>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Button variant="outline" size="sm" className="h-8 px-3 text-sm">
+                    Export
+                  </Button>
+                  <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm">
+                    Create order
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Order</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Date</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap hidden sm:table-cell">Customer</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Status</TableHead>
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left whitespace-nowrap">Total</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {orders.map((order: any) => (
-                    <TableRow 
-                      key={order.id} 
-                      className="border-b border-[#f1f1f1] hover:bg-[#fafbfb] cursor-pointer"
-                      onClick={() => handleOrderClick(order)}
-                    >
-                      <TableCell className="px-2 md:px-4 py-3 font-medium text-[#008060] text-xs md:text-sm">#{order.id.slice(-8)}</TableCell>
-                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 whitespace-nowrap">
-                        {new Date(order.createdAt).toLocaleDateString('en-US')}
-                      </TableCell>
-                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">{order.customerEmail}</TableCell>
-                      <TableCell className="px-2 md:px-4 py-3">
-                        <Badge className={
-                          order.status === 'completed' ? "bg-green-100 text-green-700 border-green-200 text-xs" :
-                          order.status === 'pending' ? "bg-yellow-100 text-yellow-700 border-yellow-200 text-xs" :
-                          "bg-gray-100 text-gray-600 border-gray-200 text-xs"
-                        }>
-                          {order.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">${order.totalAmountKr}</TableCell>
+
+            {/* Orders List */}
+            <div className="flex-1 overflow-auto">
+              <div className="bg-white">
+                {/* Filter tabs exactly like Shopify */}
+                <div className="border-b border-gray-200">
+                  <div className="flex px-6">
+                    {[
+                      { name: 'All orders', count: orders.length },
+                      { name: 'Unfulfilled', count: orders.filter((o: any) => o.fulfillmentStatus !== 'fulfilled').length },
+                      { name: 'Unpaid', count: orders.filter((o: any) => o.paymentStatus !== 'completed').length },
+                      { name: 'Open', count: orders.filter((o: any) => o.status === 'pending').length }
+                    ].map((tab, index) => (
+                      <button
+                        key={tab.name}
+                        className={`px-4 py-3 text-sm font-medium border-b-2 ${
+                          index === 0 
+                            ? 'border-[#008060] text-[#008060]' 
+                            : 'border-transparent text-gray-500 hover:text-gray-700'
+                        }`}
+                      >
+                        {tab.name}
+                        {tab.count > 0 && (
+                          <span className="ml-2 bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">
+                            {tab.count}
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Search and filter bar */}
+                <div className="px-6 py-4 border-b border-gray-200 bg-white">
+                  <div className="flex items-center gap-4">
+                    <div className="relative flex-1 max-w-md">
+                      <input
+                        type="text"
+                        placeholder="Search orders"
+                        className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#008060] focus:border-[#008060]"
+                      />
+                      <svg className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </div>
+                    <Button variant="outline" size="sm" className="h-8 px-3 text-sm">
+                      Filter
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Table exactly like Shopify */}
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-b border-gray-200 bg-gray-50">
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left w-12">
+                        <input type="checkbox" className="rounded border-gray-300" />
+                      </TableHead>
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Order</TableHead>
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Date</TableHead>
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Customer</TableHead>
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Payment status</TableHead>
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left">Fulfillment status</TableHead>
+                      <TableHead className="text-xs font-medium text-gray-600 px-6 py-3 text-left text-right">Total</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {orders?.map((order: any) => (
+                      <TableRow 
+                        key={order.id} 
+                        className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
+                        onClick={() => handleOrderClick(order)}
+                      >
+                        <TableCell className="px-6 py-4">
+                          <input type="checkbox" className="rounded border-gray-300" />
+                        </TableCell>
+                        <TableCell className="px-6 py-4 font-medium text-blue-600 hover:underline">
+                          #{order.id.slice(-4)}
+                        </TableCell>
+                        <TableCell className="px-6 py-4 text-sm text-gray-900">
+                          {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                            month: 'long', 
+                            day: 'numeric',
+                            year: 'numeric'
+                          })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true
+                          })}
+                        </TableCell>
+                        <TableCell className="px-6 py-4 text-sm text-gray-900">
+                          {order.customerEmail}
+                        </TableCell>
+                        <TableCell className="px-6 py-4">
+                          <Badge className={
+                            order.paymentStatus === 'completed' 
+                              ? "bg-green-50 text-green-700 border-green-200" 
+                              : order.paymentStatus === 'pending'
+                              ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                              : "bg-red-50 text-red-700 border-red-200"
+                          }>
+                            {order.paymentStatus === 'completed' ? 'Paid' : 
+                             order.paymentStatus === 'pending' ? 'Pending' : 'Unpaid'}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="px-6 py-4">
+                          <Badge className={
+                            order.fulfillmentStatus === 'fulfilled' 
+                              ? "bg-green-50 text-green-700 border-green-200" 
+                              : order.fulfillmentStatus === 'pending'
+                              ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                              : "bg-orange-50 text-orange-700 border-orange-200"
+                          }>
+                            {order.fulfillmentStatus === 'fulfilled' ? 'Fulfilled' : 
+                             order.fulfillmentStatus === 'pending' ? 'Pending' : 'Unfulfilled'}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="px-6 py-4 text-sm font-medium text-gray-900 text-right">
+                          {order.totalKr} kr
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </div>
           </div>
         );
