@@ -126,7 +126,7 @@ export default function Cart() {
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 text-[#ffffff]">
                   <Link href="/checkout">
                     <Button className="gold-button w-full text-lg py-6 rounded-3xl shadow-lg font-medium">
                       Gå till kassan
