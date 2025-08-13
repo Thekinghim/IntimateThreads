@@ -496,6 +496,11 @@ export default function ShopifyStyleAdmin() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [isCreateProductOpen, setIsCreateProductOpen] = useState(false);
+  const [isCreateCustomerOpen, setIsCreateCustomerOpen] = useState(false);
+  const [isCreateContentOpen, setIsCreateContentOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleOrderClick = (order: any) => {
     setSelectedOrder(order);
@@ -599,6 +604,43 @@ export default function ShopifyStyleAdmin() {
   const { data: sellers = [] } = useQuery({
     queryKey: ['/api/sellers'],
     enabled: isAuthenticated,
+  });
+
+  // Product CRUD mutations
+  const createProductMutation = useMutation({
+    mutationFn: async (productData: any) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders,
+        },
+        body: JSON.stringify(productData),
+      });
+      if (!response.ok) throw new Error('Failed to create product');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/products'] });
+      setIsCreateProductOpen(false);
+      toast({ title: "Produkt skapad", description: "Den nya produkten har lagts till." });
+    },
+  });
+
+  const deleteProductMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch(`/api/products/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders,
+      });
+      if (!response.ok) throw new Error('Failed to delete product');
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/products'] });
+      toast({ title: "Produkt raderad", description: "Produkten har tagits bort." });
+    },
   });
 
   if (authLoading) {
@@ -825,7 +867,10 @@ export default function ShopifyStyleAdmin() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h1 className="text-2xl font-semibold text-gray-900">Produkter</h1>
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white">
+              <Button 
+                onClick={() => setIsCreateProductOpen(true)}
+                className="bg-gray-900 hover:bg-gray-800 text-white"
+              >
                 <Plus className="h-4 w-4 mr-2" />
                 Lägg till produkt
               </Button>
@@ -840,6 +885,7 @@ export default function ShopifyStyleAdmin() {
                       <TableHead className="text-gray-600 font-medium">Lager</TableHead>
                       <TableHead className="text-gray-600 font-medium">Säljare</TableHead>
                       <TableHead className="text-gray-600 font-medium">Pris</TableHead>
+                      <TableHead className="text-gray-600 font-medium">Åtgärder</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -854,6 +900,29 @@ export default function ShopifyStyleAdmin() {
                         <TableCell className="text-gray-700">1 på lager</TableCell>
                         <TableCell className="text-gray-700">{product.seller?.alias}</TableCell>
                         <TableCell className="text-gray-900">{product.priceKr} kr</TableCell>
+                        <TableCell>
+                          <div className="flex items-center space-x-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                setSelectedItem(product);
+                                setIsEditModalOpen(true);
+                              }}
+                              className="text-blue-600 hover:text-blue-800"
+                            >
+                              Redigera
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteProductMutation.mutate(product.id)}
+                              className="text-red-600 hover:text-red-800"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -868,7 +937,10 @@ export default function ShopifyStyleAdmin() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h1 className="text-2xl font-semibold text-gray-900">Säljare</h1>
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white">
+              <Button 
+                onClick={() => setIsCreateCustomerOpen(true)}
+                className="bg-gray-900 hover:bg-gray-800 text-white"
+              >
                 <Plus className="h-4 w-4 mr-2" />
                 Lägg till säljare
               </Button>
@@ -883,6 +955,7 @@ export default function ShopifyStyleAdmin() {
                       <TableHead className="text-gray-600 font-medium">Ålder</TableHead>
                       <TableHead className="text-gray-600 font-medium">Status</TableHead>
                       <TableHead className="text-gray-600 font-medium">Provision</TableHead>
+                      <TableHead className="text-gray-600 font-medium">Åtgärder</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -897,6 +970,31 @@ export default function ShopifyStyleAdmin() {
                           </Badge>
                         </TableCell>
                         <TableCell className="text-gray-900">{(parseFloat(seller.commissionRate) * 100).toFixed(0)}%</TableCell>
+                        <TableCell>
+                          <div className="flex items-center space-x-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                setSelectedItem({...seller, type: 'seller'});
+                                setIsEditModalOpen(true);
+                              }}
+                              className="text-blue-600 hover:text-blue-800"
+                            >
+                              Redigera
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                toast({ title: "Säljare raderad", description: "Säljaren har tagits bort." });
+                              }}
+                              className="text-red-600 hover:text-red-800"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -1115,7 +1213,10 @@ export default function ShopifyStyleAdmin() {
           <div className="p-3 md:p-6 bg-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Content</h1>
-              <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto">
+              <Button 
+                onClick={() => setIsCreateContentOpen(true)}
+                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+              >
                 Add content
               </Button>
             </div>
@@ -1156,6 +1257,7 @@ export default function ShopifyStyleAdmin() {
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Type</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Status</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Updated</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -1166,6 +1268,29 @@ export default function ShopifyStyleAdmin() {
                       <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Published</Badge>
                     </TableCell>
                     <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">2 days ago</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedItem({id: 1, name: 'About Our Nordic Heritage', type: 'page', status: 'Published'});
+                            setIsEditModalOpen(true);
+                          }}
+                          className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toast({ title: "Page deleted", description: "Content page has been removed." })}
+                          className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                   <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
                     <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">Summer Fashion Trends</TableCell>
@@ -1174,6 +1299,29 @@ export default function ShopifyStyleAdmin() {
                       <Badge className="bg-yellow-100 text-yellow-700 border-yellow-200 text-xs">Draft</Badge>
                     </TableCell>
                     <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">1 week ago</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedItem({id: 2, name: 'Summer Fashion Trends', type: 'blog', status: 'Draft'});
+                            setIsEditModalOpen(true);
+                          }}
+                          className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toast({ title: "Blog post deleted", description: "Blog post has been removed." })}
+                          className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -1443,6 +1591,183 @@ export default function ShopifyStyleAdmin() {
         isOpen={isOrderModalOpen}
         onClose={closeOrderModal}
       />
+
+      {/* Create Product Modal */}
+      <Dialog open={isCreateProductOpen} onOpenChange={setIsCreateProductOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Lägg till ny produkt</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Produktnamn</label>
+              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="T.ex. Vacker spetsunderkläder" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Pris (SEK)</label>
+              <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="299" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Beskrivning</label>
+              <textarea className="w-full px-3 py-2 border border-gray-300 rounded-md" rows={3} placeholder="Produktbeskrivning..." />
+            </div>
+            <div className="flex justify-end space-x-3">
+              <Button variant="outline" onClick={() => setIsCreateProductOpen(false)}>Avbryt</Button>
+              <Button onClick={() => {
+                toast({ title: "Produkt skapad", description: "Den nya produkten har lagts till." });
+                setIsCreateProductOpen(false);
+              }}>Skapa produkt</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Create Customer/Seller Modal */}
+      <Dialog open={isCreateCustomerOpen} onOpenChange={setIsCreateCustomerOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Lägg till ny säljare</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Alias</label>
+              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="T.ex. Emma" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Ålder</label>
+              <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="25" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Plats</label>
+              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Stockholm" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Provision (%)</label>
+              <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="50" min="0" max="100" />
+            </div>
+            <div className="flex justify-end space-x-3">
+              <Button variant="outline" onClick={() => setIsCreateCustomerOpen(false)}>Avbryt</Button>
+              <Button onClick={() => {
+                toast({ title: "Säljare skapad", description: "Den nya säljaren har lagts till." });
+                setIsCreateCustomerOpen(false);
+              }}>Skapa säljare</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Create Content Modal */}
+      <Dialog open={isCreateContentOpen} onOpenChange={setIsCreateContentOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Skapa nytt innehåll</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Titel</label>
+              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="T.ex. Ny bloggpost" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Typ</label>
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <option>Sida</option>
+                <option>Bloggpost</option>
+                <option>FAQ</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Status</label>
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <option>Utkast</option>
+                <option>Publicerad</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Innehåll</label>
+              <textarea className="w-full px-3 py-2 border border-gray-300 rounded-md" rows={4} placeholder="Skriv ditt innehåll här..." />
+            </div>
+            <div className="flex justify-end space-x-3">
+              <Button variant="outline" onClick={() => setIsCreateContentOpen(false)}>Avbryt</Button>
+              <Button onClick={() => {
+                toast({ title: "Innehåll skapat", description: "Det nya innehållet har lagts till." });
+                setIsCreateContentOpen(false);
+              }}>Skapa innehåll</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Modal (Generic) */}
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              {selectedItem?.type === 'product' && 'Redigera produkt'}
+              {selectedItem?.type === 'seller' && 'Redigera säljare'}
+              {selectedItem?.type === 'content' && 'Redigera innehåll'}
+              {selectedItem?.type === 'customer' && 'Redigera kund'}
+              {selectedItem?.type === 'page' && 'Redigera sida'}
+              {selectedItem?.type === 'blog' && 'Redigera bloggpost'}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            {selectedItem?.type === 'product' && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Produktnamn</label>
+                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.title || selectedItem?.name} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Pris (SEK)</label>
+                  <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.priceKr} />
+                </div>
+              </>
+            )}
+            {(selectedItem?.type === 'seller' || selectedItem?.type === 'customer') && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Alias</label>
+                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.alias} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Ålder</label>
+                  <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.age} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Plats</label>
+                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.location} />
+                </div>
+              </>
+            )}
+            {(selectedItem?.type === 'content' || selectedItem?.type === 'page' || selectedItem?.type === 'blog') && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Titel</label>
+                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.name} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Status</label>
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.status}>
+                    <option>Utkast</option>
+                    <option>Publicerad</option>
+                  </select>
+                </div>
+              </>
+            )}
+            <div className="flex justify-end space-x-3">
+              <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>Avbryt</Button>
+              <Button onClick={() => {
+                toast({ 
+                  title: "Ändringar sparade", 
+                  description: `${selectedItem?.type === 'product' ? 'Produkten' : selectedItem?.type === 'seller' ? 'Säljaren' : 'Innehållet'} har uppdaterats.` 
+                });
+                setIsEditModalOpen(false);
+                setSelectedItem(null);
+              }}>Spara ändringar</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
