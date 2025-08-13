@@ -126,7 +126,7 @@ export default function Cart() {
                   </div>
                 </div>
 
-                <div className="space-y-4 text-[#ffffff]">
+                <div className="space-y-6 text-[#ffffff]">
                   <Link href="/checkout">
                     <Button className="gold-button w-full text-lg py-6 rounded-3xl shadow-lg font-medium">
                       Gå till kassan
@@ -134,7 +134,7 @@ export default function Cart() {
                   </Link>
                   
                   <Link href="/womens">
-                    <Button className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-4 rounded-2xl shadow-lg">
+                    <Button className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-6 rounded-3xl shadow-lg">
                       Fortsätt handla
                     </Button>
                   </Link>
