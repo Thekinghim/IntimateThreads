@@ -20,7 +20,7 @@ import { Request, Response } from "express";
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
 
 // PayPal is optional - only initialize if both keys are provided
-const isPayPalConfigured = !!(PAYPAL_CLIENT_ID && PAYPAL_CLIENT_SECRET && PAYPAL_CLIENT_SECRET !== 'dummy_secret_for_sandbox');
+const isPayPalConfigured = !!(PAYPAL_CLIENT_ID && PAYPAL_CLIENT_SECRET && PAYPAL_CLIENT_SECRET !== 'dummy_secret_for_sandbox' && PAYPAL_CLIENT_ID.length > 20);
 
 if (!isPayPalConfigured) {
   console.log("⚠️  PayPal not configured - missing PAYPAL_CLIENT_ID or PAYPAL_CLIENT_SECRET");
