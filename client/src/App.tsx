@@ -41,7 +41,7 @@ function Router() {
 
   // Check if mobile device - always use v2 for mobile
   const isMobile = window.innerWidth < 768;
-  const AdminComponent = isMobile ? MobileAdmin : Admin;
+  const AdminComponent = isMobile ? MobileAdmin : ShopifyStyleAdmin;
 
   return (
     <Switch>
