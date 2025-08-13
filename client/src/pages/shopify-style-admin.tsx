@@ -1980,29 +1980,217 @@ export default function ShopifyStyleAdmin() {
 
       {/* Create Product Modal */}
       <Dialog open={isCreateProductOpen} onOpenChange={setIsCreateProductOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>Lägg till ny produkt</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Produktnamn</label>
-              <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="T.ex. Vacker spetsunderkläder" />
+        <DialogContent className="max-w-7xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+          {/* Shopify-style Header */}
+          <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 md:gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsCreateProductOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                >
+                  <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+                <div>
+                  <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">Create Product</DialogTitle>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 md:gap-3">
+                <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                  Duplicate
+                </Button>
+                <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                  View
+                </Button>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Pris (SEK)</label>
-              <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="299" />
+          </div>
+
+          {/* Shopify-style Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
+            {/* Left column - Main product details */}
+            <div className="lg:col-span-2 space-y-4">
+              {/* Title Section */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Title</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <input 
+                    type="text" 
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="e.g. Vintage Cotton T-Shirt"
+                  />
+                </div>
+              </div>
+
+              {/* Description Section */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Description</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="border border-gray-300 rounded">
+                    {/* Rich text toolbar */}
+                    <div className="border-b border-gray-200 p-2 flex items-center gap-1 bg-gray-50">
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        <strong>B</strong>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        <em>I</em>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        <u>U</u>
+                      </Button>
+                      <div className="h-4 w-px bg-gray-300 mx-1"></div>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        •
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                        1.
+                      </Button>
+                    </div>
+                    <textarea 
+                      className="w-full p-3 text-sm resize-none border-none focus:outline-none"
+                      rows={4}
+                      placeholder="High-purity gold bracelet with garnet studs and a Citrine gemstone. The bracelet adapts to any wrist size."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Images Section */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200 flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">Images</h3>
+                  <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-800 text-sm">
+                    Add image from URL
+                  </Button>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div className="text-sm text-gray-600 mb-2">Add images</div>
+                    <div className="text-xs text-gray-500">or drop files to upload</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Beskrivning</label>
-              <textarea className="w-full px-3 py-2 border border-gray-300 rounded-md" rows={3} placeholder="Produktbeskrivning..." />
+
+            {/* Right column - Organization & Settings */}
+            <div className="space-y-4">
+              {/* Product availability */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200 flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">Product availability</h3>
+                  <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-800 text-sm">
+                    Manage
+                  </Button>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="text-xs text-gray-600 mb-2">Available on 1 of 1 channels and apps</div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 bg-green-500 rounded flex items-center justify-center">
+                      <span className="text-white text-xs">✓</span>
+                    </div>
+                    <span className="text-sm text-gray-900">Online Store</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Organization */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Organization</h3>
+                </div>
+                <div className="p-3 md:p-4 space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Product type</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                      <option>e.g. Shirts</option>
+                      <option>Underwear</option>
+                      <option>Accessories</option>
+                      <option>Lingerie</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Vendor</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                      <option>Scandiscent Store</option>
+                      <option>Emma</option>
+                      <option>Sofia</option>
+                      <option>Lina</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Collections */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200 flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">COLLECTIONS</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="relative">
+                    <input 
+                      type="text" 
+                      className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Search for collections"
+                    />
+                    <svg className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-900">Wedding Bells</span>
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-gray-400">×</Button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-900">Jewellery</span>
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-gray-400">×</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tags */}
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200 flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">TAGS</h3>
+                  <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-800 text-sm">
+                    View all tags
+                  </Button>
+                </div>
+                <div className="p-3 md:p-4">
+                  <input 
+                    type="text" 
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Vintage, cotton, summer"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="flex justify-end space-x-3">
-              <Button variant="outline" onClick={() => setIsCreateProductOpen(false)}>Avbryt</Button>
-              <Button onClick={() => {
-                toast({ title: "Produkt skapad", description: "Den nya produkten har lagts till." });
-                setIsCreateProductOpen(false);
-              }}>Skapa produkt</Button>
+          </div>
+
+          {/* Footer with Save button */}
+          <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex justify-end">
+              <Button 
+                className="bg-[#008060] hover:bg-[#006b52] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Product created", description: "The new product has been added." });
+                  setIsCreateProductOpen(false);
+                }}
+              >
+                Save product
+              </Button>
             </div>
           </div>
         </DialogContent>
@@ -2085,30 +2273,189 @@ export default function ShopifyStyleAdmin() {
 
       {/* Edit Modal (Generic) */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>
-              {selectedItem?.type === 'product' && 'Redigera produkt'}
-              {selectedItem?.type === 'seller' && 'Redigera säljare'}
-              {selectedItem?.type === 'content' && 'Redigera innehåll'}
-              {selectedItem?.type === 'customer' && 'Redigera kund'}
-              {selectedItem?.type === 'page' && 'Redigera sida'}
-              {selectedItem?.type === 'blog' && 'Redigera bloggpost'}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            {selectedItem?.type === 'product' && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Produktnamn</label>
-                  <input className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.title || selectedItem?.name} />
+        <DialogContent className={selectedItem?.type === 'product' ? "max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full" : "max-w-md"}>
+          {selectedItem?.type === 'product' ? (
+            <>
+              {/* Shopify-style Header for Products */}
+              <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 md:gap-4">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setIsEditModalOpen(false)}
+                      className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                    >
+                      <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                    </Button>
+                    <div>
+                      <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">{selectedItem?.title || 'Edit Product'}</DialogTitle>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                      Duplicate
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                      View
+                    </Button>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Pris (SEK)</label>
-                  <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue={selectedItem?.priceKr} />
+              </div>
+
+              {/* Shopify-style Main Content */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
+                {/* Left column - Main product details */}
+                <div className="lg:col-span-2 space-y-4">
+                  {/* Title Section */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Title</h3>
+                    </div>
+                    <div className="p-3 md:p-4">
+                      <input 
+                        type="text" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                        defaultValue={selectedItem?.title || selectedItem?.name}
+                        placeholder="Product title"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Description Section */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Description</h3>
+                    </div>
+                    <div className="p-3 md:p-4">
+                      <div className="border border-gray-300 rounded">
+                        <div className="border-b border-gray-200 p-2 flex items-center gap-1 bg-gray-50">
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                            <strong>B</strong>
+                          </Button>
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                            <em>I</em>
+                          </Button>
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-600">
+                            <u>U</u>
+                          </Button>
+                        </div>
+                        <textarea 
+                          className="w-full p-3 text-sm resize-none border-none focus:outline-none"
+                          rows={4}
+                          defaultValue={selectedItem?.description || ''}
+                          placeholder="Product description..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pricing Section */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Pricing</h3>
+                    </div>
+                    <div className="p-3 md:p-4">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Price</label>
+                      <div className="flex items-center">
+                        <span className="text-sm text-gray-500 mr-2">SEK</span>
+                        <input 
+                          type="number" 
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500" 
+                          defaultValue={selectedItem?.priceKr}
+                          placeholder="0.00"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </>
-            )}
+
+                {/* Right column - Organization & Settings */}
+                <div className="space-y-4">
+                  {/* Product Status */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Product status</h3>
+                    </div>
+                    <div className="p-3 md:p-4">
+                      <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <option>Active</option>
+                        <option>Draft</option>
+                        <option>Archived</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Organization */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Organization</h3>
+                    </div>
+                    <div className="p-3 md:p-4 space-y-4">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-1">Product type</label>
+                        <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                          <option>Underwear</option>
+                          <option>Lingerie</option>
+                          <option>Accessories</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-1">Vendor</label>
+                        <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                          <option>Scandiscent Store</option>
+                          <option>Emma</option>
+                          <option>Sofia</option>
+                          <option>Lina</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="bg-white border border-gray-200 rounded-lg">
+                    <div className="p-3 md:p-4 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Tags</h3>
+                    </div>
+                    <div className="p-3 md:p-4">
+                      <input 
+                        type="text" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Vintage, cotton, summer"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer with Save button */}
+              <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+                <div className="flex justify-end">
+                  <Button 
+                    className="bg-[#008060] hover:bg-[#006b52] text-white px-6"
+                    onClick={() => {
+                      toast({ title: "Product updated", description: "The product has been saved." });
+                      setIsEditModalOpen(false);
+                      setSelectedItem(null);
+                    }}
+                  >
+                    Save product
+                  </Button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <DialogHeader>
+                <DialogTitle>
+                  {selectedItem?.type === 'seller' && 'Redigera säljare'}
+                  {selectedItem?.type === 'content' && 'Redigera innehåll'}
+                  {selectedItem?.type === 'customer' && 'Redigera kund'}
+                  {selectedItem?.type === 'page' && 'Redigera sida'}
+                  {selectedItem?.type === 'blog' && 'Redigera bloggpost'}
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
             {(selectedItem?.type === 'seller' || selectedItem?.type === 'customer') && (
               <>
                 <div>
@@ -2151,7 +2498,9 @@ export default function ShopifyStyleAdmin() {
                 setSelectedItem(null);
               }}>Spara ändringar</Button>
             </div>
-          </div>
+              </div>
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </div>
