@@ -18,20 +18,24 @@ export default function OrderConfirmation() {
   const { items: cartItems, clearCart } = useCartStore();
   const [orderNumber, setOrderNumber] = useState('');
   const [orderTotal, setOrderTotal] = useState(0);
+  const [orderItems, setOrderItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     // Generate order number
     const orderNum = 'HMT' + Math.random().toString().substr(2, 6);
     setOrderNumber(orderNum);
 
-    // Calculate total from cart items
-    const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.priceKr * item.quantity), 0);
-    setOrderTotal(total);
+    // Save order items immediately before clearing cart
+    if (cartItems.length > 0) {
+      setOrderItems([...cartItems]);
+      const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.priceKr * item.quantity), 0);
+      setOrderTotal(total);
+    }
 
-    // Clear cart after successful order
+    // Clear cart after saving order data
     setTimeout(() => {
       clearCart();
-    }, 3000);
+    }, 5000);
   }, [cartItems, clearCart]);
 
   const handlePrintReceipt = () => {
@@ -103,8 +107,8 @@ export default function OrderConfirmation() {
 
               {/* Order Items */}
               <div className="space-y-4 mb-6">
-                {cartItems.length > 0 ? (
-                  cartItems.map((item: CartItem) => (
+                {orderItems.length > 0 ? (
+                  orderItems.map((item: CartItem) => (
                     <div key={item.id} className="flex items-start space-x-4">
                       <div className="relative">
                         <img 
@@ -130,7 +134,7 @@ export default function OrderConfirmation() {
                   ))
                 ) : (
                   <div className="text-center py-4">
-                    <p className="text-gray-500 text-sm">Orderdetaljer laddas...</p>
+                    <p className="text-gray-500 text-sm">Ingen orderinformation tillgänglig</p>
                   </div>
                 )}
               </div>
