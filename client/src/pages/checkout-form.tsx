@@ -135,28 +135,28 @@ export default function CheckoutForm() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
           {/* Left Side - Form */}
-          <div className="bg-white p-6 lg:p-12">
+          <div className="bg-white p-6 lg:p-12 shadow-sm">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
-              <h1 className="text-2xl font-bold text-[#064F8C]">SCANDISCENT</h1>
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+              <h1 className="text-2xl font-bold text-[#064F8C] font-cormorant">SCANDISCENT</h1>
               <div className="flex items-center text-sm text-gray-500 space-x-2">
                 <span>Kundvagn</span>
-                <span>&gt;</span>
+                <span className="text-[#064F8C]">→</span>
                 <span>Information</span>
-                <span>&gt;</span>
+                <span className="text-[#064F8C]">→</span>
                 <span>Frakt</span>
-                <span>&gt;</span>
-                <span className="text-gray-900">Betalning</span>
+                <span className="text-[#064F8C]">→</span>
+                <span className="text-[#064F8C] font-medium">Betalning</span>
               </div>
             </div>
 
             {/* Express Checkout */}
-            <div className="mb-8">
-              <p className="text-lg font-medium mb-4 text-gray-900">Snabb utcheckning</p>
+            <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <p className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Snabb utcheckning</p>
               <div className="space-y-3 mb-4">
                 <div 
                   id="paypal-button-container" 
-                  className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-md flex items-center justify-center h-12 cursor-pointer transition-colors relative overflow-hidden"
+                  className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-lg flex items-center justify-center h-12 cursor-pointer transition-all duration-200 relative border border-[#E6B800] shadow-sm"
                 >
                   <PayPalButton 
                     amount={finalTotal.toString()} 
@@ -167,15 +167,15 @@ export default function CheckoutForm() {
               </div>
               <div className="flex items-center my-6">
                 <div className="flex-1 border-t border-gray-300"></div>
-                <span className="mx-4 text-gray-500 text-sm">ELLER</span>
+                <span className="mx-4 text-gray-500 text-sm font-medium">ELLER</span>
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Contact Information */}
-              <div>
-                <h2 className="text-lg font-medium mb-4 text-gray-900">Kontaktinformation</h2>
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h2 className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Kontaktinformation</h2>
                 <div className="space-y-4">
                   <div>
                     <Input
@@ -184,7 +184,7 @@ export default function CheckoutForm() {
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       required
-                      className="w-full border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                      className="w-full bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                     />
                   </div>
                   <div className="flex items-center space-x-2">
@@ -201,33 +201,33 @@ export default function CheckoutForm() {
               </div>
 
               {/* Delivery Method */}
-              <div>
-                <h2 className="text-lg font-medium mb-4 text-gray-900">Leveranssätt</h2>
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h2 className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Leveranssätt</h2>
                 <RadioGroup value={formData.deliveryMethod} onValueChange={(value) => handleInputChange('deliveryMethod', value)}>
-                  <div className="flex items-center space-x-2 p-4 border border-gray-300 rounded-lg bg-white">
+                  <div className="flex items-center space-x-2 p-4 border border-gray-300 rounded-lg bg-white shadow-sm">
                     <RadioGroupItem value="ship" id="ship" className="text-[#064F8C]" />
-                    <Label htmlFor="ship" className="flex-1 text-gray-900">Skicka</Label>
+                    <Label htmlFor="ship" className="flex-1 text-gray-900 font-medium">Skicka</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               {/* Shipping Address */}
-              <div>
-                <h2 className="text-lg font-medium mb-4 text-gray-900">Leveransadress</h2>
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h2 className="text-lg font-medium mb-4 text-[#064F8C] font-lora">Leveransadress</h2>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <Input
                     placeholder="Förnamn"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
                     required
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                   <Input
                     placeholder="Efternamn"
                     value={formData.lastName}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
                     required
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                 </div>
                 <div className="space-y-4">
@@ -235,31 +235,31 @@ export default function CheckoutForm() {
                     placeholder="Företag (valfritt)"
                     value={formData.company}
                     onChange={(e) => handleInputChange('company', e.target.value)}
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                   <Input
                     placeholder="Adress"
                     value={formData.address}
                     onChange={(e) => handleInputChange('address', e.target.value)}
                     required
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                   <Input
                     placeholder="Lägenhet, svit, etc. (valfritt)"
                     value={formData.apartment}
                     onChange={(e) => handleInputChange('apartment', e.target.value)}
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                   <Input
                     placeholder="Stad"
                     value={formData.city}
                     onChange={(e) => handleInputChange('city', e.target.value)}
                     required
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                   <div className="grid grid-cols-3 gap-4">
                     <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
-                      <SelectTrigger className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]">
+                      <SelectTrigger className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12">
                         <SelectValue placeholder="Land/region" />
                       </SelectTrigger>
                       <SelectContent>
@@ -270,7 +270,7 @@ export default function CheckoutForm() {
                       </SelectContent>
                     </Select>
                     <Select value={formData.state} onValueChange={(value) => handleInputChange('state', value)}>
-                      <SelectTrigger className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]">
+                      <SelectTrigger className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12">
                         <SelectValue placeholder="Län" />
                       </SelectTrigger>
                       <SelectContent>
@@ -284,14 +284,14 @@ export default function CheckoutForm() {
                       value={formData.zipCode}
                       onChange={(e) => handleInputChange('zipCode', e.target.value)}
                       required
-                      className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                     />
                   </div>
                   <Input
                     placeholder="Telefon (valfritt)"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    className="border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] h-12"
                   />
                 </div>
               </div>
