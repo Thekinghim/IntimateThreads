@@ -2,6 +2,133 @@ import { useState, useEffect } from 'react';
 import PayPalButton from '@/components/PayPalButton';
 import { useCartStore } from '@/lib/cart';
 import { getProductImageUrl } from '@/assets/images';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
+// Stripe Payment Component
+function StripePaymentForm({ amount }: { amount: number }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements || amount <= 0) return;
+
+    setIsProcessing(true);
+    setMessage('');
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.origin + '/order-confirmation',
+      },
+    });
+
+    if (error) {
+      setMessage(error.message || 'Något gick fel med betalningen');
+    } else {
+      setMessage('Betalning genomförd!');
+    }
+    setIsProcessing(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <PaymentElement />
+      {message && (
+        <div className={`p-3 rounded-md text-sm ${
+          message.includes('genomförd') ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+        }`}>
+          {message}
+        </div>
+      )}
+      <button
+        type="submit"
+        disabled={!stripe || isProcessing || amount <= 0}
+        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 rounded-md font-medium transition-colors"
+      >
+        {isProcessing ? 'Bearbetar betalning...' : `Betala ${amount.toFixed(2)} SEK`}
+      </button>
+    </form>
+  );
+}
+
+// Wrapper that creates Payment Intent and provides Stripe Elements
+function StripeCheckout({ amount }: { amount: number }) {
+  const [clientSecret, setClientSecret] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (amount > 0) {
+      fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.clientSecret) {
+          setClientSecret(data.clientSecret);
+        } else {
+          setError('Kunde inte skapa betalning');
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Payment intent error:', err);
+        setError('Kunde inte ansluta till betalningssystemet');
+        setLoading(false);
+      });
+    }
+  }, [amount]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full"></div>
+        <span className="ml-2 text-gray-600">Förbereder säker betalning...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-md p-4">
+        <p className="text-red-800">{error}</p>
+      </div>
+    );
+  }
+
+  if (!clientSecret) {
+    return (
+      <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
+        <p className="text-yellow-800">Betalningsformulär kunde inte laddas</p>
+      </div>
+    );
+  }
+
+  return (
+    <Elements 
+      stripe={stripePromise} 
+      options={{ 
+        clientSecret,
+        appearance: { 
+          theme: 'stripe',
+          variables: {
+            colorPrimary: '#2563eb',
+          }
+        }
+      }}
+    >
+      <StripePaymentForm amount={amount} />
+    </Elements>
+  );
+}
 
 export default function ShopifyCheckout() {
   const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal' | 'crypto'>('stripe');
@@ -306,26 +433,7 @@ export default function ShopifyCheckout() {
                             </p>
                           </div>
                           
-                          <div className="space-y-4">
-                            <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
-                              <p className="text-sm text-yellow-800">
-                                ⚠️ <strong>Stripe Elements (inline betalning):</strong> Implementerat med Payment Intent API för säker kortbetalning direkt på sidan utan omdirigering.
-                              </p>
-                            </div>
-                            <button
-                              onClick={async () => {
-                                try {
-                                  // För nu använder vi PayPal istället som fungerar
-                                  alert('Stripe Elements implementerat! För demonstration, använd PayPal-alternativet nedan som fungerar fullt ut.');
-                                } catch (error) {
-                                  console.error('Payment error:', error);
-                                }
-                              }}
-                              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-medium"
-                            >
-                              Stripe Elements - {discountedTotal.toFixed(2)} SEK (Demo)
-                            </button>
-                          </div>
+                          <StripeCheckout amount={discountedTotal} />
                         </div>
                       ) : (
                         <div className="text-center py-6">
