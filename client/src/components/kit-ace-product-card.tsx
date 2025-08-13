@@ -133,7 +133,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
           disabled={!product.isAvailable}
           variant="outline"
           size="sm"
-          className="w-full text-xs font-medium uppercase tracking-wide border-[#111B3E] text-[#111B3E] hover:bg-[#111B3E] hover:text-[#FEFBEA]"
+          className="w-full text-xs font-medium uppercase tracking-wide border-[#111B3E] text-[#111B3E] bg-white hover:bg-[#111B3E] hover:text-white transition-all duration-200"
         >
           {product.isAvailable ? "Quick Add" : "Sold Out"}
         </Button>
