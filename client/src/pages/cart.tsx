@@ -67,7 +67,7 @@ export default function Cart() {
               {/* Header */}
               <div className="flex items-center justify-between mb-8">
                 <h1 className="text-2xl font-bold text-gray-800">Varukorg</h1>
-                <span className="text-lg font-medium text-gray-600">{itemCount} {itemCount === 1 ? 'Artikel' : 'Artiklar'}</span>
+                <span className="text-lg font-medium text-gray-600">{itemCount} {itemCount === 1 ? 'produkt' : 'produkter'}</span>
               </div>
 
               {/* Column Headers - Hidden on mobile */}

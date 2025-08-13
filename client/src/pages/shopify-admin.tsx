@@ -10,6 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { 
   BarChart3, 
   ShoppingBag, 
@@ -35,7 +37,9 @@ import {
   Clock,
   CheckCircle,
   Truck,
-  XCircle
+  XCircle,
+  Plus,
+  Trash2
 } from "lucide-react";
 import ProductManager from "@/components/admin/product-manager";
 import OrderStatusManager from "@/components/admin/order-status-manager";
@@ -45,6 +49,257 @@ import VisualImprovements from "@/components/visual-improvements";
 import SellerManager from "@/components/admin/seller-manager";
 import SettingsPanel from "@/components/admin/settings-panel";
 import { format } from "date-fns";
+
+function PromoCodesPanel() {
+  const { getAuthHeader } = useAdminAuth();
+  const { toast } = useToast();
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+
+  const { data: promoCodes = [], refetch } = useQuery({
+    queryKey: ['/api/admin/promo-codes'],
+    queryFn: async () => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/promo-codes', {
+        headers: authHeaders,
+      });
+      if (!response.ok) throw new Error('Failed to fetch promo codes');
+      return response.json();
+    },
+  });
+
+  const createPromoMutation = useMutation({
+    mutationFn: async (promoData: any) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/promo-codes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders,
+        },
+        body: JSON.stringify(promoData),
+      });
+      if (!response.ok) throw new Error('Failed to create promo code');
+      return response.json();
+    },
+    onSuccess: () => {
+      refetch();
+      setIsCreateDialogOpen(false);
+      toast({ title: "Rabattkod skapad", description: "Den nya rabattkoden är nu aktiv." });
+    },
+  });
+
+  const deletePromoMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch(`/api/admin/promo-codes/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders,
+      });
+      if (!response.ok) throw new Error('Failed to delete promo code');
+    },
+    onSuccess: () => {
+      refetch();
+      toast({ title: "Rabattkod raderad", description: "Rabattkoden har tagits bort." });
+    },
+  });
+
+  const togglePromoMutation = useMutation({
+    mutationFn: async ({ id, isActive }: { id: string; isActive: boolean }) => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch(`/api/admin/promo-codes/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders,
+        },
+        body: JSON.stringify({ isActive }),
+      });
+      if (!response.ok) throw new Error('Failed to update promo code');
+      return response.json();
+    },
+    onSuccess: () => {
+      refetch();
+      toast({ title: "Rabattkod uppdaterad", description: "Status har ändrats." });
+    },
+  });
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-4xl font-bold text-deep-charcoal mb-2 font-poppins">Rabattkoder</h2>
+          <p className="text-soft-taupe text-lg">Hantera rabattkoder och kampanjer</p>
+        </div>
+        <Button
+          onClick={() => setIsCreateDialogOpen(true)}
+          className="btn-luxury rounded-2xl"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Ny rabattkod
+        </Button>
+      </div>
+
+      <Card className="glass border-0 shadow-luxury">
+        <CardHeader>
+          <CardTitle className="text-deep-charcoal font-poppins">Aktiva rabattkoder</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Kod</TableHead>
+                <TableHead>Rabatt</TableHead>
+                <TableHead>Användningar</TableHead>
+                <TableHead>Giltig till</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Åtgärder</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {promoCodes.map((promo: any) => (
+                <TableRow key={promo.id}>
+                  <TableCell className="font-medium">{promo.code}</TableCell>
+                  <TableCell>{promo.discountKr} kr</TableCell>
+                  <TableCell>
+                    {promo.usageCount}{promo.maxUsage ? ` / ${promo.maxUsage}` : ''}
+                  </TableCell>
+                  <TableCell>
+                    {promo.validUntil 
+                      ? new Date(promo.validUntil).toLocaleDateString('sv-SE')
+                      : 'Ingen gräns'
+                    }
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={promo.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}>
+                      {promo.isActive ? 'Aktiv' : 'Inaktiv'}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => togglePromoMutation.mutate({ id: promo.id, isActive: !promo.isActive })}
+                      >
+                        {promo.isActive ? 'Inaktivera' : 'Aktivera'}
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => deletePromoMutation.mutate(promo.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      <CreatePromoCodeDialog
+        open={isCreateDialogOpen}
+        onOpenChange={setIsCreateDialogOpen}
+        onSubmit={(data) => createPromoMutation.mutate(data)}
+        isLoading={createPromoMutation.isPending}
+      />
+    </div>
+  );
+}
+
+function CreatePromoCodeDialog({ open, onOpenChange, onSubmit, isLoading }: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onSubmit: (data: any) => void;
+  isLoading: boolean;
+}) {
+  const [formData, setFormData] = useState({
+    code: '',
+    discountKr: '',
+    description: '',
+    maxUsage: '',
+    validUntil: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit({
+      code: formData.code.toUpperCase(),
+      discountKr: parseFloat(formData.discountKr),
+      description: formData.description,
+      maxUsage: formData.maxUsage ? parseInt(formData.maxUsage) : null,
+      validUntil: formData.validUntil ? new Date(formData.validUntil) : null,
+      isActive: true,
+    });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Skapa ny rabattkod</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Kod</label>
+            <Input
+              value={formData.code}
+              onChange={(e) => setFormData({ ...formData, code: e.target.value })}
+              placeholder="SUMMER20"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Rabatt (kr)</label>
+            <Input
+              type="number"
+              value={formData.discountKr}
+              onChange={(e) => setFormData({ ...formData, discountKr: e.target.value })}
+              placeholder="100"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Beskrivning</label>
+            <Input
+              value={formData.description}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              placeholder="Sommarkampanj 2025"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Max användningar (valfritt)</label>
+            <Input
+              type="number"
+              value={formData.maxUsage}
+              onChange={(e) => setFormData({ ...formData, maxUsage: e.target.value })}
+              placeholder="100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Giltig till (valfritt)</label>
+            <Input
+              type="date"
+              value={formData.validUntil}
+              onChange={(e) => setFormData({ ...formData, validUntil: e.target.value })}
+            />
+          </div>
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+              Avbryt
+            </Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? 'Skapar...' : 'Skapa rabattkod'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export default function ShopifyAdmin() {
   // All hooks must be called at the top level before any conditional returns
@@ -76,6 +331,19 @@ export default function ShopifyAdmin() {
   const { data: sellers } = useQuery({
     queryKey: ['/api/sellers'],
     enabled: isAuthenticated,
+  });
+
+  const { data: promoCodes } = useQuery({
+    queryKey: ['/api/admin/promo-codes'],
+    enabled: isAuthenticated,
+    queryFn: async () => {
+      const authHeaders = getAuthHeader();
+      const response = await fetch('/api/admin/promo-codes', {
+        headers: authHeaders,
+      });
+      if (!response.ok) throw new Error('Failed to fetch promo codes');
+      return response.json();
+    },
   });
 
   // Update order mutation - always defined
@@ -312,6 +580,23 @@ export default function ShopifyAdmin() {
                     {stats.activeSellers}
                   </Badge>
                   {selectedTab === "sellers" && <ChevronDown className="h-4 w-4" />}
+                </div>
+              </Button>
+              <Button 
+                variant={selectedTab === "promo-codes" ? "default" : "ghost"} 
+                className={`w-full justify-start py-3 lg:py-4 px-4 lg:px-6 text-base lg:text-lg rounded-xl lg:rounded-2xl transition-all duration-300 ${
+                  selectedTab === "promo-codes" 
+                    ? "btn-luxury text-nordic-cream shadow-luxury scale-105" 
+                    : "text-soft-taupe hover:bg-dusty-rose/20 hover:text-deep-charcoal hover:scale-102"
+                }`}
+                onClick={() => setSelectedTab("promo-codes")}
+              >
+                <div className="w-5 h-5 lg:w-6 lg:h-6 mr-3 lg:mr-4 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <span className="text-yellow-600 text-xs font-bold">%</span>
+                </div>
+                <span>Rabattkoder</span>
+                <div className="ml-auto">
+                  {selectedTab === "promo-codes" && <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4" />}
                 </div>
               </Button>
               <Separator className="my-6 bg-dusty-rose/30" />
@@ -986,6 +1271,10 @@ SKAPAD: ${format(new Date(order.createdAt), 'yyyy-MM-dd HH:mm')}
                 </CardContent>
               </Card>
               </div>
+            )}
+
+            {selectedTab === "promo-codes" && (
+              <PromoCodesPanel />
             )}
 
             {selectedTab === "settings" && (
