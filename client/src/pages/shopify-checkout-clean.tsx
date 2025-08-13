@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PayPalButton from '@/components/PayPalButton';
+import StripeCheckout from '@/components/StripeCheckout';
 
 export default function ShopifyCheckout() {
   const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal'>('stripe');
@@ -18,9 +19,9 @@ export default function ShopifyCheckout() {
     useBillingAddress: true
   });
 
-  const [cartTotal, setCartTotal] = useState(0);
+  const [cartTotal, setCartTotal] = useState(299);
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Produktnamn', variant: 'Storlek / Färg', price: 0, quantity: 1 }
+    { id: 1, name: 'Premium Trosor', variant: 'Medium / Svart', price: 299, quantity: 1 }
   ]);
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -287,51 +288,14 @@ export default function ShopifyCheckout() {
                 {selectedPayment === 'stripe' && (
                   <div className="px-4 pb-4 border-t border-gray-200">
                     <div className="pt-4">
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Card number</label>
-                          <div className="w-full px-4 py-3 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
-                            <div id="card-number-element" className="min-h-[20px]"></div>
-                          </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-3">
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Expiry date</label>
-                            <div className="w-full px-4 py-3 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
-                              <div id="card-expiry-element" className="min-h-[20px]"></div>
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">CVC</label>
-                            <div className="w-full px-4 py-3 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
-                              <div id="card-cvc-element" className="min-h-[20px]"></div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Name on card</label>
-                          <input
-                            type="text"
-                            placeholder="Name on card"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                          />
-                        </div>
-                        
-                        <button
-                          type="button"
-                          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors"
-                          onClick={() => {
-                            console.log('Processing credit card payment...');
-                            // This would normally process the Stripe payment
-                            alert('Stripe payment processing would happen here');
-                          }}
-                        >
-                          Pay with Credit Card
-                        </button>
-                      </div>
+                      <StripeCheckout
+                        amount={cartTotal}
+                        onSuccess={() => {
+                          console.log('Stripe payment successful');
+                          window.location.href = '/order-confirmation';
+                        }}
+                        onClose={() => console.log('Stripe checkout closed')}
+                      />
                     </div>
                   </div>
                 )}
