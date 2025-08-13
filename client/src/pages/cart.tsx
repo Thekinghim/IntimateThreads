@@ -46,43 +46,47 @@ export default function Cart() {
             {items.map((item) => (
               <Card key={item.id} className="overflow-hidden bg-white shadow-lg border-none">
                 <CardContent className="p-0">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 p-4 sm:p-8">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-6 sm:space-y-0 sm:space-x-8 p-6 sm:p-10">
                     <img
-                      src={item.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=150"}
+                      src={item.imageUrl || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=300&h=300&fit=crop&crop=center"}
                       alt={item.title}
-                      className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-xl shadow-md flex-shrink-0"
+                      className="w-32 h-32 sm:w-40 sm:h-40 object-cover rounded-2xl shadow-lg flex-shrink-0"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=300&h=300&fit=crop&crop=center";
+                      }}
                     />
                     
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-lora font-semibold text-xl text-[#064F8C] truncate">
+                      <h3 className="font-lora font-semibold text-2xl text-[#064F8C] truncate">
                         {item.sellerAlias} - {item.title}
                       </h3>
-                      <p className="text-[#4A5568] text-base font-dm-sans mt-1">Storlek: {item.size}</p>
-                      <p className="font-dm-sans font-bold text-[#064F8C] text-lg mt-2">
+                      <p className="text-[#4A5568] text-lg font-dm-sans mt-2">Storlek: {item.size}</p>
+                      <p className="font-dm-sans font-bold text-[#064F8C] text-xl mt-3">
                         {item.priceKr.toLocaleString('sv-SE')} kr
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-2 sm:space-x-4 rounded-2xl px-2 sm:px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#F4E971] shadow-lg">
+                    <div className="flex items-center space-x-3 sm:space-x-4 rounded-2xl px-4 sm:px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F4E971] shadow-lg">
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         disabled={item.quantity <= 1}
-                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md disabled:opacity-50"
+                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md disabled:opacity-50"
                       >
-                        <Minus className="h-4 w-4" />
+                        <Minus className="h-5 w-5" />
                       </Button>
                       
-                      <span className="w-6 sm:w-8 text-center font-bold text-base sm:text-lg text-[#064F8C] drop-shadow-sm">{item.quantity}</span>
+                      <span className="w-8 sm:w-10 text-center font-bold text-lg sm:text-xl text-[#064F8C] drop-shadow-sm">{item.quantity}</span>
                       
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md"
+                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white transition-all duration-200 shadow-md"
                       >
-                        <Plus className="h-4 w-4" />
+                        <Plus className="h-5 w-5" />
                       </Button>
                     </div>
 
