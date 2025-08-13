@@ -30,11 +30,11 @@ function StripePaymentForm({ amount }: { amount: number }) {
     if (error) {
       setMessage(error.message || 'Något gick fel med betalningen');
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      setMessage('✅ Betalning genomförd! Din order har bekräftats.');
-      // Handle successful payment without redirect
+      setMessage('✅ Betalning genomförd! Omdirigerar...');
+      // Redirect to order confirmation page
       setTimeout(() => {
-        alert('Betalning genomförd! Tack för ditt köp.');
-      }, 1000);
+        window.location.href = '/order-confirmation';
+      }, 1500);
     } else {
       setMessage('Betalningen kräver ytterligare verifiering.');
     }

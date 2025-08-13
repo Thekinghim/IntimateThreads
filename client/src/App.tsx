@@ -64,7 +64,7 @@ function Router() {
       <Route path="/checkout-form" component={ShopifyCheckout} />
       <Route path="/checkout-old" component={CheckoutForm} />
       <Route path="/crypto-payment/:paymentId" component={CryptoPayment} />
-      <Route path="/order-confirmation/:id" component={OrderConfirmation} />
+      <Route path="/order-confirmation" component={OrderConfirmation} />
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />

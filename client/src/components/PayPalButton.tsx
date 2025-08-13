@@ -61,6 +61,11 @@ export default function PayPalButton({
     console.log("onApprove", data);
     const orderData = await captureOrder(data.orderId);
     console.log("Capture result", orderData);
+    
+    // Redirect to order confirmation page on successful payment
+    if (orderData && orderData.status === 'COMPLETED') {
+      window.location.href = '/order-confirmation';
+    }
   };
 
   const onCancel = async (data: any) => {

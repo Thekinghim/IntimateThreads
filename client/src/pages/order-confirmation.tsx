@@ -1,222 +1,174 @@
-import { useEffect, useState } from "react";
-import { useRoute } from "wouter";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Package, Truck, Mail } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { CheckCircle, Printer, ShoppingBag } from 'lucide-react';
+import { useCartStore } from '@/lib/cart';
+import { getProductImageUrl } from '@/assets/images';
 
-interface Order {
+interface CartItem {
   id: string;
-  customerEmail: string;
-  items: Array<{
-    productId: string;
-    quantity: number;
-    size: string;
-    price: number;
-  }>;
-  total: number;
-  status: string;
-  paymentMethod: string;
-  shippingAddress: {
-    name: string;
-    address: string;
-    apartment?: string;
-    city: string;
-    country: string;
-    zipCode: string;
-    phone?: string;
-  };
-  createdAt: string;
+  title: string;
+  priceKr: number;
+  imageUrl: string;
+  size: string;
+  quantity: number;
+  wearDays?: number;
+  sellerAlias: string;
 }
 
 export default function OrderConfirmation() {
-  const [match, params] = useRoute("/order-confirmation/:id");
-  const [order, setOrder] = useState<Order | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { items: cartItems, clearCart } = useCartStore();
+  const [orderNumber, setOrderNumber] = useState('');
+  const [orderTotal, setOrderTotal] = useState(0);
 
   useEffect(() => {
-    if (!match || !params?.id) return;
+    // Generate order number
+    const orderNum = 'HMT' + Math.random().toString().substr(2, 6);
+    setOrderNumber(orderNum);
 
-    const fetchOrder = async () => {
-      try {
-        const response = await fetch(`/api/orders/${params.id}`);
-        if (response.ok) {
-          const orderData = await response.json();
-          setOrder(orderData);
-        } else {
-          setError("Beställningen kunde inte hittas");
-        }
-      } catch (error) {
-        console.error("Error fetching order:", error);
-        setError("Ett fel uppstod vid hämtning av beställning");
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Calculate total from cart items
+    const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.priceKr * item.quantity), 0);
+    setOrderTotal(total);
 
-    fetchOrder();
-  }, [match, params?.id]);
+    // Clear cart after successful order
+    setTimeout(() => {
+      clearCart();
+    }, 2000);
+  }, [cartItems, clearCart]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Laddar beställning...</p>
-        </div>
-      </div>
-    );
-  }
+  const handlePrintReceipt = () => {
+    window.print();
+  };
 
-  if (error || !order) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            {error || "Beställningen kunde inte hittas"}
-          </h1>
-          <Link href="/">
-            <Button>Tillbaka till startsidan</Button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const handleKeepShopping = () => {
+    window.location.href = '/womens';
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Success Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-            <CheckCircle className="w-8 h-8 text-green-600" />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Tack för din beställning!
-          </h1>
-          <p className="text-gray-600">
-            Beställningsnummer: <span className="font-semibold">{order.id}</span>
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Order Details */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Package className="w-5 h-5 mr-2" />
-                Beställningsdetaljer
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-b pb-4">
-                <p className="text-sm text-gray-600">Status</p>
-                <p className="font-semibold capitalize">{order.status}</p>
-              </div>
-              <div className="border-b pb-4">
-                <p className="text-sm text-gray-600">Total summa</p>
-                <p className="font-semibold">{order.total.toFixed(2)} SEK</p>
-              </div>
-              <div className="border-b pb-4">
-                <p className="text-sm text-gray-600">Betalningsmetod</p>
-                <p className="font-semibold capitalize">{order.paymentMethod}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Beställningsdatum</p>
-                <p className="font-semibold">
-                  {new Date(order.createdAt).toLocaleDateString('sv-SE')}
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 py-8 lg:py-12">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Left Column - Main Content */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-sm p-8">
+              {/* Success Icon */}
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h1 className="text-2xl font-semibold text-gray-900 mb-2">
+                  Din beställning är på väg!
+                </h1>
+                <p className="text-gray-600 max-w-md mx-auto leading-relaxed">
+                  Välkommen till Scandiscent-familjen! Vårt mål är att bygga en förtroendefull relation som sträcker sig långt över vad du vill. Vi skickar en orderbekräftelse så fort din beställning har skickats.
                 </p>
               </div>
-            </CardContent>
-          </Card>
 
-          {/* Shipping Address */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Truck className="w-5 h-5 mr-2" />
-                Leveransadress
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p className="font-semibold">{order.shippingAddress.name}</p>
-                <p>{order.shippingAddress.address}</p>
-                {order.shippingAddress.apartment && (
-                  <p>{order.shippingAddress.apartment}</p>
-                )}
-                <p>
-                  {order.shippingAddress.zipCode} {order.shippingAddress.city}
-                </p>
-                <p>{order.shippingAddress.country}</p>
-                {order.shippingAddress.phone && (
-                  <p className="text-gray-600">{order.shippingAddress.phone}</p>
-                )}
+              {/* Order Number */}
+              <div className="text-center mb-8">
+                <h2 className="text-lg font-medium text-gray-900 mb-2">Beställning {orderNumber}</h2>
               </div>
-            </CardContent>
-          </Card>
-        </div>
 
-        {/* What's Next */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Mail className="w-5 h-5 mr-2" />
-              Vad händer nu?
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-sm font-semibold text-blue-600">
-                  1
-                </div>
-                <div>
-                  <p className="font-semibold">Orderbekräftelse</p>
-                  <p className="text-gray-600">
-                    Du kommer att få en bekräftelse via e-post till {order.customerEmail}
-                  </p>
-                </div>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <button
+                  onClick={handleKeepShopping}
+                  className="inline-flex items-center justify-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-md transition-colors"
+                >
+                  <ShoppingBag className="w-4 h-4 mr-2" />
+                  Fortsätt handla
+                </button>
+                <button
+                  onClick={handlePrintReceipt}
+                  className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium rounded-md transition-colors"
+                >
+                  <Printer className="w-4 h-4 mr-2" />
+                  Skriv ut kvitto
+                </button>
               </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-sm font-semibold text-blue-600">
-                  2
-                </div>
-                <div>
-                  <p className="font-semibold">Bearbetning</p>
-                  <p className="text-gray-600">
-                    Vi bearbetar din beställning inom 1-2 arbetsdagar
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-sm font-semibold text-blue-600">
-                  3
-                </div>
-                <div>
-                  <p className="font-semibold">Leverans</p>
-                  <p className="text-gray-600">
-                    Din order skickas och du får spårningsinformation via e-post
-                  </p>
+
+              {/* Shipping Address */}
+              <div className="border-t border-gray-200 pt-8">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">Leveransadress</h3>
+                <div className="text-gray-600">
+                  <p className="font-medium">Scandiscent Kund</p>
+                  <p>Sverige</p>
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
-          <Link href="/track-order">
-            <Button variant="outline" className="w-full sm:w-auto">
-              Spåra beställning
-            </Button>
-          </Link>
-          <Link href="/womens">
-            <Button className="w-full sm:w-auto">
-              Fortsätt handla
-            </Button>
-          </Link>
+          {/* Right Column - Order Summary */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-lg font-medium text-gray-900 mb-6">Ordersammanfattning</h2>
+
+              {/* Order Items */}
+              <div className="space-y-4 mb-6">
+                {cartItems.length > 0 ? (
+                  cartItems.map((item: CartItem) => (
+                    <div key={item.id} className="flex items-start space-x-4">
+                      <div className="relative">
+                        <img 
+                          src={getProductImageUrl(item.imageUrl) || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=64&h=64&fit=crop&crop=center"} 
+                          alt={item.title}
+                          className="w-16 h-16 object-cover rounded-lg border"
+                        />
+                        <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                          {item.quantity}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-medium text-gray-900 leading-tight">{item.title}</h3>
+                        <p className="text-sm text-gray-500 mt-1">{item.size}</p>
+                        {item.wearDays && (
+                          <p className="text-sm text-gray-500">{item.wearDays} dagar</p>
+                        )}
+                      </div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {(item.priceKr * item.quantity).toFixed(2)} kr
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-4">
+                    <p className="text-gray-500 text-sm">Orderdetaljer laddas...</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Order Totals */}
+              <div className="border-t border-gray-200 pt-4 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Subtotal</span>
+                  <span className="text-gray-900">{orderTotal.toFixed(2)} kr</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Frakt</span>
+                  <span className="text-gray-900">0,00 kr</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Moms</span>
+                  <span className="text-gray-900">0,00 kr</span>
+                </div>
+                <div className="border-t border-gray-200 pt-2">
+                  <div className="flex justify-between text-base font-medium">
+                    <span className="text-gray-900">Totalt</span>
+                    <span className="text-gray-900">{orderTotal.toFixed(2)} kr</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Payment Method */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600 text-sm">Betald</span>
+                  <div className="flex items-center">
+                    <span className="text-green-600 text-sm font-medium mr-2">✓</span>
+                    <span className="text-green-600 font-medium">{orderTotal.toFixed(2)} kr</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
