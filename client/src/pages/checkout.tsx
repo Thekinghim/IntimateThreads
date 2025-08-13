@@ -152,28 +152,36 @@ export default function Checkout() {
             {/* Express Checkout */}
             <div className="mb-8">
               <p className="text-lg font-medium mb-4">Express checkout</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <div className="space-y-3 mb-4">
                 <Button 
-                  className="bg-[#5A31F4] hover:bg-[#4A28E4] text-white py-3 px-6 rounded text-sm font-medium"
+                  className="w-full bg-[#5A31F4] hover:bg-[#4A28E4] text-white py-3 px-6 rounded-md text-sm font-medium h-12"
                 >
-                  Shop Pay
+                  <span className="flex items-center justify-center">
+                    <span className="font-bold text-base">Shop</span>
+                    <span className="ml-1 font-normal">Pay</span>
+                  </span>
                 </Button>
+                <div className="w-full bg-[#FFC439] hover:bg-[#F0B429] rounded-md overflow-hidden flex items-center justify-center h-12">
+                  <PayPalButton 
+                    amount={finalTotal.toString()} 
+                    currency="SEK" 
+                    intent="CAPTURE" 
+                  />
+                </div>
                 <Button 
-                  className="bg-[#FFC439] hover:bg-[#F0B429] text-black py-3 px-6 rounded text-sm font-medium flex items-center justify-center"
-                  onClick={() => {
-                    // PayPal integration will be activated when secret is provided
-                    toast({ title: "PayPal kommer snart", description: "PayPal-betalningar aktiveras när API-nycklar är konfigurerade" });
-                  }}
+                  className="w-full bg-black hover:bg-gray-900 text-white py-3 px-6 rounded-md text-sm font-medium h-12"
                 >
-                  PayPal
-                </Button>
-                <Button 
-                  className="bg-black hover:bg-gray-900 text-white py-3 px-6 rounded text-sm font-medium"
-                >
-                  G Pay
+                  <span className="flex items-center justify-center">
+                    <span className="font-bold text-base">G</span>
+                    <span className="ml-1 font-normal">Pay</span>
+                  </span>
                 </Button>
               </div>
-              <div className="text-center text-gray-500 text-sm">OR</div>
+              <div className="flex items-center my-6">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <span className="mx-4 text-gray-500 text-sm">OR</span>
+                <div className="flex-1 border-t border-gray-300"></div>
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -297,13 +305,18 @@ export default function Checkout() {
               </div>
 
               {/* Submit Button */}
-              <div className="flex items-center justify-between pt-6">
-                <Button type="submit" className="bg-gray-900 hover:bg-gray-800 text-white py-3 px-8">
+              <div className="pt-6">
+                <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white py-4 px-8 rounded-md text-base font-medium">
                   Continue to shipping
                 </Button>
-                <Link href="/cart" className="text-blue-600 hover:underline text-sm">
-                  Return to cart
-                </Link>
+                <div className="flex items-center justify-between mt-4">
+                  <Link href="/cart" className="text-blue-600 hover:underline text-sm">
+                    ← Return to cart
+                  </Link>
+                  <div className="text-xs text-gray-400">
+                    Powered by Scandiscent
+                  </div>
+                </div>
               </div>
             </form>
 
@@ -349,9 +362,13 @@ export default function Checkout() {
                     placeholder="Gift card or discount code"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
-                    className="flex-1"
+                    className="flex-1 h-10 border-gray-300 rounded-md"
                   />
-                  <Button onClick={applyPromoCode} variant="outline">
+                  <Button 
+                    onClick={applyPromoCode} 
+                    variant="outline"
+                    className="px-4 py-2 h-10 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-md"
+                  >
                     Apply
                   </Button>
                 </div>
@@ -363,10 +380,10 @@ export default function Checkout() {
               </div>
 
               {/* Summary */}
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 text-sm border-t pt-4">
                 <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>{totalPrice.toFixed(2)} SEK</span>
+                  <span className="text-gray-600">Subtotal</span>
+                  <span className="font-medium">{totalPrice.toFixed(2)} SEK</span>
                 </div>
                 {appliedPromo && (
                   <div className="flex justify-between text-green-600">
@@ -375,11 +392,11 @@ export default function Checkout() {
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span>Calculated at next step</span>
+                  <span className="text-gray-600">Shipping</span>
+                  <span className="text-gray-600">Calculated at next step</span>
                 </div>
-                <Separator />
-                <div className="flex justify-between text-lg font-medium">
+                <Separator className="my-3" />
+                <div className="flex justify-between text-lg font-semibold">
                   <span>Total</span>
                   <span>SEK {finalTotal.toFixed(2)}</span>
                 </div>
