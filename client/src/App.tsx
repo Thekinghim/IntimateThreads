@@ -43,8 +43,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Use MobileAdminV2 for all devices - it has full functionality including Live View and working forms
-  const AdminComponent = MobileAdmin;
+  // Use Admin (shopify-admin) which has modern design and full functionality
+  const AdminComponent = Admin;
 
   return (
     <Switch>
