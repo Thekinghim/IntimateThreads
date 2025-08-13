@@ -144,7 +144,7 @@ export default function AdminLogin() {
                       <Input
                         type="password"
                         placeholder="adminpass123"
-                        className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                        className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base bg-[#ffffff]"
                         {...field}
                       />
                     </FormControl>
@@ -169,54 +169,6 @@ export default function AdminLogin() {
               <Key className="w-4 h-4" />
               <span>Sign in with passkey</span>
             </button>
-          </div>
-
-          {/* Divider */}
-          <div className="mt-6 mb-6 text-center">
-            <span className="text-gray-500 text-sm">or</span>
-          </div>
-
-          {/* Social Login Buttons */}
-          <div className="space-y-3">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full bg-gray-50 border-gray-200 hover:bg-gray-100 py-3 px-4 rounded-md flex items-center justify-center space-x-3"
-            >
-              <SiApple className="w-5 h-5 text-gray-900" />
-            </Button>
-            
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full bg-gray-50 border-gray-200 hover:bg-gray-100 py-3 px-4 rounded-md flex items-center justify-center space-x-3"
-            >
-              <SiFacebook className="w-5 h-5 text-blue-600" />
-            </Button>
-            
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full bg-gray-50 border-gray-200 hover:bg-gray-100 py-3 px-4 rounded-md flex items-center justify-center space-x-3"
-            >
-              <SiGoogle className="w-5 h-5 text-red-500" />
-            </Button>
-          </div>
-
-          {/* Admin Instructions */}
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">
-              New to Scandiscent?{" "}
-              <a href="#" className="text-blue-600 hover:underline">
-                Get started →
-              </a>
-            </p>
-          </div>
-
-          <div className="mt-4 flex justify-center space-x-4 text-xs text-gray-500">
-            <a href="#" className="hover:text-gray-700">Help</a>
-            <a href="#" className="hover:text-gray-700">Privacy</a>
-            <a href="#" className="hover:text-gray-700">Terms</a>
           </div>
 
           {/* Dev credentials hint */}
