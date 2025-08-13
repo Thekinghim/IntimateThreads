@@ -20,6 +20,7 @@ import MajaProfile from "@/pages/maja-profile";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
 import CheckoutForm from "@/pages/checkout-form";
+import ShopifyCheckout from "@/pages/shopify-checkout";
 import CryptoPayment from "@/pages/crypto-payment";
 import OrderConfirmation from "@/pages/order-confirmation";
 import HowItWorks from "@/pages/how-it-works";
@@ -60,7 +61,8 @@ function Router() {
       <Route path="/product/:id" component={Product} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
-      <Route path="/checkout-form" component={CheckoutForm} />
+      <Route path="/checkout-form" component={ShopifyCheckout} />
+      <Route path="/checkout-old" component={CheckoutForm} />
       <Route path="/crypto-payment/:paymentId" component={CryptoPayment} />
       <Route path="/order-confirmation/:id" component={OrderConfirmation} />
       <Route path="/how-it-works" component={HowItWorks} />
