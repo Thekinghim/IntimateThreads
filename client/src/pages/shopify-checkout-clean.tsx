@@ -606,68 +606,11 @@ export default function ShopifyCheckout() {
               </label>
             </div>
 
-            <button 
-              className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              data-testid="button-complete-order"
-              onClick={async () => {
-                if (discountedTotal === 0) {
-                  alert('Din kundvagn är tom. Lägg till produkter först.');
-                  return;
-                }
-
-                try {
-                  if (selectedPayment === 'stripe') {
-                    const response = await fetch('/api/create-payment-intent', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ 
-                        amount: discountedTotal,
-                        items: cartItems 
-                      })
-                    });
-                    const { url } = await response.json();
-                    window.location.href = url;
-                  } else if (selectedPayment === 'crypto') {
-                    const response = await fetch('/api/create-crypto-payment', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ 
-                        amount: discountedTotal,
-                        currency: 'SEK',
-                        order_description: `Scandiscent Order - ${cartItems.length} items`
-                      })
-                    });
-                    const data = await response.json();
-                    
-                    if (data.payment_url) {
-                      window.location.href = data.payment_url;
-                    } else {
-                      alert('Krypto-betalning kunde inte initieras. Försök igen.');
-                    }
-                  } else if (selectedPayment === 'paypal') {
-                    // Try to trigger PayPal button click programmatically
-                    const paypalButtons = document.querySelectorAll('[id="paypal-button"]');
-                    let buttonClicked = false;
-                    
-                    paypalButtons.forEach(button => {
-                      if (button && !buttonClicked) {
-                        (button as HTMLElement).click();
-                        buttonClicked = true;
-                      }
-                    });
-                    
-                    if (!buttonClicked) {
-                      alert('PayPal-betalning kunde inte startas automatiskt. Använd PayPal-knappen ovan istället.');
-                    }
-                  }
-                } catch (error) {
-                  console.error('Payment error:', error);
-                  alert('Betalning misslyckades. Försök igen.');
-                }
-              }}
-            >
-              Slutför beställning - {discountedTotal.toFixed(2)} SEK
-            </button>
+            <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-sm text-blue-800 text-center">
+                <strong>Välj betalningsmetod ovan och klicka på motsvarande "Betala"-knapp för att genomföra köpet.</strong>
+              </p>
+            </div>
           </div>
         </div>
 
