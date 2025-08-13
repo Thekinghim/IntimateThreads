@@ -67,16 +67,16 @@ export default function Checkout() {
             {/* Shopping Cart Section */}
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-8">
-                <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
-                <span className="text-gray-600">{itemCount} Items</span>
+                <h1 className="text-2xl font-bold text-gray-900">Kundvagn</h1>
+                <span className="text-gray-600">{itemCount} artiklar</span>
               </div>
 
               {/* Column Headers */}
               <div className="hidden sm:grid grid-cols-6 gap-4 pb-4 border-b border-gray-200 text-sm font-medium text-gray-500 uppercase tracking-wide">
-                <div className="col-span-3">PRODUCT DETAILS</div>
-                <div className="text-center">QUANTITY</div>
-                <div className="text-center">PRICE</div>
-                <div className="text-center">TOTAL</div>
+                <div className="col-span-3">PRODUKTDETALJER</div>
+                <div className="text-center">ANTAL</div>
+                <div className="text-center">PRIS</div>
+                <div className="text-center">TOTALT</div>
               </div>
 
               {/* Product Items */}
@@ -93,12 +93,12 @@ export default function Checkout() {
                       <div>
                         <h3 className="font-semibold text-gray-900">{item.title}</h3>
                         <p className="text-sm text-gray-500">{item.sellerAlias}</p>
-                        <p className="text-xs text-gray-400">Size: {item.size}</p>
+                        <p className="text-xs text-gray-400">Storlek: {item.size}</p>
                         <button
                           onClick={() => removeItem(item.id)}
                           className="text-xs text-red-500 hover:text-red-700 mt-1"
                         >
-                          Remove
+                          Ta bort
                         </button>
                       </div>
                     </div>
@@ -140,7 +140,7 @@ export default function Checkout() {
               <div className="mt-8">
                 <Link href="/womens">
                   <Button variant="ghost" className="text-blue-600 hover:text-blue-800">
-                    ← Continue Shopping
+                    ← Fortsätt handla
                   </Button>
                 </Link>
               </div>
@@ -148,26 +148,26 @@ export default function Checkout() {
 
             {/* Order Summary Section */}
             <div className="bg-gray-50 rounded-xl p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-6">Ordersammanfattning</h2>
               
               <div className="space-y-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">ITEMS {itemCount}</span>
+                  <span className="text-gray-600">ARTIKLAR {itemCount}</span>
                   <span className="font-medium">{totalPrice.toFixed(2)} SEK</span>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="text-sm font-medium text-gray-700">SHIPPING</div>
+                  <div className="text-sm font-medium text-gray-700">FRAKT</div>
                   <select className="w-full p-2 border border-gray-300 rounded text-sm">
-                    <option>Standard Delivery - Free</option>
+                    <option>Standardleverans - Gratis</option>
                   </select>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="text-sm font-medium text-gray-700">PROMO CODE</div>
+                  <div className="text-sm font-medium text-gray-700">RABATTKOD</div>
                   <div className="flex space-x-2">
                     <Input
-                      placeholder="Enter your code"
+                      placeholder="Ange din kod"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
                       className="flex-1 text-sm"
@@ -176,7 +176,7 @@ export default function Checkout() {
                       onClick={applyPromoCode}
                       className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 text-sm"
                     >
-                      APPLY
+                      TILLÄMPA
                     </Button>
                   </div>
                   {appliedPromo && (
@@ -188,7 +188,7 @@ export default function Checkout() {
 
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-lg font-bold">
-                    <span>TOTAL COST</span>
+                    <span>TOTALKOSTNAD</span>
                     <span>{finalTotal.toFixed(2)} SEK</span>
                   </div>
                 </div>
@@ -196,8 +196,9 @@ export default function Checkout() {
                 <Button 
                   onClick={handleCheckout}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-medium mt-6"
+                  data-testid="button-go-to-checkout"
                 >
-                  CHECKOUT
+                  GÅ TILL KASSAN
                 </Button>
               </div>
             </div>
