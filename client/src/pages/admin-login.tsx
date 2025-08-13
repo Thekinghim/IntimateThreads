@@ -80,15 +80,15 @@ export default function AdminLogin() {
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
       }}
     >
-      <Card className="w-full max-w-md bg-white shadow-2xl border-0 rounded-lg">
-        <CardHeader className="pb-8 pt-8">
-          {/* Shopify Logo */}
+      <Card className="w-full max-w-sm bg-white shadow-2xl border-0 rounded-xl">
+        <CardHeader className="pb-6 pt-8">
+          {/* Scandiscent Logo */}
           <div className="flex items-center justify-start mb-8">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
                 <span className="text-white font-bold text-sm">S</span>
               </div>
-              <span className="text-xl font-semibold text-gray-900">shopify</span>
+              <span className="text-xl font-semibold text-gray-900">scandiscent</span>
             </div>
           </div>
           
@@ -97,7 +97,7 @@ export default function AdminLogin() {
               Log in
             </CardTitle>
             <CardDescription className="text-gray-600 font-normal">
-              Continue to Shopify
+              Continue to Scandiscent
             </CardDescription>
           </div>
         </CardHeader>
@@ -116,8 +116,8 @@ export default function AdminLogin() {
                     <FormControl>
                       <div className="relative">
                         <Input
-                          placeholder="admin1@shopify.com"
-                          className="w-full px-3 py-2 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                          placeholder="admin1@scandiscent.com"
+                          className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                           {...field}
                         />
                         {field.value && (
@@ -144,7 +144,7 @@ export default function AdminLogin() {
                       <Input
                         type="password"
                         placeholder="adminpass123"
-                        className="w-full px-3 py-2 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                        className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                         {...field}
                       />
                     </FormControl>
@@ -206,10 +206,10 @@ export default function AdminLogin() {
           {/* Admin Instructions */}
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              Test credentials:{" "}
-              <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs">admin1</span>
-              {" / "}
-              <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs">adminpass123</span>
+              New to Scandiscent?{" "}
+              <a href="#" className="text-blue-600 hover:underline">
+                Get started →
+              </a>
             </p>
           </div>
 
@@ -217,6 +217,13 @@ export default function AdminLogin() {
             <a href="#" className="hover:text-gray-700">Help</a>
             <a href="#" className="hover:text-gray-700">Privacy</a>
             <a href="#" className="hover:text-gray-700">Terms</a>
+          </div>
+
+          {/* Dev credentials hint */}
+          <div className="mt-6 text-center p-3 bg-gray-50 rounded-lg">
+            <p className="text-xs text-gray-600">
+              <strong>Dev Login:</strong> admin1 / adminpass123
+            </p>
           </div>
         </CardContent>
       </Card>
