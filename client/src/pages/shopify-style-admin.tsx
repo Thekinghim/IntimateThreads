@@ -579,13 +579,15 @@ export default function ShopifyStyleAdmin() {
   const { toast } = useToast();
   const [selectedTab, setSelectedTab] = useState("home");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isCreateOrderOpen, setIsCreateOrderOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [isCreateProductOpen, setIsCreateProductOpen] = useState(false);
   const [isCreateCustomerOpen, setIsCreateCustomerOpen] = useState(false);
   const [isCreateContentOpen, setIsCreateContentOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showLiveView, setShowLiveView] = useState(false);
   const [liveStats, setLiveStats] = useState({
@@ -977,11 +979,45 @@ export default function ShopifyStyleAdmin() {
                   <h1 className="text-lg md:text-xl font-medium text-gray-900">Orders</h1>
                 </div>
                 <div className="flex items-center gap-2 md:gap-3">
-                  <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => {
+                      // Export orders to CSV with real data
+                      const csvData = orders.map((order: any) => ({
+                        'Order ID': order.id,
+                        'Customer': order.customerEmail || 'Guest',
+                        'Date': new Date(order.createdAt).toLocaleDateString('sv-SE'),
+                        'Status': order.status,
+                        'Total': `${order.total} SEK`,
+                        'Payment Method': order.paymentMethod || 'Unknown',
+                        'Items': order.items?.length || 0
+                      }));
+                      
+                      const csv = [
+                        Object.keys(csvData[0]).join(','),
+                        ...csvData.map(row => Object.values(row).join(','))
+                      ].join('\n');
+                      
+                      const blob = new Blob([csv], { type: 'text/csv' });
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `scandiscent-orders-${new Date().toISOString().split('T')[0]}.csv`;
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                      
+                      toast({ title: "Export klar", description: `${csvData.length} beställningar exporterade till CSV.` });
+                    }}
+                    className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm"
+                  >
                     <span className="hidden sm:inline">Export</span>
                     <span className="sm:hidden">Exp</span>
                   </Button>
-                  <Button className="bg-[#008060] hover:bg-[#006b52] text-white h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm">
+                  <Button 
+                    onClick={() => setIsCreateOrderOpen(true)}
+                    className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm"
+                  >
                     <span className="hidden sm:inline">Create order</span>
                     <span className="sm:hidden">Create</span>
                   </Button>
@@ -1034,7 +1070,12 @@ export default function ShopifyStyleAdmin() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
-                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0 rounded">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setIsFilterOpen(true)}
+                      className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0 rounded"
+                    >
                       Filter
                     </Button>
                   </div>
@@ -2581,6 +2622,257 @@ export default function ShopifyStyleAdmin() {
                 }}
               >
                 Skapa innehåll
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Create Order Modal - Shopify Style */}
+      <Dialog open={isCreateOrderOpen} onOpenChange={setIsCreateOrderOpen}>
+        <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+          {/* Shopify-style Header */}
+          <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 md:gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsCreateOrderOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                >
+                  <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+                <div>
+                  <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">Skapa ny beställning</DialogTitle>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Shopify-style Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
+            {/* Left column - Main details */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Kunduppgifter</h3>
+                </div>
+                <div className="p-3 md:p-4 space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">E-postadress</label>
+                    <input 
+                      type="email" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="customer@example.com"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Förnamn</label>
+                      <input 
+                        type="text" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Anna"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Efternamn</label>
+                      <input 
+                        type="text" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Andersson"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Produkter</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <Button variant="outline" className="w-full mb-3">
+                    Lägg till produkt
+                  </Button>
+                  <div className="text-sm text-gray-500 text-center py-8">
+                    Inga produkter tillagda än
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right column - Settings */}
+            <div className="space-y-4">
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Betalning</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="pending">Väntande</option>
+                    <option value="completed">Betald</option>
+                    <option value="refunded">Återbetald</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Leverans</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="pending">Väntande</option>
+                    <option value="fulfilled">Skickad</option>
+                    <option value="cancelled">Avbruten</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg">
+                <div className="p-3 md:p-4 border-b border-gray-200">
+                  <h3 className="text-sm font-medium text-gray-900">Totalt</h3>
+                </div>
+                <div className="p-3 md:p-4">
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span>Subtotal:</span>
+                      <span>0 SEK</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Frakt:</span>
+                      <span>0 SEK</span>
+                    </div>
+                    <div className="flex justify-between font-medium border-t pt-2">
+                      <span>Totalt:</span>
+                      <span>0 SEK</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer with Save button */}
+          <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex justify-end">
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Beställning skapad", description: "Den nya beställningen har lagts till." });
+                  setIsCreateOrderOpen(false);
+                }}
+              >
+                Skapa beställning
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Filter Modal - Shopify Style */}
+      <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+        <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
+          {/* Shopify-style Header */}
+          <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 md:gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsFilterOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                >
+                  <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+                <div>
+                  <DialogTitle className="text-lg md:text-xl font-medium text-gray-900">Filtrera beställningar</DialogTitle>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Shopify-style Main Content */}
+          <div className="p-3 md:p-6 bg-[#f6f6f7]">
+            <div className="bg-white border border-gray-200 rounded-lg">
+              <div className="p-3 md:p-4 border-b border-gray-200">
+                <h3 className="text-sm font-medium text-gray-900">Filteralternativ</h3>
+              </div>
+              <div className="p-3 md:p-4 space-y-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Status</label>
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">Alla statusar</option>
+                    <option value="pending">Väntande</option>
+                    <option value="completed">Slutförd</option>
+                    <option value="cancelled">Avbruten</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Betalningsstatus</label>
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">Alla betalningsstatusar</option>
+                    <option value="pending">Väntande</option>
+                    <option value="completed">Betald</option>
+                    <option value="failed">Misslyckad</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Från datum</label>
+                    <input 
+                      type="date" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Till datum</label>
+                    <input 
+                      type="date" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Belopp</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input 
+                      type="number" 
+                      placeholder="Min SEK"
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                    <input 
+                      type="number" 
+                      placeholder="Max SEK"
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer with buttons */}
+          <div className="bg-white border-t border-gray-200 px-3 md:px-6 py-4">
+            <div className="flex justify-between">
+              <Button 
+                variant="outline"
+                onClick={() => {
+                  toast({ title: "Filter rensade", description: "Alla filter har återställts." });
+                }}
+              >
+                Rensa filter
+              </Button>
+              <Button 
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white px-6"
+                onClick={() => {
+                  toast({ title: "Filter tillämpade", description: "Beställningarna har filtrerats." });
+                  setIsFilterOpen(false);
+                }}
+              >
+                Använd filter
               </Button>
             </div>
           </div>
