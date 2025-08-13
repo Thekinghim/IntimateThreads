@@ -37,7 +37,7 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-        {/* Header exactly like Shopify - Mobile responsive */}
+        {/* Header exactly like Scandiscent - Mobile responsive */}
         <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
@@ -106,7 +106,7 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
           {/* Left column - Order details */}
           <div className="lg:col-span-2 space-y-4">
-            {/* Unfulfilled items exactly like Shopify */}
+            {/* Unfulfilled items exactly like Scandiscent */}
             <div className="bg-white border border-gray-200 rounded-lg">
               <div className="px-3 md:px-4 py-3 border-b border-gray-200 bg-yellow-50">
                 <div className="flex items-center gap-2 md:gap-3">
@@ -149,7 +149,7 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
               </div>
             </div>
 
-            {/* Payment section exactly like Shopify */}
+            {/* Payment section exactly like Scandiscent */}
             <div className="bg-white border border-gray-200 rounded-lg">
               <div className="px-4 py-3 border-b border-gray-200">
                 <div className="flex items-center gap-3">
@@ -195,7 +195,7 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
             </div>
           </div>
 
-          {/* Right column - Customer info exactly like Shopify */}
+          {/* Right column - Customer info exactly like Scandiscent */}
           <div className="space-y-4">
             {/* Notes */}
             <div className="bg-white border border-gray-200 rounded-lg">
@@ -574,7 +574,7 @@ function CreatePromoCodeDialog({ open, onOpenChange, onSubmit, isLoading }: {
   );
 }
 
-export default function ShopifyStyleAdmin() {
+export default function ScandiscentStyleAdmin() {
   const { isAuthenticated, isLoading: authLoading, adminUser, logout, getAuthHeader } = useAdminAuth();
   const { toast } = useToast();
   const [selectedTab, setSelectedTab] = useState("home");
@@ -816,7 +816,7 @@ export default function ShopifyStyleAdmin() {
     conversionRate: "33.33%",
   };
 
-  // Sidebar navigation items exactly like Shopify
+  // Sidebar navigation items exactly like Scandiscent
   const navigationItems = [
     { id: "home", label: "Home", icon: Home },
     { id: "orders", label: "Orders", icon: ShoppingBag },
@@ -829,7 +829,7 @@ export default function ShopifyStyleAdmin() {
   ];
 
   const salesChannelItems = [
-    { id: "buy-button", label: "Buy Button", icon: Package },
+    // Sales channels removed per user request
   ];
 
   const renderContent = () => {
@@ -837,7 +837,7 @@ export default function ShopifyStyleAdmin() {
       case "home":
         return (
           <div className="p-6 bg-white">
-            {/* Header exactly like Shopify */}
+            {/* Header exactly like Scandiscent */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <Select defaultValue="today">
@@ -895,13 +895,13 @@ export default function ShopifyStyleAdmin() {
               </div>
             </div>
 
-            {/* Chart section exactly like Shopify */}
+            {/* Chart section exactly like Scandiscent */}
             <div className="bg-white border border-[#e1e3e5] rounded">
               <div className="h-72 relative bg-[#fafbfb] m-4 rounded">
-                {/* Chart background with exact Shopify styling */}
+                {/* Chart background with exact Scandiscent styling */}
                 <div className="absolute inset-0">
                   <svg className="w-full h-full">
-                    {/* Grid pattern like Shopify */}
+                    {/* Grid pattern like Scandiscent */}
                     <defs>
                       <pattern id="shopifyGrid" width="50" height="40" patternUnits="userSpaceOnUse">
                         <path d="M 50 0 L 0 0 0 40" fill="none" stroke="#e8e8e8" strokeWidth="0.5"/>
@@ -909,7 +909,7 @@ export default function ShopifyStyleAdmin() {
                     </defs>
                     <rect width="100%" height="100%" fill="url(#shopifyGrid)" />
                     
-                    {/* Shopify chart line - cyan blue */}
+                    {/* Scandiscent chart line - cyan blue */}
                     <path 
                       d="M 50 220 L 100 200 L 150 180 L 200 120 L 250 40 L 300 35 L 350 30 L 400 60 L 450 80 L 500 210 L 550 190 L 600 200"
                       fill="none" 
@@ -926,7 +926,7 @@ export default function ShopifyStyleAdmin() {
                     />
                   </svg>
                   
-                  {/* Time labels exactly like Shopify */}
+                  {/* Time labels exactly like Scandiscent */}
                   <div className="absolute bottom-1 left-0 w-full flex justify-between text-xs text-gray-500 px-8">
                     <span>12:00 AM</span>
                     <span>3:00 AM</span>
@@ -938,7 +938,7 @@ export default function ShopifyStyleAdmin() {
                     <span>9:00 PM</span>
                   </div>
 
-                  {/* Legend like Shopify */}
+                  {/* Legend like Scandiscent */}
                   <div className="absolute bottom-3 right-6 flex items-center space-x-4 text-xs">
                     <div className="flex items-center space-x-1.5">
                       <div className="w-2.5 h-0.5 bg-[#5DBEA3]"></div>
@@ -967,7 +967,7 @@ export default function ShopifyStyleAdmin() {
       case "orders":
         return (
           <div className="flex flex-col h-screen bg-[#f6f6f7]">
-            {/* Header exactly like Shopify - Mobile responsive */}
+            {/* Header exactly like Scandiscent - Mobile responsive */}
             <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 md:gap-4">
@@ -1028,7 +1028,7 @@ export default function ShopifyStyleAdmin() {
             {/* Orders List */}
             <div className="flex-1 overflow-auto">
               <div className="bg-white">
-                {/* Filter tabs exactly like Shopify - Mobile responsive */}
+                {/* Filter tabs exactly like Scandiscent - Mobile responsive */}
                 <div className="border-b border-gray-200">
                   <div className="flex px-3 md:px-6 overflow-x-auto">
                     {[
@@ -1081,7 +1081,7 @@ export default function ShopifyStyleAdmin() {
                   </div>
                 </div>
 
-                {/* Table exactly like Shopify - with mobile responsiveness */}
+                {/* Table exactly like Scandiscent - with mobile responsiveness */}
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
@@ -1951,7 +1951,7 @@ export default function ShopifyStyleAdmin() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Shopify Header - Exact colors */}
+      {/* Scandiscent Header - Exact colors */}
       <header className="bg-[#f1f1f1] text-gray-900 h-14 flex items-center px-4 border-b border-gray-200">
         <div className="flex items-center justify-between w-full">
           {/* Left side */}
@@ -2099,7 +2099,7 @@ export default function ShopifyStyleAdmin() {
       {/* Create Product Modal */}
       <Dialog open={isCreateProductOpen} onOpenChange={setIsCreateProductOpen}>
         <DialogContent className="max-w-7xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-          {/* Shopify-style Header */}
+          {/* Scandiscent-style Header */}
           <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 md:gap-4">
@@ -2126,7 +2126,7 @@ export default function ShopifyStyleAdmin() {
             </div>
           </div>
 
-          {/* Shopify-style Main Content */}
+          {/* Scandiscent-style Main Content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
             {/* Left column - Main product details */}
             <div className="lg:col-span-2 space-y-4">
@@ -2314,10 +2314,10 @@ export default function ShopifyStyleAdmin() {
         </DialogContent>
       </Dialog>
 
-      {/* Create Customer/Seller Modal - Shopify Style */}
+      {/* Create Customer/Seller Modal - Scandiscent Style */}
       <Dialog open={isCreateCustomerOpen} onOpenChange={setIsCreateCustomerOpen}>
         <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-          {/* Shopify-style Header */}
+          {/* Scandiscent-style Header */}
           <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 md:gap-4">
@@ -2336,7 +2336,7 @@ export default function ShopifyStyleAdmin() {
             </div>
           </div>
 
-          {/* Shopify-style Main Content */}
+          {/* Scandiscent-style Main Content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
             {/* Left column - Main details */}
             <div className="lg:col-span-2 space-y-4">
@@ -2456,10 +2456,10 @@ export default function ShopifyStyleAdmin() {
         </DialogContent>
       </Dialog>
 
-      {/* Create Content Modal - Shopify Style */}
+      {/* Create Content Modal - Scandiscent Style */}
       <Dialog open={isCreateContentOpen} onOpenChange={setIsCreateContentOpen}>
         <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-          {/* Shopify-style Header */}
+          {/* Scandiscent-style Header */}
           <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 md:gap-4">
@@ -2478,7 +2478,7 @@ export default function ShopifyStyleAdmin() {
             </div>
           </div>
 
-          {/* Shopify-style Main Content */}
+          {/* Scandiscent-style Main Content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
             {/* Left column - Main content */}
             <div className="lg:col-span-2 space-y-4">
@@ -2609,10 +2609,10 @@ export default function ShopifyStyleAdmin() {
         </DialogContent>
       </Dialog>
 
-      {/* Create Order Modal - Shopify Style */}
+      {/* Create Order Modal - Scandiscent Style */}
       <Dialog open={isCreateOrderOpen} onOpenChange={setIsCreateOrderOpen}>
         <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-          {/* Shopify-style Header */}
+          {/* Scandiscent-style Header */}
           <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 md:gap-4">
@@ -2631,7 +2631,7 @@ export default function ShopifyStyleAdmin() {
             </div>
           </div>
 
-          {/* Shopify-style Main Content */}
+          {/* Scandiscent-style Main Content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
             {/* Left column - Main details */}
             <div className="lg:col-span-2 space-y-4">
@@ -2753,10 +2753,10 @@ export default function ShopifyStyleAdmin() {
         </DialogContent>
       </Dialog>
 
-      {/* Filter Modal - Shopify Style */}
+      {/* Filter Modal - Scandiscent Style */}
       <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
         <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-          {/* Shopify-style Header */}
+          {/* Scandiscent-style Header */}
           <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 md:gap-4">
@@ -2775,7 +2775,7 @@ export default function ShopifyStyleAdmin() {
             </div>
           </div>
 
-          {/* Shopify-style Main Content */}
+          {/* Scandiscent-style Main Content */}
           <div className="p-3 md:p-6 bg-[#f6f6f7]">
             <div className="bg-white border border-gray-200 rounded-lg">
               <div className="p-3 md:p-4 border-b border-gray-200">
@@ -2864,7 +2864,7 @@ export default function ShopifyStyleAdmin() {
       {/* Edit Modal (Generic) */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 w-[95vw] md:w-full">
-          {/* Shopify-style Header for ALL modals */}
+          {/* Scandiscent-style Header for ALL modals */}
           <div className="bg-white border-b border-gray-200 px-3 md:px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 md:gap-4">
@@ -2917,7 +2917,7 @@ export default function ShopifyStyleAdmin() {
           {selectedItem?.type === 'product' ? (
             <>
 
-              {/* Shopify-style Main Content for Products */}
+              {/* Scandiscent-style Main Content for Products */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
                 {/* Left column - Main product details */}
                 <div className="lg:col-span-2 space-y-4">
@@ -3067,7 +3067,7 @@ export default function ShopifyStyleAdmin() {
             </>
           ) : (
             <>
-              {/* Shopify-style Main Content for other types */}
+              {/* Scandiscent-style Main Content for other types */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 p-3 md:p-6 bg-[#f6f6f7]">
                 {/* Left column - Main details */}
                 <div className="lg:col-span-2 space-y-4">
