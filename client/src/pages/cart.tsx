@@ -32,181 +32,150 @@ export default function Cart() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F1E8] py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-10">
-          <h1 className="font-cormorant font-bold text-5xl gold-text">Varukorg</h1>
-          <Badge variant="secondary" className="gradient-midnight-cyan text-white text-base px-4 py-2">
-            {itemCount} {itemCount === 1 ? 'artikel' : 'artiklar'}
-          </Badge>
-        </div>
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+            {/* Main Cart Content */}
+            <div className="lg:col-span-2 p-8">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-8">
+                <h1 className="text-2xl font-bold text-gray-800">Shopping Cart</h1>
+                <span className="text-lg font-medium text-gray-600">{itemCount} Items</span>
+              </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
-          <div className="lg:col-span-2">
-            <Card className="bg-white shadow-lg border-none overflow-hidden">
-              <CardContent className="p-0">
-                {/* Header */}
-                <div className="grid grid-cols-12 gap-4 p-6 border-b border-gray-200 bg-gray-50">
-                  <div className="col-span-6 text-sm font-medium text-[#4A5568] uppercase tracking-wide">PRODUKT DETALJER</div>
-                  <div className="col-span-2 text-sm font-medium text-[#4A5568] uppercase tracking-wide text-center">KVANTITET</div>
-                  <div className="col-span-2 text-sm font-medium text-[#4A5568] uppercase tracking-wide text-center">PRIS</div>
-                  <div className="col-span-2 text-sm font-medium text-[#4A5568] uppercase tracking-wide text-center">TOTALT</div>
-                </div>
+              {/* Column Headers */}
+              <div className="grid grid-cols-6 gap-4 pb-4 border-b border-gray-200 mb-4">
+                <div className="col-span-3 text-sm font-medium text-gray-500 uppercase tracking-wide">PRODUCT DETAILS</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">QUANTITY</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">PRICE</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide text-center">TOTAL</div>
+              </div>
 
-                {/* Cart Items */}
-                {items.map((item, index) => (
-                  <div key={item.id} className={`grid grid-cols-12 gap-4 p-6 ${index !== items.length - 1 ? 'border-b border-gray-100' : ''}`}>
+              {/* Cart Items */}
+              <div className="space-y-6">
+                {items.map((item) => (
+                  <div key={item.id} className="grid grid-cols-6 gap-4 items-center py-4 border-b border-gray-100">
                     {/* Product Details */}
-                    <div className="col-span-6 flex items-center space-x-4">
+                    <div className="col-span-3 flex items-center space-x-4">
                       <img
                         src={getProductImageUrl(item.imageUrl) || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=300&h=300&fit=crop&crop=center"}
                         alt={item.title}
-                        className="w-16 h-16 object-cover rounded-lg shadow-sm flex-shrink-0"
-                        loading="lazy"
+                        className="w-20 h-20 object-cover rounded"
                       />
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-lora font-semibold text-lg text-[#064F8C] mb-1">
-                          {item.sellerAlias} - {item.title}
-                        </h3>
-                        <p className="text-[#4A5568] text-sm font-dm-sans">Storlek: {item.size}</p>
+                      <div>
+                        <h3 className="font-medium text-gray-800 mb-1">{item.sellerAlias} - {item.title}</h3>
+                        <p className="text-sm text-gray-500 mb-1">Storlek: {item.size}</p>
                         <button
                           onClick={() => removeItem(item.id)}
-                          className="text-red-500 hover:text-red-700 text-sm font-dm-sans mt-1"
+                          className="text-sm text-red-500 hover:text-red-700"
                         >
-                          Ta bort
+                          Remove
                         </button>
                       </div>
                     </div>
 
                     {/* Quantity */}
-                    <div className="col-span-2 flex items-center justify-center">
-                      <div className="flex items-center space-x-2 rounded-lg border border-gray-300 bg-white">
-                        <Button
-                          variant="ghost"
-                          size="sm"
+                    <div className="flex items-center justify-center">
+                      <div className="flex items-center border border-gray-300 rounded">
+                        <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
-                          className="h-8 w-8 p-0 hover:bg-gray-100 disabled:opacity-50"
+                          className="p-2 hover:bg-gray-100 disabled:opacity-50"
                         >
-                          <Minus className="h-3 w-3" />
-                        </Button>
-                        
-                        <span className="w-8 text-center font-medium text-sm text-[#064F8C]">{item.quantity}</span>
-                        
-                        <Button
-                          variant="ghost"
-                          size="sm"
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="px-4 py-2 min-w-[3rem] text-center">{item.quantity}</span>
+                        <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="h-8 w-8 p-0 hover:bg-gray-100"
+                          className="p-2 hover:bg-gray-100"
                         >
-                          <Plus className="h-3 w-3" />
-                        </Button>
+                          <Plus className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
 
                     {/* Price */}
-                    <div className="col-span-2 flex items-center justify-center">
-                      <span className="font-dm-sans font-medium text-[#064F8C]">
+                    <div className="text-center">
+                      <span className="font-medium text-gray-800">
                         {item.priceKr.toLocaleString('sv-SE')} kr
                       </span>
                     </div>
 
                     {/* Total */}
-                    <div className="col-span-2 flex items-center justify-center">
-                      <span className="font-dm-sans font-bold text-[#064F8C]">
+                    <div className="text-center">
+                      <span className="font-bold text-gray-800">
                         {(item.priceKr * item.quantity).toLocaleString('sv-SE')} kr
                       </span>
                     </div>
                   </div>
                 ))}
+              </div>
 
-                {/* Continue Shopping */}
-                <div className="p-6 border-t border-gray-100">
-                  <Link href="/womens">
-                    <Button variant="ghost" className="text-[#064F8C] hover:text-[#111B3E] font-dm-sans">
-                      ← Fortsätt handla
-                    </Button>
-                  </Link>
+              {/* Continue Shopping */}
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <Link href="/womens">
+                  <Button variant="ghost" className="text-blue-600 hover:text-blue-800">
+                    ← Continue Shopping
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Order Summary */}
+            <div className="bg-gray-50 p-8">
+              <h2 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h2>
+              
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">ITEMS {itemCount}</span>
+                  <span className="font-medium">{totalPrice.toLocaleString('sv-SE')} kr</span>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
 
-          {/* Order Summary */}
-          <div className="lg:col-span-1">
-            <Card className="sticky top-8 bg-white shadow-lg border-none">
-              <CardContent className="p-6">
-                <h2 className="font-cormorant font-bold text-2xl text-[#064F8C] mb-6">Ordersammanfattning</h2>
-                
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-[#4A5568] font-dm-sans">ARTIKLAR: {itemCount}</span>
-                    <span className="text-[#064F8C] font-bold font-dm-sans">{totalPrice.toLocaleString('sv-SE')} kr</span>
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="mb-2">
+                    <span className="text-gray-600 text-sm">SHIPPING</span>
                   </div>
-
-                  <div className="border-b border-gray-200 pb-4">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-[#4A5568] font-dm-sans">FRAKT:</span>
-                    </div>
-                    <div className="ml-4">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-[#4A5568] font-dm-sans">Standard leverans - 65 kr</span>
-                        <button className="text-[#064F8C] hover:text-[#111B3E]">▼</button>
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between bg-white border border-gray-300 rounded p-3">
+                    <span className="text-sm">Standard Delivery - 65 kr</span>
+                    <button className="text-gray-400">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
                   </div>
+                </div>
 
-                  <div className="border-b border-gray-200 pb-4">
-                    <div className="text-sm text-[#4A5568] font-dm-sans mb-2">RABATTKOD:</div>
-                    <div className="flex space-x-2">
-                      <input
-                        type="text"
-                        placeholder="Ange din kod"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm font-dm-sans focus:outline-none focus:border-[#064F8C]"
-                      />
-                      <Button 
-                        size="sm" 
-                        className="bg-red-400 hover:bg-red-500 text-white px-4 py-2 text-sm font-dm-sans"
-                      >
-                        ANVÄND
-                      </Button>
-                    </div>
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="mb-2">
+                    <span className="text-gray-600 text-sm">PROMO CODE</span>
                   </div>
+                  <div className="flex space-x-2">
+                    <input
+                      type="text"
+                      placeholder="Enter your code"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
+                    />
+                    <Button className="bg-red-400 hover:bg-red-500 text-white px-4 py-2 text-sm">
+                      APPLY
+                    </Button>
+                  </div>
+                </div>
 
-                  <div className="pt-4">
-                    <div className="flex justify-between font-bold text-lg">
-                      <span className="text-[#064F8C] font-cormorant">TOTAL KOSTNAD:</span>
-                      <span className="text-[#064F8C] font-cormorant">{(totalPrice + 65).toLocaleString('sv-SE')} kr</span>
-                    </div>
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="flex justify-between text-lg font-bold">
+                    <span>TOTAL COST</span>
+                    <span>{(totalPrice + 65).toLocaleString('sv-SE')} kr</span>
                   </div>
                 </div>
 
                 <Link href="/checkout">
-                  <Button className="w-full bg-[#6366f1] hover:bg-[#5855eb] text-white py-4 rounded font-medium text-lg mb-4">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded text-lg font-medium mt-6">
                     CHECKOUT
                   </Button>
                 </Link>
-
-                <div className="mt-6 text-center space-y-2">
-                  <Button
-                    variant="ghost"
-                    onClick={clearCart}
-                    className="text-red-500 hover:text-red-700 hover:bg-red-50 text-sm font-dm-sans"
-                  >
-                    Töm varukorg
-                  </Button>
-                  <br />
-                  <Button
-                    variant="ghost"
-                    onClick={debugClearStorage}
-                    className="text-orange-500 hover:text-orange-700 hover:bg-orange-50 text-xs font-dm-sans"
-                  >
-                    Debug: Rensa localStorage
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
