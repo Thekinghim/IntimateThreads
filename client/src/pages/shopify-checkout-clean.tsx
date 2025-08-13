@@ -8,7 +8,7 @@ import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 // Stripe Payment Component
-function StripePaymentForm({ amount, formValid }: { amount: number; formValid: boolean }) {
+function StripePaymentForm({ amount, formValid, formData }: { amount: number; formValid: boolean; formData: any }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -34,6 +34,8 @@ function StripePaymentForm({ amount, formValid }: { amount: number; formValid: b
       setMessage(error.message || 'Något gick fel med betalningen');
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
       setMessage('✅ Betalning genomförd! Omdirigerar...');
+      // Save customer data to localStorage for order confirmation
+      localStorage.setItem('orderCustomerData', JSON.stringify(formData));
       // Immediate redirect with smooth transition
       setTimeout(() => {
         window.location.href = '/order-confirmation';
@@ -68,7 +70,7 @@ function StripePaymentForm({ amount, formValid }: { amount: number; formValid: b
 }
 
 // Wrapper that creates Payment Intent and provides Stripe Elements
-function StripeCheckout({ amount, formValid }: { amount: number; formValid: boolean }) {
+function StripeCheckout({ amount, formValid, formData }: { amount: number; formValid: boolean; formData: any }) {
   const [clientSecret, setClientSecret] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -141,7 +143,7 @@ function StripeCheckout({ amount, formValid }: { amount: number; formValid: bool
         }
       }}
     >
-      <StripePaymentForm amount={amount} formValid={formValid} />
+      <StripePaymentForm amount={amount} formValid={formValid} formData={formData} />
     </Elements>
   );
 }
@@ -489,7 +491,7 @@ export default function ShopifyCheckout() {
                             </p>
                           </div>
                           
-                          <StripeCheckout amount={discountedTotal} formValid={formValid} />
+                          <StripeCheckout amount={discountedTotal} formValid={formValid} formData={formData} />
                         </div>
                       ) : (
                         <div className="text-center py-6">

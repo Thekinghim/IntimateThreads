@@ -19,6 +19,7 @@ export default function OrderConfirmation() {
   const [orderNumber, setOrderNumber] = useState('');
   const [orderTotal, setOrderTotal] = useState(0);
   const [orderItems, setOrderItems] = useState<CartItem[]>([]);
+  const [customerData, setCustomerData] = useState<any>(null);
 
   useEffect(() => {
     // Generate order number
@@ -30,6 +31,14 @@ export default function OrderConfirmation() {
       setOrderItems([...cartItems]);
       const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.priceKr * item.quantity), 0);
       setOrderTotal(total);
+    }
+
+    // Load customer data from localStorage
+    const savedCustomerData = localStorage.getItem('orderCustomerData');
+    if (savedCustomerData) {
+      setCustomerData(JSON.parse(savedCustomerData));
+      // Clean up localStorage after loading
+      localStorage.removeItem('orderCustomerData');
     }
 
     // Clear cart after saving order data
@@ -93,8 +102,20 @@ export default function OrderConfirmation() {
               <div className="border-t border-gray-200 pt-8">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Leveransadress</h3>
                 <div className="text-gray-600">
-                  <p className="font-medium">Scandiscent Kund</p>
-                  <p>Sverige</p>
+                  {customerData ? (
+                    <>
+                      <p className="font-medium">{customerData.firstName} {customerData.lastName}</p>
+                      <p>{customerData.address}</p>
+                      {customerData.apartment && <p>{customerData.apartment}</p>}
+                      <p>{customerData.postalCode} {customerData.city}</p>
+                      <p>{customerData.country}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-medium">Kund</p>
+                      <p>Sverige</p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
