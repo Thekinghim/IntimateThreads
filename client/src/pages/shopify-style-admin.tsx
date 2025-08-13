@@ -75,11 +75,27 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
             <div className="flex items-center gap-1 md:gap-3 flex-shrink-0">
               <Badge className="bg-gray-100 text-gray-600 text-xs">Paid</Badge>
               <Badge className="bg-yellow-100 text-yellow-700 text-xs">Unfulfilled</Badge>
-              <Button variant="outline" size="sm" className="h-6 md:h-8 px-1 md:px-3 text-xs hidden sm:inline-flex">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="h-6 md:h-8 px-1 md:px-3 text-xs hidden sm:inline-flex border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log('Print order clicked');
+                }}
+              >
                 <span className="hidden md:inline">Print order</span>
                 <span className="md:hidden">Print</span>
               </Button>
-              <Button variant="outline" size="sm" className="h-6 md:h-8 px-1 md:px-3 text-xs">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="h-6 md:h-8 px-1 md:px-3 text-xs border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log('More actions clicked');
+                }}
+              >
                 <span className="hidden md:inline">More actions</span>
                 <span className="md:hidden">⋯</span>
               </Button>
@@ -239,7 +255,15 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
             <div className="bg-white border border-gray-200 rounded-lg">
               <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                 <h3 className="font-medium text-gray-900">Shipping address</h3>
-                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-xs text-blue-600 h-auto p-0 hover:underline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit shipping address clicked');
+                  }}
+                >
                   Edit
                 </Button>
               </div>
@@ -257,7 +281,15 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
                   </div>
                 </div>
                 <div className="mt-3">
-                  <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-xs text-blue-600 h-auto p-0 hover:underline"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      console.log('View map clicked');
+                    }}
+                  >
                     View map
                   </Button>
                 </div>
@@ -268,7 +300,15 @@ function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boo
             <div className="bg-white border border-gray-200 rounded-lg">
               <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                 <h3 className="font-medium text-gray-900">Billing address</h3>
-                <Button variant="ghost" size="sm" className="text-xs text-blue-600 h-auto p-0">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-xs text-blue-600 h-auto p-0 hover:underline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit billing address clicked');
+                  }}
+                >
                   Edit
                 </Button>
               </div>
@@ -928,7 +968,7 @@ export default function ShopifyStyleAdmin() {
                         key={tab.name}
                         className={`px-2 md:px-4 py-3 text-xs md:text-sm font-medium border-b-2 whitespace-nowrap ${
                           index === 0 
-                            ? 'border-[#008060] text-[#008060]' 
+                            ? 'border-[#005bd3] text-[#005bd3]' 
                             : 'border-transparent text-gray-500 hover:text-gray-700'
                         }`}
                       >
@@ -951,13 +991,13 @@ export default function ShopifyStyleAdmin() {
                       <input
                         type="text"
                         placeholder="Search orders"
-                        className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-[#008060] focus:border-[#008060]"
+                        className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-[#005bd3] focus:border-[#005bd3]"
                       />
                       <svg className="absolute right-3 top-2.5 h-3 w-3 md:h-4 md:w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
-                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0">
+                    <Button variant="outline" size="sm" className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm flex-shrink-0 rounded">
                       Filter
                     </Button>
                   </div>
@@ -967,56 +1007,73 @@ export default function ShopifyStyleAdmin() {
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-b border-gray-200 bg-gray-50">
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left w-12">
+                      <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left w-8">
                           <input type="checkbox" className="rounded border-gray-300" />
                         </TableHead>
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[80px]">Order</TableHead>
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[120px] hidden sm:table-cell">Date</TableHead>
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[150px] hidden md:table-cell">Customer</TableHead>
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[120px]">Payment</TableHead>
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left min-w-[120px] hidden lg:table-cell">Fulfillment</TableHead>
-                        <TableHead className="text-xs font-medium text-gray-600 px-3 md:px-6 py-3 text-left text-right min-w-[80px]">Total</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Order</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden md:table-cell">Date</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Customer</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Items</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Payment</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden lg:table-cell">Fulfillment</TableHead>
+                        <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-right">Total</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {orders?.map((order: any) => (
                         <TableRow 
                           key={order.id} 
-                          className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
+                          className="border-b border-[#f1f1f1] hover:bg-[#fafbfb] cursor-pointer"
                           onClick={() => handleOrderClick(order)}
                         >
-                          <TableCell className="px-3 md:px-6 py-4">
+                          <TableCell className="px-2 md:px-4 py-3">
                             <input type="checkbox" className="rounded border-gray-300" />
                           </TableCell>
-                          <TableCell className="px-3 md:px-6 py-4 font-medium text-blue-600 hover:underline text-sm">
-                            #{order.id.slice(-4)}
-                          </TableCell>
-                          <TableCell className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 hidden sm:table-cell">
-                            <div className="md:hidden">
-                              {new Date(order.createdAt).toLocaleDateString('en-US', { 
-                                month: 'short', 
-                                day: 'numeric'
-                              })}
-                            </div>
-                            <div className="hidden md:block">
-                              {new Date(order.createdAt).toLocaleDateString('en-US', { 
-                                month: 'long', 
-                                day: 'numeric',
-                                year: 'numeric'
-                              })} at {new Date(order.createdAt).toLocaleTimeString('en-US', {
-                                hour: 'numeric',
-                                minute: '2-digit',
-                                hour12: true
-                              })}
+                          <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs">
+                            <div className="flex flex-col">
+                              <span className="text-blue-600 hover:underline">#{order.id.slice(-6)}</span>
+                              <span className="text-xs text-gray-500 md:hidden">
+                                {new Date(order.createdAt).toLocaleDateString('sv-SE')}
+                              </span>
                             </div>
                           </TableCell>
-                          <TableCell className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 hidden md:table-cell">
-                            <div className="truncate max-w-[150px]">
-                              {order.customerEmail}
+                          <TableCell className="px-2 md:px-4 py-3 text-xs text-gray-700 hidden md:table-cell">
+                            {new Date(order.createdAt).toLocaleDateString('sv-SE')} {new Date(order.createdAt).toLocaleTimeString('sv-SE', {
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </TableCell>
+                          <TableCell className="px-2 md:px-4 py-3 text-xs text-gray-700">
+                            <div className="flex flex-col">
+                              <span className="font-medium truncate max-w-[120px] md:max-w-[150px]">{order.customerEmail}</span>
+                              <div className="flex items-center gap-1 sm:hidden mt-1">
+                                <Badge className={`text-xs ${
+                                  order.paymentStatus === 'completed' 
+                                    ? "bg-green-50 text-green-700 border-green-200" 
+                                    : order.paymentStatus === 'pending'
+                                    ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                                    : "bg-red-50 text-red-700 border-red-200"
+                                }`}>
+                                  {order.paymentStatus === 'completed' ? 'Paid' : 
+                                   order.paymentStatus === 'pending' ? 'Pending' : 'Unpaid'}
+                                </Badge>
+                              </div>
                             </div>
                           </TableCell>
-                          <TableCell className="px-3 md:px-6 py-4">
+                          <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-gray-100 rounded border flex-shrink-0 overflow-hidden">
+                                <img 
+                                  src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=32&h=32&fit=crop&crop=center" 
+                                  alt="Product" 
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                              <span className="text-xs text-gray-600">{order.items?.length || 1} item{(order.items?.length || 1) > 1 ? 's' : ''}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="px-2 md:px-4 py-3 hidden sm:table-cell">
                             <Badge className={`text-xs ${
                               order.paymentStatus === 'completed' 
                                 ? "bg-green-50 text-green-700 border-green-200" 
@@ -1028,7 +1085,7 @@ export default function ShopifyStyleAdmin() {
                                order.paymentStatus === 'pending' ? 'Pending' : 'Unpaid'}
                             </Badge>
                           </TableCell>
-                          <TableCell className="px-3 md:px-6 py-4 hidden lg:table-cell">
+                          <TableCell className="px-2 md:px-4 py-3 hidden lg:table-cell">
                             <Badge className={`text-xs ${
                               order.fulfillmentStatus === 'fulfilled' 
                                 ? "bg-green-50 text-green-700 border-green-200" 
@@ -1040,7 +1097,7 @@ export default function ShopifyStyleAdmin() {
                                order.fulfillmentStatus === 'pending' ? 'Pending' : 'Unfulfilled'}
                             </Badge>
                           </TableCell>
-                          <TableCell className="px-3 md:px-6 py-4 text-xs md:text-sm font-medium text-gray-900 text-right">
+                          <TableCell className="px-2 md:px-4 py-3 text-xs font-medium text-gray-900 text-right">
                             {order.totalKr} kr
                           </TableCell>
                         </TableRow>
