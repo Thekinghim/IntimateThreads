@@ -34,10 +34,10 @@ function StripePaymentForm({ amount, formValid }: { amount: number; formValid: b
       setMessage(error.message || 'Något gick fel med betalningen');
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
       setMessage('✅ Betalning genomförd! Omdirigerar...');
-      // Redirect to order confirmation page
+      // Immediate redirect with smooth transition
       setTimeout(() => {
         window.location.href = '/order-confirmation';
-      }, 1500);
+      }, 800);
     } else {
       setMessage('Betalningen kräver ytterligare verifiering.');
     }
