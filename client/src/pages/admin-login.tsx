@@ -53,7 +53,7 @@ export default function AdminLogin() {
         });
 
         setTimeout(() => {
-          window.location.href = '/shopify-admin';
+          window.location.href = '/admin';
         }, 1000);
       } else {
         toast({
@@ -109,7 +109,7 @@ export default function AdminLogin() {
                 control={form.control}
                 name="username"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="space-y-2 text-[#000000]">
                     <FormLabel className="text-sm font-medium text-gray-700">
                       Email
                     </FormLabel>
@@ -136,7 +136,7 @@ export default function AdminLogin() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="text-[#000000]">
+                  <FormItem className="space-y-2 text-[#000000]">
                     <FormLabel className="text-sm font-medium text-gray-700">
                       Password
                     </FormLabel>

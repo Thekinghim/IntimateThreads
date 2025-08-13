@@ -68,7 +68,6 @@ function Router() {
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />
-      <Route path="/admin/shopify" component={ShopifyStyleAdmin} />
       <Route path="/admin" component={AdminComponent} />
 
       <Route path="/terms-of-service" component={TermsOfService} />
