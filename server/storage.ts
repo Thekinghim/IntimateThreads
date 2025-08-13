@@ -125,15 +125,6 @@ export class DatabaseStorage implements IStorage {
     await db.delete(sellers).where(eq(sellers.id, id));
   }
 
-  async updateProduct(id: string, updates: Partial<Product>): Promise<Product | undefined> {
-    const [product] = await db
-      .update(products)
-      .set(updates)
-      .where(eq(products.id, id))
-      .returning();
-    return product || undefined;
-  }
-
   // Orders
   async getOrders(): Promise<OrderWithDetails[]> {
     return await db.query.orders.findMany({

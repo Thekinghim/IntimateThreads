@@ -30,9 +30,17 @@ export function ImageUploader({ value, onChange, placeholder = "Enter image URL"
         const formData = new FormData();
         formData.append('file', file);
         
+        // Get admin token for authenticated upload
+        const token = localStorage.getItem('adminToken');
+        const headers: any = {};
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+        
         const response = await fetch('/api/upload-image', {
           method: 'POST',
-          body: formData
+          body: formData,
+          headers
         });
         
         if (response.ok) {
