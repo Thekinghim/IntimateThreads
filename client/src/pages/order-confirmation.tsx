@@ -31,7 +31,7 @@ export default function OrderConfirmation() {
     // Clear cart after successful order
     setTimeout(() => {
       clearCart();
-    }, 2000);
+    }, 3000);
   }, [cartItems, clearCart]);
 
   const handlePrintReceipt = () => {
@@ -164,6 +164,19 @@ export default function OrderConfirmation() {
                   <div className="flex items-center">
                     <span className="text-green-600 text-sm font-medium mr-2">✓</span>
                     <span className="text-green-600 font-medium">{orderTotal.toFixed(2)} kr</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Subtle thank you note */}
+              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-md">
+                <div className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-medium text-green-900">Tack för din beställning</h4>
+                    <p className="text-sm text-green-700 mt-1">
+                      Du kommer få en orderbekräftelse via e-post inom kort. Leverans sker normalt inom 2-5 arbetsdagar.
+                    </p>
                   </div>
                 </div>
               </div>
