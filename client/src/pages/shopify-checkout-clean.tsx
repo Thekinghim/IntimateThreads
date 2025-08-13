@@ -3,7 +3,7 @@ import PayPalButton from '@/components/PayPalButton';
 import { useCartStore } from '@/lib/cart';
 
 export default function ShopifyCheckout() {
-  const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal'>('stripe');
+  const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal' | 'crypto'>('stripe');
   const [deliveryMethod, setDeliveryMethod] = useState<'ship' | 'pickup'>('ship');
   const [formData, setFormData] = useState({
     email: '',
@@ -332,14 +332,30 @@ export default function ShopifyCheckout() {
                             />
                           </div>
                           
-                          <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
-                            <p className="text-sm text-blue-800">
-                              <strong>Total att betala: {cartTotal.toFixed(2)} SEK</strong>
-                            </p>
-                            <p className="text-xs text-blue-600 mt-1">
-                              Kortbetalning är för närvarande inte tillgänglig. Använd PayPal istället.
-                            </p>
-                          </div>
+                          <button
+                            onClick={async () => {
+                              try {
+                                const response = await fetch('/api/create-payment-intent', {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ 
+                                    amount: cartTotal,
+                                    items: cartItems 
+                                  })
+                                });
+                                const { url } = await response.json();
+                                
+                                // Redirect to Stripe Checkout
+                                window.location.href = url;
+                              } catch (error) {
+                                console.error('Payment error:', error);
+                                alert('Betalning misslyckades. Försök igen.');
+                              }
+                            }}
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-medium"
+                          >
+                            Betala {cartTotal.toFixed(2)} SEK med kort
+                          </button>
                         </div>
                       ) : (
                         <div className="text-center py-6">
@@ -396,6 +412,91 @@ export default function ShopifyCheckout() {
                           </div>
                         )}
                       </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Crypto Payment Option */}
+              <div className={`border-2 rounded-lg transition-all ${
+                selectedPayment === 'crypto' 
+                  ? 'border-blue-500 bg-blue-50' 
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}>
+                <div 
+                  className="p-4 cursor-pointer flex items-center space-x-3"
+                  onClick={() => setSelectedPayment('crypto')}
+                  data-testid="payment-option-crypto"
+                >
+                  <input
+                    type="radio"
+                    checked={selectedPayment === 'crypto'}
+                    onChange={() => setSelectedPayment('crypto')}
+                    className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    data-testid="radio-crypto"
+                  />
+                  <span className="font-bold text-orange-600 text-lg">Bitcoin & Crypto</span>
+                  <div className="flex items-center space-x-2 ml-auto">
+                    <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">BTC</span>
+                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">ETH</span>
+                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">USDT</span>
+                  </div>
+                </div>
+                {selectedPayment === 'crypto' && (
+                  <div className="px-4 pb-4 border-t border-gray-200">
+                    <div className="pt-4">
+                      {cartTotal > 0 ? (
+                        <div className="space-y-4">
+                          <div className="bg-orange-50 border border-orange-200 rounded-md p-4">
+                            <h4 className="font-medium text-orange-900 mb-2">Betala med Kryptovaluta</h4>
+                            <p className="text-sm text-orange-800 mb-3">
+                              Säker och anonym betalning med Bitcoin, Ethereum eller USDT
+                            </p>
+                            <p className="text-sm font-medium text-orange-900">
+                              Total: {cartTotal.toFixed(2)} SEK
+                            </p>
+                          </div>
+                          
+                          <button
+                            onClick={async () => {
+                              try {
+                                const response = await fetch('/api/create-crypto-payment', {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ 
+                                    amount: cartTotal,
+                                    currency: 'SEK',
+                                    order_description: `Scandiscent Order - ${cartItems.length} items`
+                                  })
+                                });
+                                const data = await response.json();
+                                
+                                if (data.payment_url) {
+                                  window.location.href = data.payment_url;
+                                } else {
+                                  alert('Krypto-betalning kunde inte initieras. Försök igen.');
+                                }
+                              } catch (error) {
+                                console.error('Crypto payment error:', error);
+                                alert('Krypto-betalning misslyckades. Försök igen.');
+                              }
+                            }}
+                            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-md font-medium"
+                          >
+                            Betala {cartTotal.toFixed(2)} SEK med Crypto
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="text-center py-6">
+                          <p className="text-gray-500">Din kundvagn är tom. Lägg till produkter för att betala.</p>
+                          <button 
+                            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                            onClick={() => window.location.href = '/womens'}
+                          >
+                            Fortsätt handla
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

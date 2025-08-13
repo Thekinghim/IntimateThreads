@@ -9,10 +9,8 @@ import { randomUUID } from "crypto";
 import { sendOrderConfirmationEmail } from "./email";
 import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "./paypal";
 
-const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY || process.env.API_KEY || "your_api_key_here";
-const nowpaymentsBaseUrl = process.env.NODE_ENV === "production" 
-  ? "https://api.nowpayments.io/v1" 
-  : "https://api-sandbox.nowpayments.io/v1";
+const nowpaymentsApiKey = process.env.NOWPAYMENTS_API_KEY;
+const nowpaymentsBaseUrl = "https://api.nowpayments.io/v1"; // Production API
 
 // Initialize Stripe
 if (!process.env.STRIPE_SECRET_KEY) {
@@ -693,21 +691,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // PayPal routes
-  // Stripe payment intent route
+  // Stripe checkout session route for production
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
-      const { amount } = req.body;
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: Math.round(amount * 100), // Convert to öre (SEK cents)
-        currency: "sek",
+      const { amount, items } = req.body;
+      
+      // Create a real Stripe checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        currency: 'sek',
+        line_items: [
+          {
+            price_data: {
+              currency: 'sek',
+              product_data: {
+                name: 'Scandiscent Order',
+                description: 'Premium Nordic garments'
+              },
+              unit_amount: Math.round(amount * 100), // Convert to öre
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${req.headers.origin}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/checkout-form`,
         metadata: {
-          source: "scandiscent_checkout"
+          source: "scandiscent_production_checkout"
         }
       });
-      res.json({ clientSecret: paymentIntent.client_secret });
+      
+      res.json({ sessionId: session.id, url: session.url });
     } catch (error: any) {
-      console.error('Stripe payment intent error:', error);
-      res.status(500).json({ message: "Error creating payment intent: " + error.message });
+      console.error('Stripe checkout session error:', error);
+      res.status(500).json({ message: "Error creating checkout session: " + error.message });
     }
   });
 
@@ -722,6 +739,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/paypal/order/:orderID/capture", async (req, res) => {
     await capturePaypalOrder(req, res);
+  });
+
+  // NOWPayments crypto payment route for production
+  app.post("/api/create-crypto-payment", async (req, res) => {
+    try {
+      const { amount, currency, order_description } = req.body;
+      
+      if (!nowpaymentsApiKey) {
+        return res.status(500).json({ message: "NOWPayments API key not configured" });
+      }
+
+      const paymentData = {
+        price_amount: amount,
+        price_currency: currency || "SEK",
+        pay_currency: "btc", // Default to Bitcoin
+        order_description: order_description || "Scandiscent Order",
+        ipn_callback_url: `${req.headers.origin}/api/crypto-webhook`,
+        success_url: `${req.headers.origin}/order-confirmation`,
+        cancel_url: `${req.headers.origin}/checkout-form`
+      };
+
+      const response = await fetch(`${nowpaymentsBaseUrl}/payment`, {
+        method: "POST",
+        headers: {
+          "x-api-key": nowpaymentsApiKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentData),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        console.error("NOWPayments error:", data);
+        return res.status(response.status).json({ message: data.message || "Payment creation failed" });
+      }
+
+      res.json(data);
+    } catch (error: any) {
+      console.error("Crypto payment error:", error);
+      res.status(500).json({ message: "Error creating crypto payment: " + error.message });
+    }
   });
 
   const httpServer = createServer(app);
