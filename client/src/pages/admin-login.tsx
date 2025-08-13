@@ -117,7 +117,7 @@ export default function AdminLogin() {
                       <div className="relative">
                         <Input
                           placeholder="admin1@scandiscent.com"
-                          className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                          className="w-full px-3 py-3 h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base bg-[#ffffff]"
                           {...field}
                         />
                         {field.value && (
