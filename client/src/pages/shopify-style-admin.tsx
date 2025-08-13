@@ -1232,7 +1232,7 @@ export default function ShopifyStyleAdmin() {
                               e.stopPropagation();
                               handleEditProduct(product);
                             }}
-                            className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                            className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
                             data-testid={`button-edit-product-${product.id}`}
                           >
                             Edit
@@ -1241,7 +1241,7 @@ export default function ShopifyStyleAdmin() {
                             variant="ghost"
                             size="sm"
                             onClick={() => deleteProductMutation.mutate(product.id)}
-                            className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                            className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
                           >
                             Delete
                           </Button>
@@ -1300,7 +1300,7 @@ export default function ShopifyStyleAdmin() {
                               setSelectedItem({...seller, type: 'seller'});
                               setIsEditModalOpen(true);
                             }}
-                            className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                            className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
                           >
                             Edit
                           </Button>
@@ -1310,7 +1310,7 @@ export default function ShopifyStyleAdmin() {
                             onClick={() => {
                               toast({ title: "Customer deleted", description: "Customer has been removed." });
                             }}
-                            className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                            className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
                           >
                             Delete
                           </Button>
@@ -1373,7 +1373,7 @@ export default function ShopifyStyleAdmin() {
                             variant="ghost"
                             size="sm"
                             onClick={() => togglePromoMutation.mutate({ id: promo.id, isActive: !promo.isActive })}
-                            className="text-xs text-gray-600 hover:text-gray-900 h-6 px-1 md:px-2"
+                            className="text-xs bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-1 md:px-2"
                           >
                             {promo.isActive ? 'Disable' : 'Enable'}
                           </Button>
@@ -1381,7 +1381,7 @@ export default function ShopifyStyleAdmin() {
                             variant="ghost"
                             size="sm"
                             onClick={() => deletePromoMutation.mutate(promo.id)}
-                            className="text-xs text-red-600 hover:text-red-800 h-6 px-1 md:px-2"
+                            className="text-xs bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-1 md:px-2"
                           >
                             <Trash2 className="h-3 w-3" />
                           </Button>
@@ -1412,7 +1412,7 @@ export default function ShopifyStyleAdmin() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowLiveView(false)}
-                    className="text-blue-600 hover:text-blue-800 h-8"
+                    className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-8"
                   >
                     ← Back to Analytics
                   </Button>
@@ -1502,7 +1502,7 @@ export default function ShopifyStyleAdmin() {
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Analytics</h1>
               <Button
                 onClick={() => setShowLiveView(true)}
-                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
+                className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
                 Live View
               </Button>
@@ -2058,26 +2058,7 @@ export default function ShopifyStyleAdmin() {
               })}
             </ul>
 
-            {/* Sales Channels Section */}
-            <div className="mt-4 px-3">
-              <div className="flex items-center justify-between py-2">
-                <h3 className="text-xs font-medium text-gray-600 uppercase tracking-wider">Sales channels</h3>
-                <ChevronRight className="h-3 w-3 text-gray-500" />
-              </div>
-              <ul className="space-y-0.5">
-                {salesChannelItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <li key={item.id}>
-                      <button className="w-full flex items-center space-x-2.5 px-0 py-1 text-left text-sm text-gray-700 hover:bg-[#f1f2f3] rounded">
-                        <Icon className="h-4 w-4 text-gray-600" />
-                        <span className="text-sm">{item.label}</span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            
 
 
 
@@ -2783,7 +2764,7 @@ export default function ShopifyStyleAdmin() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsFilterOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                  className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-7 w-7 md:h-8 md:w-8 p-0"
                 >
                   <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
@@ -2862,6 +2843,7 @@ export default function ShopifyStyleAdmin() {
                 onClick={() => {
                   toast({ title: "Filter rensade", description: "Alla filter har återställts." });
                 }}
+                className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4]"
               >
                 Rensa filter
               </Button>
@@ -2890,7 +2872,7 @@ export default function ShopifyStyleAdmin() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 h-7 w-7 md:h-8 md:w-8 p-0"
+                  className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-7 w-7 md:h-8 md:w-8 p-0"
                 >
                   <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
@@ -2909,7 +2891,7 @@ export default function ShopifyStyleAdmin() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                  className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] rounded"
                   onClick={(e) => {
                     e.stopPropagation();
                     console.log('Duplicate clicked');
@@ -2920,7 +2902,7 @@ export default function ShopifyStyleAdmin() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm border-gray-300 text-gray-700 hover:bg-gray-50 rounded"
+                  className="h-7 md:h-8 px-2 md:px-3 text-xs md:text-sm bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] rounded"
                   onClick={(e) => {
                     e.stopPropagation();
                     console.log('View clicked');
