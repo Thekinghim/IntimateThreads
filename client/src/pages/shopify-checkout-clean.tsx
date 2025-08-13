@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import PayPalButton from '@/components/PayPalButton';
 import { useCartStore } from '@/lib/cart';
+import { getProductImageUrl } from '@/assets/images';
 
 export default function ShopifyCheckout() {
   const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal' | 'crypto'>('stripe');
   const [deliveryMethod, setDeliveryMethod] = useState<'ship' | 'pickup'>('ship');
+  const [promoCode, setPromoCode] = useState('');
+  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [promoDiscount, setPromoDiscount] = useState(0);
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -21,9 +25,30 @@ export default function ShopifyCheckout() {
 
   const { items: cartItems, getTotalPrice, getTotalItems } = useCartStore();
   const cartTotal = getTotalPrice();
+  const discountedTotal = cartTotal - promoDiscount;
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const applyPromoCode = async () => {
+    if (!promoCode.trim()) return;
+
+    try {
+      const response = await fetch(`/api/promo-codes/${promoCode.trim()}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setAppliedPromo(data.code);
+        setPromoDiscount(parseFloat(data.discountKr));
+        setPromoCode('');
+      } else {
+        alert(data.message || 'Ogiltig rabattkod');
+      }
+    } catch (error) {
+      console.error('Promo code validation error:', error);
+      alert('Fel vid validering av rabattkod');
+    }
   };
 
   return (
@@ -377,9 +402,9 @@ export default function ShopifyCheckout() {
                         <p className="text-sm text-gray-600 mb-4">
                           After clicking "Complete order", you'll be redirected to PayPal to finish your purchase.
                         </p>
-                        {cartTotal > 0 ? (
+                        {discountedTotal > 0 ? (
                           <PayPalButton
-                            amount={cartTotal.toString()}
+                            amount={discountedTotal.toString()}
                             currency="USD"
                             intent="CAPTURE"
                           />
@@ -554,7 +579,7 @@ export default function ShopifyCheckout() {
                 }
               }}
             >
-              Slutför beställning - {cartTotal.toFixed(2)} SEK
+              Slutför beställning - {discountedTotal.toFixed(2)} SEK
             </button>
           </div>
         </div>
@@ -573,7 +598,7 @@ export default function ShopifyCheckout() {
                   <div key={item.id} className="flex items-center space-x-4">
                     <div className="relative">
                       <img 
-                        src={item.imageUrl} 
+                        src={getProductImageUrl(item.imageUrl) || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=300&h=300&fit=crop&crop=center"} 
                         alt={item.title}
                         className="w-16 h-16 object-cover rounded-lg border"
                       />
@@ -608,16 +633,40 @@ export default function ShopifyCheckout() {
             </div>
 
             <div className="mb-6">
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  placeholder="Discount code"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                />
-                <button className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-md transition-colors">
-                  Apply
-                </button>
-              </div>
+              {appliedPromo ? (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-green-700 text-sm font-medium">{appliedPromo} tillämpat</span>
+                    <span className="text-green-700 font-bold">-{promoDiscount} kr</span>
+                  </div>
+                  <button 
+                    onClick={() => {
+                      setAppliedPromo(null);
+                      setPromoDiscount(0);
+                    }}
+                    className="mt-2 text-green-600 hover:text-green-800 text-sm underline"
+                  >
+                    Ta bort rabatt
+                  </button>
+                </div>
+              ) : (
+                <div className="flex space-x-2">
+                  <input
+                    type="text"
+                    placeholder="Discount code (t.ex. TEST3KR)"
+                    value={promoCode}
+                    onChange={(e) => setPromoCode(e.target.value)}
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  />
+                  <button 
+                    onClick={applyPromoCode}
+                    disabled={!promoCode.trim()}
+                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-medium rounded-md transition-colors"
+                  >
+                    Apply
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="space-y-3 mb-6">
@@ -625,6 +674,12 @@ export default function ShopifyCheckout() {
                 <span className="text-gray-600">Subtotal</span>
                 <span className="text-gray-900">kr{cartTotal.toFixed(2)}</span>
               </div>
+              {appliedPromo && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-green-600">Rabatt ({appliedPromo})</span>
+                  <span className="text-green-600 font-medium">-kr{promoDiscount.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Shipping</span>
                 <span className="text-gray-500">Calculated at next step</span>
@@ -632,7 +687,7 @@ export default function ShopifyCheckout() {
               <div className="border-t border-gray-200 pt-3">
                 <div className="flex justify-between text-lg font-medium">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-gray-900">kr{cartTotal.toFixed(2)}</span>
+                  <span className="text-gray-900">kr{discountedTotal.toFixed(2)}</span>
                 </div>
                 <p className="text-sm text-gray-500 mt-1">Including VAT</p>
               </div>
