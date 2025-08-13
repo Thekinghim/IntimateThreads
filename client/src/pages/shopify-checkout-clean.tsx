@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import PayPalButton from '@/components/PayPalButton';
-import StripeCheckout from '@/components/StripeCheckout';
 
 export default function ShopifyCheckout() {
   const [selectedPayment, setSelectedPayment] = useState<'stripe' | 'paypal'>('stripe');
@@ -18,6 +17,11 @@ export default function ShopifyCheckout() {
     saveInfo: false,
     useBillingAddress: true
   });
+
+  const [cartTotal, setCartTotal] = useState(0);
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: 'Produktnamn', variant: 'Storlek / Färg', price: 0, quantity: 1 }
+  ]);
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -42,7 +46,7 @@ export default function ShopifyCheckout() {
             {/* Express Payment Methods */}
             <div className="space-y-3">
               <PayPalButton
-                amount="500"
+                amount={cartTotal.toString()}
                 currency="SEK"
                 intent="capture"
               />
@@ -283,15 +287,51 @@ export default function ShopifyCheckout() {
                 {selectedPayment === 'stripe' && (
                   <div className="px-4 pb-4 border-t border-gray-200">
                     <div className="pt-4">
-                      <StripeCheckout
-                        amount={500}
-                        onSuccess={() => {
-                          console.log('Stripe payment successful');
-                          // Redirect to order confirmation
-                          window.location.href = '/order-confirmation/stripe-' + Date.now();
-                        }}
-                        onClose={() => console.log('Stripe checkout closed')}
-                      />
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Card number</label>
+                          <div className="w-full px-4 py-3 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                            <div id="card-number-element" className="min-h-[20px]"></div>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Expiry date</label>
+                            <div className="w-full px-4 py-3 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                              <div id="card-expiry-element" className="min-h-[20px]"></div>
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">CVC</label>
+                            <div className="w-full px-4 py-3 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                              <div id="card-cvc-element" className="min-h-[20px]"></div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Name on card</label>
+                          <input
+                            type="text"
+                            placeholder="Name on card"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                          />
+                        </div>
+                        
+                        <button
+                          type="button"
+                          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors"
+                          onClick={() => {
+                            console.log('Processing credit card payment...');
+                            // This would normally process the Stripe payment
+                            alert('Stripe payment processing would happen here');
+                          }}
+                        >
+                          Pay with Credit Card
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -325,7 +365,7 @@ export default function ShopifyCheckout() {
                           After clicking "Complete order", you'll be redirected to PayPal to finish your purchase.
                         </p>
                         <PayPalButton
-                          amount="500"
+                          amount={cartTotal.toString()}
                           currency="SEK"
                           intent="capture"
                         />
@@ -377,19 +417,23 @@ export default function ShopifyCheckout() {
             </div>
 
             <div className="space-y-4 mb-6">
-              <div className="flex items-center space-x-4">
-                <div className="relative">
-                  <div className="w-16 h-16 bg-gray-200 rounded-lg border"></div>
-                  <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+              {cartItems.map((item, index) => (
+                <div key={item.id} className="flex items-center space-x-4">
+                  <div className="relative">
+                    <div className="w-16 h-16 bg-gray-200 rounded-lg border"></div>
+                    <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {item.quantity}
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-sm font-medium text-gray-900">{item.name}</h3>
+                    <p className="text-sm text-gray-500">{item.variant}</p>
+                  </div>
+                  <div className="text-sm font-medium text-gray-900">
+                    kr{item.price.toFixed(2)}
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-sm font-medium text-gray-900">Produktnamn</h3>
-                  <p className="text-sm text-gray-500">Storlek / Färg</p>
-                </div>
-                <div className="text-sm font-medium text-gray-900">
-                  kr500.00
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="mb-6">
@@ -408,7 +452,7 @@ export default function ShopifyCheckout() {
             <div className="space-y-3 mb-6">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="text-gray-900">kr500.00</span>
+                <span className="text-gray-900">kr{cartTotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Shipping</span>
@@ -417,7 +461,7 @@ export default function ShopifyCheckout() {
               <div className="border-t border-gray-200 pt-3">
                 <div className="flex justify-between text-lg font-medium">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-gray-900">kr500.00</span>
+                  <span className="text-gray-900">kr{cartTotal.toFixed(2)}</span>
                 </div>
                 <p className="text-sm text-gray-500 mt-1">Including VAT</p>
               </div>
