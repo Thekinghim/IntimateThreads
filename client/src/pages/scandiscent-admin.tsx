@@ -15,7 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { Order, Product, Seller, SelectOrder, SelectProduct, SelectSeller } from "@shared/schema";
-import { OrderDetailsModal } from "@/components/OrderDetailsModal";
+import { OrderDetailsModal } from "../components/OrderDetailsModal";
 
 // Mock data for initial testing
 const orderStatuses = ["all", "pending", "processing", "shipped", "delivered", "cancelled"];
@@ -69,7 +69,7 @@ export default function ScanDiscentAdmin() {
     enabled: selectedTab === "customers"
   });
 
-  const { data: promoCodes = [] } = useQuery({
+  const { data: promoCodes = [] } = useQuery<any[]>({
     queryKey: ["/api/admin/promo-codes"],
     enabled: selectedTab === "discounts"
   });
@@ -150,7 +150,7 @@ export default function ScanDiscentAdmin() {
                         </button>
                       </td>
                       <td className="py-3 px-4 text-gray-600">
-                        {new Date(order.createdAt).toLocaleDateString('sv-SE')}
+                        {order.createdAt ? new Date(order.createdAt).toLocaleDateString('sv-SE') : 'N/A'}
                       </td>
                       <td className="py-3 px-4 text-gray-900">{order.customerEmail}</td>
                       <td className="py-3 px-4">
@@ -165,7 +165,7 @@ export default function ScanDiscentAdmin() {
                            order.paymentStatus === 'failed' ? 'Failed' : order.paymentStatus}
                         </span>
                       </td>
-                      <td className="py-3 px-4 font-medium text-gray-900">{order.totalKr} SEK</td>
+                      <td className="py-3 px-4 font-medium text-gray-900">{order.totalAmountKr} SEK</td>
                       <td className="py-3 px-4">
                         <Button
                           variant="ghost"
@@ -208,7 +208,7 @@ export default function ScanDiscentAdmin() {
                   <Package className="h-12 w-12 text-gray-400" />
                 </div>
                 <div className="p-3">
-                  <h3 className="font-medium text-gray-900 truncate">{product.name}</h3>
+                  <h3 className="font-medium text-gray-900 truncate">{product.title}</h3>
                   <p className="text-sm text-gray-600 mt-1">{product.priceKr} SEK</p>
                   <div className="flex justify-between items-center mt-3">
                     <span className="text-xs text-gray-500">Active</span>

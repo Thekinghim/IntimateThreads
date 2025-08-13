@@ -126,6 +126,11 @@ export type Admin = typeof admins.$inferSelect;
 export type AdminSession = typeof adminSessions.$inferSelect;
 export type PromoCode = typeof promoCodes.$inferSelect;
 
+// Alias types for admin panel compatibility
+export type SelectSeller = typeof sellers.$inferSelect;
+export type SelectProduct = typeof products.$inferSelect;
+export type SelectOrder = typeof orders.$inferSelect;
+
 // Relations
 export const sellersRelations = relations(sellers, ({ many }) => ({
   products: many(products),
