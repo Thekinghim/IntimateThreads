@@ -25,7 +25,9 @@ import CryptoPayment from "@/pages/crypto-payment";
 import OrderConfirmation from "@/pages/order-confirmation";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
-import ScandiscentAdminClean from "@/pages/scandiscent-admin-clean";
+import Admin from "@/pages/shopify-admin";
+import MobileAdmin from "@/pages/mobile-admin-v2";
+import ScandiscentStyleAdmin from "@/pages/scandiscent-style-admin";
 import AdminLogin from "@/pages/admin-login";
 
 import TermsOfService from "@/pages/terms-of-service";
@@ -41,8 +43,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Always use ScandiscentAdminClean for all devices - it's fully responsive
-  const AdminComponent = ScandiscentAdminClean;
+  // Always use ScandiscentStyleAdmin for all devices - it's fully responsive
+  const AdminComponent = ScandiscentStyleAdmin;
 
   return (
     <Switch>
@@ -67,7 +69,6 @@ function Router() {
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={AdminComponent} />
-      <Route path="/scandiscent-admin" component={AdminComponent} />
 
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />

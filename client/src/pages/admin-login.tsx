@@ -44,10 +44,8 @@ export default function AdminLogin() {
       const result = await response.json();
 
       if (response.ok) {
-        // Store with the keys that the admin panel expects
-        localStorage.setItem('scandiscent_admin_token', result.token);
-        localStorage.setItem('scandiscent_admin_id', result.admin.id);
-        localStorage.setItem('scandiscent_admin_username', result.admin.username);
+        localStorage.setItem('adminToken', result.token);
+        localStorage.setItem('adminUser', JSON.stringify(result.admin));
         
         toast({
           title: "Inloggning lyckades",

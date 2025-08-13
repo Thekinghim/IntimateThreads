@@ -178,64 +178,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Create new order (admin)
-  app.post('/api/admin/orders', requireAdminAuth, async (req, res) => {
-    try {
-      const { customerEmail, customerName, customerAddress, productId, paymentMethod, status, totalAmountKr, notes } = req.body;
-      
-      // Get product details
-      const product = await storage.getProduct(productId);
-      if (!product) {
-        return res.status(400).json({ error: 'Product not found' });
-      }
-
-      const order = await storage.createOrder({
-        customerEmail,
-        customerName,
-        customerAddress,
-        items: [{ 
-          productId, 
-          title: product.title, 
-          price: totalAmountKr.toString(), 
-          quantity: 1 
-        }],
-        paymentMethod,
-        status: status || 'pending',
-        totalAmountKr: parseInt(totalAmountKr),
-        notes: notes || '',
-        createdAt: new Date()
-      });
-
-      res.json(order);
-    } catch (error) {
-      console.error('Error creating order:', error);
-      res.status(500).json({ error: 'Failed to create order' });
-    }
-  });
-
-  // Create new seller (admin)
-  app.post('/api/admin/sellers', requireAdminAuth, async (req, res) => {
-    try {
-      const { name, email, age, location, bio, commissionRate } = req.body;
-      
-      const seller = await storage.createSeller({
-        name,
-        email,
-        age: age.toString(),
-        location,
-        bio,
-        commissionRate: commissionRate.toString(),
-        status: 'active',
-        createdAt: new Date()
-      });
-
-      res.json(seller);
-    } catch (error) {
-      console.error('Error creating seller:', error);
-      res.status(500).json({ error: 'Failed to create seller' });
-    }
-  });
-
   // Admin: Update product
   app.put("/api/admin/products/:id", requireAdminAuth, async (req, res) => {
     try {
@@ -324,7 +266,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nowpayments/status", async (req, res) => {
     try {
       const response = await fetch(`${nowpaymentsBaseUrl}/status`, {
-        headers: nowpaymentsApiKey ? { 'x-api-key': nowpaymentsApiKey } : {}
+        headers: { 'x-api-key': nowpaymentsApiKey }
       });
       const data = await response.json();
       res.json(data);
@@ -336,7 +278,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nowpayments/currencies", async (req, res) => {
     try {
       const response = await fetch(`${nowpaymentsBaseUrl}/currencies`, {
-        headers: nowpaymentsApiKey ? { 'x-api-key': nowpaymentsApiKey } : {}
+        headers: { 'x-api-key': nowpaymentsApiKey }
       });
       const data = await response.json();
       res.json(data);
@@ -350,7 +292,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { amount, currency_from, currency_to } = req.query;
       
       const response = await fetch(`${nowpaymentsBaseUrl}/estimate?amount=${amount}&currency_from=${currency_from}&currency_to=${currency_to}`, {
-        headers: nowpaymentsApiKey ? { 'x-api-key': nowpaymentsApiKey } : {}
+        headers: { 'x-api-key': nowpaymentsApiKey }
       });
       
       if (!response.ok) {
@@ -380,10 +322,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const response = await fetch(`${nowpaymentsBaseUrl}/payment`, {
         method: 'POST',
-        headers: nowpaymentsApiKey ? {
+        headers: {
           'Content-Type': 'application/json',
           'x-api-key': nowpaymentsApiKey
-        } : { 'Content-Type': 'application/json' },
+        },
         body: JSON.stringify(paymentData)
       });
       
@@ -414,7 +356,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nowpayments/payment/:payment_id", async (req, res) => {
     try {
       const response = await fetch(`${nowpaymentsBaseUrl}/payment/${req.params.payment_id}`, {
-        headers: nowpaymentsApiKey ? { 'x-api-key': nowpaymentsApiKey } : {}
+        headers: { 'x-api-key': nowpaymentsApiKey }
       });
       const data = await response.json();
       res.json(data);
@@ -578,7 +520,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Check if max usage reached
-      if (promoCode.maxUsage && (promoCode.usageCount || 0) >= promoCode.maxUsage) {
+      if (promoCode.maxUsage && promoCode.usageCount >= promoCode.maxUsage) {
         return res.status(400).json({ message: "Rabattkoden har uppnått maximal användning" });
       }
 
