@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import PayPalButton from '@/components/PayPalButton';
-import StripeCheckout from '@/components/StripeCheckout';
 import { useCartStore } from '@/lib/cart';
 
 export default function ShopifyCheckout() {
@@ -294,14 +293,54 @@ export default function ShopifyCheckout() {
                   <div className="px-4 pb-4 border-t border-gray-200">
                     <div className="pt-4">
                       {cartTotal > 0 ? (
-                        <StripeCheckout
-                          amount={cartTotal}
-                          onSuccess={() => {
-                            console.log('Stripe payment successful');
-                            window.location.href = '/order-confirmation';
-                          }}
-                          onClose={() => console.log('Stripe checkout closed')}
-                        />
+                        <div className="space-y-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Kortnummer</label>
+                            <input
+                              type="text"
+                              placeholder="1234 1234 1234 1234"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                            />
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-3">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">Utgångsdatum (MM/ÅÅ)</label>
+                              <input
+                                type="text"
+                                placeholder="MM/ÅÅ"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                              />
+                            </div>
+                            
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">Säkerhetskod</label>
+                              <input
+                                type="text"
+                                placeholder="123"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                              />
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Namn på kort</label>
+                            <input
+                              type="text"
+                              placeholder="Namn på kort"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                            />
+                          </div>
+                          
+                          <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+                            <p className="text-sm text-blue-800">
+                              <strong>Total att betala: {cartTotal.toFixed(2)} SEK</strong>
+                            </p>
+                            <p className="text-xs text-blue-600 mt-1">
+                              Kortbetalning är för närvarande inte tillgänglig. Använd PayPal istället.
+                            </p>
+                          </div>
+                        </div>
                       ) : (
                         <div className="text-center py-6">
                           <p className="text-gray-500">Din kundvagn är tom. Lägg till produkter för att betala.</p>
