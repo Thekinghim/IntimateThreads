@@ -864,143 +864,135 @@ export default function ShopifyStyleAdmin() {
 
       case "products":
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-semibold text-gray-900">Produkter</h1>
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Products</h1>
               <Button 
                 onClick={() => setIsCreateProductOpen(true)}
-                className="bg-gray-900 hover:bg-gray-800 text-white"
+                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Lägg till produkt
+                Add product
               </Button>
             </div>
-            <Card className="border border-gray-200 shadow-sm">
-              <CardContent className="p-0">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="border-b border-gray-200">
-                      <TableHead className="text-gray-600 font-medium">Produkt</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Status</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Lager</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Säljare</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Pris</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Åtgärder</TableHead>
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Product</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Inventory</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Seller</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Price</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {products.map((product: any) => (
+                    <TableRow key={product.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                      <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">{product.title}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3">
+                        <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
+                      </TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">1 in stock</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">{product.seller?.alias}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">{product.priceKr} kr</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3">
+                        <div className="flex items-center space-x-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedItem(product);
+                              setIsEditModalOpen(true);
+                            }}
+                            className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => deleteProductMutation.mutate(product.id)}
+                            className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {products.map((product: any) => (
-                      <TableRow key={product.id} className="border-b border-gray-100 hover:bg-gray-50">
-                        <TableCell className="font-medium text-gray-900">{product.title}</TableCell>
-                        <TableCell>
-                          <Badge className="bg-green-100 text-green-800 border-green-200">
-                            Aktiv
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-gray-700">1 på lager</TableCell>
-                        <TableCell className="text-gray-700">{product.seller?.alias}</TableCell>
-                        <TableCell className="text-gray-900">{product.priceKr} kr</TableCell>
-                        <TableCell>
-                          <div className="flex items-center space-x-2">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => {
-                                setSelectedItem(product);
-                                setIsEditModalOpen(true);
-                              }}
-                              className="text-blue-600 hover:text-blue-800"
-                            >
-                              Redigera
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => deleteProductMutation.mutate(product.id)}
-                              className="text-red-600 hover:text-red-800"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         );
 
       case "customers":
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-semibold text-gray-900">Säljare</h1>
+          <div className="p-3 md:p-6 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Customers</h1>
               <Button 
                 onClick={() => setIsCreateCustomerOpen(true)}
-                className="bg-gray-900 hover:bg-gray-800 text-white"
+                className="bg-[#008060] hover:bg-[#006b52] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Lägg till säljare
+                Add customer
               </Button>
             </div>
-            <Card className="border border-gray-200 shadow-sm">
-              <CardContent className="p-0">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="border-b border-gray-200">
-                      <TableHead className="text-gray-600 font-medium">Säljare</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Plats</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Ålder</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Status</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Provision</TableHead>
-                      <TableHead className="text-gray-600 font-medium">Åtgärder</TableHead>
+            <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Customer</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Location</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Age</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Commission</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {sellers.map((seller: any) => (
+                    <TableRow key={seller.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
+                      <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">{seller.alias}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">{seller.location}</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">{seller.age} years</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3">
+                        <Badge className={seller.isActive ? "bg-green-100 text-green-700 border-green-200 text-xs" : "bg-red-100 text-red-700 border-red-200 text-xs"}>
+                          {seller.isActive ? 'Active' : 'Inactive'}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">{(parseFloat(seller.commissionRate) * 100).toFixed(0)}%</TableCell>
+                      <TableCell className="px-2 md:px-4 py-3">
+                        <div className="flex items-center space-x-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedItem({...seller, type: 'seller'});
+                              setIsEditModalOpen(true);
+                            }}
+                            className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              toast({ title: "Customer deleted", description: "Customer has been removed." });
+                            }}
+                            className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {sellers.map((seller: any) => (
-                      <TableRow key={seller.id} className="border-b border-gray-100 hover:bg-gray-50">
-                        <TableCell className="font-medium text-gray-900">{seller.alias}</TableCell>
-                        <TableCell className="text-gray-700">{seller.location}</TableCell>
-                        <TableCell className="text-gray-700">{seller.age} år</TableCell>
-                        <TableCell>
-                          <Badge className={seller.isActive ? "bg-green-100 text-green-800 border-green-200" : "bg-red-100 text-red-800 border-red-200"}>
-                            {seller.isActive ? 'Aktiv' : 'Inaktiv'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-gray-900">{(parseFloat(seller.commissionRate) * 100).toFixed(0)}%</TableCell>
-                        <TableCell>
-                          <div className="flex items-center space-x-2">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => {
-                                setSelectedItem({...seller, type: 'seller'});
-                                setIsEditModalOpen(true);
-                              }}
-                              className="text-blue-600 hover:text-blue-800"
-                            >
-                              Redigera
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => {
-                                toast({ title: "Säljare raderad", description: "Säljaren har tagits bort." });
-                              }}
-                              className="text-red-600 hover:text-red-800"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         );
 
@@ -1183,6 +1175,7 @@ export default function ShopifyStyleAdmin() {
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Type</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Status</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Results</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -1193,6 +1186,29 @@ export default function ShopifyStyleAdmin() {
                       <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
                     </TableCell>
                     <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">1,247 opens</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedItem({id: 1, name: 'Summer Collection Launch', type: 'campaign'});
+                            setIsEditModalOpen(true);
+                          }}
+                          className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toast({ title: "Campaign deleted", description: "Campaign has been removed." })}
+                          className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                   <TableRow className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
                     <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">Weekend Sale</TableCell>
@@ -1201,6 +1217,29 @@ export default function ShopifyStyleAdmin() {
                       <Badge className="bg-gray-100 text-gray-600 border-gray-200 text-xs">Completed</Badge>
                     </TableCell>
                     <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">892 clicks</TableCell>
+                    <TableCell className="px-2 md:px-4 py-3">
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedItem({id: 2, name: 'Weekend Sale', type: 'campaign'});
+                            setIsEditModalOpen(true);
+                          }}
+                          className="text-blue-600 hover:text-blue-800 h-6 px-2 text-xs"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toast({ title: "Campaign deleted", description: "Campaign has been removed." })}
+                          className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
