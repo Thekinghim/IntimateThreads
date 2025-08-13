@@ -83,7 +83,7 @@ export default function About() {
 
           {/* How We Work */}
           <div className="mb-16">
-            <h2 className="text-4xl font-bold text-center mb-12">Så Fungerar Vi</h2>
+            <h2 className="text-4xl font-bold text-center mb-6">Så Fungerar Vi</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="bg-white/60 border-[#064F8C]/20 p-6">
                 <CardContent className="p-0">
