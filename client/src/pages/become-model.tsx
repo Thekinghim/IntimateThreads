@@ -113,7 +113,7 @@ export default function BecomeModel() {
                   <div>
                     <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #1</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button variant="outline" className="text-[#064F8C] border-[#064F8C] bg-[#F5F1E8]">Choose files</Button>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
                       <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
                     </div>
                   </div>
@@ -121,7 +121,7 @@ export default function BecomeModel() {
                   <div>
                     <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #2</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button variant="outline" className="text-[#064F8C] border-[#064F8C] bg-[#F5F1E8]">Choose files</Button>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
                       <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
                     </div>
                   </div>
@@ -129,7 +129,7 @@ export default function BecomeModel() {
                   <div>
                     <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #3</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button variant="outline" className="text-[#064F8C] border-[#064F8C] bg-[#F5F1E8]">Choose files</Button>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
                       <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
                     </div>
                   </div>
@@ -137,7 +137,7 @@ export default function BecomeModel() {
                   <div>
                     <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #4</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button variant="outline" className="text-[#064F8C] border-[#064F8C] bg-[#F5F1E8]">Choose files</Button>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
                       <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
                     </div>
                   </div>
@@ -145,7 +145,7 @@ export default function BecomeModel() {
                   <div>
                     <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #5</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button variant="outline" className="text-[#064F8C] border-[#064F8C] bg-[#F5F1E8]">Choose files</Button>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
                       <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
                     </div>
                   </div>
@@ -153,7 +153,7 @@ export default function BecomeModel() {
                   <div>
                     <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #6</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button variant="outline" className="text-[#064F8C] border-[#064F8C] bg-[#F5F1E8]">Choose files</Button>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
                       <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
                     </div>
                   </div>
