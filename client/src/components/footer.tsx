@@ -30,7 +30,7 @@ export default function Footer() {
               <li><Link href="/about" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Om oss</Link></li>
               <li><Link href="/how-it-works" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Så funkar det</Link></li>
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Bli en modell</a></li>
-              <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Nyheter</a></li>
+              <li><Link href="/news" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Nyheter</Link></li>
               <li><Link href="/contact" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Kontakt & vanliga frågor</Link></li>
               <li><Link href="/feedback-and-tips" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Feedback & Gåvor</Link></li>
             </ul>
