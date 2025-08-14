@@ -149,7 +149,7 @@ export default function ModelsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {models.map((model) => (
-            <Card key={model.id} className="bg-white shadow-xl border-none overflow-hidden hover:shadow-2xl transition-all duration-300">
+            <Card key={model.id} className="bg-white shadow-xl border-none overflow-hidden">
               {/* Model Header */}
               <div className="bg-gradient-to-r from-[#064F8C] to-[#111B3E] p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
