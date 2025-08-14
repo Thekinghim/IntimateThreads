@@ -3,13 +3,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Clock, Mail, MessageCircle, Phone, MapPin, Shield, Package } from "lucide-react";
+import heroImage from "@assets/IMG_2353_1755189196516.jpg";
 
 export default function Contact() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F5F0E8] to-[#E8DDD4]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#064F8C] to-[#0A5A9C] text-white py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
+      <section 
+        className="relative py-16 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#064F8C]/80 to-[#0A5A9C]/80"></div>
+        <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
           <h1 className="text-5xl font-bold mb-4 gold-text-static">Kontakt & Vanliga Frågor</h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Vi är här för att hjälpa dig. Kontakta oss på det sätt som passar dig bäst, eller hitta svar på vanliga frågor nedan.
