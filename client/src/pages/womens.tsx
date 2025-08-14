@@ -49,9 +49,9 @@ export default function Womens() {
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex text-sm">
-            <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
+            <Link href="/" className="text-gray-500 hover:text-gray-700">Hem</Link>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900">Women's Used</span>
+            <span className="text-gray-900">Använda Trosor</span>
           </nav>
         </div>
       </div>
@@ -59,22 +59,22 @@ export default function Womens() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-light text-[#2D3748] uppercase tracking-widest mb-4">WOMEN'S USED</h1>
-          <p className="text-[#4A5568] max-w-2xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl font-cormorant font-bold text-[#064F8C] mb-4">Använda Trosor</h1>
+          <p className="text-lg text-[#064F8C]/80 max-w-2xl mx-auto font-dm-sans">
             Exklusiva använda damplagg från verifierade nordiska kvinnor
           </p>
         </div>
 
         {/* Filters Bar */}
-        <div className="border-b border-gray-200 mb-8 pb-4">
+        <div className="border-b border-[#064F8C]/20 mb-8 pb-6">
           <div className="flex flex-wrap items-center gap-6">
             {/* Model Filter */}
             <div className="flex gap-4">
               <Select value={selectedModel} onValueChange={setSelectedModel}>
-                <SelectTrigger className="w-48 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm">
+                <SelectTrigger className="w-48 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
                   <SelectValue placeholder="Välj modell" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="font-dm-sans">
                   <SelectItem value="all">Alla modeller</SelectItem>
                   {availableModels.map((model) => (
                     <SelectItem key={model} value={model}>
@@ -85,11 +85,11 @@ export default function Womens() {
               </Select>
               
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-32 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm">
-                  <SelectValue placeholder="Sort by" />
+                <SelectTrigger className="w-40 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
+                  <SelectValue placeholder="Sortera" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="price-high">Price: High to Low</SelectItem>
+                <SelectContent className="font-dm-sans">
+                  <SelectItem value="price-high">Pris: Hög till låg</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -98,7 +98,7 @@ export default function Womens() {
 
         {/* Results count */}
         <div className="mb-6">
-          <p className="text-gray-600">
+          <p className="text-[#064F8C]/70 font-dm-sans">
             {isLoading ? "Laddar..." : `${sortedProducts.length} använda trosor`}
           </p>
         </div>
@@ -115,12 +115,12 @@ export default function Womens() {
             ))
           ) : sortedProducts.length === 0 ? (
             <div className="col-span-full text-center py-12">
-              <p className="text-gray-500 text-lg">Inga produkter från vald modell.</p>
+              <p className="text-[#064F8C]/70 text-lg font-dm-sans">Inga produkter från vald modell.</p>
               <Button 
                 onClick={() => {
                   setSelectedModel("all");
                 }}
-                className="mt-4"
+                className="mt-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] hover:from-[#B8941F] hover:to-[#E6C200] text-white font-dm-sans font-medium"
               >
                 Visa alla modeller
               </Button>
