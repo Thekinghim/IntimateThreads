@@ -107,7 +107,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
               <h4 style="color: #064F8C; font-weight: 600; margin: 0 0 16px 0;">Vill du göra en ny beställning?</h4>
               <p style="color: #4A5568; margin: 0;">
                 Du kan påbörja en ny order genom att besöka vår hemsida: 
-                <a href="https://www.scandiscent.com/womens" style="color: #064F8C; text-decoration: underline; font-weight: 500;">scandiscent.com</a>
+                <a href="https://www.scandiscent.se/womens" style="color: #064F8C; text-decoration: underline; font-weight: 500;">scandiscent.se</a>
               </p>
             </div>
           </div>
@@ -148,20 +148,18 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
 
                 <!-- Customer Information -->
                 <div style="border-top: 2px solid rgba(6, 79, 140, 0.2); padding-top: 24px;">
-                  <div style="display: flex; flex-wrap: wrap; gap: 24px;">
-                    <div style="flex: 1; min-width: 120px;">
-                      <h4 style="color: #064F8C; font-weight: 600; margin: 0 0 8px 0;">Kontaktinformation</h4>
-                      <div style="color: #4A5568; font-size: 14px;">
-                        <p style="margin: 0 0 4px 0;">${data.customerName}</p>
-                        <p style="margin: 0;">${data.customerEmail}</p>
-                      </div>
+                  <div style="margin-bottom: 16px;">
+                    <h4 style="color: #064F8C; font-weight: 600; margin: 0 0 8px 0;">Kontaktinformation</h4>
+                    <div style="color: #4A5568; font-size: 14px;">
+                      <p style="margin: 0 0 4px 0;">${data.customerName}</p>
+                      <p style="margin: 0;">${data.customerEmail}</p>
                     </div>
-                    
-                    <div style="flex: 1; min-width: 120px;">
-                      <h4 style="color: #064F8C; font-weight: 600; margin: 0 0 8px 0;">Betalningsmetod</h4>
-                      <div style="color: #4A5568; font-size: 14px;">
-                        <p style="margin: 0; text-transform: capitalize;">${data.paymentMethod}</p>
-                      </div>
+                  </div>
+                  
+                  <div>
+                    <h4 style="color: #064F8C; font-weight: 600; margin: 0 0 8px 0;">Betalningsmetod</h4>
+                    <div style="color: #4A5568; font-size: 14px;">
+                      <p style="margin: 0; text-transform: capitalize;">${data.paymentMethod}</p>
                     </div>
                   </div>
                 </div>
@@ -189,7 +187,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
           </div>
           
           <div style="color: #4A5568; font-size: 12px;">
-            <p style="margin: 0 0 4px 0; font-weight: 500;">www.scandiscent.com</p>
+            <p style="margin: 0 0 4px 0; font-weight: 500;">www.scandiscent.se</p>
             <p style="margin: 0 0 4px 0;">Stockholm, Sverige</p>
             <p style="margin: 16px 0 0 0; color: #064F8C; font-weight: 500;">© 2025 ScandiScent. Alla rättigheter förbehållna.</p>
           </div>

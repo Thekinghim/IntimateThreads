@@ -129,21 +129,19 @@ export default function EmailPreview() {
                   </div>
 
                   {/* Customer Information */}
-                  <div className="border-t-2 border-[#064F8C]/20 pt-6">
-                    <div className="flex flex-wrap gap-6">
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-[#064F8C] font-semibold mb-2">Kontaktinformation</h4>
-                        <div className="text-[#4A5568] text-sm">
-                          <p className="mb-1">{testOrderData.customerName}</p>
-                          <p>{testOrderData.customerEmail}</p>
-                        </div>
+                  <div className="border-t-2 border-[#064F8C]/20 pt-6 space-y-4">
+                    <div>
+                      <h4 className="text-[#064F8C] font-semibold mb-2">Kontaktinformation</h4>
+                      <div className="text-[#4A5568] text-sm">
+                        <p className="mb-1">{testOrderData.customerName}</p>
+                        <p>{testOrderData.customerEmail}</p>
                       </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-[#064F8C] font-semibold mb-2">Betalningsmetod</h4>
-                        <div className="text-[#4A5568] text-sm">
-                          <p className="capitalize">{testOrderData.paymentMethod}</p>
-                        </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-[#064F8C] font-semibold mb-2">Betalningsmetod</h4>
+                      <div className="text-[#4A5568] text-sm">
+                        <p className="capitalize">{testOrderData.paymentMethod}</p>
                       </div>
                     </div>
                   </div>
@@ -177,7 +175,7 @@ export default function EmailPreview() {
             </div>
             
             <div className="text-[#4A5568] text-xs space-y-1">
-              <p className="font-medium">www.scandiscent.com</p>
+              <p className="font-medium">www.scandiscent.se</p>
               <p>Stockholm, Sverige</p>
               <p className="pt-2 text-[#064F8C] font-medium">© 2025 ScandiScent. Alla rättigheter förbehållna.</p>
             </div>
