@@ -45,7 +45,7 @@ export default function BecomeModel() {
                     id="email"
                     type="email"
                     placeholder="Email"
-                    className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
 
@@ -167,7 +167,7 @@ export default function BecomeModel() {
                 </Label>
                 <Textarea
                   id="hearAbout"
-                  className="min-h-[80px] text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                  className="min-h-[80px] text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                 />
               </div>
 
@@ -177,7 +177,7 @@ export default function BecomeModel() {
                 <Textarea
                   id="message"
                   placeholder="Include anything extra you want to say."
-                  className="min-h-[120px] text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                  className="min-h-[120px] text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent placeholder:text-[#064F8C]/60"
                 />
               </div>
 
