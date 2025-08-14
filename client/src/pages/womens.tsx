@@ -50,15 +50,10 @@ export default function Womens() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="text-center mb-12 relative py-20 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/60 to-[#2D3748]/80 rounded-xl">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
-            <span className="block gold-text-static italic tracking-wider text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-extrabold drop-shadow-lg" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-              Använda Trosor
-            </span>
+        <div className="text-center mb-12">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-[#064F8C] leading-none mb-8 tracking-tight" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+            Använda Trosor
           </h1>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto font-dm-sans font-light drop-shadow-md">
-            Exklusiva använda damplagg från verifierade nordiska kvinnor
-          </p>
         </div>
 
         {/* Filters Bar */}

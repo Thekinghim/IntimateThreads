@@ -87,13 +87,17 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
       
       <div className="mt-3">
         <Button 
-          onClick={handleAddToCart}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = `/product/${product.id}`;
+          }}
           disabled={!product.isAvailable}
           variant="outline"
           size="sm"
           className="w-full text-xs font-medium uppercase tracking-wide border-[#111B3E] text-[#111B3E] bg-white hover:bg-[#111B3E] hover:text-white transition-all duration-200"
         >
-          {product.isAvailable ? "Lägg till" : "Slutsåld"}
+          {product.isAvailable ? "Visa mer" : "Slutsåld"}
         </Button>
       </div>
     </div>
