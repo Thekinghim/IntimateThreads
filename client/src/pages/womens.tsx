@@ -7,10 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Link } from "wouter";
 import { useState } from "react";
 import { type ProductWithSeller } from "@shared/schema";
-import { Search } from "lucide-react";
+
 
 export default function Womens() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedModel, setSelectedModel] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
 
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
@@ -26,13 +26,12 @@ export default function Womens() {
     !product.category // Default to women's if no category
   ) || [];
 
+  // Get unique models from products
+  const availableModels = [...new Set(womensProducts.map(product => product.seller.alias))];
+
   const filteredProducts = womensProducts.filter((product) => {
-    const matchesSearch = 
-      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.seller.alias.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    return matchesSearch && product.isAvailable;
+    const matchesModel = selectedModel === "all" || product.seller.alias === selectedModel;
+    return matchesModel && product.isAvailable;
   });
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -73,19 +72,22 @@ export default function Womens() {
         {/* Filters Bar */}
         <div className="border-b border-gray-200 mb-8 pb-4">
           <div className="flex flex-wrap items-center gap-6">
-            {/* Search */}
-            <div className="relative flex-1 min-w-80">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#064F8C]" />
-              <Input
-                placeholder="Search products, sellers..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm placeholder:text-[#064F8C]/60 focus:border-[#064F8C] focus:ring-2 focus:ring-[#064F8C]/20"
-              />
-            </div>
-            
-            {/* Sort dropdown */}
+            {/* Model Filter */}
             <div className="flex gap-4">
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="w-48 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm">
+                  <SelectValue placeholder="Välj modell" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Alla modeller</SelectItem>
+                  {availableModels.map((model) => (
+                    <SelectItem key={model} value={model}>
+                      {model}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-32 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm">
                   <SelectValue placeholder="Sort by" />
@@ -119,14 +121,14 @@ export default function Womens() {
             ))
           ) : sortedProducts.length === 0 ? (
             <div className="col-span-full text-center py-12">
-              <p className="text-gray-500 text-lg">No products found matching your search.</p>
+              <p className="text-gray-500 text-lg">Inga produkter från vald modell.</p>
               <Button 
                 onClick={() => {
-                  setSearchTerm("");
+                  setSelectedModel("all");
                 }}
                 className="mt-4"
               >
-                Clear Search
+                Visa alla modeller
               </Button>
             </div>
           ) : (
