@@ -206,8 +206,24 @@ export default function Contact() {
                   Populära tjejer kan ha 10–20+ beställningar i kö vid varje given tidpunkt.
                 </p>
                 <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed mt-3">
-                  Genomsnittlig leveranstid är 2–3 veckor. Populära modeller kan ta 3–5 veckor eller längre. 
-                  Varje produkt tillverkas personligt när beställningen görs.
+                  Varje par trosor måste bäras under den fullständiga begärda tiden (1–3 dagar eller upp till en vecka), 
+                  och alla beställningar behandlas i ordning efter när de kom in.
+                </p>
+                <div className="bg-[#064F8C]/5 rounded-lg p-4 mt-4">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-[#064F8C]">Genomsnittlig leveranstid:</span>
+                      <span className="font-bold text-[#064F8C]">2–3 veckor</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-[#064F8C]">Populära modeller:</span>
+                      <span className="font-bold text-[#064F8C]">3–5 veckor eller längre</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed mt-3">
+                  Om det uppstår oväntade förseningar kommer vi att kontakta dig. Eftersom detta inte är lagervaror, 
+                  uppskattar vi verkligen ditt tålamod medan våra modeller uppfyller varje beställning personligt och med omsorg.
                 </p>
               </CardContent>
             </Card>
