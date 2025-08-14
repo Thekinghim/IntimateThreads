@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ArrowLeft, MapPin, Calendar, Package, Shield, Star, Users, Clock, CheckCircle, Award, Heart } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Package, Shield, Star, Users, Clock, CheckCircle, Award, Heart, PenTool } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
@@ -383,6 +383,13 @@ export default function Product() {
                   <div>
                     <span className="font-medium">Över 10 000 nöjda kunder</span>
                     <p className="text-gray-600">Skandinaviens mest betrodda plattform</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <PenTool className="h-4 w-4 text-pink-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium">+ Ett handskrivet kort från din modell</span>
+                    <p className="text-gray-600">Personligt meddelande medföljer varje beställning</p>
                   </div>
                 </div>
               </div>
