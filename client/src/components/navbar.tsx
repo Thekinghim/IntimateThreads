@@ -112,8 +112,8 @@ export default function Navbar() {
             </Button>
             
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingBag className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="relative hover:bg-[#064F8C]/10 hover:text-[#064F8C]">
+                <ShoppingBag className="h-5 w-5 text-[#064F8C]" />
                 {itemCount > 0 && (
                   <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs gold-accent text-[#111B3E] font-semibold">
                     {itemCount}

@@ -100,7 +100,7 @@ export default function Cart() {
                           <p className="text-xs text-gray-500 mb-1">Storlek: {item.size}</p>
                           <button
                             onClick={() => removeItem(item.id)}
-                            className="text-xs text-red-500 hover:text-red-700"
+                            className="text-xs text-[#064F8C] hover:text-[#0A5A9C]"
                           >
                             Ta bort
                           </button>
@@ -150,7 +150,7 @@ export default function Cart() {
                           <p className="text-sm text-gray-500 mb-1">Storlek: {item.size}</p>
                           <button
                             onClick={() => removeItem(item.id)}
-                            className="text-sm text-red-500 hover:text-red-700"
+                            className="text-sm text-[#064F8C] hover:text-[#0A5A9C]"
                           >
                             Ta bort
                           </button>
@@ -198,7 +198,7 @@ export default function Cart() {
               {/* Continue Shopping */}
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <Link href="/womens">
-                  <Button variant="ghost" className="text-blue-600 hover:text-blue-800">
+                  <Button variant="ghost" className="text-[#064F8C] hover:text-[#0A5A9C] hover:bg-[#064F8C]/5">
                     ← Fortsätt handla
                   </Button>
                 </Link>
