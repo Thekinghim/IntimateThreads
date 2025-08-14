@@ -44,7 +44,7 @@ export default function Contact() {
                       <span className="text-gray-600">Inom 1-2 dagar</span>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
                       <span className="font-medium text-[#064F8C]">Språk:</span>
                       <div className="flex flex-wrap gap-2">
                         <div className="flex items-center gap-1">
@@ -62,6 +62,23 @@ export default function Contact() {
                         <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">EN</Badge>
                           <span className="text-sm text-[#064F8C]">Engelska</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div>
+                        <div className="font-medium text-[#064F8C] text-sm">Kundsupport</div>
+                        <div className="text-xs text-gray-600">Tillgänglig 24/7 via vårt säkra meddelandesystem</div>
+                      </div>
+                      <div>
+                        <div className="font-medium text-[#064F8C] text-sm">Svarstid</div>
+                        <div className="text-xs text-gray-600">Inom 2 timmar, oftast mycket snabbare</div>
+                      </div>
+                      <div className="pt-2">
+                        <div className="flex items-center gap-2 text-[#064F8C]">
+                          <Clock className="w-3 h-3" />
+                          <span className="text-xs">Grundat 2023 • Över 1,000 nöjda kunder</span>
                         </div>
                       </div>
                     </div>
