@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ShoppingBag, Menu, Globe } from "lucide-react";
+import { ShoppingBag, Menu, Globe, MessageCircle } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { useState } from "react";
 import { useLanguage, useTranslations, getLanguageName, type Language } from "@/hooks/useLanguage";
@@ -54,9 +54,12 @@ export default function Navbar() {
               </span>
             </Link>
             <Link href="/contact">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
-                Kontakt
-              </span>
+              <div className="flex items-center gap-1 text-[#064F8C] hover:text-[#111B3E] transition-colors">
+                <MessageCircle className="h-4 w-4" />
+                <span className="text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
+                  Kontakt
+                </span>
+              </div>
             </Link>
           </div>
 
