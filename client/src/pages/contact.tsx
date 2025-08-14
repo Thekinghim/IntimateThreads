@@ -199,11 +199,15 @@ export default function Contact() {
             <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
               <CardContent className="p-8">
                 <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
-                  Hur lång tid tar det att få min beställning?
+                  Hur lång tid tar det för trosorna att komma fram?
                 </h3>
                 <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
+                  Våra modeller är alla amatörer med riktiga liv – de flesta är studenter eller arbetar heltid. 
+                  Populära tjejer kan ha 10–20+ beställningar i kö vid varje given tidpunkt.
+                </p>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed mt-3">
                   Genomsnittlig leveranstid är 2–3 veckor. Populära modeller kan ta 3–5 veckor eller längre. 
-                  Alla våra modeller är amatörer med riktiga liv, och varje produkt tillverkas personligt när beställningen görs.
+                  Varje produkt tillverkas personligt när beställningen görs.
                 </p>
               </CardContent>
             </Card>
