@@ -44,7 +44,8 @@ export default function ProductCard({ product }: ProductCardProps) {
       return <Badge className="gold-accent text-[#111B3E] font-semibold">Ny</Badge>;
     }
     
-    return <Badge variant="secondary">Tillgänglig</Badge>;
+    // Don't show any badge for available products - it's redundant
+    return null;
   };
 
   return (
