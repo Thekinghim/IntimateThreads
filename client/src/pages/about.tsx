@@ -113,14 +113,6 @@ export default function About() {
                 </CardContent>
               </Card>
             </div>
-            
-            <div className="bg-white/60 p-4 rounded-2xl">
-              <img 
-                src={heartUnderwearImage} 
-                alt="Exklusiva hjärt-trosor" 
-                className="w-full h-auto rounded-xl object-cover"
-              />
-            </div>
           </div>
         </div>
       </section>
