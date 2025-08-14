@@ -11,33 +11,13 @@ interface KitAceProductCardProps {
   product: ProductWithSeller;
 }
 
-function calculatePriceWithWearDays(basePrice: string, wearDays: number): number {
-  const base = parseFloat(basePrice);
-  const daysPricing = {
-    0: 0,    // Ny
-    1: 500,  // 1 dag
-    2: 1000, // 2 dagar
-    3: 1500, // 3 dagar
-  };
-  
-  if (wearDays <= 3) {
-    return base + (daysPricing[wearDays as keyof typeof daysPricing] || 0);
-  } else if (wearDays >= 4 && wearDays <= 7) {
-    return base + 2000; // 4-7 dagar
-  } else if (wearDays >= 8) {
-    return base + 3000; // 8+ dagar
-  }
-  
-  return base;
-}
-
 export default function KitAceProductCard({ product }: KitAceProductCardProps) {
   const { addItem } = useCartStore();
   const { toast } = useToast();
-  const [selectedWearDays, setSelectedWearDays] = useState(product.wearDays || 0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const finalPrice = calculatePriceWithWearDays(product.priceKr, selectedWearDays);
+  const salePrice = 300; // All underwear now has sale price of 300kr
+  const originalPrice = 500; // All underwear original price is 500kr
   
   const frontImageUrl = getProductImageUrl(product.imageUrl || "");
   const backImageUrl = getBackImageUrl(product.imageUrl || "");
@@ -51,8 +31,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
       title: product.title,
       sellerId: product.sellerId,
       sellerAlias: product.seller.alias,
-      priceKr: finalPrice,
-      wearDays: selectedWearDays,
+      priceKr: salePrice,
       imageUrl: product.imageUrl || "",
       size: product.size,
     });
@@ -82,47 +61,26 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
           <h3 className="text-sm font-light text-[#111B3E] uppercase tracking-wide">
             {product.title}
           </h3>
-          <p className="text-sm text-[#064F8C]">{product.seller.alias}</p>
-          <div className="space-y-2">
-            {/* Days selector */}
-            <div className="flex flex-wrap gap-1">
-              {[0, 1, 2, 3, 4, 7, 10].map((days) => (
-                <button
-                  key={days}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setSelectedWearDays(days);
-                  }}
-                  className={`px-2 py-1 text-xs border rounded transition-colors ${
-                    selectedWearDays === days
-                      ? 'border-[#111B3E] bg-[#111B3E] text-[#FEFBEA]'
-                      : 'border-[#064F8C] text-[#064F8C] hover:border-[#111B3E]'
-                  }`}
-                >
-                  {days === 0 ? 'Ny' : `${days}d`}
-                </button>
-              ))}
-            </div>
+          
+          {/* Model link */}
+          <span 
+            className="text-sm text-[#064F8C] hover:text-[#111B3E] transition-colors cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.location.href = `/model/${product.seller.alias.toLowerCase()}`;
+            }}
+          >
+            Modell - {product.seller.alias}
+          </span>
 
-            {/* Price display */}
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col">
-                {selectedWearDays > 0 && (
-                  <span className="text-xs text-[#064F8C]/70 line-through">
-                    {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
-                  </span>
-                )}
-                <p className="text-sm font-medium text-[#111B3E]">
-                  {finalPrice.toLocaleString('sv-SE')} kr
-                </p>
-              </div>
-              {selectedWearDays > 0 && (
-                <span className="text-xs gold-text font-medium">
-                  +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr
-                </span>
-              )}
-            </div>
+          {/* Price display with sale price */}
+          <div className="flex flex-col">
+            <span className="text-xs text-[#064F8C]/70 line-through">
+              {originalPrice} kr
+            </span>
+            <p className="text-sm font-medium text-[#111B3E]">
+              {salePrice} kr
+            </p>
           </div>
         </div>
       </Link>
@@ -135,7 +93,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
           size="sm"
           className="w-full text-xs font-medium uppercase tracking-wide border-[#111B3E] text-[#111B3E] bg-white hover:bg-[#111B3E] hover:text-white transition-all duration-200"
         >
-          {product.isAvailable ? "Quick Add" : "Sold Out"}
+          {product.isAvailable ? "Lägg till" : "Slutsåld"}
         </Button>
       </div>
     </div>
