@@ -7,7 +7,7 @@ import heroImage from "@assets/IMG_2353_1755189196516.jpg";
 
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: "center 95%" }}>
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Hero Section */}
       <section 
         className="relative py-16 bg-cover bg-center bg-no-repeat"
@@ -23,12 +23,11 @@ export default function Contact() {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2D3748]/60 to-[#2D3748]/40"></div>
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
           {/* Detailed Information */}
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-white text-center">Kundsupport</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[#064F8C] text-center">Kundsupport</h2>
             <div className="space-y-6">
               <Card className="bg-white/60 border-[#064F8C]/20 p-6">
                 <CardContent className="p-0">
@@ -97,10 +96,9 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative py-20 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: "center 95%" }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/60 via-[#2D3748]/70 to-[#2D3748]/80"></div>
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 relative z-10">
-          <h2 className="font-cormorant font-bold text-5xl text-white text-center mb-16">
+      <section className="bg-gradient-to-b from-white to-[#F5F1E8] py-20">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10">
+          <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] text-center mb-16">
             Vanliga Frågor
           </h2>
           
