@@ -96,7 +96,7 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-gradient-to-b from-white to-[#F5F1E8] py-20">
+      <section className="bg-[#F5F1E8] py-20">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10">
           <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] text-center mb-16">
             Vanliga Frågor
