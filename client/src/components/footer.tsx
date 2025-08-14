@@ -5,8 +5,8 @@ export default function Footer() {
   return (
     <footer className="bg-[#F5F1E8] text-[#2D3748] py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div>
             <div className="flex items-center space-x-4 mb-8">
               <img 
                 src={logoImage} 
@@ -21,24 +21,23 @@ export default function Footer() {
             <p className="text-[#064F8C] mb-10 max-w-lg text-xl leading-relaxed font-light">
               Exklusiva, personliga plagg från nordiska kvinnor. Vi värnar om diskretion, kvalitet och integritet i varje transaktion.
             </p>
-
           </div>
           
           <div>
-            <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#064F8C]">Information</h5>
+            <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#064F8C]">Navigation</h5>
             <ul className="space-y-6 text-[#064F8C]">
               <li><Link href="/about" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Om oss</Link></li>
               <li><Link href="/how-it-works" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Så funkar det</Link></li>
-              <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Bli en modell</a></li>
               <li><Link href="/news" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Nyheter</Link></li>
               <li><Link href="/contact" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Kontakt & vanliga frågor</Link></li>
-              <li><Link href="/feedback-and-tips" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Feedback & Gåvor</Link></li>
             </ul>
           </div>
           
           <div>
-            <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#064F8C]">Villkor</h5>
+            <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#064F8C]">Support & Villkor</h5>
             <ul className="space-y-6 text-[#064F8C]">
+              <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Bli en modell</a></li>
+              <li><Link href="/feedback-and-tips" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Feedback & Gåvor</Link></li>
               <li><Link href="/privacy-policy" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Integritetspolicy</Link></li>
               <li><Link href="/terms-of-service" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Användarvillkor</Link></li>
             </ul>
