@@ -156,29 +156,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-b from-[#064F8C] to-[#111B3E] py-24">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 text-center">
-          <h2 className="font-cormorant font-bold text-5xl text-white mb-8">
-            Redo att börja?
-          </h2>
-          <p className="text-white/90 text-xl mb-12 font-dm-sans max-w-3xl mx-auto leading-relaxed">
-            Utforska vår exklusiva kollektion och upplev diskret shopping på en ny nivå.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/womens">
-              <Button size="lg" className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg">
-                Utforska Kollektion
-              </Button>
-            </Link>
-            <Link href="/">
-              <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-[#064F8C] font-dm-sans font-medium px-12 py-6 text-xl rounded-3xl">
-                Tillbaka till startsidan
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       {/* Newsletter Section */}
       <section className="py-8 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
