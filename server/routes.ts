@@ -842,6 +842,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Test email endpoint
+  app.post("/api/test-email", async (req, res) => {
+    try {
+      const emailData = req.body;
+      const success = await sendOrderConfirmationEmail({
+        customerName: emailData.customerName || "Test Användare",
+        customerEmail: emailData.customerEmail,
+        orderId: emailData.orderId || "test-" + Date.now(),
+        products: emailData.products || [{ name: "Test Produkt", quantity: 1, price: 2999 }],
+        totalAmount: emailData.totalAmount || 2999,
+        paymentMethod: emailData.paymentMethod || "test",
+        shippingAddress: emailData.shippingAddress || "Test Adress\n123 45 Stockholm\nSverige"
+      });
+      
+      if (success) {
+        res.json({ message: "Test email sent successfully" });
+      } else {
+        res.status(500).json({ message: "Failed to send test email" });
+      }
+    } catch (error) {
+      console.error("Test email error:", error);
+      res.status(500).json({ message: "Test email failed", error: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
