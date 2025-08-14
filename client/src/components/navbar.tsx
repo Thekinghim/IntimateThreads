@@ -54,12 +54,9 @@ export default function Navbar() {
               </span>
             </Link>
             <Link href="/contact">
-              <div className="flex items-center gap-1 text-[#064F8C] hover:text-[#111B3E] transition-colors">
-                <MessageCircle className="h-4 w-4" />
-                <span className="text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
-                  Kontakt
-                </span>
-              </div>
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
+                Kontakt
+              </span>
             </Link>
           </div>
 
