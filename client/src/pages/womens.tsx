@@ -11,7 +11,7 @@ import { type ProductWithSeller } from "@shared/schema";
 
 export default function Womens() {
   const [selectedModel, setSelectedModel] = useState("all");
-  const [sortBy, setSortBy] = useState("newest");
+  const [sortBy, setSortBy] = useState("price-low");
 
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
@@ -40,8 +40,6 @@ export default function Womens() {
         return 300 - 300; // All same price now
       case "price-high":
         return 300 - 300; // All same price now
-      case "newest":
-        return (b.createdAt ? new Date(b.createdAt).getTime() : 0) - (a.createdAt ? new Date(a.createdAt).getTime() : 0);
       default:
         return 0;
     }
@@ -93,7 +91,6 @@ export default function Womens() {
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="newest">Newest</SelectItem>
                   <SelectItem value="price-low">Price: Low to High</SelectItem>
                   <SelectItem value="price-high">Price: High to Low</SelectItem>
                 </SelectContent>
