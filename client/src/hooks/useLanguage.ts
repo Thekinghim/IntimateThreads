@@ -27,7 +27,7 @@ export const translations = {
     
     // Home page
     heroTitle: 'Exklusiva Nordiska Plagg',
-    heroSubtitle: 'Diskret marketplace för intima plagg från verifierade nordiska kvinnor',
+    heroSubtitle: 'Diskret marketplace för använda underkläder från verifierade nordiska kvinnor',
     exploreCollection: 'Använda trosor',
     
     // How it works
