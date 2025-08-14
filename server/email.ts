@@ -28,7 +28,9 @@ interface OrderEmailData {
 function generateOrderConfirmationHTML(data: OrderEmailData): string {
   const productsHTML = data.products.map(product => `
     <div style="display: flex; align-items: center; padding: 16px; margin-bottom: 12px; border: 2px solid rgba(6, 79, 140, 0.1); border-radius: 8px; background-color: #F5F1E8; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); border-radius: 8px; margin-right: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #F8BBD9 0%, #E879F9 100%); border-radius: 8px; margin-right: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 32px; height: 32px; background-color: rgba(255,255,255,0.5); border-radius: 4px;"></div>
+      </div>
       <div style="flex: 1;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <h4 style="color: #064F8C; font-size: 16px; font-weight: 600; margin: 0;">${product.name}</h4>
@@ -56,8 +58,8 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
     <body style="margin: 0; padding: 0; background-color: #F5F1E8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #FFFFFF;">
         <!-- Header -->
-        <div style="background: linear-gradient(135deg, #111B3E 0%, #064F8C 100%); color: #FFFFFF; text-align: center; padding: 32px;">
-          <h1 style="font-size: 24px; font-weight: bold; letter-spacing: 2px; margin: 0; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">scandiscent</h1>
+        <div style="background: linear-gradient(135deg, #111B3E 0%, #064F8C 100%); color: #FFFFFF; text-align: center; padding: 48px 32px;">
+          <h1 style="font-size: 36px; font-weight: bold; letter-spacing: 4px; margin: 0; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ScandiScent</h1>
         </div>
 
         <!-- Success Message -->
@@ -165,12 +167,13 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
 
         <!-- Footer -->
         <div style="background-color: #F5F1E8; padding: 48px 32px; text-align: center; border-top: 4px solid rgba(6, 79, 140, 0.1);">
-          <div style="margin-bottom: 32px;">
-            <h3 style="color: #064F8C; font-size: 18px; font-weight: bold; margin: 0 0 16px 0; font-family: 'Cormorant Garamond', serif;">Följ oss på sociala medier</h3>
-            <div style="display: flex; justify-content: center; gap: 16px;">
-              <div style="width: 32px; height: 32px; background-color: #064F8C; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
-              <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
-              <div style="width: 32px; height: 32px; background-color: #111B3E; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+          <!-- Newsletter Signup -->
+          <div style="margin-bottom: 32px; max-width: 400px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #064F8C; font-size: 18px; font-weight: bold; margin: 0 0 16px 0; font-family: 'Cormorant Garamond', serif;">Prenumerera på vårt nyhetsbrev</h3>
+            <p style="color: #4A5568; font-size: 14px; margin: 0 0 16px 0;">Få exklusiva erbjudanden och nyheter direkt i din inkorg</p>
+            <div style="display: flex; gap: 8px;">
+              <input type="email" placeholder="Din e-postadress" style="flex: 1; padding: 12px 16px; border: 1px solid rgba(6, 79, 140, 0.2); border-radius: 8px; background-color: #FFFFFF; color: #064F8C; font-size: 14px;">
+              <button style="padding: 12px 24px; background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); color: #064F8C; font-weight: 500; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">Prenumerera</button>
             </div>
           </div>
           
@@ -178,7 +181,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
             <p style="margin: 0 0 4px 0; font-weight: 500;">www.scandiscent.com</p>
             <p style="margin: 0 0 4px 0;">Stockholm, Sverige</p>
             <p style="margin: 0 0 4px 0;">Org nr: 556-XXX-XXXX</p>
-            <p style="margin: 16px 0 0 0; color: #064F8C; font-weight: 500;">© 2025 Scandiscent. Alla rättigheter förbehållna.</p>
+            <p style="margin: 16px 0 0 0; color: #064F8C; font-weight: 500;">© 2025 ScandiScent. Alla rättigheter förbehållna.</p>
           </div>
         </div>
       </div>

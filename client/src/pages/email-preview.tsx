@@ -30,13 +30,13 @@ export default function EmailPreview() {
         {/* Email Content Start */}
         <div className="max-w-2xl mx-auto bg-white">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#111B3E] to-[#064F8C] text-white text-center py-8">
-            <h1 className="text-2xl font-bold tracking-widest gold-text-static" style={{ 
+          <div className="bg-gradient-to-r from-[#111B3E] to-[#064F8C] text-white text-center py-12">
+            <h1 className="text-4xl font-bold tracking-widest gold-text-static" style={{ 
               background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
-            }}>scandiscent</h1>
+            }}>ScandiScent</h1>
           </div>
 
           {/* Success Message */}
@@ -86,9 +86,9 @@ export default function EmailPreview() {
               <div className="flex-1 min-w-0">
                 {testOrderData.products.map((product, index) => (
                   <div key={index} className="flex items-center p-4 mb-3 border-2 border-[#064F8C]/10 rounded-lg bg-[#F5F1E8] shadow-sm">
-                    <div className="w-12 h-12 gold-accent rounded-lg mr-4 flex-shrink-0 shadow-md" style={{
-                      background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%)'
-                    }}></div>
+                    <div className="w-12 h-12 bg-gradient-to-br from-pink-200 to-purple-300 rounded-lg mr-4 flex-shrink-0 shadow-md flex items-center justify-center">
+                      <div className="w-8 h-8 bg-white/50 rounded"></div>
+                    </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center">
                         <h4 className="text-[#064F8C] font-semibold">{product.name}</h4>
@@ -160,12 +160,19 @@ export default function EmailPreview() {
 
           {/* Footer */}
           <div className="bg-[#F5F1E8] px-8 py-12 text-center border-t-4 border-[#064F8C]/10">
-            <div className="mb-8">
-              <h3 className="text-lg font-bold text-[#064F8C] mb-4 font-cormorant">Följ oss på sociala medier</h3>
-              <div className="flex justify-center gap-4">
-                <div className="w-8 h-8 bg-[#064F8C] rounded-full shadow-md"></div>
-                <div className="w-8 h-8 bg-gradient-to-r from-[#FFD700] to-[#B8860B] rounded-full shadow-md"></div>
-                <div className="w-8 h-8 bg-[#111B3E] rounded-full shadow-md"></div>
+            {/* Newsletter Signup */}
+            <div className="mb-8 max-w-md mx-auto">
+              <h3 className="text-lg font-bold text-[#064F8C] mb-4 font-cormorant">Prenumerera på vårt nyhetsbrev</h3>
+              <p className="text-[#4A5568] text-sm mb-4">Få exklusiva erbjudanden och nyheter direkt i din inkorg</p>
+              <div className="flex gap-2">
+                <input 
+                  type="email" 
+                  placeholder="Din e-postadress"
+                  className="flex-1 px-4 py-2 border border-[#064F8C]/20 rounded-lg bg-white text-[#064F8C] placeholder-[#4A5568] focus:outline-none focus:ring-2 focus:ring-[#064F8C]/20"
+                />
+                <button className="px-6 py-2 bg-gradient-to-r from-[#FFD700] to-[#B8860B] text-[#064F8C] font-medium rounded-lg hover:shadow-md transition-shadow">
+                  Prenumerera
+                </button>
               </div>
             </div>
             
@@ -173,7 +180,7 @@ export default function EmailPreview() {
               <p className="font-medium">www.scandiscent.com</p>
               <p>Stockholm, Sverige</p>
               <p>Org nr: 556-XXX-XXXX</p>
-              <p className="pt-2 text-[#064F8C] font-medium">© 2025 Scandiscent. Alla rättigheter förbehållna.</p>
+              <p className="pt-2 text-[#064F8C] font-medium">© 2025 ScandiScent. Alla rättigheter förbehållna.</p>
             </div>
           </div>
         </div>
