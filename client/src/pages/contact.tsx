@@ -128,21 +128,7 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#F5D061]/10 to-[#F5D061]/5 border border-[#F5D061]/30 rounded-lg p-6">
-                    <h3 className="text-xl font-bold text-[#064F8C] mb-4 flex items-center gap-2">
-                      <MessageCircle className="h-5 w-5" />
-                      💌 Ett Meddelande från Ägaren
-                    </h3>
-                    <div className="space-y-3 text-gray-700">
-                      <p>
-                        Jag svarar personligen på varje kundemail själv. Vår webbplats växer snabbt, och jag gör mitt bästa 
-                        för att svara så snabbt som möjligt – men ha tålamod om det tar en dag eller två.
-                      </p>
-                      <p className="font-medium text-[#064F8C]">
-                        Ditt stöd betyder allt för oss – och för modellerna som gör detta möjligt.
-                      </p>
-                    </div>
-                  </div>
+                  
 
                   <div className="bg-[#064F8C]/5 border border-[#064F8C]/20 rounded-lg p-6 text-center">
                     <h3 className="text-xl font-bold text-[#064F8C] mb-4 flex items-center justify-center gap-2">
