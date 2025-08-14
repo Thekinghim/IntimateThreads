@@ -26,7 +26,7 @@ export default function About() {
           <div className="grid md:grid-cols-4 gap-6 mb-16">
             <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
               <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">10,000+</div>
+                <div className="text-3xl font-bold text-[#064F8C] mb-2">1,000+</div>
                 <div className="text-gray-600">Nöjda Kunder</div>
               </CardContent>
             </Card>
