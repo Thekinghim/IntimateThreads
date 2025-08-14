@@ -46,52 +46,7 @@ export default function About() {
                 </p>
               </div>
 
-              {/* Security & Contact Cards */}
-              <div className="space-y-6">
-                <Card className="bg-white/60 border-[#064F8C]/20 p-6">
-                  <CardContent className="p-0">
-                    <h3 className="text-xl font-bold mb-4">Säkerhet & Integritet</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <Badge variant="outline" className="border-[#064F8C] text-[#064F8C] mt-1">SSL</Badge>
-                        <div>
-                          <div className="font-medium text-[#064F8C] text-sm">256-bit SSL-kryptering</div>
-                          <div className="text-xs text-gray-600">All data skyddas med bankstandard kryptering</div>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Badge variant="outline" className="border-[#064F8C] text-[#064F8C] mt-1">GDPR</Badge>
-                        <div>
-                          <div className="font-medium text-[#064F8C] text-sm">GDPR-kompatibel</div>
-                          <div className="text-xs text-gray-600">Full efterlevnad av EU:s dataskyddsförordning</div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
 
-                <Card className="bg-white/60 border-[#064F8C]/20 p-6">
-                  <CardContent className="p-0">
-                    <h3 className="text-xl font-bold mb-4">Kontakta Oss</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <div className="font-medium text-[#064F8C] text-sm">Kundsupport</div>
-                        <div className="text-xs text-gray-600">Tillgänglig 24/7 via vårt säkra meddelandesystem</div>
-                      </div>
-                      <div>
-                        <div className="font-medium text-[#064F8C] text-sm">Svarstid</div>
-                        <div className="text-xs text-gray-600">Inom 2 timmar, oftast mycket snabbare</div>
-                      </div>
-                      <div className="pt-2">
-                        <div className="flex items-center gap-2 text-[#064F8C]">
-                          <Clock className="w-3 h-3" />
-                          <span className="text-xs">Grundat 2023 • Över 1,000 nöjda kunder</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
             </div>
             
             <div className="bg-white/60 p-4 rounded-2xl">
