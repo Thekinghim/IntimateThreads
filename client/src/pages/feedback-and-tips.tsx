@@ -16,11 +16,8 @@ export default function FeedbackAndTips() {
     email: "",
     modelName: "",
     orderNumber: "",
-    videoSatisfaction: "",
     pantiesSatisfaction: "",
     deliverySpeed: "",
-    videoAddOns: "",
-    modelPerformance: "",
     orderAgain: "",
     remainAnonymous: false,
     message: ""
@@ -51,11 +48,8 @@ export default function FeedbackAndTips() {
       email: "",
       modelName: "",
       orderNumber: "",
-      videoSatisfaction: "",
       pantiesSatisfaction: "",
       deliverySpeed: "",
-      videoAddOns: "",
-      modelPerformance: "",
       orderAgain: "",
       remainAnonymous: false,
       message: ""
@@ -155,24 +149,6 @@ export default function FeedbackAndTips() {
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <Label className="text-[#064F8C] font-medium">
-                      Hur nöjd var du med VIDEO? <span className="text-red-500">*</span>
-                    </Label>
-                    <Select value={formData.videoSatisfaction} onValueChange={(value) => setFormData(prev => ({ ...prev, videoSatisfaction: value }))}>
-                      <SelectTrigger className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]">
-                        <SelectValue placeholder="Välj din bedömning" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {ratingOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-[#064F8C] font-medium">
                       Hur nöjd var du med TROSORNA? <span className="text-red-500">*</span>
                     </Label>
                     <Select value={formData.pantiesSatisfaction} onValueChange={(value) => setFormData(prev => ({ ...prev, pantiesSatisfaction: value }))}>
@@ -194,46 +170,6 @@ export default function FeedbackAndTips() {
                       Vad tyckte du om beställningens LEVERANSHASTIGHET? <span className="text-red-500">*</span>
                     </Label>
                     <Select value={formData.deliverySpeed} onValueChange={(value) => setFormData(prev => ({ ...prev, deliverySpeed: value }))}>
-                      <SelectTrigger className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]">
-                        <SelectValue placeholder="Välj din bedömning" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {ratingOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-[#064F8C] font-medium">
-                      Inkluderade din modell alla VIDEO TILLÄGG? <span className="text-red-500">*</span>
-                    </Label>
-                    <Select value={formData.videoAddOns} onValueChange={(value) => setFormData(prev => ({ ...prev, videoAddOns: value }))}>
-                      <SelectTrigger className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]">
-                        <SelectValue placeholder="Välj din bedömning" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {ratingOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-[#064F8C] font-medium">
-                      Hur var MODELLENS PRESTATION och energi i videon? 
-                      <div className="text-sm text-gray-600 mt-1">
-                        (t.ex. verkade hon engagerad, onanerade med ansträngning, orgasm?)
-                      </div>
-                      <span className="text-red-500">*</span>
-                    </Label>
-                    <Select value={formData.modelPerformance} onValueChange={(value) => setFormData(prev => ({ ...prev, modelPerformance: value }))}>
                       <SelectTrigger className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]">
                         <SelectValue placeholder="Välj din bedömning" />
                       </SelectTrigger>
