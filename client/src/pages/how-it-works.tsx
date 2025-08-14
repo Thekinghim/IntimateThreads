@@ -19,14 +19,6 @@ export default function HowItWorks() {
       {/* Luxury How it Works */}
       <section className="py-16 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
-          <div className="text-center mb-16">
-            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
-              Så Funkar Det
-            </h3>
-            <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">
-              Enkel och diskret process från beställning till leverans
-            </p>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="text-center group">
