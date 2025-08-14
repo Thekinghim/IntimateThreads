@@ -8,6 +8,7 @@ import { Link } from "wouter";
 import { useState } from "react";
 import { PenTool } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
+import womensHeroImage from '@assets/cj4_1755033026450.jpg';
 
 
 export default function Womens() {
@@ -38,24 +39,31 @@ export default function Womens() {
 
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
-
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-none mb-8 tracking-tight gold-text-static" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+      {/* Hero Section */}
+      <div 
+        className="relative text-white py-32 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${womensHeroImage}')`
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="font-cormorant font-bold text-5xl md:text-6xl mb-4 drop-shadow-lg gold-text">
             Använda Trosor
           </h1>
-          <p className="text-xl md:text-2xl text-[#064F8C]/80 max-w-3xl mx-auto font-light leading-relaxed mb-6">
+          <p className="text-xl font-dm-sans text-white/95 max-w-3xl mx-auto drop-shadow-md mb-6">
             Exklusiva använda underkläder från verifierade nordiska kvinnor. Diskret och säkert med fullständig anonymitet.
           </p>
           
           {/* Handwritten Card Feature */}
-          <div className="flex items-center justify-center gap-3 text-lg text-pink-600 bg-pink-50 rounded-lg px-6 py-4 max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-3 text-lg text-pink-100 bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4 max-w-md mx-auto border border-white/30">
             <PenTool className="h-5 w-5" />
             <span className="font-medium">+ Ett handskrivet kort från din modell</span>
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
 
         {/* Filters and Results Row */}
         <div className="flex items-center justify-between mb-8">
