@@ -31,39 +31,36 @@ export default function Contact() {
             <div className="space-y-6">
               <Card className="bg-white/60 border-[#064F8C]/20 p-6">
                 <CardContent className="p-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Svarstider</h3>
-                      <div>
-                        <div className="font-medium text-[#064F8C]">Alla Frågor</div>
-                        <div className="text-gray-600">Inom 1-2 dagar</div>
-                      </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Mail className="h-4 w-4 text-[#064F8C]" />
+                      <span className="font-medium text-[#064F8C]">scandiscentswe@gmail.com</span>
                     </div>
                     
-                    <div>
-                      <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Kontakt & Språk</h3>
-                      <div className="mb-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Mail className="h-4 w-4 text-[#064F8C]" />
-                          <span className="font-medium text-[#064F8C]">scandiscentswe@gmail.com</span>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4 text-[#064F8C]" />
+                      <span className="font-medium text-[#064F8C]">Svarstid:</span>
+                      <span className="text-gray-600">Inom 1-2 dagar</span>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-medium text-[#064F8C]">Språk:</span>
+                      <div className="flex flex-wrap gap-2">
+                        <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">SE</Badge>
-                          <span>Svenska</span>
+                          <span className="text-sm">Svenska</span>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">NO</Badge>
-                          <span>Norska</span>
+                          <span className="text-sm">Norska</span>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">DK</Badge>
-                          <span>Danska</span>
+                          <span className="text-sm">Danska</span>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">EN</Badge>
-                          <span>Engelska</span>
+                          <span className="text-sm">Engelska</span>
                         </div>
                       </div>
                     </div>
