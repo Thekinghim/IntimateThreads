@@ -25,10 +25,11 @@ export default function Contact() {
       {/* Main Content */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
-          {/* Detailed Information */}
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-[#064F8C] text-center">Kundsupport</h2>
-            <div className="space-y-6">
+          {/* Contact Information and Track Order Side by Side */}
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-[#064F8C] text-center">Kundsupport</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Contact Information */}
               <Card className="bg-white/60 border-[#064F8C]/20 p-6">
                 <CardContent className="p-0">
                   <div className="space-y-4">
@@ -67,27 +68,27 @@ export default function Contact() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
-          </div>
 
-          {/* Track Order Button */}
-          <div className="max-w-md mx-auto mt-16 text-center">
-            <Card className="bg-white/60 border-[#064F8C]/20 p-8">
-              <CardContent className="p-0">
-                <div className="w-16 h-16 bg-[#064F8C]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Package className="w-8 h-8 text-[#064F8C]" />
-                </div>
-                <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Spåra Din Order</h3>
-                <p className="text-gray-600 mb-6">
-                  Har du redan gjort en beställning? Spåra din order och få uppdateringar i realtid.
-                </p>
-                <Link href="/track-order">
-                  <Button className="bg-[#064F8C] hover:bg-[#0A5A9C] text-white px-8 py-3 text-lg font-medium transition-colors duration-200">
-                    Spåra Order
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+              {/* Track Order */}
+              <Card className="bg-white/60 border-[#064F8C]/20 p-8">
+                <CardContent className="p-0">
+                  <div className="w-16 h-16 bg-[#064F8C]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Package className="w-8 h-8 text-[#064F8C]" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-[#064F8C] text-center">Spåra Din Order</h3>
+                  <p className="text-gray-600 mb-6 text-center">
+                    Har du redan gjort en beställning? Spåra din order och få uppdateringar i realtid.
+                  </p>
+                  <div className="text-center">
+                    <Link href="/track-order">
+                      <Button className="bg-[#064F8C] hover:bg-[#0A5A9C] text-white px-8 py-3 text-lg font-medium transition-colors duration-200">
+                        Spåra Order
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           
