@@ -147,7 +147,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData): Promise<
   try {
     const emailContent = {
       to: data.customerEmail,
-      from: 'viola.svea@gmail.com', // Using verified email from SendGrid account
+      from: 'scandiscent@gmail.com', // Using verified email from SendGrid account
       subject: `Orderbekräftelse - Order #${data.orderId.substring(0, 8)} | Scandiscent`,
       html: generateOrderConfirmationHTML(data),
     };
@@ -157,6 +157,9 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData): Promise<
     return true;
   } catch (error) {
     console.error('Failed to send order confirmation email:', error);
+    if (error.response?.body?.errors) {
+      console.error('SendGrid error details:', JSON.stringify(error.response.body.errors, null, 2));
+    }
     return false;
   }
 }
