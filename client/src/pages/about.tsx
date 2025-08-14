@@ -13,7 +13,7 @@ export default function About() {
       <section className="bg-gradient-to-b from-[#064F8C]/10 to-[#F5F1E8] py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 gold-text-static">Om Scandiscent</h1>
-          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-[#064F8C] leading-relaxed max-w-3xl mx-auto">
             Vi är Sveriges ledande plattform för diskret handel med använda intimplagg från verifierade nordiska kvinnor.
           </p>
         </div>
