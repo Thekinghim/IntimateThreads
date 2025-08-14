@@ -266,7 +266,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nowpayments/status", async (req, res) => {
     try {
       const response = await fetch(`${nowpaymentsBaseUrl}/status`, {
-        headers: { 'x-api-key': nowpaymentsApiKey }
+        headers: { 'x-api-key': nowpaymentsApiKey! }
       });
       const data = await response.json();
       res.json(data);
@@ -278,7 +278,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nowpayments/currencies", async (req, res) => {
     try {
       const response = await fetch(`${nowpaymentsBaseUrl}/currencies`, {
-        headers: { 'x-api-key': nowpaymentsApiKey }
+        headers: { 'x-api-key': nowpaymentsApiKey! }
       });
       const data = await response.json();
       res.json(data);
@@ -292,7 +292,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { amount, currency_from, currency_to } = req.query;
       
       const response = await fetch(`${nowpaymentsBaseUrl}/estimate?amount=${amount}&currency_from=${currency_from}&currency_to=${currency_to}`, {
-        headers: { 'x-api-key': nowpaymentsApiKey }
+        headers: { 'x-api-key': nowpaymentsApiKey! }
       });
       
       if (!response.ok) {
@@ -324,7 +324,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': nowpaymentsApiKey
+          'x-api-key': nowpaymentsApiKey!
         },
         body: JSON.stringify(paymentData)
       });
@@ -356,7 +356,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/nowpayments/payment/:payment_id", async (req, res) => {
     try {
       const response = await fetch(`${nowpaymentsBaseUrl}/payment/${req.params.payment_id}`, {
-        headers: { 'x-api-key': nowpaymentsApiKey }
+        headers: { 'x-api-key': nowpaymentsApiKey! }
       });
       const data = await response.json();
       res.json(data);
@@ -378,10 +378,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
         orderStatus = "cancelled";
       }
 
-      await storage.updateOrder(order_id, {
+      const updatedOrder = await storage.updateOrder(order_id, {
         paymentStatus: payment_status,
         status: orderStatus
       });
+
+      // Send order confirmation email when payment is finished
+      if (payment_status === "finished" && updatedOrder) {
+        try {
+          const product = await storage.getProduct(updatedOrder.productId);
+          await sendOrderConfirmationEmail({
+            customerName: updatedOrder.customerName || "Kund",
+            customerEmail: updatedOrder.customerEmail,
+            orderId: updatedOrder.id,
+            products: [{
+              name: product?.title || "Produkt",
+              quantity: 1,
+              price: parseFloat(updatedOrder.totalAmountKr)
+            }],
+            totalAmount: parseFloat(updatedOrder.totalAmountKr),
+            paymentMethod: updatedOrder.paymentMethod,
+            cryptoCurrency: updatedOrder.cryptoCurrency || undefined,
+            cryptoAmount: updatedOrder.cryptoAmount || undefined,
+            shippingAddress: updatedOrder.shippingAddress
+          });
+          console.log(`Order confirmation email sent for completed crypto payment: ${order_id}`);
+        } catch (emailError) {
+          console.error("Failed to send order confirmation email for webhook:", emailError);
+        }
+      }
 
       res.status(200).send("OK");
     } catch (error) {
@@ -520,7 +545,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Check if max usage reached
-      if (promoCode.maxUsage && promoCode.usageCount >= promoCode.maxUsage) {
+      if (promoCode.maxUsage && (promoCode.usageCount || 0) >= promoCode.maxUsage) {
         return res.status(400).json({ message: "Rabattkoden har uppnått maximal användning" });
       }
 
@@ -861,7 +886,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         res.status(500).json({ message: "Failed to send test email" });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Test email error:", error);
       res.status(500).json({ message: "Test email failed", error: error.message });
     }
