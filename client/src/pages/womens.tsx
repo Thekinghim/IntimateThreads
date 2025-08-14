@@ -102,7 +102,7 @@ export default function Womens() {
         {/* Results count */}
         <div className="mb-6">
           <p className="text-gray-600">
-            {isLoading ? "Loading..." : `${sortedProducts.length} products found`}
+            {isLoading ? "Laddar..." : `${sortedProducts.length} använda trosor`}
           </p>
         </div>
 
