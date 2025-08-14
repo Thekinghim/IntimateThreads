@@ -30,46 +30,46 @@ export default function BecomeModel() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Name */}
                 <div>
-                  <Label htmlFor="name" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Name</Label>
+                  <Label htmlFor="name" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Namn</Label>
                   <Input
                     id="name"
-                    placeholder="Name"
+                    placeholder="Namn"
                     className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
                   />
                 </div>
 
                 {/* Email */}
                 <div>
-                  <Label htmlFor="email" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Email</Label>
+                  <Label htmlFor="email" className="text-base font-dm-sans text-[#064F8C] mb-3 block">E-post</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="Email"
+                    placeholder="E-post"
                     className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
 
                 {/* Country */}
                 <div>
-                  <Label htmlFor="country" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Country</Label>
+                  <Label htmlFor="country" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Land</Label>
                   <Input
                     id="country"
-                    placeholder="Country"
+                    placeholder="Land"
                     className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
                   />
                 </div>
 
                 {/* Show Face */}
                 <div>
-                  <Label htmlFor="showFace" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Show Face?</Label>
+                  <Label htmlFor="showFace" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Visa ansikt?</Label>
                   <Select>
                     <SelectTrigger className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]">
-                      <SelectValue placeholder="Select option" />
+                      <SelectValue placeholder="Välj alternativ" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="yes">Yes</SelectItem>
-                      <SelectItem value="no">No</SelectItem>
-                      <SelectItem value="partial">Partial</SelectItem>
+                      <SelectItem value="yes">Ja</SelectItem>
+                      <SelectItem value="no">Nej</SelectItem>
+                      <SelectItem value="partial">Delvis</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -78,7 +78,7 @@ export default function BecomeModel() {
               {/* Birthday, Height, Weight */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
                 <div>
-                  <Label htmlFor="birthday" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Birthday</Label>
+                  <Label htmlFor="birthday" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Födelsedatum</Label>
                   <Input
                     id="birthday"
                     type="date"
@@ -87,19 +87,19 @@ export default function BecomeModel() {
                 </div>
 
                 <div>
-                  <Label htmlFor="height" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Height</Label>
+                  <Label htmlFor="height" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Längd</Label>
                   <Input
                     id="height"
-                    placeholder="Height"
+                    placeholder="Längd (cm)"
                     className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="weight" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Weight</Label>
+                  <Label htmlFor="weight" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Vikt</Label>
                   <Input
                     id="weight"
-                    placeholder="Weight"
+                    placeholder="Vikt (kg)"
                     className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
                   />
                 </div>
@@ -111,50 +111,50 @@ export default function BecomeModel() {
               <div className="mt-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #1</Label>
+                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #1</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
                     </div>
                   </div>
 
                   <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #2</Label>
+                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #2</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
                     </div>
                   </div>
 
                   <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #3</Label>
+                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #3</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
                     </div>
                   </div>
 
                   <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #4</Label>
+                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #4</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
                     </div>
                   </div>
 
                   <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #5</Label>
+                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #5</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
                     </div>
                   </div>
 
                   <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Photo #6</Label>
+                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #6</Label>
                     <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Choose files</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">No fil...hosen</p>
+                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
                     </div>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function BecomeModel() {
               {/* How did you hear about us */}
               <div className="mt-10">
                 <Label htmlFor="hearAbout" className="text-base font-dm-sans text-[#064F8C] mb-3 block">
-                  How did you hear about us?
+                  Hur hörde du talas om oss?
                 </Label>
                 <Textarea
                   id="hearAbout"
@@ -173,10 +173,10 @@ export default function BecomeModel() {
 
               {/* Message */}
               <div className="mt-8">
-                <Label htmlFor="message" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Message</Label>
+                <Label htmlFor="message" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Meddelande</Label>
                 <Textarea
                   id="message"
-                  placeholder="Include anything extra you want to say."
+                  placeholder="Skriv allt extra du vill tillägga här."
                   className="min-h-[120px] text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent placeholder:text-[#064F8C]/60"
                 />
               </div>
@@ -187,7 +187,7 @@ export default function BecomeModel() {
                   size="lg"
                   className="gold-button font-medium px-16 py-4 text-xl rounded-3xl shadow-lg uppercase tracking-wide"
                 >
-                  JOIN THE TEAM
+                  GÅ MED I TEAMET
                 </Button>
               </div>
           </div>
