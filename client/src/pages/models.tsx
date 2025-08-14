@@ -153,12 +153,9 @@ export default function ModelsPage() {
               {/* Model Header */}
               <div className="bg-gradient-to-r from-[#064F8C] to-[#111B3E] p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="text-4xl">{model.avatar}</div>
-                    <div>
-                      <h3 className="font-cormorant font-bold text-2xl">{model.name}</h3>
-                      <p className="font-dm-sans text-white/80">{model.age} år • {model.location}</p>
-                    </div>
+                  <div>
+                    <h3 className="font-cormorant font-bold text-2xl" style={{ color: '#F5D061' }}>{model.name}</h3>
+                    <p className="font-dm-sans text-white/80">{model.age} år • {model.location}</p>
                   </div>
                 </div>
 
