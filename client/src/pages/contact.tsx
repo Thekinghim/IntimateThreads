@@ -27,11 +27,11 @@ export default function Contact() {
         <div className="max-w-6xl mx-auto px-6">
           {/* Contact Information and Track Order Side by Side */}
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-[#064F8C] text-center">Kundsupport</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Contact Information */}
               <Card className="bg-white/60 border-[#064F8C]/20 p-6">
                 <CardContent className="p-0">
+                  <h2 className="text-2xl font-bold mb-6 text-[#064F8C]">Kundsupport</h2>
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
                       <Mail className="h-4 w-4 text-[#064F8C]" />
