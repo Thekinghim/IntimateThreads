@@ -20,54 +20,6 @@ export default function Contact() {
       {/* Main Content */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
-          {/* Contact Methods */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <Card className="bg-white/60 border-[#064F8C]/20 p-8 text-center">
-              <CardContent className="p-0">
-                <div className="w-16 h-16 bg-[#064F8C]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MessageCircle className="w-8 h-8 text-[#064F8C]" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">Säkert Meddelande</h3>
-                <p className="text-gray-600 mb-4">
-                  Kontakta oss via vårt säkra meddelandesystem för diskreta förfrågningar.
-                </p>
-                <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">
-                  Rekommenderat
-                </Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/60 border-[#064F8C]/20 p-8 text-center">
-              <CardContent className="p-0">
-                <div className="w-16 h-16 bg-[#064F8C]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="w-8 h-8 text-[#064F8C]" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">E-post</h3>
-                <p className="text-gray-600 mb-4">
-                  Skicka dina frågor till oss via e-post för snabba svar.
-                </p>
-                <div className="text-[#064F8C] font-medium">
-                  scandiscentswe@gmail.com
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/60 border-[#064F8C]/20 p-8 text-center">
-              <CardContent className="p-0">
-                <div className="w-16 h-16 bg-[#064F8C]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-8 h-8 text-[#064F8C]" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">Support Tider</h3>
-                <p className="text-gray-600 mb-4">
-                  Vi är tillgängliga dygnet runt för att hjälpa dig.
-                </p>
-                <div className="text-[#064F8C] font-medium">
-                  24/7 Support
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
           {/* Detailed Information */}
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold mb-6 gold-text-static text-center">Kundsupport</h2>
