@@ -68,25 +68,17 @@ export default function FeedbackAndTips() {
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#064F8C] to-[#0A5A9C] text-white py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Text content */}
-            <div>
-              <h1 className="text-5xl font-bold mb-4 gold-text-static">Feedback & Gåvor</h1>
-              <p className="text-xl text-white/90">
-                Din åsikt är viktig för oss. Berätta om din upplevelse och hjälp oss att förbättra vår service.
-              </p>
-            </div>
-            {/* Image */}
-            <div className="flex justify-center">
-              <img 
-                src={feedbackImage} 
-                alt="Feedback" 
-                className="w-full max-w-sm h-auto rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
+      <section 
+        className="relative text-white py-16 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(6, 79, 140, 0.7), rgba(10, 90, 156, 0.7)), url(${feedbackImage})`
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
+          <h1 className="text-5xl font-bold mb-4 gold-text-static drop-shadow-lg">Feedback & Gåvor</h1>
+          <p className="text-xl text-white/95 max-w-3xl mx-auto drop-shadow-md">
+            Din åsikt är viktig för oss. Berätta om din upplevelse och hjälp oss att förbättra vår service.
+          </p>
         </div>
       </section>
 
