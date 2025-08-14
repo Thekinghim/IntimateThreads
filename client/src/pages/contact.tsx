@@ -49,19 +49,19 @@ export default function Contact() {
                       <div className="flex flex-wrap gap-2">
                         <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">SE</Badge>
-                          <span className="text-sm">Svenska</span>
+                          <span className="text-sm text-[#064F8C]">Svenska</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">NO</Badge>
-                          <span className="text-sm">Norska</span>
+                          <span className="text-sm text-[#064F8C]">Norska</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">DK</Badge>
-                          <span className="text-sm">Danska</span>
+                          <span className="text-sm text-[#064F8C]">Danska</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">EN</Badge>
-                          <span className="text-sm">Engelska</span>
+                          <span className="text-sm text-[#064F8C]">Engelska</span>
                         </div>
                       </div>
                     </div>
