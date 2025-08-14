@@ -9,7 +9,7 @@ export default function HowItWorks() {
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#064F8C] to-[#111B3E] py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-cormorant font-bold text-6xl text-white mb-6">Så funkar det</h1>
+          <h1 className="font-cormorant font-bold text-6xl mb-6" style={{ color: '#F5D061' }}>Så funkar det</h1>
           <p className="text-xl text-white/90 max-w-2xl mx-auto font-dm-sans">
             Enkel, diskret och säker process från beställning till leverans. Vi värnar om din integritet i varje steg.
           </p>
