@@ -135,6 +135,67 @@
     @apply p-3 sm:p-4;
   }
   
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-paint {
+    contain: paint;
+  }
+  
+  .contain-strict {
+    contain: strict;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Optimize font loading */
+  .font-display-swap {
+    font-display: swap;
+  }
+  
+  /* Reduce layout shift */
+  .aspect-square {
+    aspect-ratio: 1;
+  }
+  
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-product {
+    aspect-ratio: 4 / 5;
+  }
+  
+  /* Image optimization classes */
+  .img-optimized {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px 256px;
+  }
+  
+  /* Preload animations */
+  .skeleton {
+    animation: skeleton-loading 1.2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(210, 15%, 88%);
+    }
+    100% {
+      background-color: hsl(210, 15%, 95%);
+    }
+  }
+  
   /* Typography hierarchy */
   h1, h2 {
     font-family: 'Cormorant Garamond', serif;

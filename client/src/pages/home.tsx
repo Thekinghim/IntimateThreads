@@ -86,12 +86,14 @@ export default function Home() {
       />
       {/* Hero Section with Background Image */}
       <section
-        className="relative min-h-[90vh] sm:min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        className="relative min-h-[90vh] sm:min-h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat gpu-accelerated"
         style={{
           backgroundImage: `url(${heroImage})`,
           backgroundPosition: "center 95%",
         }}
       >
+        {/* Preload critical hero image */}
+        <link rel="preload" as="image" href={heroImage} fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/60 via-[#2D3748]/70 to-[#2D3748]/80"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 sm:mb-12">

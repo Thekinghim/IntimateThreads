@@ -64,6 +64,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             }
             alt={product.title}
             className="w-full h-64 object-cover group-hover:scale-105 transition-all duration-300"
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="256"
           />
           {backImage && (
             <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
