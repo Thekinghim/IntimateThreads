@@ -34,7 +34,7 @@ export default function BecomeModel() {
                   <Input
                     id="name"
                     placeholder="Namn"
-                    className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
 
@@ -55,7 +55,7 @@ export default function BecomeModel() {
                   <Input
                     id="country"
                     placeholder="Land"
-                    className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
 
@@ -63,7 +63,7 @@ export default function BecomeModel() {
                 <div>
                   <Label htmlFor="showFace" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Visa ansikt?</Label>
                   <Select>
-                    <SelectTrigger className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]">
+                    <SelectTrigger className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent">
                       <SelectValue placeholder="Välj alternativ" />
                     </SelectTrigger>
                     <SelectContent>
@@ -82,7 +82,7 @@ export default function BecomeModel() {
                   <Input
                     id="birthday"
                     type="date"
-                    className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
 
@@ -91,7 +91,7 @@ export default function BecomeModel() {
                   <Input
                     id="height"
                     placeholder="Längd (cm)"
-                    className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
 
@@ -100,7 +100,7 @@ export default function BecomeModel() {
                   <Input
                     id="weight"
                     placeholder="Vikt (kg)"
-                    className="h-12 text-base border-[#064F8C] bg-[#F5F1E8] text-[#064F8C] focus:border-[#064F8C]"
+                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                   />
                 </div>
               </div>
