@@ -2,13 +2,18 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, CreditCard, Truck, Gift, KeyRound, Shield, Package } from "lucide-react";
+import heroImage from "@assets/IMG_2348_1755188685506.jpg";
 
 export default function HowItWorks() {
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-[#064F8C] to-[#111B3E] py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section 
+        className="relative py-24 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-[#064F8C]/80 to-[#111B3E]/80"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="font-cormorant font-bold text-6xl mb-6" style={{ color: '#F5D061' }}>Så funkar det</h1>
           <p className="text-xl text-white/90 max-w-2xl mx-auto font-dm-sans">
             Enkel, diskret och säker process från beställning till leverans. Vi värnar om din integritet i varje steg.
