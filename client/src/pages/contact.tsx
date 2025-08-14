@@ -27,47 +27,49 @@ export default function Contact() {
         <div className="max-w-6xl mx-auto px-6">
           {/* Detailed Information */}
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 gold-text-static text-center">Kundsupport</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[#064F8C] text-center">Kundsupport</h2>
             <div className="space-y-6">
               <Card className="bg-white/60 border-[#064F8C]/20 p-6">
                 <CardContent className="p-0">
-                  <h3 className="text-xl font-bold mb-4">Svarstider</h3>
-                  <div className="space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <div className="font-medium text-[#064F8C]">Akuta Frågor</div>
-                      <div className="text-gray-600">Inom 30 minuter</div>
+                      <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Svarstider</h3>
+                      <div className="space-y-3">
+                        <div>
+                          <div className="font-medium text-[#064F8C]">Akuta Frågor</div>
+                          <div className="text-gray-600">Inom 30 minuter</div>
+                        </div>
+                        <div>
+                          <div className="font-medium text-[#064F8C]">Allmänna Frågor</div>
+                          <div className="text-gray-600">Inom 2 timmar</div>
+                        </div>
+                        <div>
+                          <div className="font-medium text-[#064F8C]">Teknisk Support</div>
+                          <div className="text-gray-600">Inom 1 timme</div>
+                        </div>
+                      </div>
                     </div>
+                    
                     <div>
-                      <div className="font-medium text-[#064F8C]">Allmänna Frågor</div>
-                      <div className="text-gray-600">Inom 2 timmar</div>
-                    </div>
-                    <div>
-                      <div className="font-medium text-[#064F8C]">Teknisk Support</div>
-                      <div className="text-gray-600">Inom 1 timme</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-white/60 border-[#064F8C]/20 p-6">
-                <CardContent className="p-0">
-                  <h3 className="text-xl font-bold mb-4">Språk Vi Talar</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">SE</Badge>
-                      <span>Svenska</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">NO</Badge>
-                      <span>Norska</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">DK</Badge>
-                      <span>Danska</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">EN</Badge>
-                      <span>Engelska</span>
+                      <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Språk Vi Talar</h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">SE</Badge>
+                          <span>Svenska</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">NO</Badge>
+                          <span>Norska</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">DK</Badge>
+                          <span>Danska</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">EN</Badge>
+                          <span>Engelska</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
