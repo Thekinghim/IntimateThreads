@@ -38,16 +38,7 @@ export default function Womens() {
 
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
-      {/* Breadcrumb */}
-      <div className="border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex text-sm">
-            <Link href="/" className="text-gray-500 hover:text-gray-700">Hem</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900">Använda Trosor</span>
-          </nav>
-        </div>
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
