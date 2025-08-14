@@ -10,9 +10,9 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#064F8C] to-[#0A5A9C] text-white py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-4 gold-text-static">Kontakt</h1>
+          <h1 className="text-5xl font-bold mb-4 gold-text-static">Kontakt & Vanliga Frågor</h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Vi är här för att hjälpa dig. Kontakta oss på det sätt som passar dig bäst.
+            Vi är här för att hjälpa dig. Kontakta oss på det sätt som passar dig bäst, eller hitta svar på vanliga frågor nedan.
           </p>
         </div>
       </section>
@@ -138,6 +138,53 @@ export default function Contact() {
             </Card>
           </div>
 
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-gradient-to-b from-white to-[#F5F1E8] py-20">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10">
+          <h2 className="font-cormorant font-bold text-5xl text-[#064F8C] text-center mb-16">
+            Vanliga Frågor
+          </h2>
+          
+          <div className="space-y-8">
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
+                  Är det verkligen anonymt?
+                </h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
+                  Ja, vi använder alias för alla parter och kryptovaluta-betalningar lämnar inga digitala fotspår. 
+                  Leveransadresser hanteras diskret och all kommunikation sker via vår plattform.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
+                  Hur vet jag att produkterna är äkta?
+                </h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
+                  Alla säljare genomgår en verifieringsprocess och alla produkter kontrolleras innan listning. 
+                  Vi har nolltolerans mot falska annonser.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-8">
+                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">
+                  Vad händer om jag inte är nöjd?
+                </h3>
+                <p className="text-[#4A5568] text-base font-dm-sans leading-relaxed">
+                  Vi erbjuder diskret kundservice och arbetar för att lösa eventuella problem. 
+                  På grund av produkternas natur kan vi inte erbjuda returer, men vi tar alla klagomål på allvar.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
     </div>
