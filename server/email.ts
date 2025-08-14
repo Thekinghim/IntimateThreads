@@ -59,7 +59,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
       <div style="max-width: 600px; margin: 0 auto; background-color: #FFFFFF;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #111B3E 0%, #064F8C 100%); color: #FFFFFF; text-align: center; padding: 48px 32px;">
-          <h1 style="font-size: 36px; font-weight: bold; letter-spacing: 4px; margin: 0; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ScandiScent</h1>
+          <h1 style="font-size: 48px; font-weight: bold; letter-spacing: 4px; margin: 0; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ScandiScent</h1>
         </div>
 
         <!-- Success Message -->
@@ -103,7 +103,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
         </div>
 
         <!-- Order Items -->
-        <div style="padding: 0 32px 32px; background-color: #FFFFFF;">
+        <div style="padding: 32px 32px 32px; background-color: #FFFFFF;">
           <div style="display: flex; flex-wrap: wrap; gap: 32px;">
             <!-- Items List -->
             <div style="flex: 1; min-width: 300px;">

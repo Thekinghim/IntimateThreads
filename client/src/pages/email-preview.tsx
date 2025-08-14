@@ -31,7 +31,7 @@ export default function EmailPreview() {
         <div className="max-w-2xl mx-auto bg-white">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#111B3E] to-[#064F8C] text-white text-center py-12">
-            <h1 className="text-4xl font-bold tracking-widest gold-text-static" style={{ 
+            <h1 className="text-5xl font-bold tracking-widest gold-text-static" style={{ 
               background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -80,7 +80,7 @@ export default function EmailPreview() {
           </div>
 
           {/* Order Items */}
-          <div className="px-8 pb-8 bg-white">
+          <div className="px-8 pb-8 bg-white pt-8">
             <div className="flex flex-wrap gap-8">
               {/* Items List */}
               <div className="flex-1 min-w-0">
