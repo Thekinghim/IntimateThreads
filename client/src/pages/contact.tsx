@@ -34,19 +34,9 @@ export default function Contact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Svarstider</h3>
-                      <div className="space-y-3">
-                        <div>
-                          <div className="font-medium text-[#064F8C]">Akuta Frågor</div>
-                          <div className="text-gray-600">Inom 30 minuter</div>
-                        </div>
-                        <div>
-                          <div className="font-medium text-[#064F8C]">Allmänna Frågor</div>
-                          <div className="text-gray-600">Inom 2 timmar</div>
-                        </div>
-                        <div>
-                          <div className="font-medium text-[#064F8C]">Teknisk Support</div>
-                          <div className="text-gray-600">Inom 1 timme</div>
-                        </div>
+                      <div>
+                        <div className="font-medium text-[#064F8C]">Alla Frågor</div>
+                        <div className="text-gray-600">Inom 1-2 dagar</div>
                       </div>
                     </div>
                     
