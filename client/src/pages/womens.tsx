@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from "wouter";
 import { useState } from "react";
+import { PenTool } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
 
 
@@ -54,9 +55,15 @@ export default function Womens() {
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-none mb-8 tracking-tight gold-text-static" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
             Använda Trosor
           </h1>
-          <p className="text-xl md:text-2xl text-[#064F8C]/80 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-[#064F8C]/80 max-w-3xl mx-auto font-light leading-relaxed mb-6">
             Exklusiva använda underkläder från verifierade nordiska kvinnor. Diskret och säkert med fullständig anonymitet.
           </p>
+          
+          {/* Handwritten Card Feature */}
+          <div className="flex items-center justify-center gap-3 text-lg text-pink-600 bg-pink-50 rounded-lg px-6 py-4 max-w-md mx-auto">
+            <PenTool className="h-5 w-5" />
+            <span className="font-medium">+ Ett handskrivet kort från din modell</span>
+          </div>
         </div>
 
         {/* Filters Bar */}
