@@ -67,7 +67,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
             {/* Language Selector - Always visible */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-16 sm:w-20 h-8 sm:h-9 text-xs sm:text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-1 sm:px-2">
+              <SelectTrigger className="w-20 sm:w-24 h-8 sm:h-9 text-xs sm:text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-2 sm:px-3">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
