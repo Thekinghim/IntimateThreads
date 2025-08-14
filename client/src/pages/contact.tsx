@@ -51,7 +51,13 @@ export default function Contact() {
                     </div>
                     
                     <div>
-                      <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Språk Vi Talar</h3>
+                      <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Kontakt & Språk</h3>
+                      <div className="mb-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Mail className="h-4 w-4 text-[#064F8C]" />
+                          <span className="font-medium text-[#064F8C]">scandiscentswe@gmail.com</span>
+                        </div>
+                      </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">SE</Badge>
