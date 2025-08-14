@@ -27,8 +27,8 @@ interface OrderEmailData {
 
 function generateOrderConfirmationHTML(data: OrderEmailData): string {
   const productsHTML = data.products.map(product => `
-    <div style="display: flex; align-items: center; padding: 16px; margin-bottom: 12px; border: 2px solid rgba(6, 79, 140, 0.1); border-radius: 8px; background-color: #F5F1E8; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #F8BBD9 0%, #E879F9 100%); border-radius: 8px; margin-right: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+    <div class="product-mobile" style="display: flex; align-items: center; padding: 16px; margin-bottom: 12px; border: 2px solid rgba(6, 79, 140, 0.1); border-radius: 8px; background-color: #F5F1E8; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+      <div class="icon-mobile" style="width: 48px; height: 48px; background: linear-gradient(135deg, #F8BBD9 0%, #E879F9 100%); border-radius: 8px; margin-right: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
         <div style="width: 32px; height: 32px; background-color: rgba(255,255,255,0.5); border-radius: 4px;"></div>
       </div>
       <div style="flex: 1;">
@@ -65,16 +65,32 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Orderbekräftelse - ScandiScent</title>
+      <style>
+        @media only screen and (max-width: 600px) {
+          .email-container { width: 100% !important; margin: 0 !important; }
+          .header-mobile { padding: 32px 16px !important; }
+          .content-mobile { padding: 32px 16px !important; }
+          .title-mobile { font-size: 32px !important; }
+          .heading-mobile { font-size: 20px !important; }
+          .product-mobile { padding: 12px !important; margin-bottom: 8px !important; }
+          .icon-mobile { width: 40px !important; height: 40px !important; margin-right: 12px !important; }
+          .flex-mobile { display: block !important; }
+          .order-summary-mobile { margin-top: 16px !important; }
+          .newsletter-mobile { display: block !important; }
+          .input-mobile { width: 100% !important; margin-bottom: 8px !important; }
+          .button-mobile { width: 100% !important; }
+        }
+      </style>
     </head>
     <body style="margin: 0; padding: 0; background-color: #F5F1E8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: #FFFFFF;">
+      <div class="email-container" style="max-width: 600px; margin: 0 auto; background-color: #FFFFFF;">
         <!-- Header -->
-        <div style="background: linear-gradient(135deg, #111B3E 0%, #064F8C 100%); color: #FFFFFF; text-align: center; padding: 48px 32px;">
-          <h1 style="font-size: 48px; font-weight: bold; letter-spacing: 4px; margin: 0; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ScandiScent</h1>
+        <div class="header-mobile" style="background: linear-gradient(135deg, #111B3E 0%, #064F8C 100%); color: #FFFFFF; text-align: center; padding: 48px 32px;">
+          <h1 class="title-mobile" style="font-size: 48px; font-weight: bold; letter-spacing: 4px; margin: 0; background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ScandiScent</h1>
         </div>
 
         <!-- Success Message -->
-        <div style="padding: 48px 32px; text-align: center; background-color: #F5F1E8;">
+        <div class="content-mobile" style="padding: 48px 32px; text-align: center; background-color: #F5F1E8;">
           <div style="margin-bottom: 24px;">
             <div style="width: 64px; height: 64px; background-color: #D1FAE5; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
               <svg style="width: 32px; height: 32px; color: #10B981;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +98,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
               </svg>
             </div>
             <h2 style="color: #064F8C; font-size: 14px; margin: 0 0 8px 0; font-weight: 500;">Order ${orderNumber}</h2>
-            <h1 style="color: #064F8C; font-size: 32px; font-weight: bold; margin: 0 0 24px 0; font-family: 'Cormorant Garamond', serif;">Tack ${customerName}!</h1>
+            <h1 class="heading-mobile" style="color: #064F8C; font-size: 32px; font-weight: bold; margin: 0 0 24px 0; font-family: 'Cormorant Garamond', serif;">Tack ${customerName}!</h1>
           </div>
 
           <!-- Map Placeholder -->

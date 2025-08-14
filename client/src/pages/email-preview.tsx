@@ -20,18 +20,18 @@ export default function EmailPreview() {
   const customerName = testOrderData.customerName || testOrderData.customerEmail.split('@')[0];
 
   return (
-    <div className="min-h-screen bg-[#F5F1E8] py-8">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg">
-        <div className="bg-[#064F8C] text-white p-4 text-center">
-          <h1 className="text-lg font-semibold">📧 Förhandsvisning: Orderbekräftelse E-post</h1>
+    <div className="min-h-screen bg-[#F5F1E8] py-4 md:py-8 px-2 md:px-4">
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="bg-[#064F8C] text-white p-3 md:p-4 text-center">
+          <h1 className="text-base md:text-lg font-semibold">📧 Förhandsvisning: Orderbekräftelse E-post</h1>
           <p className="text-sm text-blue-100 mt-1">Så här ser e-posten ut som kunden får</p>
         </div>
 
         {/* Email Content Start */}
-        <div className="max-w-2xl mx-auto bg-white">
+        <div className="max-w-2xl mx-auto bg-white w-full">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#111B3E] to-[#064F8C] text-white text-center py-12">
-            <h1 className="text-5xl font-bold tracking-widest gold-text-static" style={{ 
+            <h1 className="text-3xl md:text-5xl font-bold tracking-widest gold-text-static" style={{ 
               background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #B8860B 50%, #DAA520 75%, #FFD700 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -40,7 +40,7 @@ export default function EmailPreview() {
           </div>
 
           {/* Success Message */}
-          <div className="px-8 py-12 text-center bg-[#F5F1E8]">
+          <div className="px-4 md:px-8 py-8 md:py-12 text-center bg-[#F5F1E8]">
             <div className="mb-6">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@ export default function EmailPreview() {
                 </svg>
               </div>
               <h2 className="text-[#064F8C] text-sm mb-2 font-medium">Order {orderNumber}</h2>
-              <h1 className="text-3xl font-bold text-[#064F8C] mb-6 font-cormorant">Tack {customerName}!</h1>
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#064F8C] mb-6 font-cormorant">Tack {customerName}!</h1>
             </div>
 
             {/* Map Placeholder */}
@@ -80,32 +80,31 @@ export default function EmailPreview() {
           </div>
 
           {/* Order Items */}
-          <div className="px-8 pb-8 bg-white pt-8">
-            <div className="flex flex-wrap gap-8">
+          <div className="px-4 md:px-8 pb-8 bg-white pt-8">
+            <div className="flex flex-col lg:flex-row gap-8">
               {/* Items List */}
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 lg:min-w-0 w-full">
                 {testOrderData.products.map((product, index) => (
-                  <div key={index} className="flex items-center p-4 mb-3 border-2 border-[#064F8C]/10 rounded-lg bg-[#F5F1E8] shadow-sm">
-                    <div className="w-12 h-12 bg-gradient-to-br from-pink-200 to-purple-300 rounded-lg mr-4 flex-shrink-0 shadow-md flex items-center justify-center">
-                      <div className="w-8 h-8 bg-white/50 rounded"></div>
+                  <div key={index} className="flex items-center p-3 md:p-4 mb-3 border-2 border-[#064F8C]/10 rounded-lg bg-[#F5F1E8] shadow-sm">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-pink-200 to-purple-300 rounded-lg mr-3 md:mr-4 flex-shrink-0 shadow-md flex items-center justify-center">
+                      <div className="w-6 h-6 md:w-8 md:h-8 bg-white/50 rounded"></div>
                     </div>
                     <div className="flex-1">
-                      <div className="flex justify-between items-center">
-                        <h4 className="text-[#064F8C] font-semibold">{product.name}</h4>
-                        <span className="text-[#4A5568] text-sm">{product.quantity}</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                        <h4 className="text-[#064F8C] font-semibold text-sm md:text-base">{product.name}</h4>
+                        <span className="text-[#4A5568] text-sm sm:ml-2">Antal: {product.quantity}</span>
                       </div>
-                      <p className="text-[#4A5568] text-sm">Antal: {product.quantity}</p>
                     </div>
-                    <div className="text-right ml-4">
-                      <p className="text-[#064F8C] font-semibold">{product.price.toLocaleString('sv-SE')} kr</p>
+                    <div className="text-right ml-2 md:ml-4">
+                      <p className="text-[#064F8C] font-semibold text-sm md:text-base">{product.price.toLocaleString('sv-SE')} kr</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Order Summary */}
-              <div className="flex-1 min-w-0">
-                <div className="bg-[#F5F1E8] border-2 border-[#064F8C]/20 rounded-lg p-6 shadow-sm">
+              <div className="flex-1 lg:min-w-0 w-full">
+                <div className="bg-[#F5F1E8] border-2 border-[#064F8C]/20 rounded-lg p-4 md:p-6 shadow-sm">
                   <h3 className="text-[#064F8C] font-semibold mb-4 font-lora">Ordersammanfattning</h3>
                   
                   <div className="mb-6">
@@ -157,18 +156,18 @@ export default function EmailPreview() {
           </div>
 
           {/* Footer */}
-          <div className="bg-[#F5F1E8] px-8 py-12 text-center border-t-4 border-[#064F8C]/10">
+          <div className="bg-[#F5F1E8] px-4 md:px-8 py-8 md:py-12 text-center border-t-4 border-[#064F8C]/10">
             {/* Newsletter Signup */}
-            <div className="mb-8 max-w-md mx-auto">
+            <div className="mb-6 md:mb-8 max-w-md mx-auto">
               <h3 className="text-lg font-bold text-[#064F8C] mb-4 font-cormorant">Prenumerera på vårt nyhetsbrev</h3>
               <p className="text-[#4A5568] text-sm mb-4">Få exklusiva erbjudanden och nyheter direkt i din inkorg</p>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input 
                   type="email" 
                   placeholder="Din e-postadress"
                   className="flex-1 px-4 py-2 border border-[#064F8C]/20 rounded-lg bg-white text-[#064F8C] placeholder-[#4A5568] focus:outline-none focus:ring-2 focus:ring-[#064F8C]/20"
                 />
-                <button className="px-6 py-2 bg-gradient-to-r from-[#FFD700] to-[#B8860B] text-[#064F8C] font-medium rounded-lg hover:shadow-md transition-shadow">
+                <button className="px-4 md:px-6 py-2 bg-gradient-to-r from-[#FFD700] to-[#B8860B] text-[#064F8C] font-medium rounded-lg hover:shadow-md transition-shadow text-sm md:text-base w-full sm:w-auto">
                   Prenumerera
                 </button>
               </div>
