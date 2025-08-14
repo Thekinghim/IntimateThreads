@@ -66,64 +66,74 @@ export default function Womens() {
           </div>
         </div>
 
-        {/* Filters Bar */}
-        <div className="border-b border-[#064F8C]/20 mb-8 pb-6">
-          <div className="flex flex-wrap items-center gap-6">
-            {/* Model Filter */}
-            <div className="flex gap-4">
-              <Select value={selectedModel} onValueChange={setSelectedModel}>
-                <SelectTrigger className="w-48 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
-                  <SelectValue placeholder="Välj modell" />
-                </SelectTrigger>
-                <SelectContent className="font-dm-sans">
-                  <SelectItem value="all">Alla modeller</SelectItem>
-                  {availableModels.map((model) => (
-                    <SelectItem key={model} value={model}>
-                      {model}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
+        {/* Main Content with Filter Sidebar */}
+        <div className="flex gap-8">
+          {/* Left Sidebar - Filters */}
+          <div className="w-64 flex-shrink-0">
+            <div className="sticky top-8">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-[#064F8C]/20">
+                <h3 className="text-lg font-semibold text-[#064F8C] mb-4 font-dm-sans">Filter</h3>
+                
+                {/* Model Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-[#064F8C] mb-2 font-dm-sans">
+                    Modell
+                  </label>
+                  <Select value={selectedModel} onValueChange={setSelectedModel}>
+                    <SelectTrigger className="w-full bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
+                      <SelectValue placeholder="Välj modell" />
+                    </SelectTrigger>
+                    <SelectContent className="font-dm-sans">
+                      <SelectItem value="all">Alla modeller</SelectItem>
+                      {availableModels.map((model) => (
+                        <SelectItem key={model} value={model}>
+                          {model}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
+                {/* Results count */}
+                <div className="border-t border-[#064F8C]/20 pt-4">
+                  <p className="text-[#064F8C]/70 font-dm-sans text-sm">
+                    {isLoading ? "Laddar..." : `${filteredProducts.length} använda trosor`}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Results count */}
-        <div className="mb-6">
-          <p className="text-[#064F8C]/70 font-dm-sans">
-            {isLoading ? "Laddar..." : `${filteredProducts.length} använda trosor`}
-          </p>
-        </div>
-
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {isLoading ? (
-            Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="space-y-4">
-                <Skeleton className="h-80 w-full rounded-lg" />
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-1/2" />
-              </div>
-            ))
-          ) : filteredProducts.length === 0 ? (
-            <div className="col-span-full text-center py-12">
-              <p className="text-[#064F8C]/70 text-lg font-dm-sans">Inga produkter från vald modell.</p>
-              <Button 
-                onClick={() => {
-                  setSelectedModel("all");
-                }}
-                className="mt-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] hover:from-[#B8941F] hover:to-[#E6C200] text-white font-dm-sans font-medium"
-              >
-                Visa alla modeller
-              </Button>
+          {/* Right Content - Products Grid */}
+          <div className="flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {isLoading ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className="space-y-4">
+                    <Skeleton className="h-80 w-full rounded-lg" />
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                  </div>
+                ))
+              ) : filteredProducts.length === 0 ? (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-[#064F8C]/70 text-lg font-dm-sans">Inga produkter från vald modell.</p>
+                  <Button 
+                    onClick={() => {
+                      setSelectedModel("all");
+                    }}
+                    className="mt-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] hover:from-[#B8941F] hover:to-[#E6C200] text-white font-dm-sans font-medium"
+                  >
+                    Visa alla modeller
+                  </Button>
+                </div>
+              ) : (
+                filteredProducts.map((product) => (
+                  <KitAceProductCard key={product.id} product={product} />
+                ))
+              )}
             </div>
-          ) : (
-            filteredProducts.map((product) => (
-              <KitAceProductCard key={product.id} product={product} />
-            ))
-          )}
+          </div>
         </div>
       </div>
 
