@@ -155,7 +155,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData): Promise<
     await mailService.send(emailContent);
     console.log(`Order confirmation email sent to ${data.customerEmail} for order ${data.orderId}`);
     return true;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to send order confirmation email:', error);
     if (error.response?.body?.errors) {
       console.error('SendGrid error details:', JSON.stringify(error.response.body.errors, null, 2));
