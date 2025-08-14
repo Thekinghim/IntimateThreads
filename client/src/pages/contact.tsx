@@ -4,19 +4,47 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Clock, Mail, MessageCircle, Phone, MapPin, Shield, Package, ShoppingCart, Truck, CreditCard, HelpCircle, Users } from "lucide-react";
 import heroImage from "@assets/IMG_2353_1755189196516.jpg";
+import SEOHead from "@/components/seo-head";
 
 export default function Contact() {
+  const contactStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Kontakt - Scandiscent",
+    "url": "https://scandiscent.replit.app/contact",
+    "description": "Kontakta Scandiscent för frågor om beställningar, leveranser och diskret handel. Vi svarar på svenska, norska, danska och engelska inom 1-2 dagar.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Scandiscent",
+      "email": "scandiscentswe@gmail.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "scandiscentswe@gmail.com",
+        "availableLanguage": ["Swedish", "Norwegian", "Danish", "English"],
+        "hoursAvailable": "Mo-Fr 09:00-17:00"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
+      <SEOHead
+        title="Kontakt & Kundservice - Scandiscent | Hjälp med beställningar"
+        description="Kontakta Scandiscent för hjälp med beställningar, leveranser och diskret handel. Vi svarar på svenska, norska, danska och engelska inom 1-2 dagar via scandiscentswe@gmail.com"
+        keywords="kontakt scandiscent, kundservice, hjälp beställningar, email support, scandiscentswe@gmail.com, svenska kundtjänst"
+        canonicalUrl="https://scandiscent.replit.app/contact"
+        structuredData={contactStructuredData}
+      />
       {/* Hero Section */}
       <section 
-        className="relative py-16 bg-cover bg-center bg-no-repeat"
+        className="relative py-12 sm:py-16 lg:py-20 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#064F8C]/80 to-[#0A5A9C]/80"></div>
-        <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-5xl font-bold mb-4 gold-text-static">Kontakt & Vanliga Frågor</h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 gold-text-static">Kontakt & Vanliga Frågor</h1>
+          <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto px-4">
             Vi är här för att hjälpa dig. Kontakta oss på det sätt som passar dig bäst, eller hitta svar på vanliga frågor nedan.
           </p>
         </div>

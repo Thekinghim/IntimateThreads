@@ -4,17 +4,41 @@ import { Button } from "@/components/ui/button";
 import { Shield, Heart, Users, Award, Clock, Lock } from "lucide-react";
 import { useTranslations } from "@/hooks/useLanguage";
 import heartUnderwearImage from "@assets/generated_images/Heart_pattern_string_underwear_625c1ba1.png";
+import SEOHead from "@/components/seo-head";
 
 export default function About() {
   const t = useTranslations();
 
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "Om Scandiscent",
+    "url": "https://scandiscent.replit.app/about",
+    "description": "Lär dig mer om Scandiscent - Sveriges ledande plattform för diskret handel med använda intimplagg från verifierade nordiska kvinnor.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Scandiscent",
+      "foundingDate": "2023",
+      "description": "Sveriges ledande plattform för diskret handel med använda intimplagg från verifierade nordiska kvinnor",
+      "areaServed": "Nordic countries",
+      "knowsAbout": ["Diskret handel", "Använda intimplagg", "Verifierade säljare"]
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
+      <SEOHead
+        title="Om Scandiscent - Sveriges ledande plattform för diskret handel | Om oss"
+        description="Lär dig mer om Scandiscent - Sveriges ledande plattform för diskret handel med använda intimplagg från verifierade nordiska kvinnor. Grundat 2023 med 10,000+ nöjda kunder."
+        keywords="om scandiscent, företagsinformation, diskret handel, nordiska kvinnor, säker plattform, verifierade säljare, kundnöjdhet"
+        canonicalUrl="https://scandiscent.replit.app/about"
+        structuredData={aboutStructuredData}
+      />
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-[#064F8C]/10 to-[#F5F1E8] py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 gold-text-static">Om Scandiscent</h1>
-          <p className="text-xl md:text-2xl text-[#064F8C] leading-relaxed max-w-3xl mx-auto">
+      <section className="bg-gradient-to-b from-[#064F8C]/10 to-[#F5F1E8] py-16 sm:py-20 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 gold-text-static">Om Scandiscent</h1>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#064F8C] leading-relaxed max-w-3xl mx-auto">
             Vi är Sveriges ledande plattform för diskret handel med använda intimplagg från verifierade nordiska kvinnor.
           </p>
         </div>

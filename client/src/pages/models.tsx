@@ -5,6 +5,8 @@ import { Star, Sparkles, Coffee } from 'lucide-react';
 import { Link } from 'wouter';
 import PrivacyBanner from '@/components/privacy-banner';
 import modelsHeroImage from '@/assets/cj4_1755033026450.jpg';
+import { useEffect } from 'react';
+import SEOHead from '@/components/seo-head';
 
 interface Model {
   id: string;
@@ -122,22 +124,53 @@ const models: Model[] = [
 ];
 
 export default function ModelsPage() {
+  const modelsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Våra Modeller - Scandiscent",
+    "url": "https://scandiscent.replit.app/models",
+    "description": "Möt våra verifierade nordiska modeller som erbjuder exklusiva använda trosor med personliga handskrivna kort.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": models.length,
+      "itemListElement": models.map((model, index) => ({
+        "@type": "Person",
+        "position": index + 1,
+        "name": model.name,
+        "description": model.bio,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": model.location,
+          "addressCountry": "Sverige"
+        },
+        "knowsAbout": model.specialty
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
+      <SEOHead
+        title="Våra Modeller - Verifierade Nordiska Kvinnor | Scandiscent"
+        description="Möt våra verifierade nordiska modeller från Stockholm, Göteborg, Malmö och Lund. Erfarna kvinnor som erbjuder exklusiva använda trosor med personliga handskrivna kort."
+        keywords="nordiska modeller, svenska tjejer, verifierade kvinnor, Stockholm modeller, Göteborg modeller, Malmö modeller, personliga kort"
+        canonicalUrl="https://scandiscent.replit.app/models"
+        structuredData={modelsStructuredData}
+      />
       <PrivacyBanner />
       
       {/* Hero Section */}
       <div 
-        className="relative text-white py-32 bg-cover bg-center bg-no-repeat"
+        className="relative text-white py-20 sm:py-24 md:py-32 lg:py-40 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${modelsHeroImage}')`
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-cormorant font-bold text-5xl md:text-6xl mb-4 drop-shadow-lg gold-text">
+          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 drop-shadow-lg gold-text">
             Våra Modeller
           </h1>
-          <p className="text-xl font-dm-sans text-white/95 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-lg sm:text-xl lg:text-2xl font-dm-sans text-white/95 max-w-2xl mx-auto drop-shadow-md px-4">
             Möt våra verifierade och erfarna modeller som erbjuder unika och personliga upplevelser
           </p>
         </div>
@@ -146,8 +179,8 @@ export default function ModelsPage() {
 
 
       {/* Models Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {models.map((model) => (
             <Card key={model.id} className="bg-white shadow-xl border-none overflow-hidden">
               {/* Model Header */}
