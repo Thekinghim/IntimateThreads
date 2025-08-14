@@ -19,7 +19,7 @@ export default function Product() {
   const [selectedColor, setSelectedColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedImage, setSelectedImage] = useState<string>("");
-  const [selectedWearDays, setSelectedWearDays] = useState<number>(0);
+
   
   const sizeChart = {
     'XS': { bust: '78-82', waist: '60-64', hips: '86-90' },
@@ -49,20 +49,7 @@ export default function Product() {
     imageGallery.push(backImagePath);
   }
 
-  // Calculate final price with wear days
-  const calculateFinalPrice = (basePrice: string, wearDays: number): number => {
-    const base = parseFloat(basePrice);
-    if (wearDays === 0) return base;
-    if (wearDays === 1) return base + 500;
-    if (wearDays === 2) return base + 1000;
-    if (wearDays === 3) return base + 1500;
-    if (wearDays >= 4 && wearDays <= 7) return base + 2000;
-    if (wearDays >= 8) return base + 3000;
-    return base;
-  };
 
-  const wearDays = selectedWearDays;
-  const finalPrice = product ? calculateFinalPrice(product.priceKr, wearDays) : 0;
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -72,7 +59,7 @@ export default function Product() {
       title: product.title,
       sellerId: product.sellerId,
       sellerAlias: product.seller.alias,
-      priceKr: finalPrice,
+      priceKr: parseFloat(product.priceKr),
       imageUrl: product.imageUrl || "",
       size: product.size,
     });
@@ -180,27 +167,12 @@ export default function Product() {
 
             <p className="text-sm text-gray-600 capitalize">{product.material}</p>
 
-            {/* Price with wear days */}
+            {/* Price */}
             <div className="space-y-2">
               <div className="flex flex-col space-y-1">
-                {wearDays > 0 && (
-                  <span className="text-lg line-through text-gray-400">
-                    {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr (grundpris)
-                  </span>
-                )}
                 <span className="text-2xl sm:text-3xl font-medium text-gray-900">
-                  {finalPrice.toLocaleString('sv-SE')} kr
+                  {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
                 </span>
-                {wearDays > 0 && (
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                      {wearDays} dag{wearDays !== 1 ? 'ar' : ''} använd
-                    </span>
-                    <span className="text-sm text-green-600">
-                      +{(finalPrice - parseFloat(product.priceKr)).toLocaleString('sv-SE')} kr extra
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -243,35 +215,7 @@ export default function Product() {
               </div>
             </div>
 
-            {/* Wear Days Selector */}
-            <div className="border-t border-gray-200 pt-6">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Antal dagar använd:</h3>
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((days) => (
-                  <button
-                    key={days}
-                    onClick={() => setSelectedWearDays(days)}
-                    className={`px-3 py-2 text-sm border rounded-md transition-colors ${
-                      selectedWearDays === days
-                        ? 'border-gray-900 bg-gray-900 text-white'
-                        : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                    }`}
-                  >
-                    {days === 0 ? 'Ny' : `${days} dag${days > 1 ? 'ar' : ''}`}
-                  </button>
-                ))}
-              </div>
-              
-              {/* Price explanation */}
-              <div className="text-xs text-gray-500 mb-4">
-                {wearDays === 0 && "Grundpris - helt ny produkt"}
-                {wearDays === 1 && "Grundpris + 500 kr"}
-                {wearDays === 2 && "Grundpris + 1,000 kr"}
-                {wearDays === 3 && "Grundpris + 1,500 kr"}
-                {wearDays >= 4 && wearDays <= 7 && "Grundpris + 2,000 kr"}
-                {wearDays >= 8 && "Grundpris + 3,000 kr"}
-              </div>
-            </div>
+
 
             {/* Size */}
             <div>
