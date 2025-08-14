@@ -57,33 +57,31 @@ export default function Womens() {
           </div>
         </div>
 
-        {/* Filters Bar */}
-        <div className="border-b border-[#064F8C]/20 mb-8 pb-6">
-          <div className="flex flex-wrap items-center gap-6">
-            {/* Model Filter */}
-            <div className="flex gap-4">
-              <Select value={selectedModel} onValueChange={setSelectedModel}>
-                <SelectTrigger className="w-48 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
-                  <SelectValue placeholder="Välj modell" />
-                </SelectTrigger>
-                <SelectContent className="font-dm-sans">
-                  <SelectItem value="all">Alla modeller</SelectItem>
-                  {availableModels.map((model) => (
-                    <SelectItem key={model} value={model}>
-                      {model}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+        {/* Filters and Results Row */}
+        <div className="flex items-center justify-between mb-8">
+          {/* Model Filter */}
+          <div>
+            <Select value={selectedModel} onValueChange={setSelectedModel}>
+              <SelectTrigger className="w-48 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
+                <SelectValue placeholder="Välj modell" />
+              </SelectTrigger>
+              <SelectContent className="font-dm-sans">
+                <SelectItem value="all">Alla modeller</SelectItem>
+                {availableModels.map((model) => (
+                  <SelectItem key={model} value={model}>
+                    {model}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-        </div>
 
-        {/* Results count */}
-        <div className="mb-6">
-          <p className="text-[#064F8C]/70 font-dm-sans">
-            {isLoading ? "Laddar..." : `${filteredProducts.length} använda trosor`}
-          </p>
+          {/* Results count */}
+          <div>
+            <p className="text-[#064F8C]/70 font-dm-sans">
+              {isLoading ? "Laddar..." : `${filteredProducts.length} använda trosor`}
+            </p>
+          </div>
         </div>
 
         {/* Products Grid */}
