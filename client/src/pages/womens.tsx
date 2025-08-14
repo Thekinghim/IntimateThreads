@@ -54,6 +54,9 @@ export default function Womens() {
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-none mb-8 tracking-tight gold-text-static" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
             Använda Trosor
           </h1>
+          <p className="text-xl md:text-2xl text-[#064F8C]/80 max-w-3xl mx-auto font-light leading-relaxed">
+            Exklusiva använda underkläder från verifierade nordiska kvinnor. Diskret och säkert med fullständig anonymitet.
+          </p>
         </div>
 
         {/* Filters Bar */}
