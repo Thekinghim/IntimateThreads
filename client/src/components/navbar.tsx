@@ -53,6 +53,11 @@ export default function Navbar() {
                 {t.trackOrder}
               </span>
             </Link>
+            <Link href="/contact">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
+                Kontakt
+              </span>
+            </Link>
           </div>
 
           {/* Right Side Actions */}
@@ -133,6 +138,11 @@ export default function Navbar() {
               <Link href="/track-order" onClick={() => setMobileMenuOpen(false)}>
                 <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
                   {t.trackOrder}
+                </span>
+              </Link>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <span className="block py-2 px-4 text-[#064F8C] hover:bg-[#F5F2E8] rounded font-light tracking-wide">
+                  Kontakt
                 </span>
               </Link>
             </div>

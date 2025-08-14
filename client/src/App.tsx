@@ -10,6 +10,7 @@ import Home from "@/pages/home";
 import Womens from "@/pages/womens";
 import Models from "@/pages/models";
 import About from "@/pages/about";
+import Contact from "@/pages/contact";
 import ModelProducts from "@/pages/model-products";
 import Product from "@/pages/product";
 import EmmaProfile from "@/pages/emma-profile";
@@ -54,6 +55,7 @@ function Router() {
       <Route path="/womens" component={Womens} />
       <Route path="/models" component={Models} />
       <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
       <Route path="/profile/emma" component={EmmaProfile} />
       <Route path="/profile/sofia" component={SofiaProfile} />
       <Route path="/profile/lina" component={LinaProfile} />
