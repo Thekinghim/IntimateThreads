@@ -42,7 +42,6 @@ export default function Footer() {
               <li><Link href="/privacy-policy" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Integritetspolicy</Link></li>
               <li><Link href="/terms-of-service" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Användarvillkor</Link></li>
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Returpolicy</a></li>
-              <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Säkerhet</a></li>
             </ul>
           </div>
         </div>
