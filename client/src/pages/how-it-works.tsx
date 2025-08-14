@@ -16,6 +16,87 @@ export default function HowItWorks() {
         </div>
       </section>
 
+      {/* Luxury How it Works */}
+      <section className="py-16 bg-[#F5F1E8] relative">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+          <div className="text-center mb-16">
+            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
+              Så Funkar Det
+            </h3>
+            <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">
+              Enkel och diskret process från beställning till leverans
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Search className="h-12 w-12 text-white" />
+              </div>
+              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+                1. Välj
+              </h4>
+              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+                Bläddra igenom vår exklusiva kollektion med fullständig anonymitet och välj det plagg som tilltalar dig mest.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <CreditCard className="h-12 w-12 text-white" />
+              </div>
+              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+                2. Säker Betalning
+              </h4>
+              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+                Diskret och säker betalning via kryptovaluta, Revolut eller andra krypterade betalningsmetoder.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Truck className="h-12 w-12 text-white" />
+              </div>
+              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+                3. Diskret Frakt
+              </h4>
+              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+                Plagget skickas diskret i neutral förpackning utan avslöjande
+                märkningar.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Gift className="h-12 w-12 text-white" />
+              </div>
+              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+                4. Diskret Leverans
+              </h4>
+              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+                Motta ditt paket hemma i neutral förpackning utan avslöjande märkningar eller logotyper.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Luxury Call to Action */}
+      <section className="py-14 relative overflow-hidden bg-[#F5F1E8]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+          <div className="text-center">
+            <Link href="/womens">
+              <Button
+                size="lg"
+                className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
+              >
+                Börja Utforska Nu
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Process Steps */}
       <section className="py-20 bg-[#F5F1E8]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
