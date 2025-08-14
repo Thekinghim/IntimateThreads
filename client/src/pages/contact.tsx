@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Mail, MessageCircle, Phone, MapPin, Shield } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { Clock, Mail, MessageCircle, Phone, MapPin, Shield, Package } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -116,6 +118,25 @@ export default function Contact() {
             </div>
           </div>
 
+          {/* Track Order Button */}
+          <div className="max-w-md mx-auto mt-16 text-center">
+            <Card className="bg-white/60 border-[#064F8C]/20 p-8">
+              <CardContent className="p-0">
+                <div className="w-16 h-16 bg-[#064F8C]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Package className="w-8 h-8 text-[#064F8C]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-[#064F8C]">Spåra Din Order</h3>
+                <p className="text-gray-600 mb-6">
+                  Har du redan gjort en beställning? Spåra din order och få uppdateringar i realtid.
+                </p>
+                <Link href="/track-order">
+                  <Button className="bg-[#064F8C] hover:bg-[#0A5A9C] text-white px-8 py-3 text-lg font-medium transition-colors duration-200">
+                    Spåra Order
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
 
         </div>
       </section>
