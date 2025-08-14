@@ -160,12 +160,6 @@ export default function ModelsPage() {
                       <p className="font-dm-sans text-white/80">{model.age} år • {model.location}</p>
                     </div>
                   </div>
-                  {model.verified && (
-                    <Badge className="bg-green-500 text-white border-none">
-                      <Star className="w-3 h-3 mr-1" />
-                      Verifierad
-                    </Badge>
-                  )}
                 </div>
                 
                 {/* Rating */}
