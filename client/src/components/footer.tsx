@@ -32,7 +32,7 @@ export default function Footer() {
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Bli en modell</a></li>
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Nyheter</a></li>
               <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Vanliga frågor</a></li>
-              <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Kontakt och feedback</a></li>
+              <li><Link href="/contact" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Kontakt och feedback</Link></li>
             </ul>
           </div>
           
