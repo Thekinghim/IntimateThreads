@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <h5 className="font-poppins font-semibold text-2xl mb-8 text-[#064F8C]">Support & Villkor</h5>
             <ul className="space-y-6 text-[#064F8C]">
-              <li><a href="#" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Bli en modell</a></li>
+              <li><Link href="/become-model" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Bli en modell</Link></li>
               <li><Link href="/feedback-and-tips" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Feedback & Gåvor</Link></li>
               <li><Link href="/privacy-policy" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Integritetspolicy</Link></li>
               <li><Link href="/terms-of-service" className="hover:text-[#111B3E] hover:translate-x-2 transition-all duration-400 flex items-center text-lg font-light">Användarvillkor</Link></li>
