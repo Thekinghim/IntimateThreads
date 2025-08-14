@@ -255,59 +255,59 @@ font-extrabold drop-shadow-lg"
       </section>
       
       {/* Statistics and Testimonials Section */}
-      <section className="py-16 bg-gradient-to-b from-[#E8F4F8] to-[#F0F8FF] relative">
+      <section className="py-16 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           {/* Main Statistic */}
           <div className="text-center mb-16">
-            <h2 className="text-6xl md:text-7xl font-bold text-[#64B5F6] mb-4" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+            <h2 className="text-6xl md:text-7xl font-bold text-[#064F8C] mb-4 font-cormorant">
               1,000+
             </h2>
-            <p className="text-2xl font-medium text-[#E91E63] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <p className="text-2xl font-medium text-[#2D3748] mb-2 font-dm-sans">
               Använda Trosor Sålda
             </p>
-            <div className="w-32 h-1 bg-[#64B5F6] mx-auto"></div>
+            <div className="w-32 h-1 bg-[#F5D061] mx-auto"></div>
           </div>
 
           {/* Customer Testimonials */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50">
-              <div className="text-[#64B5F6] text-4xl mb-4">"</div>
-              <p className="text-gray-700 mb-6 leading-relaxed font-dm-sans text-sm">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
+              <div className="text-[#F5D061] text-4xl mb-4">"</div>
+              <p className="text-[#4A5568] mb-6 leading-relaxed font-dm-sans text-sm">
                 Jag älskar er sajt och har varit kund länge. Jag gick tillbaka och tittade på mina beställningar från #1588 fram till idag #3624. Vem skulle ha trott att en fetischsajt för använda trosor skulle fungera så bra... Att ha ett par trosor som du ser en modell bära och onanera i, är bara ett underbart sätt att känna sig kopplad till en modell utan att vara fysiskt kopplad. Det är briljant!
               </p>
-              <p className="font-bold text-[#064F8C] text-right">J M</p>
+              <p className="font-bold text-[#064F8C] text-right font-lora">J M</p>
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50">
-              <div className="text-[#64B5F6] text-4xl mb-4">"</div>
-              <p className="text-gray-700 mb-6 leading-relaxed font-dm-sans text-sm">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
+              <div className="text-[#F5D061] text-4xl mb-4">"</div>
+              <p className="text-[#4A5568] mb-6 leading-relaxed font-dm-sans text-sm">
                 Er sajt är fantastisk och jag handlar minst en gång i månaden. Era modeller, kundservice och alternativ är mycket bättre än på andra sajter. Jag uppskattar vad ni gör och kommer fortsätta att vara en lojal kund!
               </p>
-              <p className="font-bold text-[#064F8C] text-right">A B</p>
+              <p className="font-bold text-[#064F8C] text-right font-lora">A B</p>
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50">
-              <div className="text-[#64B5F6] text-4xl mb-4">"</div>
-              <p className="text-gray-700 mb-6 leading-relaxed font-dm-sans text-sm">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
+              <div className="text-[#F5D061] text-4xl mb-4">"</div>
+              <p className="text-[#4A5568] mb-6 leading-relaxed font-dm-sans text-sm">
                 Jag var tveksam först att köpa trosor online och har blivit lurad förut. Jag har lagt flera beställningar nu och vissa tar längre tid än andra, vilket jag förstår, men det viktiga är att ni alltid levererar! Era kundservice är bättre än de flesta "vanliga" företag, så tack för att ni är en fantastisk och unik service för denna nisch!
               </p>
-              <p className="font-bold text-[#064F8C] text-right">T P</p>
+              <p className="font-bold text-[#064F8C] text-right font-lora">T P</p>
             </div>
           </div>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
             <Link href="/womens">
-              <Button className="bg-[#E91E63] hover:bg-[#C2185B] text-white font-medium px-8 py-3 rounded-lg shadow-lg">
-                BLÄDDRA TROSOR
+              <Button className="gold-button font-medium px-8 py-3 rounded-2xl shadow-lg">
+                Bläddra Trosor
               </Button>
             </Link>
             <Link href="/models">
-              <Button variant="outline" className="border-2 border-[#64B5F6] text-[#64B5F6] hover:bg-[#64B5F6] hover:text-white font-medium px-8 py-3 rounded-lg">
-                VISA MODELLER
+              <Button variant="outline" className="border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white font-medium px-8 py-3 rounded-2xl transition-all duration-300">
+                Visa Modeller
               </Button>
             </Link>
           </div>
