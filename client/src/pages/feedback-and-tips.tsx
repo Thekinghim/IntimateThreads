@@ -73,7 +73,7 @@ export default function FeedbackAndTips() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Text content */}
             <div>
-              <h1 className="text-5xl font-bold mb-4 gold-text-static">Feedback och Tips</h1>
+              <h1 className="text-5xl font-bold mb-4 gold-text-static">Feedback & Gåvor</h1>
               <p className="text-xl text-white/90">
                 Din åsikt är viktig för oss. Berätta om din upplevelse och hjälp oss att förbättra vår service.
               </p>
