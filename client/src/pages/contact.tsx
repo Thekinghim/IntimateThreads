@@ -90,62 +90,7 @@ export default function Contact() {
             </Card>
           </div>
 
-          {/* Important Information */}
-          <div className="max-w-4xl mx-auto mt-16">
-            <h2 className="text-3xl font-bold mb-8 gold-text-static text-center">Viktigt att Läsa Före Du Kontaktar Oss</h2>
-            
-            <Card className="bg-gradient-to-br from-white/80 to-white/60 border-[#064F8C]/20 mb-8">
-              <CardContent className="p-8">
-                <div className="space-y-6">
-                  <div className="bg-[#064F8C]/5 border border-[#064F8C]/20 rounded-lg p-6">
-                    <h3 className="text-xl font-bold text-[#064F8C] mb-4 flex items-center gap-2">
-                      <Clock className="h-5 w-5" />
-                      Leveranstider & Processering
-                    </h3>
-                    <div className="space-y-3 text-gray-700">
-                      <p>
-                        Våra modeller är alla amatörer med riktiga liv – de flesta är studenter eller arbetar heltid. 
-                        Populära tjejer kan ha 10–20+ beställningar i kö vid varje given tidpunkt.
-                      </p>
-                      <p>
-                        Varje par trosor måste bäras under den fullständiga begärda tiden (1–3 dagar eller upp till en vecka), 
-                        och alla beställningar behandlas i ordning efter när de kom in.
-                      </p>
-                      <div className="bg-white/80 rounded-lg p-4 border border-[#064F8C]/10">
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="font-medium text-[#064F8C]">Genomsnittlig leveranstid:</span>
-                          <span className="font-bold">2–3 veckor</span>
-                        </div>
-                        <div className="flex items-center justify-between text-sm mt-1">
-                          <span className="font-medium text-[#064F8C]">Populära modeller:</span>
-                          <span className="font-bold">3–5 veckor eller längre</span>
-                        </div>
-                      </div>
-                      <p className="text-sm">
-                        Om det uppstår oväntade förseningar kommer vi att kontakta dig. Eftersom detta inte är lagervaror, 
-                        uppskattar vi verkligen ditt tålamod medan våra modeller uppfyller varje beställning personligt och med omsorg.
-                      </p>
-                    </div>
-                  </div>
-
-                  
-
-                  <div className="bg-[#064F8C]/5 border border-[#064F8C]/20 rounded-lg p-6 text-center">
-                    <h3 className="text-xl font-bold text-[#064F8C] mb-4 flex items-center justify-center gap-2">
-                      <Mail className="h-5 w-5" />
-                      📩 Kontakta Oss
-                    </h3>
-                    <div className="text-lg font-medium text-[#064F8C] mb-2">
-                      scandiscentswe@gmail.com
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      (Vänligen läs informationen ovan före du mailar!)
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          
 
         </div>
       </section>
