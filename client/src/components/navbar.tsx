@@ -97,6 +97,13 @@ export default function Navbar() {
                 </SelectItem>
               </SelectContent>
             </Select>
+            {/* Contact icon for mobile */}
+            <Link href="/contact" className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <MessageCircle className="h-5 w-5 text-[#064F8C]" />
+              </Button>
+            </Link>
+
             {/* Mobile menu button */}
             <Button 
               variant="ghost" 
