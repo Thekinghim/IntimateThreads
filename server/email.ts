@@ -147,7 +147,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData): Promise<
   try {
     const emailContent = {
       to: data.customerEmail,
-      from: 'scandiscent@gmail.com', // Using verified email from SendGrid account
+      from: 'scandiscentswe@gmail.com', // Using verified email from SendGrid account
       subject: `Orderbekräftelse - Order #${data.orderId.substring(0, 8)} | Scandiscent`,
       html: generateOrderConfirmationHTML(data),
     };
