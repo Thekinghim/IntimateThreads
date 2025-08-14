@@ -27,42 +27,44 @@ export default function Navbar() {
   return (
     <nav className="bg-gradient-to-r from-[#FEFBEA] to-white shadow-sm border-b border-[#111B3E]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pl-[10px] pr-[10px]">
-        <div className="flex justify-between items-center h-14 sm:h-16">
+        <div className="flex justify-between items-center h-14 sm:h-16 min-w-0">
           {/* Logo */}
-          <Link href="/">
-            <Logo size="sm" className="text-[#064F8C]" />
-          </Link>
+          <div className="flex-shrink-0">
+            <Link href="/">
+              <Logo size="sm" className="text-[#064F8C]" />
+            </Link>
+          </div>
 
           {/* Navigation Links - Hidden on mobile */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-2 lg:space-x-4 xl:space-x-8 flex-shrink-0">
             <Link href="/womens">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
                 Använda Trosor
               </span>
             </Link>
             <Link href="/models">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
                 Våra modeller
               </span>
             </Link>
             <Link href="/about">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
                 Om Oss
               </span>
             </Link>
             <Link href="/track-order">
-              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors lg:text-base text-[25px] font-light tracking-wide">
+              <span className="text-[#064F8C] hover:text-[#111B3E] transition-colors text-sm lg:text-base font-light tracking-wide whitespace-nowrap">
                 {t.trackOrder}
               </span>
             </Link>
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Language Selector */}
+          <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+            {/* Language Selector - Always visible */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-20 h-9 text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] hidden sm:flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-2">
-                <div className="flex items-center gap-1">
+              <SelectTrigger className="w-16 sm:w-20 h-8 sm:h-9 text-xs sm:text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-1 sm:px-2">
+                <div className="flex items-center gap-0.5 sm:gap-1">
                   <Globe className="h-3 w-3 flex-shrink-0" />
                   <SelectValue />
                 </div>
@@ -141,24 +143,6 @@ export default function Navbar() {
                   {t.trackOrder}
                 </span>
               </Link>
-              
-              {/* Mobile Language Selector */}
-              <div className="px-4 py-2">
-                <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-                  <SelectTrigger className="w-full gradient-midnight-cyan text-white border-none rounded-lg shadow-sm">
-                    <div className="flex items-center space-x-2">
-                      <Globe className="h-4 w-4" />
-                      <span>{getLanguageName(language)}</span>
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
-                    <SelectItem value="sv" className="hover:bg-[#064F8C]/10">Svenska</SelectItem>
-                    <SelectItem value="no" className="hover:bg-[#064F8C]/10">Norsk</SelectItem>
-                    <SelectItem value="da" className="hover:bg-[#064F8C]/10">Dansk</SelectItem>
-                    <SelectItem value="en" className="hover:bg-[#064F8C]/10">English</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
           </div>
         )}
