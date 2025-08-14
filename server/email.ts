@@ -47,13 +47,24 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
   const orderNumber = `SCND${data.orderId.substring(0, 6).toUpperCase()}`;
   const customerName = data.customerName || data.customerEmail.split('@')[0];
 
+  const paymentInfo = data.cryptoCurrency && data.cryptoAmount 
+    ? `<p style="color: #2D3748; font-size: 16px; margin: 0;">
+         Kryptovaluta: ${data.cryptoCurrency}<br>
+         Belopp: ${data.cryptoAmount}<br>
+         Status: Bekräftad
+       </p>`
+    : `<p style="color: #2D3748; font-size: 16px; margin: 0;">
+         Metod: ${data.paymentMethod}<br>
+         Status: Bekräftad
+       </p>`;
+
   return `
     <!DOCTYPE html>
     <html lang="sv">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Orderbekräftelse - Scandiscent</title>
+      <title>Orderbekräftelse - ScandiScent</title>
     </head>
     <body style="margin: 0; padding: 0; background-color: #F5F1E8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #FFFFFF;">
@@ -89,7 +100,7 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
           </div>
 
           <div style="text-align: left;">
-            <h3 style="color: #064F8C; font-size: 18px; font-weight: bold; margin: 0 0 8px 0; font-family: 'Cormorant Garamond', serif;">Din Scandiscent order är bekräftad!</h3>
+            <h3 style="color: #064F8C; font-size: 18px; font-weight: bold; margin: 0 0 8px 0; font-family: 'Cormorant Garamond', serif;">Din ScandiScent order är bekräftad!</h3>
             <p style="color: #4A5568; font-size: 16px; margin: 0 0 24px 0;">Du kommer få ett email när din order är redo.</p>
 
             <div style="background-color: #FFFFFF; border: 1px solid rgba(6, 79, 140, 0.1); border-radius: 8px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -180,71 +191,8 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
           <div style="color: #4A5568; font-size: 12px;">
             <p style="margin: 0 0 4px 0; font-weight: 500;">www.scandiscent.com</p>
             <p style="margin: 0 0 4px 0;">Stockholm, Sverige</p>
-            <p style="margin: 0 0 4px 0;">Org nr: 556-XXX-XXXX</p>
             <p style="margin: 16px 0 0 0; color: #064F8C; font-weight: 500;">© 2025 ScandiScent. Alla rättigheter förbehållna.</p>
           </div>
-        </div>
-      </div>
-    </body>
-    </html>
-                  <th style="padding: 12px 0; color: #064F8C; font-size: 16px; text-align: center;">Antal</th>
-                  <th style="padding: 12px 0; color: #064F8C; font-size: 16px; text-align: right;">Pris</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${productsHTML}
-              </tbody>
-            </table>
-            
-            <div style="border-top: 2px solid #064F8C; padding-top: 20px; margin-top: 20px;">
-              <p style="color: #064F8C; font-size: 20px; font-weight: bold; text-align: right; margin: 0;">
-                Totalt: ${data.totalAmount} SEK
-              </p>
-            </div>
-          </div>
-
-          <!-- Payment Info -->
-          <div style="background-color: #F0F4F8; border-radius: 12px; padding: 25px; margin: 30px 0;">
-            <h3 style="color: #064F8C; font-size: 20px; margin: 0 0 15px 0;">Betalningsinformation</h3>
-            ${paymentInfo}
-          </div>
-
-          <!-- Shipping Info -->
-          <div style="background-color: #F0F4F8; border-radius: 12px; padding: 25px; margin: 30px 0;">
-            <h3 style="color: #064F8C; font-size: 20px; margin: 0 0 15px 0;">Leveransadress</h3>
-            <p style="color: #2D3748; font-size: 16px; margin: 0; white-space: pre-line;">${data.shippingAddress}</p>
-          </div>
-
-          <!-- Next Steps -->
-          <div style="background: linear-gradient(135deg, #064F8C 0%, #111B3E 100%); border-radius: 12px; padding: 25px; margin: 30px 0;">
-            <h3 style="color: #FFFFFF; font-size: 20px; margin: 0 0 15px 0;">Nästa steg</h3>
-            <ul style="color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; margin: 0; padding-left: 20px;">
-              <li>Vi förbereder din beställning inom 24 timmar</li>
-              <li>Du får ett spårningsnummer via email när paketet skickas</li>
-              <li>Leverans sker diskret i neutral förpackning</li>
-              <li>Leveranstid: 2-5 arbetsdagar inom Sverige</li>
-            </ul>
-          </div>
-
-          <!-- Contact Info -->
-          <div style="text-align: center; margin: 40px 0;">
-            <p style="color: #64748B; font-size: 14px; margin: 0 0 10px 0;">
-              Har du frågor om din beställning?
-            </p>
-            <p style="color: #064F8C; font-size: 16px; margin: 0; font-weight: bold;">
-              Kontakta oss på: support@scandiscent.se
-            </p>
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <div style="background-color: #F7FAFC; padding: 30px; text-align: center; border-top: 1px solid #E2E8F0;">
-          <p style="color: #64748B; font-size: 14px; margin: 0 0 10px 0;">
-            Tack för att du valde Scandiscent
-          </p>
-          <p style="color: #64748B; font-size: 12px; margin: 0;">
-            Detta email skickades till ${data.customerEmail}
-          </p>
         </div>
       </div>
     </body>
@@ -254,26 +202,51 @@ function generateOrderConfirmationHTML(data: OrderEmailData): string {
 
 export async function sendOrderConfirmationEmail(data: OrderEmailData): Promise<boolean> {
   if (!process.env.SENDGRID_API_KEY) {
-    console.log('No SendGrid API key - email not sent for order:', data.orderId);
+    console.warn("SendGrid API key not configured - email will not be sent");
     return false;
   }
 
   try {
-    const emailContent = {
+    const orderNumber = `SCND${data.orderId.substring(0, 6).toUpperCase()}`;
+    const customerName = data.customerName || data.customerEmail.split('@')[0];
+    
+    const emailHTML = generateOrderConfirmationHTML(data);
+    
+    const message = {
       to: data.customerEmail,
-      from: 'scandiscentswe@gmail.com', // Using verified email from SendGrid account
-      subject: `Orderbekräftelse - Order #${data.orderId.substring(0, 8)} | Scandiscent`,
-      html: generateOrderConfirmationHTML(data),
+      from: {
+        email: 'scandiscentswe@gmail.com',
+        name: 'ScandiScent'
+      },
+      subject: `Orderbekräftelse ${orderNumber} - Tack för din beställning!`,
+      html: emailHTML,
+      text: `
+        Hej ${customerName}!
+        
+        Tack för din beställning hos ScandiScent!
+        
+        Ordernummer: ${orderNumber}
+        Produkter: ${data.products.map(p => `${p.name} (${p.quantity}st)`).join(', ')}
+        Totalt: ${data.totalAmount.toLocaleString('sv-SE')} kr
+        
+        Din order är bekräftad och kommer att skickas inom 1-2 arbetsdagar.
+        
+        Leveransadress:
+        ${data.shippingAddress}
+        
+        Behöver du hjälp? Kontakta oss på scandiscentswe@gmail.com
+        
+        Med vänliga hälsningar,
+        ScandiScent Team
+      `
     };
-
-    await mailService.send(emailContent);
-    console.log(`Order confirmation email sent to ${data.customerEmail} for order ${data.orderId}`);
+    
+    await mailService.send(message);
+    console.log(`✅ Order confirmation email sent successfully to ${data.customerEmail}`);
     return true;
-  } catch (error: any) {
-    console.error('Failed to send order confirmation email:', error);
-    if (error.response?.body?.errors) {
-      console.error('SendGrid error details:', JSON.stringify(error.response.body.errors, null, 2));
-    }
+    
+  } catch (error) {
+    console.error('❌ Failed to send order confirmation email:', error);
     return false;
   }
 }

@@ -179,7 +179,6 @@ export default function EmailPreview() {
             <div className="text-[#4A5568] text-xs space-y-1">
               <p className="font-medium">www.scandiscent.com</p>
               <p>Stockholm, Sverige</p>
-              <p>Org nr: 556-XXX-XXXX</p>
               <p className="pt-2 text-[#064F8C] font-medium">© 2025 ScandiScent. Alla rättigheter förbehållna.</p>
             </div>
           </div>
