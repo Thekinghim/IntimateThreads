@@ -37,6 +37,7 @@ import AdminLogin from "@/pages/admin-login";
 
 import TermsOfService from "@/pages/terms-of-service";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import BecomeModel from "@/pages/become-model";
 import NotFound from "@/pages/not-found";
 import AgeVerification from "@/components/age-verification";
 
@@ -82,6 +83,7 @@ function Router() {
 
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/become-model" component={BecomeModel} />
       <Route component={NotFound} />
     </Switch>
   );
