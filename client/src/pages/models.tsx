@@ -161,19 +161,7 @@ export default function ModelsPage() {
                     </div>
                   </div>
                 </div>
-                
-                {/* Rating */}
-                <div className="flex items-center space-x-2">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className={`w-4 h-4 ${i < Math.floor(model.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                      />
-                    ))}
-                  </div>
-                  <span className="font-dm-sans text-sm text-white/90">{model.rating} ({model.reviews} recensioner)</span>
-                </div>
+
               </div>
 
               <CardContent className="p-6">
@@ -182,26 +170,7 @@ export default function ModelsPage() {
                   {model.bio}
                 </p>
 
-                {/* Specialty */}
-                <div className="mb-4">
-                  <h4 className="font-lora font-semibold text-[#064F8C] mb-2">Specialitet</h4>
-                  <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">
-                    <Sparkles className="w-3 h-3 mr-1" />
-                    {model.specialty}
-                  </Badge>
-                </div>
 
-                {/* Interests */}
-                <div className="mb-4">
-                  <h4 className="font-lora font-semibold text-[#064F8C] mb-2">Intressen</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {model.interests.map((interest, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs bg-[#F5F1E8] text-[#064F8C]">
-                        {interest}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
 
                 {/* Tags */}
                 <div className="mb-4">
