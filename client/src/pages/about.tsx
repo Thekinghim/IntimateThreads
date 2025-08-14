@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Shield, Heart, Users, Award, Clock, Lock } from "lucide-react";
 import { useTranslations } from "@/hooks/useLanguage";
 import heartUnderwearImage from "@assets/generated_images/Heart_pattern_string_underwear_625c1ba1.png";
@@ -99,6 +100,33 @@ export default function About() {
                 alt="Exklusiva hjärt-trosor" 
                 className="w-full h-auto rounded-xl object-cover"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-8 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl px-8 py-6 border border-white/20 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="text-center lg:text-left">
+              <h3 className="font-cormorant font-bold text-2xl text-white mb-2">
+                Gå med i vår trosklubb för att få de senaste nyheterna
+              </h3>
+              <p className="font-dm-sans text-white/80 text-sm">
+                Bli först att veta om nya modeller och exklusiva erbjudanden
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-3 min-w-fit">
+              <input
+                type="email"
+                placeholder="Din e-postadress..."
+                className="px-4 py-3 rounded-lg border-none bg-white/20 backdrop-blur-sm text-white placeholder-white/70 focus:ring-2 focus:ring-white/50 focus:outline-none font-dm-sans text-sm w-64"
+              />
+              <Button className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium px-6 py-3 rounded-lg whitespace-nowrap text-sm shadow-lg">
+                Gå med nu
+              </Button>
             </div>
           </div>
         </div>
