@@ -65,7 +65,7 @@ export default function FeedbackAndTips() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F5F0E8] to-[#E8DDD4]">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#064F8C] to-[#0A5A9C] text-white py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
@@ -79,7 +79,7 @@ export default function FeedbackAndTips() {
       {/* Form Section */}
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-6">
-          <Card className="bg-white/80 border-[#064F8C]/20 shadow-lg">
+          <Card className="bg-white border-[#064F8C]/20 shadow-lg">
             <CardContent className="p-8">
               <h2 className="text-3xl font-bold mb-8 text-center gold-text-static">Recensera Din Beställning</h2>
               
@@ -87,7 +87,7 @@ export default function FeedbackAndTips() {
                 {/* Name and Email */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-[#064F8C] font-medium">
+                    <Label htmlFor="name" className="text-gray-700 font-medium">
                       Namn <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -95,12 +95,12 @@ export default function FeedbackAndTips() {
                       value={formData.name}
                       onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                       placeholder="Namn"
-                      className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-[#064F8C] font-medium">
+                    <Label htmlFor="email" className="text-gray-700 font-medium">
                       E-post <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -109,7 +109,7 @@ export default function FeedbackAndTips() {
                       value={formData.email}
                       onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                       placeholder="E-post"
-                      className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
                       required
                     />
                   </div>
@@ -118,7 +118,7 @@ export default function FeedbackAndTips() {
                 {/* Model Name and Order Number */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="modelName" className="text-[#064F8C] font-medium">
+                    <Label htmlFor="modelName" className="text-gray-700 font-medium">
                       Modellens Namn <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -126,12 +126,12 @@ export default function FeedbackAndTips() {
                       value={formData.modelName}
                       onChange={(e) => setFormData(prev => ({ ...prev, modelName: e.target.value }))}
                       placeholder="Modellens namn"
-                      className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="orderNumber" className="text-[#064F8C] font-medium">
+                    <Label htmlFor="orderNumber" className="text-gray-700 font-medium">
                       Beställningsnummer <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -139,7 +139,7 @@ export default function FeedbackAndTips() {
                       value={formData.orderNumber}
                       onChange={(e) => setFormData(prev => ({ ...prev, orderNumber: e.target.value }))}
                       placeholder="Beställningsnummer"
-                      className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
                       required
                     />
                   </div>
@@ -148,16 +148,16 @@ export default function FeedbackAndTips() {
                 {/* Rating Questions */}
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <Label className="text-[#064F8C] font-medium">
+                    <Label className="text-gray-700 font-medium">
                       Hur nöjd var du med TROSORNA? <span className="text-red-500">*</span>
                     </Label>
                     <Select value={formData.pantiesSatisfaction} onValueChange={(value) => setFormData(prev => ({ ...prev, pantiesSatisfaction: value }))}>
-                      <SelectTrigger className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]">
+                      <SelectTrigger className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700">
                         <SelectValue placeholder="Välj din bedömning" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white">
                         {ratingOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <SelectItem key={option.value} value={option.value} className="text-gray-700">
                             {option.label}
                           </SelectItem>
                         ))}
@@ -166,16 +166,16 @@ export default function FeedbackAndTips() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="text-[#064F8C] font-medium">
+                    <Label className="text-gray-700 font-medium">
                       Vad tyckte du om beställningens LEVERANSHASTIGHET? <span className="text-red-500">*</span>
                     </Label>
                     <Select value={formData.deliverySpeed} onValueChange={(value) => setFormData(prev => ({ ...prev, deliverySpeed: value }))}>
-                      <SelectTrigger className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C]">
+                      <SelectTrigger className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700">
                         <SelectValue placeholder="Välj din bedömning" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white">
                         {ratingOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <SelectItem key={option.value} value={option.value} className="text-gray-700">
                             {option.label}
                           </SelectItem>
                         ))}
@@ -186,7 +186,7 @@ export default function FeedbackAndTips() {
 
                 {/* Would Order Again */}
                 <div className="space-y-3">
-                  <Label className="text-[#064F8C] font-medium text-base">
+                  <Label className="text-gray-700 font-medium text-base">
                     Skulle du beställa från din modell igen?
                   </Label>
                   <RadioGroup
@@ -195,16 +195,16 @@ export default function FeedbackAndTips() {
                     className="flex gap-6"
                   >
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="yes" id="yes" className="border-[#064F8C] text-[#064F8C]" />
-                      <Label htmlFor="yes" className="text-[#064F8C]">Ja</Label>
+                      <RadioGroupItem value="yes" id="yes" className="border-gray-300 text-[#064F8C]" />
+                      <Label htmlFor="yes" className="text-gray-700">Ja</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="no" id="no" className="border-[#064F8C] text-[#064F8C]" />
-                      <Label htmlFor="no" className="text-[#064F8C]">Nej</Label>
+                      <RadioGroupItem value="no" id="no" className="border-gray-300 text-[#064F8C]" />
+                      <Label htmlFor="no" className="text-gray-700">Nej</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="maybe" id="maybe" className="border-[#064F8C] text-[#064F8C]" />
-                      <Label htmlFor="maybe" className="text-[#064F8C]">Kanske</Label>
+                      <RadioGroupItem value="maybe" id="maybe" className="border-gray-300 text-[#064F8C]" />
+                      <Label htmlFor="maybe" className="text-gray-700">Kanske</Label>
                     </div>
                   </RadioGroup>
                 </div>
@@ -215,9 +215,9 @@ export default function FeedbackAndTips() {
                     id="anonymous"
                     checked={formData.remainAnonymous}
                     onCheckedChange={(checked) => setFormData(prev => ({ ...prev, remainAnonymous: checked as boolean }))}
-                    className="border-[#064F8C] data-[state=checked]:bg-[#064F8C]"
+                    className="border-gray-300 data-[state=checked]:bg-[#064F8C]"
                   />
-                  <Label htmlFor="anonymous" className="text-[#064F8C] font-medium">
+                  <Label htmlFor="anonymous" className="text-gray-700 font-medium">
                     Förbli Anonym För Modellen (Valfritt)
                   </Label>
                 </div>
@@ -227,7 +227,7 @@ export default function FeedbackAndTips() {
 
                 {/* Message */}
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-[#064F8C] font-medium">
+                  <Label htmlFor="message" className="text-gray-700 font-medium">
                     Meddelande Till Modell Eller Sajt (Valfritt)
                   </Label>
                   <Textarea
@@ -235,7 +235,7 @@ export default function FeedbackAndTips() {
                     value={formData.message}
                     onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                     placeholder="Vad gillade du? Något vi kan förbättra?"
-                    className="border-[#064F8C]/30 focus:border-[#064F8C] focus:ring-[#064F8C] min-h-[100px]"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700 min-h-[100px]"
                     rows={4}
                   />
                 </div>
