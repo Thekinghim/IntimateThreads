@@ -100,19 +100,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Team Section */}
-          <div className="mb-16">
-            <h2 className="text-4xl font-bold text-center mb-12">Vårt Team</h2>
-            <Card className="bg-white/60 border-[#064F8C]/20 p-8">
-              <CardContent className="p-0 text-center">
-                <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
-                  Vårt team består av erfarna e-handelsproffs, säkerhetsexperter och kundservicespecialister 
-                  som arbetar dygnet runt för att säkerställa den bästa möjliga upplevelsen för våra användare. 
-                  Vi är passionerade om att skapa en trygg och respektfull miljö för alla.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+
 
           {/* Contact & Trust */}
           <div className="grid md:grid-cols-2 gap-12">
