@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Clock, Mail, MessageCircle, Phone, MapPin, Shield, Package } from "lucide-react";
+import { Clock, Mail, MessageCircle, Phone, MapPin, Shield, Package, ShoppingCart, Truck, CreditCard, HelpCircle, Users } from "lucide-react";
 import heroImage from "@assets/IMG_2353_1755189196516.jpg";
 
 export default function Contact() {
@@ -62,6 +62,37 @@ export default function Contact() {
                         <div className="flex items-center gap-1">
                           <Badge variant="outline" className="border-[#064F8C] text-[#064F8C]">EN</Badge>
                           <span className="text-sm text-[#064F8C]">Engelska</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Support Categories */}
+                    <div className="border-t pt-4 mt-6">
+                      <h3 className="font-medium text-[#064F8C] mb-3 text-sm">Vi hjälper dig med:</h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="flex items-center gap-2">
+                          <ShoppingCart className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Beställningar</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Truck className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Leveranser</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CreditCard className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Betalningar</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <HelpCircle className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Allmänna frågor</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Säkerhet</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Kontoinformation</span>
                         </div>
                       </div>
                     </div>
