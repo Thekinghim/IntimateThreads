@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import feedbackImage from "@assets/IMG_2335_1754760267758.jpg";
 
 export default function FeedbackAndTips() {
   const { toast } = useToast();
@@ -65,21 +66,34 @@ export default function FeedbackAndTips() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#064F8C] to-[#0A5A9C] text-white py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-4 gold-text-static">Feedback och Tips</h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Din åsikt är viktig för oss. Berätta om din upplevelse och hjälp oss att förbättra vår service.
-          </p>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Text content */}
+            <div>
+              <h1 className="text-5xl font-bold mb-4 gold-text-static">Feedback och Tips</h1>
+              <p className="text-xl text-white/90">
+                Din åsikt är viktig för oss. Berätta om din upplevelse och hjälp oss att förbättra vår service.
+              </p>
+            </div>
+            {/* Image */}
+            <div className="flex justify-center">
+              <img 
+                src={feedbackImage} 
+                alt="Feedback" 
+                className="w-full max-w-sm h-auto rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Form Section */}
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-6">
-          <Card className="bg-white border-[#064F8C]/20 shadow-lg">
+          <Card className="bg-white border-none shadow-none">
             <CardContent className="p-8">
               <h2 className="text-3xl font-bold mb-8 text-center gold-text-static">Recensera Din Beställning</h2>
               
