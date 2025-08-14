@@ -11,7 +11,6 @@ import { type ProductWithSeller } from "@shared/schema";
 
 export default function Womens() {
   const [selectedModel, setSelectedModel] = useState("all");
-  const [sortBy, setSortBy] = useState("price-high");
 
   const { data: products, isLoading } = useQuery<ProductWithSeller[]>({
     queryKey: ['/api/products'],
@@ -27,21 +26,14 @@ export default function Womens() {
   ) || [];
 
   // Get unique models from products
-  const availableModels = [...new Set(womensProducts.map(product => product.seller.alias))];
+  const availableModels = Array.from(new Set(womensProducts.map(product => product.seller.alias)));
 
   const filteredProducts = womensProducts.filter((product) => {
     const matchesModel = selectedModel === "all" || product.seller.alias === selectedModel;
     return matchesModel && product.isAvailable;
   });
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case "price-high":
-        return 300 - 300; // All same price now
-      default:
-        return 0;
-    }
-  });
+  // No sorting needed anymore, just use filtered products
 
   return (
     <div className="min-h-screen bg-[#F5F1E8]">
@@ -58,9 +50,13 @@ export default function Womens() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-cormorant font-bold text-[#064F8C] mb-4">Använda Trosor</h1>
-          <p className="text-lg text-[#064F8C]/80 max-w-2xl mx-auto font-dm-sans">
+        <div className="text-center mb-12 relative py-20 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/60 to-[#2D3748]/80 rounded-xl">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-8 tracking-tight">
+            <span className="block gold-text-static italic tracking-wider text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-extrabold drop-shadow-lg" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+              Använda Trosor
+            </span>
+          </h1>
+          <p className="text-xl text-white/90 max-w-2xl mx-auto font-dm-sans font-light drop-shadow-md">
             Exklusiva använda damplagg från verifierade nordiska kvinnor
           </p>
         </div>
@@ -84,14 +80,7 @@ export default function Womens() {
                 </SelectContent>
               </Select>
               
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40 bg-white text-[#064F8C] border-2 border-[#064F8C] rounded-lg shadow-sm font-dm-sans">
-                  <SelectValue placeholder="Sortera" />
-                </SelectTrigger>
-                <SelectContent className="font-dm-sans">
-                  <SelectItem value="price-high">Pris: Hög till låg</SelectItem>
-                </SelectContent>
-              </Select>
+
             </div>
           </div>
         </div>
@@ -99,7 +88,7 @@ export default function Womens() {
         {/* Results count */}
         <div className="mb-6">
           <p className="text-[#064F8C]/70 font-dm-sans">
-            {isLoading ? "Laddar..." : `${sortedProducts.length} använda trosor`}
+            {isLoading ? "Laddar..." : `${filteredProducts.length} använda trosor`}
           </p>
         </div>
 
@@ -113,7 +102,7 @@ export default function Womens() {
                 <Skeleton className="h-4 w-1/2" />
               </div>
             ))
-          ) : sortedProducts.length === 0 ? (
+          ) : filteredProducts.length === 0 ? (
             <div className="col-span-full text-center py-12">
               <p className="text-[#064F8C]/70 text-lg font-dm-sans">Inga produkter från vald modell.</p>
               <Button 
@@ -126,7 +115,7 @@ export default function Womens() {
               </Button>
             </div>
           ) : (
-            sortedProducts.map((product) => (
+            filteredProducts.map((product) => (
               <KitAceProductCard key={product.id} product={product} />
             ))
           )}
