@@ -49,11 +49,11 @@ export default function About() {
 
             </div>
             
-            <div className="bg-white/60 p-4 rounded-2xl">
+            <div className="bg-white/60 p-4 rounded-2xl h-fit">
               <img 
                 src={heartUnderwearImage} 
                 alt="Exklusiva hjärt-trosor" 
-                className="w-full h-auto rounded-xl object-cover"
+                className="w-full h-full rounded-xl object-cover max-h-80"
               />
             </div>
           </div>
