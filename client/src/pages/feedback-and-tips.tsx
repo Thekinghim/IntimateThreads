@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
-import feedbackImage from "@assets/IMG_2335_1754760267758.jpg";
+import feedbackImage from "@assets/IMG_2339_1755187616204.jpg";
 
 export default function FeedbackAndTips() {
   const { toast } = useToast();
