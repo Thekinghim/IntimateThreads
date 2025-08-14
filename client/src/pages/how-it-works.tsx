@@ -78,21 +78,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* Final Luxury Call to Action */}
-      <section className="py-14 relative overflow-hidden bg-[#F5F1E8]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
-          <div className="text-center">
-            <Link href="/womens">
-              <Button
-                size="lg"
-                className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
-              >
-                Börja Utforska Nu
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
 
 
@@ -154,7 +140,21 @@ export default function HowItWorks() {
         </div>
       </section>
 
-
+      {/* Call to Action after Payment Methods */}
+      <section className="py-14 relative overflow-hidden bg-[#F5F1E8]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+          <div className="text-center">
+            <Link href="/womens">
+              <Button
+                size="lg"
+                className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
+              >
+                Börja Utforska Nu
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="bg-gradient-to-b from-[#064F8C] to-[#111B3E] py-24">
