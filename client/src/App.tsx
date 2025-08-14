@@ -23,6 +23,7 @@ import CheckoutForm from "@/pages/checkout-form";
 import ShopifyCheckout from "@/pages/shopify-checkout-clean";
 import CryptoPayment from "@/pages/crypto-payment";
 import OrderConfirmation from "@/pages/order-confirmation";
+import OrderConfirmationEmailStyle from "@/pages/order-confirmation-email-style";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
 import Admin from "@/pages/shopify-admin";
@@ -64,7 +65,8 @@ function Router() {
       <Route path="/checkout-form" component={ShopifyCheckout} />
       <Route path="/checkout-old" component={CheckoutForm} />
       <Route path="/crypto-payment/:paymentId" component={CryptoPayment} />
-      <Route path="/order-confirmation" component={OrderConfirmation} />
+      <Route path="/order-confirmation/:id" component={OrderConfirmation} />
+      <Route path="/order-confirmation-email/:id" component={OrderConfirmationEmailStyle} />
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/track-order" component={TrackOrder} />
       <Route path="/admin/login" component={AdminLogin} />

@@ -1,223 +1,255 @@
-import { useState, useEffect } from 'react';
-import { CheckCircle, Printer, ShoppingBag } from 'lucide-react';
-import { useCartStore } from '@/lib/cart';
-import { getProductImageUrl } from '@/assets/images';
+import { useParams, useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
-interface CartItem {
+interface OrderItem {
   id: string;
-  title: string;
-  priceKr: number;
-  imageUrl: string;
-  size: string;
+  name: string;
   quantity: number;
-  wearDays?: number;
-  sellerAlias: string;
+  price: number;
+  image?: string;
+}
+
+interface Order {
+  id: string;
+  customerName?: string;
+  customerEmail: string;
+  totalAmountKr: string;
+  paymentMethod: string;
+  status: string;
+  shippingAddress: string;
+  createdAt: string;
+  items?: OrderItem[];
 }
 
 export default function OrderConfirmation() {
-  const { items: cartItems, clearCart } = useCartStore();
-  const [orderNumber, setOrderNumber] = useState('');
-  const [orderTotal, setOrderTotal] = useState(0);
-  const [orderItems, setOrderItems] = useState<CartItem[]>([]);
-  const [customerData, setCustomerData] = useState<any>(null);
+  const { id } = useParams<{ id: string }>();
+  const [, setLocation] = useLocation();
+  const [showPromoCode, setShowPromoCode] = useState(false);
 
+  const { data: order, isLoading, error } = useQuery<Order>({
+    queryKey: ['/api/orders', id],
+    enabled: !!id,
+  });
+
+  // Scroll to top when component loads
   useEffect(() => {
-    // Generate order number
-    const orderNum = 'HMT' + Math.random().toString().substr(2, 6);
-    setOrderNumber(orderNum);
+    window.scrollTo(0, 0);
+  }, []);
 
-    // Load order data from localStorage first
-    const savedOrderItems = localStorage.getItem('orderItemsData');
-    const savedOrderTotal = localStorage.getItem('orderTotalData');
-    const savedCustomerData = localStorage.getItem('orderCustomerData');
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
-    if (savedOrderItems) {
-      setOrderItems(JSON.parse(savedOrderItems));
-      localStorage.removeItem('orderItemsData');
-    } else if (cartItems.length > 0) {
-      // Fallback: use cart items if localStorage data is not available
-      setOrderItems([...cartItems]);
-    }
+  if (error || !order) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Order inte hittad</h1>
+          <button 
+            onClick={() => setLocation('/')}
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
+          >
+            Tillbaka till startsidan
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-    if (savedOrderTotal) {
-      setOrderTotal(parseFloat(savedOrderTotal));
-      localStorage.removeItem('orderTotalData');
-    } else if (cartItems.length > 0) {
-      // Fallback: calculate from cart items
-      const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.priceKr * item.quantity), 0);
-      setOrderTotal(total);
-    }
-
-    if (savedCustomerData) {
-      setCustomerData(JSON.parse(savedCustomerData));
-      localStorage.removeItem('orderCustomerData');
-    }
-
-    // Clear cart after saving order data
-    setTimeout(() => {
-      clearCart();
-    }, 5000);
-  }, [cartItems, clearCart]);
-
-  const handlePrintReceipt = () => {
-    window.print();
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('sv-SE', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
-  const handleKeepShopping = () => {
-    window.location.href = '/womens';
+  const getOrderNumber = () => {
+    return order.id.substring(0, 8).toUpperCase();
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 py-8 lg:py-12">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Main Content */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm p-8">
-              {/* Success Icon */}
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                  <CheckCircle className="w-8 h-8 text-green-600" />
+      {/* Header */}
+      <div className="bg-slate-700 text-white py-4">
+        <div className="max-w-4xl mx-auto px-4">
+          <h1 className="text-lg font-medium text-center">Scandiscent</h1>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        {/* Order Confirmation Header */}
+        <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Orderbekräftelse</h1>
+          
+          <div className="mb-6">
+            <p className="text-gray-600 mb-2">Hej {order.customerName || 'kund'},</p>
+            <p className="text-gray-600 mb-2">Tack för ditt köp. Detta email bekräftar din order.</p>
+            <p className="text-gray-600 mb-4">
+              Vi ska nu göra din order redo, vänligen dubbelkolla detaljerna nedan och låt oss veta om något behöver ändras.
+            </p>
+            <p className="text-gray-600 mb-6">Du kan följa statusen på din order nedan:</p>
+            
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 font-medium">
+              VISA ORDER STATUS
+            </button>
+          </div>
+
+          <div className="border-t pt-6">
+            <p className="text-sm text-gray-600 mb-1">
+              Vänligen tveka inte att kontakta oss om du har frågor alls.
+            </p>
+            <p className="text-sm text-gray-600 mb-1">Tack,</p>
+            <p className="text-sm text-gray-600">Scandiscent Team</p>
+          </div>
+        </div>
+
+        {/* Order Details */}
+        <div className="bg-white rounded-lg shadow-sm p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {/* Order Number */}
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">Order Nr. #{getOrderNumber()}</h3>
+              <p className="text-sm text-gray-600">{formatDate(order.createdAt)}</p>
+            </div>
+
+            {/* Customer & Shipping */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Kund</h4>
+                <div className="text-sm text-gray-600 space-y-1">
+                  <p>{order.customerName}</p>
+                  <p>{order.customerEmail}</p>
                 </div>
-                <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-                  Din beställning är på väg!
-                </h1>
-                <p className="text-gray-600 max-w-md mx-auto leading-relaxed">
-                  Välkommen till Scandiscent-familjen! Vårt mål är att bygga en förtroendefull relation som sträcker sig långt över vad du vill. Vi skickar en orderbekräftelse så fort din beställning har skickats.
-                </p>
               </div>
-
-              {/* Order Number */}
-              <div className="text-center mb-8">
-                <h2 className="text-lg font-medium text-gray-900 mb-2">Beställning {orderNumber}</h2>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <button
-                  onClick={handleKeepShopping}
-                  className="inline-flex items-center justify-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-md transition-colors"
-                >
-                  <ShoppingBag className="w-4 h-4 mr-2" />
-                  Fortsätt handla
-                </button>
-                <button
-                  onClick={handlePrintReceipt}
-                  className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium rounded-md transition-colors"
-                >
-                  <Printer className="w-4 h-4 mr-2" />
-                  Skriv ut kvitto
-                </button>
-              </div>
-
-              {/* Shipping Address */}
-              <div className="border-t border-gray-200 pt-8">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Leveransadress</h3>
-                <div className="text-gray-600">
-                  {customerData ? (
-                    <>
-                      <p className="font-medium">{customerData.firstName} {customerData.lastName}</p>
-                      <p>{customerData.address}</p>
-                      {customerData.apartment && <p>{customerData.apartment}</p>}
-                      <p>{customerData.postalCode} {customerData.city}</p>
-                      <p>{customerData.country}</p>
-                    </>
-                  ) : (
-                    <>
-                      <p className="font-medium">Kund</p>
-                      <p>Sverige</p>
-                    </>
-                  )}
+              
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Leveransadress</h4>
+                <div className="text-sm text-gray-600">
+                  <p className="whitespace-pre-line">{order.shippingAddress}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Order Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-6">Ordersammanfattning</h2>
-
-              {/* Order Items */}
-              <div className="space-y-4 mb-6">
-                {orderItems.length > 0 ? (
-                  orderItems.map((item: CartItem) => (
-                    <div key={item.id} className="flex items-start space-x-4">
-                      <div className="relative">
-                        <img 
-                          src={getProductImageUrl(item.imageUrl) || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=64&h=64&fit=crop&crop=center"} 
-                          alt={item.title}
-                          className="w-16 h-16 object-cover rounded-lg border"
-                        />
-                        <span className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                          {item.quantity}
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-sm font-medium text-gray-900 leading-tight">{item.title}</h3>
-                        <p className="text-sm text-gray-500 mt-1">{item.size}</p>
-                        {item.wearDays && (
-                          <p className="text-sm text-gray-500">{item.wearDays} dagar</p>
-                        )}
-                      </div>
-                      <div className="text-sm font-medium text-gray-900">
-                        {(item.priceKr * item.quantity).toFixed(2)} kr
-                      </div>
+          {/* Items */}
+          <div className="border-t pt-8">
+            <h3 className="font-semibold text-gray-900 mb-4">Produktbeskrivning</h3>
+            
+            {order.items && order.items.length > 0 ? (
+              <div className="space-y-4">
+                {order.items.map((item, index) => (
+                  <div key={index} className="flex items-center space-x-4 py-4 border-b border-gray-100 last:border-b-0">
+                    <div className="w-16 h-16 bg-gray-100 rounded-md flex items-center justify-center">
+                      {item.image ? (
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-md" />
+                      ) : (
+                        <div className="w-8 h-8 bg-gradient-to-br from-pink-200 to-rose-300 rounded"></div>
+                      )}
                     </div>
-                  ))
-                ) : (
-                  <div className="text-center py-4">
-                    <p className="text-gray-500 text-sm">Ingen orderinformation tillgänglig</p>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-900">{item.name}</h4>
+                      <p className="text-sm text-gray-600">Antal: {item.quantity}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-gray-900">{item.price.toLocaleString('sv-SE')} kr</p>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
+            ) : (
+              <div className="py-4">
+                <p className="text-gray-600">Orderdetaljer laddas...</p>
+              </div>
+            )}
 
-              {/* Order Totals */}
-              <div className="border-t border-gray-200 pt-4 space-y-2">
+            {/* Order Summary */}
+            <div className="border-t pt-6 mt-6">
+              <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="text-gray-900">{orderTotal.toFixed(2)} kr</span>
+                  <span className="text-gray-600">Delsumma</span>
+                  <span className="text-gray-900">{parseFloat(order.totalAmountKr).toLocaleString('sv-SE')} kr</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Frakt</span>
-                  <span className="text-gray-900">0,00 kr</span>
+                  <span className="text-gray-600">Standardfrakt</span>
+                  <span className="text-gray-900">49 kr</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Moms</span>
-                  <span className="text-gray-900">0,00 kr</span>
+                  <span className="text-gray-900">{Math.round(parseFloat(order.totalAmountKr) * 0.25).toLocaleString('sv-SE')} kr</span>
                 </div>
-                <div className="border-t border-gray-200 pt-2">
-                  <div className="flex justify-between text-base font-medium">
-                    <span className="text-gray-900">Totalt</span>
-                    <span className="text-gray-900">{orderTotal.toFixed(2)} kr</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Payment Method */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 text-sm">Betald</span>
-                  <div className="flex items-center">
-                    <span className="text-green-600 text-sm font-medium mr-2">✓</span>
-                    <span className="text-green-600 font-medium">{orderTotal.toFixed(2)} kr</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Subtle thank you note */}
-              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-md">
-                <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-sm font-medium text-green-900">Tack för din beställning</h4>
-                    <p className="text-sm text-green-700 mt-1">
-                      Du kommer få en orderbekräftelse via e-post inom kort. Leverans sker normalt inom 2-5 arbetsdagar.
-                    </p>
-                  </div>
+                <div className="flex justify-between text-lg font-semibold pt-2 border-t">
+                  <span className="text-gray-900">Total</span>
+                  <span className="text-gray-900">{(parseFloat(order.totalAmountKr) + 49).toLocaleString('sv-SE')} kr</span>
                 </div>
               </div>
             </div>
+
+            {/* Payment Info */}
+            <div className="border-t pt-6 mt-6">
+              <h4 className="font-semibold text-gray-900 mb-2">Betalningsinformation</h4>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-6 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">
+                  {order.paymentMethod === 'stripe' ? 'VISA' : order.paymentMethod.toUpperCase()}
+                </div>
+                <span className="text-sm text-gray-600">
+                  {parseFloat(order.totalAmountKr).toLocaleString('sv-SE')} kr
+                </span>
+              </div>
+            </div>
+
+            {/* Order Notes */}
+            <div className="border-t pt-6 mt-6">
+              <h4 className="font-semibold text-gray-900 mb-2">Orderanteckningar</h4>
+              <p className="text-sm text-gray-600">Tack så mycket för din order, tack! :)</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Promo Section */}
+        <div className="bg-white rounded-lg shadow-sm p-8 mt-8 text-center">
+          <h3 className="text-xl font-bold text-gray-900 mb-4">10% rabatt på ditt nästa köp!</h3>
+          <p className="text-gray-600 mb-6">
+            Som tack för att du handlar hos oss ger vi dig en rabattkod för att använda på ditt nästa köp. 
+            Använd den för dig själv eller skicka den till en vän!
+          </p>
+          
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 mb-6 max-w-sm mx-auto">
+            <div className="text-xl font-bold text-gray-900 tracking-widest">TAKE10OFF</div>
+          </div>
+          
+          <button 
+            onClick={() => setLocation('/womens')}
+            className="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 font-medium"
+          >
+            HANDLA NU
+          </button>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-12 space-y-4">
+          <div className="flex justify-center space-x-8 text-sm text-gray-600">
+            <button onClick={() => setLocation('/womens')} className="hover:text-gray-900">HANDLA NU</button>
+            <button onClick={() => setLocation('/about')} className="hover:text-gray-900">OM OSS</button>
+            <button onClick={() => setLocation('/contact')} className="hover:text-gray-900">KONTAKT</button>
+          </div>
+          
+          <div className="flex justify-center space-x-4">
+            <div className="w-6 h-6 bg-gray-400 rounded"></div>
+            <div className="w-6 h-6 bg-gray-400 rounded"></div>
+            <div className="w-6 h-6 bg-gray-400 rounded"></div>
+          </div>
+          
+          <div className="text-xs text-gray-500 space-y-1">
+            <p>www.scandiscent.com</p>
+            <p>Scandinavia, Nordic Region</p>
+            <p>Copyright © 2025</p>
+            <p className="font-semibold">Scandiscent</p>
           </div>
         </div>
       </div>
