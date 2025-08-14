@@ -32,13 +32,7 @@ export default function About() {
             </Card>
             <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
               <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">98%</div>
-                <div className="text-gray-600">Kundnöjdhet</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/60 border-[#064F8C]/20 text-center p-6">
-              <CardContent className="p-0">
-                <div className="text-3xl font-bold text-[#064F8C] mb-2">500+</div>
+                <div className="text-3xl font-bold text-[#064F8C] mb-2">10+</div>
                 <div className="text-gray-600">Verifierade Säljare</div>
               </CardContent>
             </Card>
