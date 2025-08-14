@@ -91,8 +91,8 @@ export default function Contact() {
                           <span className="text-sm text-gray-600">Säkerhet</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Users className="h-4 w-4 text-[#064F8C]" />
-                          <span className="text-sm text-gray-600">Kontoinformation</span>
+                          <MessageCircle className="h-4 w-4 text-[#064F8C]" />
+                          <span className="text-sm text-gray-600">Privata frågor</span>
                         </div>
                       </div>
                     </div>
