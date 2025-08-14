@@ -172,34 +172,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Company Info */}
-          <div className="mt-16 text-center">
-            <Card className="bg-white/60 border-[#064F8C]/20 p-8 max-w-2xl mx-auto">
-              <CardContent className="p-0">
-                <h3 className="text-2xl font-bold mb-4 gold-text-static">Om Scandiscent</h3>
-                <div className="space-y-4 text-gray-700">
-                  <p>
-                    Scandiscent är Nordens ledande plattform för diskret handel med intimplagg. 
-                    Vi grundades 2023 med en vision att skapa en säker och respektfull marknadsplats.
-                  </p>
-                  <div className="flex items-center justify-center gap-6 pt-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-[#064F8C]">10,000+</div>
-                      <div className="text-sm text-gray-600">Nöjda Kunder</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-[#064F8C]">98%</div>
-                      <div className="text-sm text-gray-600">Kundnöjdhet</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-[#064F8C]">24/7</div>
-                      <div className="text-sm text-gray-600">Support</div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+
         </div>
       </section>
     </div>
