@@ -94,7 +94,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <Button 
               onClick={handleAddToCart}
               disabled={!product.isAvailable}
-              className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-poppins font-medium text-sm"
+              className="gold-button font-medium text-sm"
             >
               {product.isAvailable ? "Lägg i varukorg" : "Slutsåld"}
             </Button>

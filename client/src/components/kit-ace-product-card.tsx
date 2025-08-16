@@ -85,9 +85,8 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
             window.location.href = `/product/${product.id}`;
           }}
           disabled={!product.isAvailable}
-          variant="outline"
           size="sm"
-          className="w-full text-xs font-medium uppercase tracking-wide border-[#111B3E] text-[#111B3E] bg-white hover:bg-[#111B3E] hover:text-white transition-all duration-200"
+          className="w-full gold-button text-xs font-medium uppercase tracking-wide"
         >
           {product.isAvailable ? "Visa mer" : "Slutsåld"}
         </Button>
