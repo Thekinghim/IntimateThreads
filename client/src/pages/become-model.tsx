@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import Newsletter from "@/components/newsletter";
 import heroImage from "@assets/IMG_2353_1755189196516.jpg";
 
 export default function BecomeModel() {
@@ -193,6 +194,8 @@ export default function BecomeModel() {
           </div>
         </div>
       </section>
+      
+      <Newsletter />
     </div>
   );
 }
