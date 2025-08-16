@@ -253,6 +253,14 @@
     color: #111B3E;
   }
   
+  .gold-badge {
+    background: var(--gold-metallic);
+    color: #111B3E;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  
   .gold-button-outline {
     background: transparent;
     color: #d4af37;
