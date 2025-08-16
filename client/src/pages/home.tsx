@@ -329,22 +329,14 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Newsletter Section */}
-      <section 
-        className="py-12 sm:py-16 relative bg-contain bg-center bg-no-repeat pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]"
-        style={{
-          backgroundImage: `url(${newsletterBg})`,
-          backgroundPosition: "center center",
-          backgroundSize: "80%",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#064F8C]/20 to-[#111B3E]/20"></div>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-white/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+      <section className="py-12 sm:py-16 pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#064F8C]/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-[#064F8C]/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
             <div className="text-center lg:text-left flex-1">
-              <h3 className="font-cormorant font-bold text-xl sm:text-2xl text-white mb-2">
+              <h3 className="font-cormorant font-bold text-xl sm:text-2xl text-[#064F8C] mb-2">
                 Gå med i vår trosklubb för att få de senaste nyheterna
               </h3>
-              <p className="font-dm-sans text-white/80 text-sm sm:text-base">
+              <p className="font-dm-sans text-[#4A5568] text-sm sm:text-base">
                 Bli först att veta om nya modeller och exklusiva erbjudanden
               </p>
             </div>
@@ -353,7 +345,7 @@ font-extrabold drop-shadow-lg"
               <input
                 type="email"
                 placeholder="Din e-postadress..."
-                className="px-4 py-3 rounded-lg border-none bg-white/20 backdrop-blur-sm text-white placeholder-white/70 focus:ring-2 focus:ring-white/50 focus:outline-none font-dm-sans text-sm w-full sm:w-64"
+                className="px-4 py-3 rounded-lg border border-[#064F8C]/20 bg-white backdrop-blur-sm text-[#2D3748] placeholder-[#4A5568] focus:ring-2 focus:ring-[#064F8C]/50 focus:outline-none font-dm-sans text-sm w-full sm:w-64"
               />
               <Button className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium px-6 py-3 rounded-lg whitespace-nowrap text-sm shadow-lg w-full sm:w-auto">
                 Gå med nu
