@@ -88,7 +88,7 @@ export default function Womens() {
           </p>
           
           {/* Handwritten Card Feature */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg text-white gradient-midnight-cyan px-4 sm:px-6 py-3 sm:py-4 max-w-sm sm:max-w-md mx-auto rounded-2xl sm:rounded-3xl shadow-lg font-medium">
+          <div className="gold-button flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg px-4 sm:px-6 py-3 sm:py-4 max-w-sm sm:max-w-md mx-auto rounded-2xl sm:rounded-3xl shadow-lg font-medium">
             <PenTool className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
             <span className="text-center">+ Ett handskrivet kort från din modell</span>
           </div>
