@@ -50,8 +50,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Always use ScandiscentStyleAdmin for all devices - it's fully responsive
-  const AdminComponent = ScandiscentStyleAdmin;
+  // Temporarily use Shopify Admin to show the sold-out checkbox
+  const AdminComponent = Admin;
 
   return (
     <Switch>
