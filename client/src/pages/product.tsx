@@ -148,7 +148,7 @@ export default function Product() {
               <h1 className="text-2xl sm:text-3xl font-light text-gray-900 uppercase tracking-wider">{product.title}</h1>
             </div>
 
-            <p className="text-sm text-gray-600 capitalize">{product.material}</p>
+
 
             {/* Price */}
             <div className="space-y-2">
@@ -178,21 +178,7 @@ export default function Product() {
 
 
 
-            {/* Description */}
-            <div className="border-t pt-6">
-              <button className="w-full flex justify-between items-center py-3 text-left">
-                <span className="text-sm font-medium text-gray-900 uppercase tracking-wide">🔽 DESCRIPTION</span>
-                <span className="text-gray-400">-</span>
-              </button>
-              <div className="pb-4 text-sm text-gray-600 leading-relaxed">
-                <p>{product.description}</p>
-                <br />
-                <p>Material: {product.material}</p>
-                <p>Seller: {product.seller.alias}, {product.seller.location}</p>
-                <p>Age: {product.seller.age} years</p>
-                {product.wearDays && <p>Days worn: {product.wearDays}</p>}
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
