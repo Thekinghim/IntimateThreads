@@ -130,9 +130,9 @@ font-extrabold drop-shadow-lg"
       {/* Hero Extension Fade */}
       <div className="h-30 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/50 via-[#2D3748]/25 via-[#2D3748]/10 to-[#F5F1E8]"></div>
       {/* Featured Collection */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F1E8] relative">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h3 className="font-bold text-3xl sm:text-4xl lg:text-5xl text-[#064F8C] mb-4 sm:mb-6 lg:mb-8">Bläddra bland trosorna</h3>
             <p className="text-[#4A5568] text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto font-light leading-relaxed px-4">
               Handplockade exklusiva plagg från verifierade nordiska kvinnor
@@ -189,7 +189,7 @@ font-extrabold drop-shadow-lg"
             </div>
           </div>
 
-          <div className="text-center mt-16 sm:mt-20 lg:mt-24">
+          <div className="text-center mt-12 sm:mt-16 lg:mt-20">
             <Link href="/womens">
               <Button
                 size="lg"
@@ -202,9 +202,9 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F1E8] relative">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
-          <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
               Så Funkar Det
             </h3>
@@ -266,7 +266,7 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden bg-[#F5F1E8]">
+      <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-[#F5F1E8]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
             <Link href="/womens">
@@ -282,10 +282,10 @@ font-extrabold drop-shadow-lg"
       </section>
       
       {/* Statistics and Testimonials Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F1E8] relative">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Statistic */}
-          <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#064F8C] mb-4 font-cormorant">
               1,000+
             </h2>
@@ -325,24 +325,12 @@ font-extrabold drop-shadow-lg"
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-16 sm:mt-20 lg:mt-24">
-            <Link href="/womens">
-              <Button className="gold-button font-medium px-8 py-3 rounded-2xl shadow-lg w-full sm:w-auto min-w-[160px]">
-                Bläddra Trosor
-              </Button>
-            </Link>
-            <Link href="/models">
-              <Button variant="outline" className="border-2 border-[#064F8C] text-[#064F8C] hover:bg-[#064F8C] hover:text-white font-medium px-8 py-3 rounded-2xl transition-all duration-300 w-full sm:w-auto min-w-[160px]">
-                Visa Modeller
-              </Button>
-            </Link>
-          </div>
+
         </div>
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-white/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
             <div className="text-center lg:text-left flex-1">
