@@ -3,7 +3,7 @@ import logoImage from "@assets/sverige_1754848613465.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#F5F1E8] text-[#2D3748] py-24 relative overflow-hidden pt-[0px] pb-[0px]">
+    <footer className="bg-[#F5F1E8] text-[#2D3748] py-24 relative overflow-hidden ml-[0px] mr-[0px] mt-[0px] mb-[0px] pl-[0px] pr-[0px] pt-[1px] pb-[1px]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <div>
