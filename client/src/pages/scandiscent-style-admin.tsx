@@ -1225,20 +1225,30 @@ export default function ScandiscentStyleAdmin() {
                       <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">{product.seller?.alias}</TableCell>
                       <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">{product.priceKr} kr</TableCell>
                       <TableCell className="px-2 md:px-4 py-3">
-                        <ProductManager 
-                          sellers={sellers || []} 
-                          product={product}
-                          trigger={
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
-                              data-testid={`button-edit-product-${product.id}`}
-                            >
-                              Edit Product
-                            </Button>
-                          }
-                        />
+                        <div className="flex items-center space-x-2">
+                          <ProductManager 
+                            sellers={sellers || []} 
+                            product={product}
+                            trigger={
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
+                                data-testid={`button-edit-product-${product.id}`}
+                              >
+                                Edit
+                              </Button>
+                            }
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => deleteProductMutation.mutate(product.id)}
+                            className="text-red-600 hover:text-red-800 h-6 px-2 text-xs"
+                          >
+                            Delete
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
