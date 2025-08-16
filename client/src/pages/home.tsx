@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { type ProductWithSeller } from "@shared/schema";
 import heroImage from "@assets/Clara-Gallery-2_1754772829712.webp";
+import newsletterBg from "@assets/Screenshot 2025-08-16 at 18.45.53_1755362786676.png";
 import { useTranslations } from "@/hooks/useLanguage";
 import { useState, useRef, useEffect } from "react";
 import SEOHead from "@/components/seo-head";
@@ -328,8 +329,15 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Newsletter Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-r from-[#064F8C] to-[#111B3E] pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section 
+        className="py-12 sm:py-16 relative bg-cover bg-center bg-no-repeat pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]"
+        style={{
+          backgroundImage: `url(${newsletterBg})`,
+          backgroundPosition: "center center",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#064F8C]/80 to-[#111B3E]/80"></div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-white/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
             <div className="text-center lg:text-left flex-1">
               <h3 className="font-cormorant font-bold text-xl sm:text-2xl text-white mb-2">
