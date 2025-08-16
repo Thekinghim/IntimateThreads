@@ -69,36 +69,21 @@ export default function ProductCard({ product }: ProductCardProps) {
             width="400"
             height="256"
           />
-          {backImage && (
-            <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {isHovered ? 'Baksida' : 'Hover för baksida'}
-            </div>
-          )}
+
         </div>
         
         <CardContent className="p-6 h-48 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">
             <div>
               <h4 className="font-poppins font-medium text-xl text-[#111B3E]">{product.title}</h4>
-              {/* Model link */}
-              <span 
-                className="text-[#064F8C] text-sm hover:text-[#111B3E] transition-colors cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.location.href = `/model/${product.seller.alias.toLowerCase()}`;
-                }}
-              >
-                Modell - {product.seller.alias}
-              </span>
             </div>
             {getAvailabilityBadge()}
           </div>
           
-          <p className="text-[#064F8C]/80 mb-4 text-sm flex-grow overflow-hidden text-ellipsis">{product.description}</p>
+
           
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
-              <span className="text-sm text-[#064F8C]/70 line-through">500 kr</span>
               <span className="font-poppins font-semibold text-xl text-[#111B3E]">300 kr</span>
             </div>
             <Button 

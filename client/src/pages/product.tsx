@@ -136,9 +136,7 @@ export default function Product() {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="text-xs text-gray-500 text-center mt-1">
-                    {i === 0 ? 'Fram' : 'Bak'}
-                  </div>
+
                 </div>
               ))}
             </div>
@@ -146,13 +144,8 @@ export default function Product() {
 
           {/* Right side - Product Info */}
           <div className="space-y-6 mt-6 lg:mt-0">
-            <div className="flex items-start justify-between">
-              <h1 className="text-2xl sm:text-3xl font-light text-gray-900 uppercase tracking-wider pr-4">{product.title}</h1>
-              <button className="p-2 text-gray-400 hover:text-gray-600 flex-shrink-0">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                </svg>
-              </button>
+            <div className="flex items-start">
+              <h1 className="text-2xl sm:text-3xl font-light text-gray-900 uppercase tracking-wider">{product.title}</h1>
             </div>
 
             <p className="text-sm text-gray-600 capitalize">{product.material}</p>
@@ -166,9 +159,7 @@ export default function Product() {
               </div>
             </div>
 
-            <div className="text-sm text-gray-600">
-              Diskret förpackning och anonym leverans ingår alltid
-            </div>
+
 
 
 

@@ -62,26 +62,12 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
             {product.title}
           </h3>
           
-          {/* Model link */}
-          <span 
-            className="text-sm text-[#064F8C] hover:text-[#111B3E] transition-colors cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              window.location.href = `/model/${product.seller.alias.toLowerCase()}`;
-            }}
-          >
-            Modell - {product.seller.alias}
-          </span>
 
-          {/* Price display with sale price */}
-          <div className="flex flex-col">
-            <span className="text-xs text-[#064F8C]/70 line-through">
-              {originalPrice} kr
-            </span>
-            <p className="text-sm font-medium text-[#111B3E]">
-              {salePrice} kr
-            </p>
-          </div>
+
+          {/* Price display */}
+          <p className="text-sm font-medium text-[#111B3E]">
+            {salePrice} kr
+          </p>
         </div>
       </Link>
       
