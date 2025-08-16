@@ -37,9 +37,9 @@ export default function NewsBanner() {
 
   return (
     <div className="w-screen bg-gradient-to-r from-[#F5F1E8] to-white border-b border-[#E8E4D6] relative -mx-4 sm:-mx-6 lg:-mx-8">
-      <div className="w-full py-3">
+      <div className="w-full py-3 relative">
         <div className="flex items-center justify-center">
-          <div className="flex-1 text-center max-w-4xl mx-auto px-4">
+          <div className="flex-1 text-center max-w-4xl mx-auto px-12">
             {visibleItems.map((item, index) => (
               <div key={item.id} className="relative">
                 <div className="flex items-center justify-center group">
@@ -50,21 +50,28 @@ export default function NewsBanner() {
                       dangerouslySetInnerHTML={{ __html: item.content }}
                     />
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 p-1 h-6 w-6"
-                    onClick={() => dismissItem(item.id)}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
                 </div>
                 {index < visibleItems.length - 1 && (
-                  <hr className="my-2 border-[#064F8C]/20 mx-8" />
+                  <hr className="my-2 border-[#064F8C]/20 absolute left-0 right-0 w-screen ml-[-50vw] mr-[-50vw]" />
                 )}
               </div>
             ))}
           </div>
+        </div>
+        
+        {/* Stäng-knappar - absolut positionerade längst ut till höger */}
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 space-y-2">
+          {visibleItems.map((item) => (
+            <Button
+              key={item.id}
+              variant="ghost"
+              size="sm"
+              className="opacity-70 hover:opacity-100 p-1 h-6 w-6 block"
+              onClick={() => dismissItem(item.id)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          ))}
         </div>
       </div>
     </div>
