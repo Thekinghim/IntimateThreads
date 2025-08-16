@@ -280,9 +280,8 @@ font-extrabold drop-shadow-lg"
           </div>
         </div>
       </section>
-      
       {/* Statistics and Testimonials Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative pt-[0px] pb-[0px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Statistic */}
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
@@ -328,7 +327,6 @@ font-extrabold drop-shadow-lg"
 
         </div>
       </section>
-
       {/* Newsletter Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
