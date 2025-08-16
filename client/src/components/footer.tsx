@@ -11,11 +11,17 @@ export default function Footer() {
               <img 
                 src={logoImage} 
                 alt="Scandiscent Logo" 
-                className="w-16 h-16 object-contain bg-transparent"
+                className="w-16 h-16 object-contain bg-transparent cursor-pointer hover:scale-105 transition-transform duration-200"
                 style={{ backgroundColor: 'transparent' }}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               />
               <div className="flex flex-col">
-                <h4 className="font-poppins font-bold text-3xl text-[#064F8C]">Scandiscent</h4>
+                <h4 
+                  className="font-poppins font-bold text-3xl text-[#064F8C] cursor-pointer hover:text-[#111B3E] transition-colors duration-200"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                  Scandiscent
+                </h4>
               </div>
             </div>
             <p className="text-[#064F8C] mb-10 max-w-lg text-xl leading-relaxed font-light">
