@@ -303,7 +303,7 @@ font-extrabold drop-shadow-lg"
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
               <div className="text-[#F5D061] text-3xl sm:text-4xl mb-3 sm:mb-4">"</div>
               <p className="text-[#4A5568] mb-4 sm:mb-6 leading-relaxed font-dm-sans text-sm sm:text-base">
-                Jag älskar er sajt och har varit kund länge. Jag gick tillbaka och tittade på mina beställningar från #1588 fram till idag #3624. Vem skulle ha trott att en fetischsajt för använda trosor skulle fungera så bra... Att ha ett par trosor som du ser en modell bära och onanera i, är bara ett underbart sätt att känna sig kopplad till en modell utan att vara fysiskt kopplad. Det är briljant!
+                Jag älskar er sajt och har varit kund länge. Över 2000 beställningar senare kan jag säga att det är ett underbart sätt att känna sig kopplad till en modell. Briljant koncept!
               </p>
               <p className="font-bold text-[#064F8C] text-right font-lora">J M</p>
             </div>
@@ -312,7 +312,7 @@ font-extrabold drop-shadow-lg"
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
               <div className="text-[#F5D061] text-3xl sm:text-4xl mb-3 sm:mb-4">"</div>
               <p className="text-[#4A5568] mb-4 sm:mb-6 leading-relaxed font-dm-sans text-sm sm:text-base">
-                Er sajt är fantastisk och jag handlar minst en gång i månaden. Era modeller, kundservice och alternativ är mycket bättre än på andra sajter. Jag uppskattar vad ni gör och kommer fortsätta att vara en lojal kund!
+                Fantastisk sajt! Handlar minst en gång i månaden. Era modeller, kundservice och alternativ är bättre än andra sajter. Fortsätter vara lojal kund!
               </p>
               <p className="font-bold text-[#064F8C] text-right font-lora">A B</p>
             </div>
@@ -321,7 +321,7 @@ font-extrabold drop-shadow-lg"
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
               <div className="text-[#F5D061] text-3xl sm:text-4xl mb-3 sm:mb-4">"</div>
               <p className="text-[#4A5568] mb-4 sm:mb-6 leading-relaxed font-dm-sans text-sm sm:text-base">
-                Jag var tveksam först att köpa trosor online och har blivit lurad förut. Jag har lagt flera beställningar nu och vissa tar längre tid än andra, vilket jag förstår, men det viktiga är att ni alltid levererar! Era kundservice är bättre än de flesta "vanliga" företag, så tack för att ni är en fantastisk och unik service för denna nisch!
+                Var tveksam först men ni levererar alltid! Kundservice bättre än de flesta "vanliga" företag. Fantastisk och unik service!
               </p>
               <p className="font-bold text-[#064F8C] text-right font-lora">T P</p>
             </div>
