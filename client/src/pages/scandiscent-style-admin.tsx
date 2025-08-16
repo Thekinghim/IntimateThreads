@@ -30,6 +30,7 @@ import {
   CreditCard,
   Truck
 } from "lucide-react";
+import ProductManager from "@/components/admin/product-manager";
 
 function OrderDetailsModal({ order, isOpen, onClose }: { order: any; isOpen: boolean; onClose: () => void }) {
   if (!order) return null;
@@ -1193,13 +1194,7 @@ export default function ScandiscentStyleAdmin() {
           <div className="p-3 md:p-6 bg-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
               <h1 className="text-lg md:text-xl font-semibold text-gray-900">Products</h1>
-              <Button 
-                onClick={() => setIsCreateProductOpen(true)}
-                className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
-                data-testid="button-add-product"
-              >
-                Add product
-              </Button>
+              <ProductManager sellers={sellers || []} />
             </div>
             <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
               <Table>
@@ -1218,34 +1213,32 @@ export default function ScandiscentStyleAdmin() {
                     <TableRow key={product.id} className="border-b border-[#f1f1f1] hover:bg-[#fafbfb]">
                       <TableCell className="px-2 md:px-4 py-3 font-medium text-gray-900 text-xs md:text-sm">{product.title}</TableCell>
                       <TableCell className="px-2 md:px-4 py-3">
-                        <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
+                        {product.isSoldOut ? (
+                          <Badge className="bg-red-100 text-red-700 border-red-200 text-xs">SLUT</Badge>
+                        ) : product.isAvailable ? (
+                          <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
+                        ) : (
+                          <Badge className="bg-gray-100 text-gray-700 border-gray-200 text-xs">Inactive</Badge>
+                        )}
                       </TableCell>
                       <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700 hidden sm:table-cell">1 in stock</TableCell>
                       <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-700">{product.seller?.alias}</TableCell>
                       <TableCell className="px-2 md:px-4 py-3 text-xs md:text-sm font-medium text-gray-900">{product.priceKr} kr</TableCell>
                       <TableCell className="px-2 md:px-4 py-3">
-                        <div className="flex items-center space-x-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleEditProduct(product);
-                            }}
-                            className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
-                            data-testid={`button-edit-product-${product.id}`}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => deleteProductMutation.mutate(product.id)}
-                            className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
-                          >
-                            Delete
-                          </Button>
-                        </div>
+                        <ProductManager 
+                          sellers={sellers || []} 
+                          product={product}
+                          trigger={
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="bg-[#005bd3] text-[#ffffff] hover:bg-[#004fc4] h-6 px-2 text-xs"
+                              data-testid={`button-edit-product-${product.id}`}
+                            >
+                              Edit Product
+                            </Button>
+                          }
+                        />
                       </TableCell>
                     </TableRow>
                   ))}

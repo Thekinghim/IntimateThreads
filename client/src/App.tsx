@@ -31,7 +31,6 @@ import OrderConfirmationEmailStyle from "@/pages/order-confirmation-email-style"
 import EmailPreview from "@/pages/email-preview";
 import HowItWorks from "@/pages/how-it-works";
 import TrackOrder from "@/pages/track-order";
-import Admin from "@/pages/shopify-admin";
 import MobileAdmin from "@/pages/mobile-admin-v2";
 import ScandiscentStyleAdmin from "@/pages/scandiscent-style-admin";
 import AdminLogin from "@/pages/admin-login";
@@ -50,8 +49,8 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Temporarily use Shopify Admin to show the sold-out checkbox
-  const AdminComponent = Admin;
+  // Always use ScandiscentStyleAdmin for all devices - it's fully responsive
+  const AdminComponent = ScandiscentStyleAdmin;
 
   return (
     <Switch>
