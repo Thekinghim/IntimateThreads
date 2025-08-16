@@ -131,7 +131,6 @@ font-extrabold drop-shadow-lg"
           </div>
         </div>
       </section>
-
       {/* Featured Collection */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -269,7 +268,7 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-[#F5F1E8]">
+      <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-[#F5F1E8] pt-[0px] pb-[0px]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
             <Link href="/womens">
