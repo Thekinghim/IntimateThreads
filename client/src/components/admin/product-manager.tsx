@@ -138,10 +138,10 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto mx-auto">
+      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto mx-auto bg-[#FEFBEA] border-2 border-[#DAA520]">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl">
-            <Package className="h-5 w-5" />
+          <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl text-[#111B3E] font-semibold">
+            <Package className="h-5 w-5 text-[#DAA520]" />
             {isEdit ? 'Edit Product' : 'Create New Product'}
           </DialogTitle>
         </DialogHeader>
@@ -152,8 +152,8 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
               {/* Mobile-First Single Column Layout */}
               <div className="space-y-4">
                 {/* Product Status Controls - MOVED TO TOP FOR VISIBILITY */}
-                <div className="space-y-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                  <FormLabel className="text-base font-semibold text-amber-800">📦 Produktstatus</FormLabel>
+                <div className="space-y-4 p-4 bg-[#FFF8DC] border-2 border-[#DAA520] rounded-lg">
+                  <FormLabel className="text-base font-semibold text-[#111B3E]">📦 Produktstatus</FormLabel>
                   
                   <FormField
                     control={form.control}
@@ -167,8 +167,8 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel>Produkt tillgänglig</FormLabel>
-                          <p className="text-sm text-amber-700">
+                          <FormLabel className="text-[#111B3E] font-medium">Produkt tillgänglig</FormLabel>
+                          <p className="text-sm text-[#064F8C]">
                             Produkten är aktiv och kan köpas
                           </p>
                         </div>
@@ -180,17 +180,17 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                     control={form.control}
                     name="isSoldOut"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-center space-x-3 space-y-0 p-3 bg-red-50 border border-red-200 rounded">
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0 p-3 bg-gradient-to-r from-[#FFE55C] to-[#FFA500] border-2 border-[#DAA520] rounded">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="border-red-400"
+                            className="border-[#111B3E] data-[state=checked]:bg-[#111B3E] data-[state=checked]:border-[#111B3E]"
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel className="text-red-800 font-semibold">🔴 MARKERA SOM SLUTSÅLD</FormLabel>
-                          <p className="text-sm text-red-700">
+                          <FormLabel className="text-[#111B3E] font-bold">🔴 MARKERA SOM SLUTSÅLD</FormLabel>
+                          <p className="text-sm text-[#111B3E] font-medium">
                             Markera produkten som slutsåld utan att kunden köper den
                           </p>
                         </div>
@@ -204,9 +204,13 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Product Title</FormLabel>
+                      <FormLabel className="text-[#111B3E] font-medium">Product Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Black Lace Set" {...field} />
+                        <Input 
+                          placeholder="e.g., Black Lace Set" 
+                          {...field} 
+                          className="border-[#DAA520] focus:border-[#111B3E] bg-white"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -218,11 +222,11 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel className="text-[#111B3E] font-medium">Description</FormLabel>
                       <FormControl>
                         <Textarea 
                           placeholder="Detailed description of the item..." 
-                          className="min-h-[100px]"
+                          className="min-h-[100px] border-[#DAA520] focus:border-[#111B3E] bg-white"
                           {...field} 
                         />
                       </FormControl>
@@ -237,10 +241,10 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                     name="size"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Size</FormLabel>
+                        <FormLabel className="text-[#111B3E] font-medium">Size</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="border-[#DAA520] focus:border-[#111B3E] bg-white">
                               <SelectValue placeholder="Select size" />
                             </SelectTrigger>
                           </FormControl>
@@ -260,10 +264,10 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                     name="color"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Color</FormLabel>
+                        <FormLabel className="text-[#111B3E] font-medium">Color</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="border-[#DAA520] focus:border-[#111B3E] bg-white">
                               <SelectValue placeholder="Select color" />
                             </SelectTrigger>
                           </FormControl>
@@ -284,10 +288,10 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="material"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Material</FormLabel>
+                      <FormLabel className="text-[#111B3E] font-medium">Material</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger>
+                          <SelectTrigger className="border-[#DAA520] focus:border-[#111B3E] bg-white">
                             <SelectValue placeholder="Select material" />
                           </SelectTrigger>
                         </FormControl>
@@ -307,12 +311,12 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="priceKr"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg font-semibold text-blue-600">Pris (SEK) - OBLIGATORISKT</FormLabel>
+                      <FormLabel className="text-lg font-semibold text-[#111B3E]">Pris (SEK) - OBLIGATORISKT</FormLabel>
                       <FormControl>
                         <Input 
                           type="text" 
                           placeholder="499" 
-                          className="text-lg py-3 border-2 border-blue-300 focus:border-blue-500"
+                          className="text-lg py-3 border-2 border-[#DAA520] focus:border-[#111B3E] bg-white font-medium"
                           {...field}
                           onChange={e => {
                             // Remove any leading zeros and non-numeric characters except decimal point
@@ -331,10 +335,10 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="sellerId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Seller</FormLabel>
+                      <FormLabel className="text-[#111B3E] font-medium">Seller</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger>
+                          <SelectTrigger className="border-[#DAA520] focus:border-[#111B3E] bg-white">
                             <SelectValue placeholder="Select seller" />
                           </SelectTrigger>
                         </FormControl>
@@ -356,13 +360,14 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="wearDays"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Wear Days (Optional)</FormLabel>
+                      <FormLabel className="text-[#111B3E] font-medium">Wear Days (Optional)</FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
                           placeholder="3"
                           {...field}
                           onChange={e => field.onChange(Number(e.target.value))}
+                          className="border-[#DAA520] focus:border-[#111B3E] bg-white"
                         />
                       </FormControl>
                       <FormMessage />
@@ -378,7 +383,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg font-semibold text-green-600">Produktbild - OBLIGATORISK</FormLabel>
+                      <FormLabel className="text-lg font-semibold text-[#111B3E]">Produktbild - OBLIGATORISK</FormLabel>
                       <FormControl>
                         <ImageUploader
                           value={field.value}
@@ -393,19 +398,19 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end gap-2 pt-6 border-t">
+            <div className="flex flex-col sm:flex-row justify-end gap-2 pt-6 border-t border-[#DAA520]">
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={() => setIsOpen(false)}
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto border-[#DAA520] text-[#111B3E] hover:bg-[#FFF8DC]"
               >
                 Cancel
               </Button>
               <Button 
                 type="submit" 
                 disabled={createProductMutation.isPending}
-                className="min-w-[120px] w-full sm:w-auto bg-blue-600 hover:bg-blue-700"
+                className="min-w-[120px] w-full sm:w-auto bg-gradient-to-r from-[#DAA520] to-[#B8860B] hover:from-[#B8860B] hover:to-[#DAA520] text-[#111B3E] font-semibold shadow-lg"
               >
                 {createProductMutation.isPending 
                   ? (isEdit ? "Updating..." : "Creating...") 
