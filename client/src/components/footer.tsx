@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-[#4A5568]/20 pt-[24px] pb-[24px] mt-[0px] mb-[0px]">
+        <div className="border-t border-[#4A5568]/20 pt-[24px] pb-[24px] mt-[20px] mb-[20px]">
           <div className="flex justify-between items-center">
             <p className="text-[#064F8C] text-lg font-light">© 2024 Scandiscent. Alla rättigheter förbehålls. | 18+ endast</p>
             <Link 
