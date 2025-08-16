@@ -1229,6 +1229,7 @@ export default function ScandiscentStyleAdmin() {
                           <ProductManager 
                             sellers={sellers || []} 
                             product={product}
+                            isEdit={true}
                             trigger={
                               <Button
                                 variant="ghost"
