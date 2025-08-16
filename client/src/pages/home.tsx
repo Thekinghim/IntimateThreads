@@ -284,7 +284,7 @@ font-extrabold drop-shadow-lg"
       <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative pt-[0px] pb-[0px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Statistic */}
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center sm:mb-16 lg:mb-20 mt-[20px] mb-[20px]">
             <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#064F8C] mb-4 font-cormorant">
               1,000+
             </h2>
