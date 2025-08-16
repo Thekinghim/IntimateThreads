@@ -190,7 +190,7 @@ font-extrabold drop-shadow-lg"
           </div>
 
           <div className="text-center mt-12">
-            <Link href="/collection">
+            <Link href="/womens">
               <Button
                 size="lg"
                 className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
@@ -269,7 +269,7 @@ font-extrabold drop-shadow-lg"
       <section className="py-14 relative overflow-hidden bg-[#F5F1E8]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center">
-            <Link href="/collection">
+            <Link href="/womens">
               <Button
                 size="lg"
                 className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
