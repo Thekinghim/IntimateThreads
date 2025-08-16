@@ -1,4 +1,4 @@
-import { type Seller, type Product, type Order, type InsertSeller, type InsertProduct, type InsertOrder, type ProductWithSeller, type OrderWithDetails, type Admin, type AdminSession, type InsertAdmin, type PromoCode, type InsertPromoCode, sellers, products, orders, admins, adminSessions, promoCodes } from "@shared/schema";
+import { type Seller, type Product, type Order, type InsertSeller, type InsertProduct, type InsertOrder, type ProductWithSeller, type OrderWithDetails, type Admin, type AdminSession, type InsertAdmin, type PromoCode, type InsertPromoCode, type News, type InsertNews, sellers, products, orders, admins, adminSessions, promoCodes, news } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, gt, sql } from "drizzle-orm";
 import { randomUUID } from "crypto";
@@ -40,6 +40,13 @@ export interface IStorage {
   updatePromoCode(id: string, updates: Partial<PromoCode>): Promise<PromoCode | undefined>;
   deletePromoCode(id: string): Promise<void>;
   incrementPromoCodeUsage(code: string): Promise<void>;
+
+  // News
+  getActiveNews(): Promise<News[]>;
+  getAllNews(): Promise<News[]>;
+  createNews(newsItem: InsertNews): Promise<News>;
+  updateNews(id: string, updates: Partial<News>): Promise<News | undefined>;
+  deleteNews(id: string): Promise<void>;
 }
 
 // MemStorage removed - now using DatabaseStorage only
@@ -276,6 +283,58 @@ export class DatabaseStorage implements IStorage {
         usageCount: sql`${promoCodes.usageCount} + 1`,
       })
       .where(eq(promoCodes.code, code.toUpperCase()));
+  }
+
+  // Admin functionality
+  async getAllAdminSessions(): Promise<AdminSession[]> {
+    return await db.select().from(adminSessions);
+  }
+
+  async getAllAdmins(): Promise<Admin[]> {
+    return await db.select().from(admins);
+  }
+
+  // News
+  async getActiveNews(): Promise<News[]> {
+    return await db
+      .select()
+      .from(news)
+      .where(eq(news.isActive, true))
+      .orderBy(sql`${news.createdAt} DESC`);
+  }
+
+  async getAllNews(): Promise<News[]> {
+    return await db
+      .select()
+      .from(news)
+      .orderBy(sql`${news.createdAt} DESC`);
+  }
+
+  async createNews(newsItem: InsertNews): Promise<News> {
+    const [newItem] = await db
+      .insert(news)
+      .values({
+        ...newsItem,
+        updatedAt: sql`now()`
+      })
+      .returning();
+    return newItem;
+  }
+
+  async updateNews(id: string, updates: Partial<News>): Promise<News | undefined> {
+    const [updatedNews] = await db
+      .update(news)
+      .set({
+        ...updates,
+        updatedAt: sql`now()`
+      })
+      .where(eq(news.id, id))
+      .returning();
+    return updatedNews || undefined;
+  }
+
+  async deleteNews(id: string): Promise<void> {
+    await db.delete(news).where(eq(news.id, id));
   }
 }
 

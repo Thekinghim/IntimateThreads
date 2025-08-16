@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/navbar";
+import NewsBanner from "@/components/news-banner";
 import Footer from "@/components/footer";
 import Home from "@/pages/home";
 import Womens from "@/pages/womens";
@@ -94,6 +95,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen gradient-nordic text-deep-charcoal">
+          <NewsBanner />
           <Navbar />
           <main>
             <Router />

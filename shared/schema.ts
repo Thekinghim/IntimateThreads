@@ -80,6 +80,16 @@ export const promoCodes = pgTable("promo_codes", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const news = pgTable("news", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  color: text("color").default("#064F8C"),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const insertSellerSchema = createInsertSchema(sellers).omit({
   id: true,
   createdAt: true,
@@ -107,6 +117,12 @@ export const insertPromoCodeSchema = createInsertSchema(promoCodes).omit({
   usageCount: true,
 });
 
+export const insertNewsSchema = createInsertSchema(news).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const adminLoginSchema = z.object({
   username: z.string().min(1, "Användarnamn krävs"),
   password: z.string().min(1, "Lösenord krävs"),
@@ -117,6 +133,7 @@ export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type InsertOrder = z.infer<typeof insertOrderSchema>;
 export type InsertAdmin = z.infer<typeof insertAdminSchema>;
 export type InsertPromoCode = z.infer<typeof insertPromoCodeSchema>;
+export type InsertNews = z.infer<typeof insertNewsSchema>;
 export type AdminLogin = z.infer<typeof adminLoginSchema>;
 
 export type Seller = typeof sellers.$inferSelect;
@@ -125,6 +142,7 @@ export type Order = typeof orders.$inferSelect;
 export type Admin = typeof admins.$inferSelect;
 export type AdminSession = typeof adminSessions.$inferSelect;
 export type PromoCode = typeof promoCodes.$inferSelect;
+export type News = typeof news.$inferSelect;
 
 // Relations
 export const sellersRelations = relations(sellers, ({ many }) => ({

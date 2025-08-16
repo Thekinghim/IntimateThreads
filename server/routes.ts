@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import Stripe from "stripe";
 import { storage } from "./storage";
-import { insertProductSchema, insertOrderSchema, adminLoginSchema, insertPromoCodeSchema } from "@shared/schema";
+import { insertProductSchema, insertOrderSchema, adminLoginSchema, insertPromoCodeSchema, insertNewsSchema } from "@shared/schema";
 import { z } from "zod";
 import { requireAdminAuth, authenticateAdmin, logoutAdmin } from "./adminAuth";
 import { randomUUID } from "crypto";
@@ -610,6 +610,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Delete promo code error:", error);
       res.status(500).json({ message: "Failed to delete promo code" });
+    }
+  });
+
+  // News API endpoints
+  
+  // Get all active news (public endpoint)
+  app.get("/api/news", async (req, res) => {
+    try {
+      const news = await storage.getActiveNews();
+      res.json(news);
+    } catch (error) {
+      console.error("Get news error:", error);
+      res.status(500).json({ message: "Failed to fetch news" });
+    }
+  });
+
+  // Get all news (admin only)
+  app.get("/api/admin/news", requireAdminAuth, async (req, res) => {
+    try {
+      const news = await storage.getAllNews();
+      res.json(news);
+    } catch (error) {
+      console.error("Get all news error:", error);
+      res.status(500).json({ message: "Failed to fetch news" });
+    }
+  });
+
+  // Create news (admin only)
+  app.post("/api/admin/news", requireAdminAuth, async (req, res) => {
+    try {
+      const newsData = insertNewsSchema.parse(req.body);
+      const news = await storage.createNews(newsData);
+      res.json(news);
+    } catch (error) {
+      console.error("Create news error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Ogiltig indata", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create news" });
+    }
+  });
+
+  // Update news (admin only)
+  app.put("/api/admin/news/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const updates = req.body;
+      const news = await storage.updateNews(req.params.id, updates);
+      
+      if (!news) {
+        return res.status(404).json({ message: "News not found" });
+      }
+      
+      res.json(news);
+    } catch (error) {
+      console.error("Update news error:", error);
+      res.status(500).json({ message: "Failed to update news" });
+    }
+  });
+
+  // Delete news (admin only)
+  app.delete("/api/admin/news/:id", requireAdminAuth, async (req, res) => {
+    try {
+      await storage.deleteNews(req.params.id);
+      res.json({ message: "News deleted successfully" });
+    } catch (error) {
+      console.error("Delete news error:", error);
+      res.status(500).json({ message: "Failed to delete news" });
     }
   });
 
