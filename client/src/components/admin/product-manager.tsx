@@ -148,6 +148,54 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
             <div className="space-y-6">
               {/* Mobile-First Single Column Layout */}
               <div className="space-y-4">
+                {/* Product Status Controls - MOVED TO TOP FOR VISIBILITY */}
+                <div className="space-y-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <FormLabel className="text-base font-semibold text-amber-800">📦 Produktstatus</FormLabel>
+                  
+                  <FormField
+                    control={form.control}
+                    name="isAvailable"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Produkt tillgänglig</FormLabel>
+                          <p className="text-sm text-amber-700">
+                            Produkten är aktiv och kan köpas
+                          </p>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="isSoldOut"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0 p-3 bg-red-50 border border-red-200 rounded">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            className="border-red-400"
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-red-800 font-semibold">🔴 MARKERA SOM SLUTSÅLD</FormLabel>
+                          <p className="text-sm text-red-700">
+                            Markera produkten som slutsåld utan att kunden köper den
+                          </p>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 <FormField
                   control={form.control}
                   name="title"
@@ -319,53 +367,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   )}
                 />
 
-                {/* Product Status Controls - Moved Higher for Visibility */}
-                <div className="space-y-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                  <FormLabel className="text-base font-semibold text-amber-800">📦 Produktstatus</FormLabel>
-                  
-                  <FormField
-                    control={form.control}
-                    name="isAvailable"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>Produkt tillgänglig</FormLabel>
-                          <p className="text-sm text-amber-700">
-                            Produkten är aktiv och kan köpas
-                          </p>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
 
-                  <FormField
-                    control={form.control}
-                    name="isSoldOut"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center space-x-3 space-y-0 p-3 bg-red-50 border border-red-200 rounded">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                            className="border-red-400"
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel className="text-red-800 font-semibold">🔴 Markera som slutsåld manuellt</FormLabel>
-                          <p className="text-sm text-red-700">
-                            Markera produkten som slutsåld utan att kunden köper den
-                          </p>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                </div>
 
                 {/* Image Upload - Now in single column for mobile */}
                 <FormField
