@@ -189,7 +189,7 @@ export default function Product() {
           {/* Right side - Product Info */}
           <div className="space-y-6 mt-6 lg:mt-0">
             <div className="flex items-start">
-              <h1 className="text-2xl sm:text-3xl font-light text-gray-900 uppercase tracking-wider">{product.title}</h1>
+              <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-[#064F8C] uppercase tracking-wider">{product.title}</h1>
             </div>
 
 
@@ -197,11 +197,11 @@ export default function Product() {
             {/* Price */}
             <div className="space-y-2">
               <div className="flex flex-col space-y-1">
-                <span className="text-2xl sm:text-3xl font-medium text-gray-900">
+                <span className="text-2xl sm:text-3xl font-bold text-[#2D3748]">
                   {calculateTotalPrice().toLocaleString('sv-SE')} kr
                 </span>
                 {calculateTotalPrice() > parseFloat(product.priceKr) && (
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-[#4A5568] font-light">
                     Baspris: {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
                   </span>
                 )}
@@ -214,10 +214,10 @@ export default function Product() {
               product.title?.toLowerCase().includes('set') ||
               product.title?.toLowerCase().includes('underkläder') ||
               product.category === 'women') && (
-              <div className="space-y-6 p-4 bg-gray-50 rounded-lg">
+              <div className="space-y-6">
                 {/* Days Selection */}
                 <div className="space-y-3">
-                  <Label className="font-dm-sans text-[#4A5568] font-medium">Använda dagar</Label>
+                  <Label className="font-bold text-lg text-[#2D3748]">Använda dagar</Label>
                   <RadioGroup 
                     value={selectedDays} 
                     onValueChange={setSelectedDays}
@@ -225,38 +225,38 @@ export default function Product() {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="1" id="day1" />
-                      <Label htmlFor="day1" className="text-sm cursor-pointer">1 dag</Label>
+                      <Label htmlFor="day1" className="text-[#4A5568] text-sm font-light cursor-pointer">1 dag</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="2" id="day2" />
-                      <Label htmlFor="day2" className="text-sm cursor-pointer">2 dagar (+100kr)</Label>
+                      <Label htmlFor="day2" className="text-[#4A5568] text-sm font-light cursor-pointer">2 dagar (+100kr)</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="3" id="day3" />
-                      <Label htmlFor="day3" className="text-sm cursor-pointer">3 dagar (+200kr)</Label>
+                      <Label htmlFor="day3" className="text-[#4A5568] text-sm font-light cursor-pointer">3 dagar (+200kr)</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="4" id="day4" />
-                      <Label htmlFor="day4" className="text-sm cursor-pointer">4 dagar (+300kr)</Label>
+                      <Label htmlFor="day4" className="text-[#4A5568] text-sm font-light cursor-pointer">4 dagar (+300kr)</Label>
                     </div>
                     <div className="flex items-center space-x-2 col-span-2">
                       <RadioGroupItem value="week" id="week" />
-                      <Label htmlFor="week" className="text-sm cursor-pointer">1 vecka (+1000kr)</Label>
+                      <Label htmlFor="week" className="text-[#4A5568] text-sm font-light cursor-pointer">1 vecka (+1000kr)</Label>
                     </div>
                   </RadioGroup>
                 </div>
 
                 {/* Extra Options */}
                 <div className="space-y-3">
-                  <Label className="font-dm-sans text-[#4A5568] font-medium">Extra</Label>
+                  <Label className="font-bold text-lg text-[#2D3748]">Extra</Label>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <Checkbox 
                         id="workout" 
                         checked={workoutOption}
-                        onCheckedChange={setWorkoutOption}
+                        onCheckedChange={(checked) => setWorkoutOption(checked === true)}
                       />
-                      <Label htmlFor="workout" className="text-sm cursor-pointer">
+                      <Label htmlFor="workout" className="text-[#4A5568] text-sm font-light cursor-pointer">
                         Träning (+150kr)
                       </Label>
                     </div>
@@ -264,9 +264,9 @@ export default function Product() {
                       <Checkbox 
                         id="insertion" 
                         checked={insertionOption}
-                        onCheckedChange={setInsertionOption}
+                        onCheckedChange={(checked) => setInsertionOption(checked === true)}
                       />
-                      <Label htmlFor="insertion" className="text-sm cursor-pointer">
+                      <Label htmlFor="insertion" className="text-[#4A5568] text-sm font-light cursor-pointer">
                         Uppstoppad (+200kr)
                       </Label>
                     </div>
@@ -277,13 +277,14 @@ export default function Product() {
 
             {/* Add to Cart */}
             <div className="space-y-4">
-              <button 
+              <Button
                 onClick={handleAddToCart}
                 disabled={!product.isAvailable}
-                className="w-full bg-blue-600 text-white py-3 text-base font-medium uppercase tracking-wide hover:bg-blue-700 transition-colors disabled:bg-gray-400"
+                size="lg"
+                className="w-full gold-button font-medium py-4 text-lg rounded-2xl shadow-lg uppercase tracking-wide"
               >
                 {product.isAvailable ? "LÄGG TILL I VARUKORG" : "SLUTSÅLD"}
-              </button>
+              </Button>
             </div>
 
 
