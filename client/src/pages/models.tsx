@@ -179,7 +179,7 @@ export default function ModelsPage() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 drop-shadow-lg gold-text">
+          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 drop-shadow-lg gold-text-static">
             Våra Modeller
           </h1>
           <p className="text-lg sm:text-xl lg:text-2xl font-dm-sans text-white/95 max-w-2xl mx-auto drop-shadow-md px-4">

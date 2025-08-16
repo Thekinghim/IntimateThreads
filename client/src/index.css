@@ -240,6 +240,13 @@
     animation: goldShimmer 3s ease-in-out infinite;
   }
   
+  .gold-text-static {
+    background: var(--gold-metallic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
   .gold-button {
     background: var(--gold-metallic);
     color: #111B3E;
