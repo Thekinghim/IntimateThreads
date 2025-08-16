@@ -204,7 +204,7 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-[#F5F1E8] relative pt-[20px] pb-[40px]">
+      <section className="py-8 sm:py-12 lg:py-16 bg-[#F5F1E8] relative pt-[0px] pb-[0px]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
