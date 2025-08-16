@@ -196,30 +196,9 @@ export default function ModelsPage() {
 
               <CardContent className="p-6">
                 {/* Bio */}
-                <p className="font-dm-sans text-gray-700 text-sm mb-4 leading-relaxed">
+                <p className="font-dm-sans text-gray-700 text-sm mb-6 leading-relaxed">
                   {model.bio}
                 </p>
-
-
-
-                {/* Tags */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {model.tags.map((tag, index) => (
-                      <Badge key={index} className="bg-[#064F8C]/10 text-[#064F8C] border-none text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Experience */}
-                <div className="space-y-2 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span className="font-dm-sans text-sm text-gray-600">Erfarenhet:</span>
-                    <span className="font-dm-sans text-sm font-medium text-[#064F8C]">{model.experience}</span>
-                  </div>
-                </div>
 
                 {/* Action Button */}
                 <div>
