@@ -26,6 +26,7 @@ export const products = pgTable("products", {
   imageUrl: text("image_url"),
   category: text("category").default("women"),
   isAvailable: boolean("is_available").default(true),
+  isSoldOut: boolean("is_sold_out").default(false),
   wearDays: integer("wear_days"),
   createdAt: timestamp("created_at").defaultNow(),
 });

@@ -22,6 +22,12 @@ export default function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // Don't allow adding to cart if manually sold out
+    if (product.isSoldOut || !product.isAvailable) {
+      return;
+    }
+    
     addItem({
       id: product.id,
       title: product.title,
@@ -34,6 +40,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   const getAvailabilityBadge = () => {
+    // Check if manually marked as sold out
+    if (product.isSoldOut) {
+      return <Badge variant="destructive" className="bg-red-600 text-white font-bold">SLUT</Badge>;
+    }
+    
     if (!product.isAvailable) {
       return <Badge variant="destructive">Slutsåld</Badge>;
     }
@@ -70,7 +81,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             height="256"
           />
           {/* Sold Out Badge */}
-          {!product.isAvailable && (
+          {(product.isSoldOut || !product.isAvailable) && (
             <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow-lg">
               SLUT
             </div>
@@ -93,10 +104,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
             <Button 
               onClick={handleAddToCart}
-              disabled={!product.isAvailable}
+              disabled={product.isSoldOut || !product.isAvailable}
               className="gold-button font-medium text-sm"
             >
-              {product.isAvailable ? "Lägg i varukorg" : "Slutsåld"}
+              {(product.isSoldOut || !product.isAvailable) ? "Slutsåld" : "Lägg i varukorg"}
             </Button>
           </div>
         </CardContent>

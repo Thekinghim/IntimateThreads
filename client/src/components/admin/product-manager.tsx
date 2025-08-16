@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -27,6 +28,7 @@ const productSchema = z.object({
   sellerId: z.string().min(1, "Seller must be selected"),
   wearDays: z.coerce.number().min(0).optional(),
   isAvailable: z.boolean().default(true),
+  isSoldOut: z.boolean().default(false),
 });
 
 type ProductForm = z.infer<typeof productSchema>;
@@ -56,6 +58,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
       sellerId: product.sellerId,
       wearDays: product.wearDays || 0,
       isAvailable: product.isAvailable ?? true,
+      isSoldOut: product.isSoldOut ?? false,
     } : {
       title: "",
       description: "",
@@ -67,6 +70,7 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
       sellerId: "",
       wearDays: 0,
       isAvailable: true,
+      isSoldOut: false,
     },
   });
 
@@ -314,6 +318,53 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                     </FormItem>
                   )}
                 />
+
+                {/* Product Status Controls */}
+                <div className="space-y-4">
+                  <FormLabel className="text-base font-semibold">Product Status</FormLabel>
+                  
+                  <FormField
+                    control={form.control}
+                    name="isAvailable"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Product Available</FormLabel>
+                          <p className="text-sm text-muted-foreground">
+                            Product is active and can be purchased
+                          </p>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="isSoldOut"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Manually Mark as Sold Out</FormLabel>
+                          <p className="text-sm text-muted-foreground">
+                            Mark product as sold out without customer purchase
+                          </p>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 {/* Image Upload - Now in single column for mobile */}
                 <FormField
