@@ -38,9 +38,10 @@ interface ProductManagerProps {
   product?: any;
   isEdit?: boolean;
   onSuccess?: () => void;
+  trigger?: React.ReactNode;
 }
 
-export default function ProductManager({ sellers = [], product, isEdit = false, onSuccess }: ProductManagerProps) {
+export default function ProductManager({ sellers = [], product, isEdit = false, onSuccess, trigger }: ProductManagerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -121,19 +122,21 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-2">
-          {isEdit ? (
-            <>
-              <Edit className="h-4 w-4" />
-              Edit Product
-            </>
-          ) : (
-            <>
-              <Plus className="h-4 w-4" />
-              Add Product
-            </>
-          )}
-        </Button>
+        {trigger ? trigger : (
+          <Button className="flex items-center gap-2">
+            {isEdit ? (
+              <>
+                <Edit className="h-4 w-4" />
+                Edit Product
+              </>
+            ) : (
+              <>
+                <Plus className="h-4 w-4" />
+                Add Product
+              </>
+            )}
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto mx-auto">
         <DialogHeader>
