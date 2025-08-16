@@ -347,7 +347,7 @@ font-extrabold drop-shadow-lg"
                 placeholder="Din e-postadress..."
                 className="px-4 py-3 rounded-lg border border-[#064F8C]/20 bg-white backdrop-blur-sm text-[#2D3748] placeholder-[#4A5568] focus:ring-2 focus:ring-[#064F8C]/50 focus:outline-none font-dm-sans text-sm w-full sm:w-64"
               />
-              <Button className="gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium px-6 py-3 rounded-lg whitespace-nowrap text-sm shadow-lg w-full sm:w-auto">
+              <Button className="gold-button font-medium px-6 py-3 rounded-lg whitespace-nowrap text-sm shadow-lg w-full sm:w-auto">
                 Gå med nu
               </Button>
             </div>
