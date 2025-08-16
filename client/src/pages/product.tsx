@@ -209,7 +209,11 @@ export default function Product() {
             </div>
 
             {/* Customization Options - Only for used panties */}
-            {product.title?.toLowerCase().includes('trosor') && (
+            {(product.title?.toLowerCase().includes('trosor') || 
+              product.title?.toLowerCase().includes('trosa') ||
+              product.title?.toLowerCase().includes('set') ||
+              product.title?.toLowerCase().includes('underkläder') ||
+              product.category === 'women') && (
               <div className="space-y-6 p-4 bg-gray-50 rounded-lg">
                 {/* Days Selection */}
                 <div className="space-y-3">
