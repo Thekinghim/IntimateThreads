@@ -5,6 +5,11 @@ import { Star, Sparkles, Coffee } from 'lucide-react';
 import { Link } from 'wouter';
 import PrivacyBanner from '@/components/privacy-banner';
 import modelsHeroImage from '@/assets/cj4_1755033026450.jpg';
+import modelImage1 from '@/assets/IMG_2335_1754760267758.jpg';
+import modelImage2 from '@/assets/IMG_2336_1754760267759.jpg';
+import modelImage3 from '@/assets/IMG_2337_1754760267759.jpg';
+import modelImage4 from '@/assets/IMG_2338_1754760267759.jpg';
+import modelImage5 from '@/assets/IMG_2341_1754760267760.jpg';
 import { useEffect } from 'react';
 import SEOHead from '@/components/seo-head';
 
@@ -19,6 +24,7 @@ interface Model {
   personality: string;
   experience: string;
   avatar: string;
+  image: string;
   rating: number;
   reviews: number;
   verified: boolean;
@@ -47,6 +53,7 @@ const models: Model[] = [
     personality: 'Spontan, varm, äkta',
     experience: '3 år',
     avatar: '👱‍♀️',
+    image: modelImage1,
     rating: 4.9,
     reviews: 127,
     verified: true,
@@ -64,6 +71,7 @@ const models: Model[] = [
     personality: 'Självsäker, intensiv, erfaren',
     experience: '6 år',
     avatar: '🖤',
+    image: modelImage2,
     rating: 4.8,
     reviews: 203,
     verified: true,
@@ -81,6 +89,7 @@ const models: Model[] = [
     personality: 'Nyfiken, lekfull, öppen',
     experience: '1 år',
     avatar: '🌸',
+    image: modelImage3,
     rating: 4.7,
     reviews: 89,
     verified: true,
@@ -98,6 +107,7 @@ const models: Model[] = [
     personality: 'Mogen, förståelsefull, sinnlig',
     experience: '8 år',
     avatar: '🌹',
+    image: modelImage4,
     rating: 4.9,
     reviews: 156,
     verified: true,
@@ -115,6 +125,7 @@ const models: Model[] = [
     personality: 'Kreativ, artistisk, passionerad',
     experience: '4 år',
     avatar: '🎨',
+    image: modelImage5,
     rating: 4.8,
     reviews: 134,
     verified: true,
@@ -183,15 +194,19 @@ export default function ModelsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {models.map((model) => (
             <Card key={model.id} className="bg-white shadow-xl border-none overflow-hidden">
-              {/* Model Header */}
-              <div className="bg-gradient-to-r from-[#064F8C] to-[#111B3E] p-6 text-white">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="font-cormorant font-bold text-2xl" style={{ color: '#F5D061' }}>{model.name}</h3>
-                    <p className="font-dm-sans text-white/80">{model.age} år • {model.location}</p>
-                  </div>
+              {/* Model Image */}
+              <div className="relative h-80 bg-gray-200 overflow-hidden">
+                <img 
+                  src={model.image} 
+                  alt={`${model.name} - Scandiscent modell`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h3 className="font-cormorant font-bold text-2xl" style={{ color: '#F5D061' }}>{model.name}</h3>
+                  <p className="font-dm-sans text-white/90">{model.age} år • {model.location}</p>
                 </div>
-
               </div>
 
               <CardContent className="p-6">
