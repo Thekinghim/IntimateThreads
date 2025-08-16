@@ -132,11 +132,11 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Featured Collection */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h3 className="font-bold text-3xl sm:text-4xl lg:text-5xl text-[#064F8C] mb-4 sm:mb-6 lg:mb-8">Bläddra bland trosorna</h3>
-            <p className="text-[#4A5568] text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto font-light leading-relaxed px-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
+            <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#064F8C] mb-3 sm:mb-4 md:mb-6 lg:mb-8">Bläddra bland trosorna</h3>
+            <p className="text-[#4A5568] text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto font-light leading-relaxed px-4">
               Handplockade exklusiva plagg från verifierade nordiska kvinnor
             </p>
           </div>
@@ -171,7 +171,7 @@ font-extrabold drop-shadow-lg"
             {/* Scrollable Container */}
             <div
               ref={scrollRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide px-12 py-4"
+              className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide px-6 sm:px-12 py-4"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               onScroll={handleScroll}
             >
@@ -191,11 +191,11 @@ font-extrabold drop-shadow-lg"
             </div>
           </div>
 
-          <div className="text-center mt-8 sm:mt-10 lg:mt-12">
+          <div className="text-center mt-6 sm:mt-8 md:mt-10 lg:mt-12">
             <Link href="/womens">
               <Button
                 size="lg"
-                className="gold-button font-medium px-12 py-6 text-xl rounded-3xl shadow-lg"
+                className="gold-button font-medium px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 text-lg sm:text-xl rounded-2xl sm:rounded-3xl shadow-lg"
               >
                 Se alla trosor
               </Button>
@@ -204,63 +204,63 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Luxury How it Works */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-[#F5F1E8] relative pt-[0px] pb-[0px]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h3 className="font-bold text-5xl text-[#064F8C] mb-8">
+      <section className="py-6 sm:py-8 md:py-12 lg:py-16 bg-[#F5F1E8] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 relative">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
+            <h3 className="font-bold text-3xl sm:text-4xl md:text-5xl text-[#064F8C] mb-4 sm:mb-6 md:mb-8">
               Så Funkar Det
             </h3>
-            <p className="text-[#4A5568] text-2xl max-w-3xl mx-auto font-light leading-relaxed">
+            <p className="text-[#4A5568] text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto font-light leading-relaxed px-4">
               Enkel och diskret process från beställning till leverans
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
             <div className="text-center group">
-              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Search className="h-12 w-12 text-white" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Search className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
               </div>
-              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+              <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 1. Välj
               </h4>
-              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+              <p className="text-[#4A5568] text-sm sm:text-base md:text-lg font-light leading-relaxed px-2">
                 Bläddra igenom vår exklusiva kollektion med fullständig anonymitet och välj det plagg som tilltalar dig mest.
               </p>
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <CreditCard className="h-12 w-12 text-white" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <CreditCard className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
               </div>
-              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+              <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 2. Säker Betalning
               </h4>
-              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+              <p className="text-[#4A5568] text-sm sm:text-base md:text-lg font-light leading-relaxed px-2">
                 Diskret och säker betalning via kryptovaluta, Revolut eller andra krypterade betalningsmetoder.
               </p>
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Truck className="h-12 w-12 text-white" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Truck className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
               </div>
-              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+              <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 3. Diskret Frakt
               </h4>
-              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+              <p className="text-[#4A5568] text-sm sm:text-base md:text-lg font-light leading-relaxed px-2">
                 Plagget skickas diskret i neutral förpackning utan avslöjande
                 märkningar.
               </p>
             </div>
 
             <div className="text-center group">
-              <div className="w-24 h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Gift className="h-12 w-12 text-white" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Gift className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
               </div>
-              <h4 className="font-bold text-2xl text-[#2D3748] mb-6">
+              <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 4. Diskret Leverans
               </h4>
-              <p className="text-[#4A5568] text-lg font-light leading-relaxed">
+              <p className="text-[#4A5568] text-sm sm:text-base md:text-lg font-light leading-relaxed px-2">
                 Motta ditt paket hemma i neutral förpackning utan avslöjande märkningar eller logotyper.
               </p>
             </div>
@@ -268,13 +268,13 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Final Luxury Call to Action */}
-      <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-[#F5F1E8] pt-[0px] pb-[0px]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+      <section className="py-6 sm:py-8 md:py-12 lg:py-16 relative overflow-hidden bg-[#F5F1E8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 relative">
           <div className="text-center">
             <Link href="/womens">
               <Button
                 size="lg"
-                className="gold-button font-medium px-16 py-8 text-2xl rounded-3xl shadow-lg"
+                className="gold-button font-medium px-8 sm:px-12 md:px-16 py-4 sm:py-6 md:py-8 text-lg sm:text-xl md:text-2xl rounded-2xl sm:rounded-3xl shadow-lg"
               >
                 Börja Utforska Nu
               </Button>
@@ -283,21 +283,21 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Statistics and Testimonials Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative pt-[0px] pb-[0px]">
+      <section className="py-6 sm:py-8 md:py-12 lg:py-16 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Statistic */}
-          <div className="text-center sm:mb-16 lg:mb-20 mt-[20px] mb-[20px]">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#064F8C] mb-4 font-cormorant">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-[#064F8C] mb-3 sm:mb-4 font-cormorant">
               1,000+
             </h2>
-            <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-[#2D3748] mb-4 font-dm-sans">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#2D3748] mb-3 sm:mb-4 font-dm-sans">
               Använda Trosor Sålda
             </p>
-            <div className="w-24 sm:w-32 lg:w-40 h-1 bg-[#F5D061] mx-auto"></div>
+            <div className="w-16 sm:w-24 md:w-32 lg:w-40 h-1 bg-[#F5D061] mx-auto"></div>
           </div>
 
           {/* Customer Testimonials */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {/* Testimonial 1 */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E2DDD4]/30 hover:shadow-xl transition-all duration-300">
               <div className="text-[#F5D061] text-3xl sm:text-4xl mb-3 sm:mb-4">"</div>
@@ -330,25 +330,25 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Newsletter Section */}
-      <section className="py-12 sm:py-16 pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]">
+      <section className="py-6 sm:py-8 md:py-12 lg:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#064F8C]/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-[#064F8C]/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+          <div className="bg-[#064F8C]/10 backdrop-blur-lg rounded-xl sm:rounded-2xl px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 border border-[#064F8C]/20 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-8">
             <div className="text-center lg:text-left flex-1">
-              <h3 className="font-cormorant font-bold text-xl sm:text-2xl text-[#064F8C] mb-2">
+              <h3 className="font-cormorant font-bold text-lg sm:text-xl md:text-2xl text-[#064F8C] mb-2">
                 Gå med i vår trosklubb för att få de senaste nyheterna
               </h3>
-              <p className="font-dm-sans text-[#4A5568] text-sm sm:text-base">
+              <p className="font-dm-sans text-[#4A5568] text-xs sm:text-sm md:text-base">
                 Bli först att veta om nya modeller och exklusiva erbjudanden
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto lg:min-w-fit">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full lg:w-auto lg:min-w-fit">
               <input
                 type="email"
                 placeholder="Din e-postadress..."
-                className="px-4 py-3 rounded-lg border border-[#064F8C]/20 bg-white backdrop-blur-sm text-[#2D3748] placeholder-[#4A5568] focus:ring-2 focus:ring-[#064F8C]/50 focus:outline-none font-dm-sans text-sm w-full sm:w-64"
+                className="px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-[#064F8C]/20 bg-white backdrop-blur-sm text-[#2D3748] placeholder-[#4A5568] focus:ring-2 focus:ring-[#064F8C]/50 focus:outline-none font-dm-sans text-xs sm:text-sm w-full sm:w-64"
               />
-              <Button className="gold-button font-medium px-6 py-3 rounded-lg whitespace-nowrap text-sm shadow-lg w-full sm:w-auto">
+              <Button className="gold-button font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-lg whitespace-nowrap text-xs sm:text-sm shadow-lg w-full sm:w-auto">
                 Gå med nu
               </Button>
             </div>
