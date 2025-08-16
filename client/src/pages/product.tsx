@@ -149,13 +149,19 @@ export default function Product() {
           {/* Left side - Product Images */}
           <div className="space-y-4">
             {/* Main product image - adjusted for better PC responsiveness */}
-            <div className="aspect-square lg:aspect-[3/4] max-w-full lg:max-w-[500px] xl:max-w-[550px] mx-auto bg-gray-100 rounded-lg overflow-hidden">
+            <div className="relative aspect-square lg:aspect-[3/4] max-w-full lg:max-w-[500px] xl:max-w-[550px] mx-auto bg-gray-100 rounded-lg overflow-hidden">
               <img
                 src={selectedImage || frontImage || "https://images.unsplash.com/photo-1566479179817-c0df35d84ff3?w=800"}
                 alt={product.title}
                 className="w-full h-full object-cover"
                 loading="eager"
               />
+              {/* Sold Out Badge */}
+              {!product.isAvailable && (
+                <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 text-sm font-bold rounded shadow-lg">
+                  SLUT
+                </div>
+              )}
             </div>
 
             {/* Thumbnails slideshow - responsive */}

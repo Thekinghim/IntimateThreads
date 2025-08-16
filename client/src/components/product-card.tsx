@@ -69,7 +69,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             width="400"
             height="256"
           />
-
+          {/* Sold Out Badge */}
+          {!product.isAvailable && (
+            <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow-lg">
+              SLUT
+            </div>
+          )}
         </div>
         
         <CardContent className="p-6 h-48 flex flex-col justify-between">

@@ -46,7 +46,7 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
     <div className="group">
       <Link href={`/product/${product.id}`}>
         <div 
-          className="aspect-square w-full overflow-hidden bg-gray-100 group-hover:opacity-75 transition-opacity"
+          className="relative aspect-square w-full overflow-hidden bg-gray-100 group-hover:opacity-75 transition-opacity"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -55,6 +55,12 @@ export default function KitAceProductCard({ product }: KitAceProductCardProps) {
             alt={product.title}
             className="h-full w-full object-cover object-center transition-all duration-300 ease-in-out"
           />
+          {/* Sold Out Badge */}
+          {!product.isAvailable && (
+            <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow-lg">
+              SLUT
+            </div>
+          )}
         </div>
         
         <div className="mt-4 space-y-2">
