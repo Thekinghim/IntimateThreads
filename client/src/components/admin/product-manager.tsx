@@ -319,9 +319,9 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                   )}
                 />
 
-                {/* Product Status Controls */}
-                <div className="space-y-4">
-                  <FormLabel className="text-base font-semibold">Product Status</FormLabel>
+                {/* Product Status Controls - Moved Higher for Visibility */}
+                <div className="space-y-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <FormLabel className="text-base font-semibold text-amber-800">📦 Produktstatus</FormLabel>
                   
                   <FormField
                     control={form.control}
@@ -335,9 +335,9 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel>Product Available</FormLabel>
-                          <p className="text-sm text-muted-foreground">
-                            Product is active and can be purchased
+                          <FormLabel>Produkt tillgänglig</FormLabel>
+                          <p className="text-sm text-amber-700">
+                            Produkten är aktiv och kan köpas
                           </p>
                         </div>
                       </FormItem>
@@ -348,17 +348,18 @@ export default function ProductManager({ sellers = [], product, isEdit = false, 
                     control={form.control}
                     name="isSoldOut"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0 p-3 bg-red-50 border border-red-200 rounded">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
+                            className="border-red-400"
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel>Manually Mark as Sold Out</FormLabel>
-                          <p className="text-sm text-muted-foreground">
-                            Mark product as sold out without customer purchase
+                          <FormLabel className="text-red-800 font-semibold">🔴 Markera som slutsåld manuellt</FormLabel>
+                          <p className="text-sm text-red-700">
+                            Markera produkten som slutsåld utan att kunden köper den
                           </p>
                         </div>
                       </FormItem>
