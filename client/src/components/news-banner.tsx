@@ -36,8 +36,8 @@ export default function NewsBanner() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-[#F5F1E8] to-white border-b border-[#E8E4D6] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+    <div className="w-full bg-gradient-to-r from-[#F5F1E8] to-white border-b border-[#E8E4D6] relative">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           <div className="flex-1">
             {visibleItems.map((item, index) => (
