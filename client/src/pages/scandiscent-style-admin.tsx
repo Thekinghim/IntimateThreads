@@ -822,7 +822,7 @@ export default function ScandiscentStyleAdmin() {
     { id: "home", label: "Home", icon: Home },
     { id: "orders", label: "Orders", icon: ShoppingBag },
     { id: "products", label: "Products", icon: Package },
-    { id: "customers", label: "Customers", icon: Users },
+    { id: "customers", label: "Modeller", icon: Users },
     { id: "content", label: "Content", icon: Package },
     { id: "analytics", label: "Analytics", icon: BarChart3 },
     { id: "marketing", label: "Marketing", icon: TrendingUp },
@@ -1252,19 +1252,19 @@ export default function ScandiscentStyleAdmin() {
         return (
           <div className="p-3 md:p-6 bg-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
-              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Customers</h1>
+              <h1 className="text-lg md:text-xl font-semibold text-gray-900">Modeller</h1>
               <Button 
                 onClick={() => setIsCreateCustomerOpen(true)}
                 className="bg-[#005bd3] hover:bg-[#004fc4] text-white h-8 px-3 text-sm rounded w-full sm:w-auto"
               >
-                Add customer
+                Lägg till modell
               </Button>
             </div>
             <div className="bg-white border border-[#e1e3e5] rounded overflow-hidden overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow className="border-b border-[#e1e3e5] bg-[#fafbfb]">
-                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Customer</TableHead>
+                    <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Modell</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Location</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left hidden sm:table-cell">Age</TableHead>
                     <TableHead className="text-xs font-medium text-gray-600 px-2 md:px-4 py-3 text-left">Status</TableHead>
