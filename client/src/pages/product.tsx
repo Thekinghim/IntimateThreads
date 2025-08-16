@@ -10,6 +10,9 @@ import { type ProductWithSeller } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { getProductImageUrl, getBackImageUrl } from "@/assets/images";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Product() {
   const { id } = useParams();
@@ -17,6 +20,9 @@ export default function Product() {
   const { toast } = useToast();
 
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const [selectedDays, setSelectedDays] = useState<string>("1");
+  const [workoutOption, setWorkoutOption] = useState<boolean>(false);
+  const [insertionOption, setInsertionOption] = useState<boolean>(false);
 
 
 
@@ -39,17 +45,49 @@ export default function Product() {
     imageGallery.push(backImagePath);
   }
 
-
+  // Calculate total price based on selections
+  const calculateTotalPrice = () => {
+    if (!product) return 0;
+    let total = parseFloat(product.priceKr);
+    
+    // Days pricing
+    if (selectedDays === "2") total += 100;
+    else if (selectedDays === "3") total += 200;
+    else if (selectedDays === "4") total += 300;
+    else if (selectedDays === "week") total += 1000;
+    
+    // Extra options
+    if (workoutOption) total += 150;
+    if (insertionOption) total += 200;
+    
+    return total;
+  };
 
   const handleAddToCart = () => {
     if (!product) return;
     
+    // Create customization description
+    let customDescription = "";
+    if (product.title?.toLowerCase().includes('trosor')) {
+      const dayTexts = {
+        "1": "1 dag",
+        "2": "2 dagar", 
+        "3": "3 dagar",
+        "4": "4 dagar",
+        "week": "1 vecka"
+      };
+      customDescription = dayTexts[selectedDays as keyof typeof dayTexts];
+      
+      if (workoutOption) customDescription += ", Träning";
+      if (insertionOption) customDescription += ", Uppstoppad";
+    }
+    
     addItem({
       id: product.id,
-      title: product.title,
+      title: customDescription ? `${product.title} (${customDescription})` : product.title,
       sellerId: product.sellerId,
       sellerAlias: product.seller.alias,
-      priceKr: parseFloat(product.priceKr),
+      priceKr: calculateTotalPrice(),
       imageUrl: product.imageUrl || "",
       size: product.size,
     });
@@ -154,16 +192,78 @@ export default function Product() {
             <div className="space-y-2">
               <div className="flex flex-col space-y-1">
                 <span className="text-2xl sm:text-3xl font-medium text-gray-900">
-                  {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
+                  {calculateTotalPrice().toLocaleString('sv-SE')} kr
                 </span>
+                {calculateTotalPrice() > parseFloat(product.priceKr) && (
+                  <span className="text-sm text-gray-500">
+                    Baspris: {parseFloat(product.priceKr).toLocaleString('sv-SE')} kr
+                  </span>
+                )}
               </div>
             </div>
 
+            {/* Customization Options - Only for used panties */}
+            {product.title?.toLowerCase().includes('trosor') && (
+              <div className="space-y-6 p-4 bg-gray-50 rounded-lg">
+                {/* Days Selection */}
+                <div className="space-y-3">
+                  <Label className="font-dm-sans text-[#4A5568] font-medium">Använda dagar</Label>
+                  <RadioGroup 
+                    value={selectedDays} 
+                    onValueChange={setSelectedDays}
+                    className="grid grid-cols-2 gap-2"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="1" id="day1" />
+                      <Label htmlFor="day1" className="text-sm cursor-pointer">1 dag</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="2" id="day2" />
+                      <Label htmlFor="day2" className="text-sm cursor-pointer">2 dagar (+100kr)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="3" id="day3" />
+                      <Label htmlFor="day3" className="text-sm cursor-pointer">3 dagar (+200kr)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="4" id="day4" />
+                      <Label htmlFor="day4" className="text-sm cursor-pointer">4 dagar (+300kr)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 col-span-2">
+                      <RadioGroupItem value="week" id="week" />
+                      <Label htmlFor="week" className="text-sm cursor-pointer">1 vecka (+1000kr)</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
 
-
-
-
-
+                {/* Extra Options */}
+                <div className="space-y-3">
+                  <Label className="font-dm-sans text-[#4A5568] font-medium">Extra</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="workout" 
+                        checked={workoutOption}
+                        onCheckedChange={setWorkoutOption}
+                      />
+                      <Label htmlFor="workout" className="text-sm cursor-pointer">
+                        Träning (+150kr)
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="insertion" 
+                        checked={insertionOption}
+                        onCheckedChange={setInsertionOption}
+                      />
+                      <Label htmlFor="insertion" className="text-sm cursor-pointer">
+                        Uppstoppad (+200kr)
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Add to Cart */}
             <div className="space-y-4">
