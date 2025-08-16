@@ -217,8 +217,8 @@ font-extrabold drop-shadow-lg"
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
             <div className="text-center group">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Search className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Search className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-white" />
               </div>
               <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 1. Välj
@@ -229,8 +229,8 @@ font-extrabold drop-shadow-lg"
             </div>
 
             <div className="text-center group">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <CreditCard className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-white" />
               </div>
               <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 2. Säker Betalning
@@ -241,8 +241,8 @@ font-extrabold drop-shadow-lg"
             </div>
 
             <div className="text-center group">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Truck className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Truck className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-white" />
               </div>
               <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 3. Diskret Frakt
@@ -254,8 +254,8 @@ font-extrabold drop-shadow-lg"
             </div>
 
             <div className="text-center group">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
-                <Gift className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 gradient-midnight-cyan rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-all duration-500">
+                <Gift className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-white" />
               </div>
               <h4 className="font-bold text-lg sm:text-xl md:text-2xl text-[#2D3748] mb-3 sm:mb-4 md:mb-6">
                 4. Diskret Leverans
