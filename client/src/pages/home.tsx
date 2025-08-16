@@ -131,8 +131,7 @@ font-extrabold drop-shadow-lg"
           </div>
         </div>
       </section>
-      {/* Hero Extension Fade */}
-      <div className="h-16 sm:h-20 md:h-24 lg:h-30 bg-gradient-to-b from-[#2D3748]/80 via-[#2D3748]/50 via-[#2D3748]/25 via-[#2D3748]/10 to-[#F5F1E8]"></div>
+
       {/* Featured Collection */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#F5F1E8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
