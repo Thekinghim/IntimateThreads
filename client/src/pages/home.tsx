@@ -330,13 +330,14 @@ font-extrabold drop-shadow-lg"
       </section>
       {/* Newsletter Section */}
       <section 
-        className="py-12 sm:py-16 relative bg-cover bg-center bg-no-repeat pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]"
+        className="py-12 sm:py-16 relative bg-contain bg-center bg-no-repeat pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]"
         style={{
           backgroundImage: `url(${newsletterBg})`,
           backgroundPosition: "center center",
+          backgroundSize: "80%",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#064F8C]/80 to-[#111B3E]/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#064F8C]/20 to-[#111B3E]/20"></div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-white/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
             <div className="text-center lg:text-left flex-1">
