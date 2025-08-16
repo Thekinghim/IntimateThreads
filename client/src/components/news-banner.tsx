@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import type { News } from "@shared/schema";
 
 interface NewsItem extends News {}
@@ -27,6 +28,29 @@ export default function NewsBanner() {
     localStorage.setItem('dismissedNews', JSON.stringify(Array.from(newDismissed)));
   };
 
+  // Function to replace model names with links
+  const addModelLinks = (content: string) => {
+    const modelLinks: { [key: string]: string } = {
+      'Emma': '/profile/emma',
+      'Sofia': '/profile/sofia', 
+      'Lina': '/profile/lina',
+      'Anna': '/profile/anna',
+      'Maja': '/profile/maja'
+    };
+
+    let linkedContent = content;
+    
+    Object.entries(modelLinks).forEach(([name, url]) => {
+      const regex = new RegExp(`(<strong[^>]*>)?(${name})(</strong>)?`, 'gi');
+      linkedContent = linkedContent.replace(regex, (match, openTag, modelName, closeTag) => {
+        const linkElement = `<a href="${url}" style="text-decoration: underline; font-weight: bold;">${modelName}</a>`;
+        return (openTag || '') + linkElement + (closeTag || '');
+      });
+    });
+    
+    return linkedContent;
+  };
+
   const visibleItems = newsItems.filter(item => 
     item.isActive && !dismissedItems.has(item.id)
   );
@@ -45,7 +69,7 @@ export default function NewsBanner() {
                 <div 
                   className="text-sm sm:text-base font-medium leading-relaxed"
                   style={{ color: item.color }}
-                  dangerouslySetInnerHTML={{ __html: item.content }}
+                  dangerouslySetInnerHTML={{ __html: addModelLinks(item.content) }}
                 />
               </div>
               <Button
