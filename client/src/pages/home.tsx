@@ -328,7 +328,7 @@ font-extrabold drop-shadow-lg"
         </div>
       </section>
       {/* Newsletter Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-r from-[#064F8C] to-[#111B3E]">
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-[#064F8C] to-[#111B3E] pt-[9px] pb-[9px] pl-[0px] pr-[0px] mt-[40px] mb-[40px]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl px-6 sm:px-8 py-6 sm:py-8 border border-white/20 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
             <div className="text-center lg:text-left flex-1">
