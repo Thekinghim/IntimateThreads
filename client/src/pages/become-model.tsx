@@ -25,173 +25,175 @@ export default function BecomeModel() {
       </section>
 
       {/* Application Form */}
-      <section className="py-20 bg-[#F5F1E8]">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10">
-          <div className="p-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Name */}
-                <div>
-                  <Label htmlFor="name" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Namn</Label>
-                  <Input
-                    id="name"
-                    placeholder="Namn"
-                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
+      <section className="py-16">
+        <div className="max-w-3xl mx-auto px-6">
+          <Card className="bg-white border-none shadow-none">
+            <CardContent className="p-8">
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="font-dm-sans text-[#4A5568] font-medium">Namn</Label>
+                    <Input
+                      id="name"
+                      placeholder="Namn"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="font-dm-sans text-[#4A5568] font-medium">E-post</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="E-post"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
+                    />
+                  </div>
+
+                  {/* Country */}
+                  <div className="space-y-2">
+                    <Label htmlFor="country" className="font-dm-sans text-[#4A5568] font-medium">Land</Label>
+                    <Input
+                      id="country"
+                      placeholder="Land"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
+                    />
+                  </div>
+
+                  {/* Show Face */}
+                  <div className="space-y-2">
+                    <Label htmlFor="showFace" className="font-dm-sans text-[#4A5568] font-medium">Visa ansikt?</Label>
+                    <Select>
+                      <SelectTrigger className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700">
+                        <SelectValue placeholder="Välj alternativ" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white">
+                        <SelectItem value="yes" className="text-gray-700">Ja</SelectItem>
+                        <SelectItem value="no" className="text-gray-700">Nej</SelectItem>
+                        <SelectItem value="partial" className="text-gray-700">Delvis</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                {/* Birthday, Height, Weight */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="birthday" className="font-dm-sans text-[#4A5568] font-medium">Födelsedatum</Label>
+                    <Input
+                      id="birthday"
+                      type="date"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="height" className="font-dm-sans text-[#4A5568] font-medium">Längd</Label>
+                    <Input
+                      id="height"
+                      placeholder="Längd (cm)"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="weight" className="font-dm-sans text-[#4A5568] font-medium">Vikt</Label>
+                    <Input
+                      id="weight"
+                      placeholder="Vikt (kg)"
+                      className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700"
+                    />
+                  </div>
+                </div>
+
+                {/* Photo Upload Sections */}
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="space-y-2">
+                      <Label className="font-dm-sans text-[#4A5568] font-medium">Foto #1</Label>
+                      <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
+                        <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                        <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="font-dm-sans text-[#4A5568] font-medium">Foto #2</Label>
+                      <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
+                        <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                        <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="font-dm-sans text-[#4A5568] font-medium">Foto #3</Label>
+                      <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
+                        <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                        <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="font-dm-sans text-[#4A5568] font-medium">Foto #4</Label>
+                      <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
+                        <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                        <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="font-dm-sans text-[#4A5568] font-medium">Foto #5</Label>
+                      <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
+                        <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                        <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="font-dm-sans text-[#4A5568] font-medium">Foto #6</Label>
+                      <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
+                        <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
+                        <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* How did you hear about us */}
+                <div className="space-y-2">
+                  <Label htmlFor="hearAbout" className="font-dm-sans text-[#4A5568] font-medium">
+                    Hur hörde du talas om oss?
+                  </Label>
+                  <Textarea
+                    id="hearAbout"
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700 min-h-[80px]"
                   />
                 </div>
 
-                {/* Email */}
-                <div>
-                  <Label htmlFor="email" className="text-base font-dm-sans text-[#064F8C] mb-3 block">E-post</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="E-post"
-                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
+                {/* Message */}
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="font-dm-sans text-[#4A5568] font-medium">Meddelande</Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Skriv allt extra du vill tillägga här."
+                    className="bg-white border-gray-300 focus:border-[#064F8C] focus:ring-[#064F8C] text-gray-700 min-h-[120px]"
                   />
                 </div>
 
-                {/* Country */}
-                <div>
-                  <Label htmlFor="country" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Land</Label>
-                  <Input
-                    id="country"
-                    placeholder="Land"
-                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
-                  />
+                {/* Submit Button */}
+                <div className="text-center pt-6">
+                  <Button
+                    size="lg"
+                    className="gold-button font-medium px-16 py-4 text-xl rounded-3xl shadow-lg uppercase tracking-wide"
+                  >
+                    GÅ MED I TEAMET
+                  </Button>
                 </div>
-
-                {/* Show Face */}
-                <div>
-                  <Label htmlFor="showFace" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Visa ansikt?</Label>
-                  <Select>
-                    <SelectTrigger className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent">
-                      <SelectValue placeholder="Välj alternativ" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="yes">Ja</SelectItem>
-                      <SelectItem value="no">Nej</SelectItem>
-                      <SelectItem value="partial">Delvis</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Birthday, Height, Weight */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div>
-                  <Label htmlFor="birthday" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Födelsedatum</Label>
-                  <Input
-                    id="birthday"
-                    type="date"
-                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="height" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Längd</Label>
-                  <Input
-                    id="height"
-                    placeholder="Längd (cm)"
-                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="weight" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Vikt</Label>
-                  <Input
-                    id="weight"
-                    placeholder="Vikt (kg)"
-                    className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
-                  />
-                </div>
-              </div>
-
-
-
-              {/* Photo Upload Sections */}
-              <div className="mt-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #1</Label>
-                    <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #2</Label>
-                    <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #3</Label>
-                    <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #4</Label>
-                    <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #5</Label>
-                    <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-base font-dm-sans text-[#064F8C] mb-3 block">Foto #6</Label>
-                    <div className="border-2 border-dashed border-[#064F8C] bg-[#F5F1E8] rounded-lg p-6 text-center">
-                      <Button className="bg-[#064F8C] text-white hover:bg-[#0A5A9C] transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium px-6 py-2 rounded-lg">Välj filer</Button>
-                      <p className="text-sm text-[#064F8C] mt-2">Ingen fil vald</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* How did you hear about us */}
-              <div className="mt-10">
-                <Label htmlFor="hearAbout" className="text-base font-dm-sans text-[#064F8C] mb-3 block">
-                  Hur hörde du talas om oss?
-                </Label>
-                <Textarea
-                  id="hearAbout"
-                  className="min-h-[80px] text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="mt-8">
-                <Label htmlFor="message" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Meddelande</Label>
-                <Textarea
-                  id="message"
-                  placeholder="Skriv allt extra du vill tillägga här."
-                  className="min-h-[120px] text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent placeholder:text-[#064F8C]/60"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <div className="mt-12 text-center">
-                <Button
-                  size="lg"
-                  className="gold-button font-medium px-16 py-4 text-xl rounded-3xl shadow-lg uppercase tracking-wide"
-                >
-                  GÅ MED I TEAMET
-                </Button>
-              </div>
-          </div>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </section>
       
