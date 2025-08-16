@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -144,7 +145,7 @@ export default function TrackOrder() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 to-stone-100 py-8">
+    <div className="min-h-screen bg-[#F5F1E8] py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-stone-800 mb-4">Track Your Order</h1>
@@ -166,21 +167,25 @@ export default function TrackOrder() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-stone-700">Tracking Number</label>
+              <Label htmlFor="tracking" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Tracking Number</Label>
               <Input
+                id="tracking"
                 placeholder="Enter any tracking number (DHL, FedEx, PostNord, etc.)"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
-                className="border-stone-200 focus:ring-blue-400"
+                className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
               />
             </div>
-            <Button 
-              onClick={handleTrackWith17track}
-              disabled={!trackingNumber.trim()}
-              className="w-full gradient-midnight-cyan text-white hover:bg-[#064F8C] transition-all duration-200 font-medium py-3 rounded-lg shadow-lg"
-            >
-              Track with 17track
-            </Button>
+            <div className="mt-8 text-center">
+              <Button 
+                onClick={handleTrackWith17track}
+                disabled={!trackingNumber.trim()}
+                size="lg"
+                className="gold-button font-medium px-16 py-4 text-xl rounded-3xl shadow-lg uppercase tracking-wide"
+              >
+                Spåra med 17track
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
@@ -211,34 +216,39 @@ export default function TrackOrder() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-stone-700">Order ID</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <Label htmlFor="orderId" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Order ID</Label>
                 <Input
+                  id="orderId"
                   placeholder="e.g., order-123456"
                   value={orderIdInput}
                   onChange={(e) => setOrderIdInput(e.target.value)}
-                  className="border-stone-200 focus:ring-stone-400"
+                  className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                 />
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-stone-700">Email Address</label>
+              <div>
+                <Label htmlFor="email" className="text-base font-dm-sans text-[#064F8C] mb-3 block">Email Address</Label>
                 <Input
+                  id="email"
                   type="email"
                   placeholder="your@email.com"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  className="border-stone-200 focus:ring-stone-400"
+                  className="h-12 text-base border-[#064F8C] bg-transparent text-[#064F8C] focus:border-[#064F8C] focus:bg-transparent"
                 />
               </div>
             </div>
-            <Button 
-              onClick={handleSearch}
-              disabled={!orderIdInput.trim() || !emailInput.trim() || isLoading}
-              className="w-full gold-button font-medium text-lg py-3 rounded-lg shadow-lg"
-            >
-              {isLoading ? "Searching..." : "Find My Order"}
-            </Button>
+            <div className="mt-12 text-center">
+              <Button 
+                onClick={handleSearch}
+                disabled={!orderIdInput.trim() || !emailInput.trim() || isLoading}
+                size="lg"
+                className="gold-button font-medium px-16 py-4 text-xl rounded-3xl shadow-lg uppercase tracking-wide"
+              >
+                {isLoading ? "Söker..." : "Hitta min beställning"}
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
