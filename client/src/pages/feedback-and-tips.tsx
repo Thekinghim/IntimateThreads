@@ -93,7 +93,7 @@ export default function FeedbackAndTips() {
                 {/* Name and Email */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-gray-700 font-medium">
+                    <Label htmlFor="name" className="font-dm-sans text-[#4A5568] font-medium">
                       Namn <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -106,7 +106,7 @@ export default function FeedbackAndTips() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-gray-700 font-medium">
+                    <Label htmlFor="email" className="font-dm-sans text-[#4A5568] font-medium">
                       E-post <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -124,7 +124,7 @@ export default function FeedbackAndTips() {
                 {/* Model Name and Order Number */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="modelName" className="text-gray-700 font-medium">
+                    <Label htmlFor="modelName" className="font-dm-sans text-[#4A5568] font-medium">
                       Modellens Namn <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -137,7 +137,7 @@ export default function FeedbackAndTips() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="orderNumber" className="text-gray-700 font-medium">
+                    <Label htmlFor="orderNumber" className="font-dm-sans text-[#4A5568] font-medium">
                       Beställningsnummer <span className="text-red-500">*</span>
                     </Label>
                     <Input
@@ -154,7 +154,7 @@ export default function FeedbackAndTips() {
                 {/* Rating Questions */}
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <Label className="text-gray-700 font-medium">
+                    <Label className="font-dm-sans text-[#4A5568] font-medium">
                       Hur nöjd var du med TROSORNA? <span className="text-red-500">*</span>
                     </Label>
                     <Select value={formData.pantiesSatisfaction} onValueChange={(value) => setFormData(prev => ({ ...prev, pantiesSatisfaction: value }))}>
@@ -172,7 +172,7 @@ export default function FeedbackAndTips() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="text-gray-700 font-medium">
+                    <Label className="font-dm-sans text-[#4A5568] font-medium">
                       Vad tyckte du om beställningens LEVERANSHASTIGHET? <span className="text-red-500">*</span>
                     </Label>
                     <Select value={formData.deliverySpeed} onValueChange={(value) => setFormData(prev => ({ ...prev, deliverySpeed: value }))}>
@@ -192,7 +192,7 @@ export default function FeedbackAndTips() {
 
                 {/* Would Order Again */}
                 <div className="space-y-3">
-                  <Label className="text-gray-700 font-medium text-base">
+                  <Label className="font-dm-sans text-[#4A5568] font-medium text-base">
                     Skulle du beställa från din modell igen?
                   </Label>
                   <RadioGroup
@@ -202,15 +202,15 @@ export default function FeedbackAndTips() {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="yes" id="yes" className="border-gray-300 text-[#064F8C]" />
-                      <Label htmlFor="yes" className="text-gray-700">Ja</Label>
+                      <Label htmlFor="yes" className="font-dm-sans text-[#4A5568]">Ja</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="no" id="no" className="border-gray-300 text-[#064F8C]" />
-                      <Label htmlFor="no" className="text-gray-700">Nej</Label>
+                      <Label htmlFor="no" className="font-dm-sans text-[#4A5568]">Nej</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="maybe" id="maybe" className="border-gray-300 text-[#064F8C]" />
-                      <Label htmlFor="maybe" className="text-gray-700">Kanske</Label>
+                      <Label htmlFor="maybe" className="font-dm-sans text-[#4A5568]">Kanske</Label>
                     </div>
                   </RadioGroup>
                 </div>
@@ -223,17 +223,17 @@ export default function FeedbackAndTips() {
                     onCheckedChange={(checked) => setFormData(prev => ({ ...prev, remainAnonymous: checked as boolean }))}
                     className="border-gray-300 data-[state=checked]:bg-[#064F8C]"
                   />
-                  <Label htmlFor="anonymous" className="text-gray-700 font-medium">
+                  <Label htmlFor="anonymous" className="font-dm-sans text-[#4A5568] font-medium">
                     Förbli Anonym För Modellen (Valfritt)
                   </Label>
                 </div>
-                <p className="text-sm text-gray-600 ml-6 -mt-2">
+                <p className="text-sm font-dm-sans text-[#4A5568] ml-6 -mt-2">
                   Ja - håll mitt namn och beställningsnummer anonymt
                 </p>
 
                 {/* Message */}
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-gray-700 font-medium">
+                  <Label htmlFor="message" className="font-dm-sans text-[#4A5568] font-medium">
                     Meddelande Till Modell Eller Sajt (Valfritt)
                   </Label>
                   <Textarea
