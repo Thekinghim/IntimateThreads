@@ -898,6 +898,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Image upload endpoint (with admin auth for security)
+  // Public image upload for model applications
+  app.post("/api/upload-public-image", upload.single('file'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      const objectStorage = new ObjectStorageService();
+      const uploadUrl = await objectStorage.getObjectEntityUploadURL();
+      
+      // Upload file to object storage
+      const response = await fetch(uploadUrl, {
+        method: 'PUT',
+        body: req.file.buffer,
+        headers: {
+          'Content-Type': req.file.mimetype,
+          'Content-Length': req.file.size.toString()
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload to object storage');
+      }
+
+      // Extract object path from upload URL
+      const normalizedPath = objectStorage.normalizeObjectEntityPath(uploadUrl);
+      
+      res.json({ 
+        url: normalizedPath,
+        originalUrl: uploadUrl 
+      });
+    } catch (error) {
+      console.error('Public image upload error:', error);
+      res.status(500).json({ error: 'Failed to upload image' });
+    }
+  });
+
   app.post("/api/upload-image", requireAdminAuth, upload.single('file'), async (req, res) => {
     try {
       if (!req.file) {

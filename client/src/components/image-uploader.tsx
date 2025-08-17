@@ -37,10 +37,13 @@ export function ImageUploader({ value, onChange, placeholder = "Enter image URL"
           headers['Authorization'] = `Bearer ${token}`;
         }
         
-        const response = await fetch('/api/upload-image', {
+        // Try public upload first for general users, then admin upload
+        let uploadEndpoint = '/api/upload-public-image';
+        
+        const response = await fetch(uploadEndpoint, {
           method: 'POST',
           body: formData,
-          headers
+          headers: token ? headers : {}
         });
         
         if (response.ok) {

@@ -62,34 +62,34 @@ export default function Navbar() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
-            {/* Language Selector - Always visible */}
+            {/* Language Selector - Compact design */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-20 sm:w-24 h-8 sm:h-9 text-xs sm:text-sm bg-white text-[#064F8C] border-2 border-[#064F8C] flex rounded-lg hover:bg-[#064F8C]/5 transition-all duration-200 shadow-sm px-2 sm:px-3">
-                <SelectValue />
+              <SelectTrigger className="w-14 h-8 text-xs bg-transparent text-[#064F8C] border-none hover:bg-[#064F8C]/5 transition-colors rounded-md p-1">
+                <Globe className="h-4 w-4" />
               </SelectTrigger>
-              <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg">
+              <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg min-w-[120px]">
                 <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
                   <div className="flex items-center gap-2">
                     <span className="text-base">🇸🇪</span>
-                    <span>Sve</span>
+                    <span>Svenska</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="no" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
                   <div className="flex items-center gap-2">
                     <span className="text-base">🇳🇴</span>
-                    <span>Nor</span>
+                    <span>Norsk</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="da" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
                   <div className="flex items-center gap-2">
                     <span className="text-base">🇩🇰</span>
-                    <span>Dan</span>
+                    <span>Dansk</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="en" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
                   <div className="flex items-center gap-2">
                     <span className="text-base">🇬🇧</span>
-                    <span>Eng</span>
+                    <span>English</span>
                   </div>
                 </SelectItem>
               </SelectContent>
