@@ -61,7 +61,7 @@ export default function NewsBanner() {
 
   return (
     <div className="w-screen bg-gradient-to-r from-[#F5F1E8] to-white border-b border-[#E8E4D6] relative -mx-4 sm:-mx-6 lg:-mx-8">
-      <div className="w-full py-3 relative">
+      <div className="w-full py-3 relative pt-[8px] pb-[8px] pl-[0px] pr-[0px]">
         {visibleItems.map((item, index) => (
           <div key={item.id}>
             <div className="flex items-center justify-between w-full px-4">
