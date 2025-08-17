@@ -47,7 +47,7 @@ export default function HowItWorks() {
                 2. Säker Betalning
               </h4>
               <p className="text-[#4A5568] text-lg font-light leading-relaxed">
-                Diskret och säker betalning via kryptovaluta, Revolut eller andra krypterade betalningsmetoder.
+                Diskret och säker betalning via kryptovaluta, kreditkort, PayPal eller andra säkra betalningsmetoder.
               </p>
             </div>
 
@@ -92,15 +92,15 @@ export default function HowItWorks() {
             Accepterade Betalningsmetoder
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
-              <CardContent className="p-8">
-                <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <CreditCard className="h-10 w-10 text-white" />
+              <CardContent className="p-6">
+                <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <CreditCard className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Kryptovaluta</h3>
-                <p className="text-[#4A5568] text-base font-dm-sans mb-6 leading-relaxed">Bitcoin, Ethereum, USDT och 300+ andra kryptovalutor</p>
-                <div className="text-sm text-[#4A5568] font-dm-sans">
+                <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-3">Kryptovaluta</h3>
+                <p className="text-[#4A5568] text-sm font-dm-sans mb-4 leading-relaxed">Bitcoin, Ethereum, USDT och 300+ andra kryptovalutor via NOWPayments</p>
+                <div className="text-xs text-[#4A5568] font-dm-sans">
                   ✓ Maximal anonymitet<br/>
                   ✓ Inga transaktionshistorik<br/>
                   ✓ Direkta betalningar
@@ -109,31 +109,46 @@ export default function HowItWorks() {
             </Card>
 
             <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
-              <CardContent className="p-8">
-                <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <CreditCard className="h-10 w-10 text-white" />
+              <CardContent className="p-6">
+                <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <CreditCard className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Revolut</h3>
-                <p className="text-[#4A5568] text-base font-dm-sans mb-6 leading-relaxed">Snabba och säkra banköverföringar</p>
-                <div className="text-sm text-[#4A5568] font-dm-sans">
-                  ✓ Snabba transaktioner<br/>
-                  ✓ Europeisk standard<br/>
-                  ✓ Säker hantering
+                <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-3">Kreditkort</h3>
+                <p className="text-[#4A5568] text-sm font-dm-sans mb-4 leading-relaxed">Säkra kortbetalningar via Stripe med bankstandard säkerhet</p>
+                <div className="text-xs text-[#4A5568] font-dm-sans">
+                  ✓ Visa & Mastercard<br/>
+                  ✓ 3D Secure verifiering<br/>
+                  ✓ PCI DSS säkerhet
                 </div>
               </CardContent>
             </Card>
 
             <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
-              <CardContent className="p-8">
-                <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <CreditCard className="h-10 w-10 text-white" />
+              <CardContent className="p-6">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <CreditCard className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="font-lora font-semibold text-2xl text-[#064F8C] mb-4">Gumroad</h3>
-                <p className="text-[#4A5568] text-base font-dm-sans mb-6 leading-relaxed">Säkra betalningar via etablerad plattform</p>
-                <div className="text-sm text-[#4A5568] font-dm-sans">
-                  ✓ Köparskydd<br/>
-                  ✓ Internationellt<br/>
-                  ✓ Många betalningsalternativ
+                <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-3">PayPal</h3>
+                <p className="text-[#4A5568] text-sm font-dm-sans mb-4 leading-relaxed">Bekväma och säkra betalningar via PayPal-kontot</p>
+                <div className="text-xs text-[#4A5568] font-dm-sans">
+                  ✓ PayPal-konto<br/>
+                  ✓ Köparskydd ingår<br/>
+                  ✓ Internationellt accepterat
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-none">
+              <CardContent className="p-6">
+                <div className="bg-gradient-to-br from-purple-400 to-purple-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Shield className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="font-lora font-semibold text-xl text-[#064F8C] mb-3">Banköverföring</h3>
+                <p className="text-[#4A5568] text-sm font-dm-sans mb-4 leading-relaxed">Direkta banköverföringar för större beställningar</p>
+                <div className="text-xs text-[#4A5568] font-dm-sans">
+                  ✓ Swish & bankgiro<br/>
+                  ✓ SEPA överföringar<br/>
+                  ✓ Säker verifiering
                 </div>
               </CardContent>
             </Card>
