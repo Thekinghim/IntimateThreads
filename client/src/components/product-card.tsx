@@ -98,7 +98,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           
 
           
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center text-[#0e2b56]">
             <div className="flex flex-col">
               <span className="font-poppins font-semibold text-xl text-[#111B3E]">300 kr</span>
             </div>
