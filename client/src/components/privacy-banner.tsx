@@ -33,20 +33,6 @@ export default function PrivacyBanner() {
 
   return (
     <>
-      {/* Privacy Indicator (always visible after accepting) */}
-      {hasSeenBanner && (
-        <div className="fixed top-4 right-4 z-50">
-          <Badge 
-            variant="outline" 
-            className="bg-green-50 text-green-700 border-green-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-            title="Your privacy is protected"
-          >
-            <Shield className="h-3 w-3 mr-1" />
-            Anonymous Mode Active
-          </Badge>
-        </div>
-      )}
-
       {/* Initial Privacy Banner */}
       {isVisible && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">

@@ -64,7 +64,10 @@ export default function NewsBanner() {
       <div className="w-full py-3 relative pt-[8px] pb-[8px] pl-[0px] pr-[0px]">
         {visibleItems.map((item, index) => (
           <div key={item.id}>
-            <div className="flex items-center justify-between w-full px-4">
+            <div className="flex items-center w-full px-4">
+              {/* Left spacer to balance the close button */}
+              <div className="w-6 h-6 flex-shrink-0"></div>
+              
               <div className="flex-1 text-center">
                 <div 
                   className="text-sm sm:text-base font-medium leading-relaxed"
@@ -72,10 +75,11 @@ export default function NewsBanner() {
                   dangerouslySetInnerHTML={{ __html: addModelLinks(item.content) }}
                 />
               </div>
+              
               <Button
                 variant="ghost"
                 size="sm"
-                className="opacity-70 hover:opacity-100 p-1 h-6 w-6 ml-4"
+                className="opacity-70 hover:opacity-100 p-1 h-6 w-6 flex-shrink-0"
                 onClick={() => dismissItem(item.id)}
               >
                 <X className="h-4 w-4" />
