@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ShoppingBag, Menu, Globe, MessageCircle } from "lucide-react";
+import { ShoppingBag, Menu, MessageCircle } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
 import { useState } from "react";
 import { useLanguage, useTranslations, getLanguageName, type Language } from "@/hooks/useLanguage";
@@ -64,8 +64,13 @@ export default function Navbar() {
           <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
             {/* Language Selector - Compact design */}
             <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-              <SelectTrigger className="w-14 h-8 text-xs bg-transparent text-[#064F8C] border-none hover:bg-[#064F8C]/5 transition-colors rounded-md p-1">
-                <Globe className="h-4 w-4" />
+              <SelectTrigger className="w-12 h-8 text-xs bg-transparent border-none hover:bg-gray-100 transition-colors rounded-md p-1">
+                <span className="text-lg">
+                  {language === 'sv' && '🇸🇪'}
+                  {language === 'no' && '🇳🇴'}
+                  {language === 'da' && '🇩🇰'}
+                  {language === 'en' && '🇬🇧'}
+                </span>
               </SelectTrigger>
               <SelectContent className="border border-[#064F8C]/20 shadow-lg rounded-lg min-w-[120px]">
                 <SelectItem value="sv" className="hover:bg-[#064F8C]/10 hover:text-[#064F8C] focus:bg-[#064F8C]/10 focus:text-[#064F8C]">
